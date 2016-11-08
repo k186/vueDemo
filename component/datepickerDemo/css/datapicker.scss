@@ -1,65 +1,190 @@
 @import "../../../coreCss/px2rem.scss";
 @import "../../../coreCss/reset.scss";
 @import "../css/font/iconfont.css";
-/* set the color you like*/
 
+/* set the color you like*/
+$border: #ccc;
+$totalBG:#fff;
+$boxShadow:0px 2px 5px 0px rgba(84, 84, 84, 0.21);
+$paneBG:#eee;
+$borderRadius:3px;
+$normalRadius:0px;
+$normalWord:#333;
+$normalWeek:#868686;
+$canNotChoose:#b9b9b9;
+$choosed:#fff;
+$singleChooseBG:#2c97f1;
+$mulitChooseBG:#86c3f6;
+$titleHover:#eee;
 
 /*dom structure and color*/
 .k-datePicker{
   position: relative;
-  width: 250px;
-  padding: 5px;
-  background: #fff;
-  border:1px solid #cccccc;
-  border-radius: 3px;
+  width: 210px;
+  /*max-height: 241px;*/
+  padding: 5px 6px;
+  background: $totalBG;
+  border:1px solid $border;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
   text-align: center;
+  cursor: default;
+  color: $normalWord;
 }
+
 .datePane{
   .yearBox{
     .previousBtn,.nextBtn{
-      width: 40px;
+      width: 30px;
     }
-    .yearTitle,.monthTitle{
+    .Title{
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
+      width: 128px;
+      padding: 0 5px;
     }
     ul{
       display: flex;
       justify-content: space-between;
       li{
-        height: 40px;
-        line-height: 40px;
+        height: 30px;
+        line-height: 30px;
+        &:hover{
+          background:$titleHover ;
+          color: $normalWeek;
+          border-radius: $borderRadius;
+          cursor: pointer;
+        }
       }
     }
   }
   .chooseBox{
-    .chooseYear{}
+    margin-top:5px;
+    .chooseYear{
+      .yearList{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        li{
+          width: 65px;
+          height: 48px;
+          line-height: 48px;
+          text-align: center;
+          &:hover{
+            background: $singleChooseBG;
+            border-radius: $borderRadius;
+            color: $choosed;
+            cursor: pointer;
+          }
+        }
+        /*public use this css*/
+        .canNotChoose{
+          color: $canNotChoose;
+          &:hover{
+            background: none;
+            color: $canNotChoose;
+            cursor: not-allowed;
+          }
+        }
+        .previousChoose{
+          color: $canNotChoose;
+        }
+        .singleChoosed{
+          border-radius: $borderRadius;
+          background: $singleChooseBG;
+          color: $choosed;
+        }
+        .mulitChoosed,.mulitChoosedHead,.mulitChoosedEnd{
+          color: $choosed;
+          background: $singleChooseBG;
+        }
+        .mulitChoosed{
+          background: $mulitChooseBG;
+        }
+        .mulitChoosedHead{
+          border-top-left-radius:$borderRadius;
+          border-bottom-left-radius:$borderRadius;
+        }
+        .mulitChoosedEnd{
+          border-top-right-radius:$borderRadius;
+          border-bottom-right-radius:$borderRadius;
+        }
+        /*public use this css*/
+      }
+    }
     .chooseMonth{}
     .chooseDay{
       .dayTitle{
         display: flex;
         justify-content: space-around;
+        li{
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          font-size: 14px;
+          color: $normalWeek;
+          text-align: center;
+        }
       }
       .dayList{
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+        margin-top: 5px;
+        background: $paneBG;
+        height:168px ;/*用来控制上下间距*/
+        border-radius: $borderRadius;
+        color: $normalWord;
         li{
-          width: 14.3%;
+          width: 28px;
+          height: 26px;
+          line-height: 26px;
+          text-align: center;
+          &:hover{
+            background: $singleChooseBG;
+            border-radius: $borderRadius;
+            color: $choosed;
+            cursor: pointer;
+          }
         }
+        /*public use this css*/
+        .canNotChoose{
+          color: $canNotChoose;
+          &:hover{
+            background: none;
+            color: $canNotChoose;
+            cursor: not-allowed;
+          }
+        }
+        .previousChoose{
+          color: $canNotChoose;
+        }
+        .singleChoosed{
+          border-radius: $borderRadius;
+          background: $singleChooseBG;
+          color: $choosed;
+        }
+        .mulitChoosed,.mulitChoosedHead,.mulitChoosedEnd{
+          color: $choosed;
+          background: $singleChooseBG;
+        }
+        .mulitChoosed{
+          background: $mulitChooseBG;
+        }
+        .mulitChoosedHead{
+          border-top-left-radius:$borderRadius;
+          border-bottom-left-radius:$borderRadius;
+        }
+        .mulitChoosedEnd{
+          border-top-right-radius:$borderRadius;
+          border-bottom-right-radius:$borderRadius;
+        }
+        /*public use this css*/
       }
     }
   }
-  /*set all li padding*/
-  .yearBox li,.yearList li,.dayTitle li,.dayList li{
-    padding: 2px;
-  }
+
   /*hover color*/
-  .yearBox li,.yearList li,.dayList li{
-    &:hover{
-      background: rgba(103, 179, 255, 0.74);
-      cursor: pointer;
-    }
-  }
+
 }
 
