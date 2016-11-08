@@ -113,8 +113,13 @@ a {
 body {
     height: 100%;
 }
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 /*set fontFamily you need*/
-html[lang=apple] body {
+html[lang=en] body {
     font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
     line-height: 1.8;
 }

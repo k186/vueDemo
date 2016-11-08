@@ -4,8 +4,62 @@
 /* set the color you like*/
 
 
-/*dom structure*/
+/*dom structure and color*/
 .k-datePicker{
   position: relative;
-  width: 200px;
+  width: 250px;
+  padding: 5px;
+  background: #fff;
+  border:1px solid #cccccc;
+  border-radius: 3px;
+  text-align: center;
 }
+.datePane{
+  .yearBox{
+    .previousBtn,.nextBtn{
+      width: 40px;
+    }
+    .yearTitle,.monthTitle{
+      font-weight: bold;
+      font-size: 18px;
+    }
+    ul{
+      display: flex;
+      justify-content: space-between;
+      li{
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+  }
+  .chooseBox{
+    .chooseYear{}
+    .chooseMonth{}
+    .chooseDay{
+      .dayTitle{
+        display: flex;
+        justify-content: space-around;
+      }
+      .dayList{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        li{
+          width: 14.3%;
+        }
+      }
+    }
+  }
+  /*set all li padding*/
+  .yearBox li,.yearList li,.dayTitle li,.dayList li{
+    padding: 2px;
+  }
+  /*hover color*/
+  .yearBox li,.yearList li,.dayList li{
+    &:hover{
+      background: rgba(103, 179, 255, 0.74);
+      cursor: pointer;
+    }
+  }
+}
+
