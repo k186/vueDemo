@@ -9,7 +9,7 @@
   "keywords": [
     "webpack"
   ],
-  "author": "zhaoda",
+  "author": "k186",
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.21.0",
