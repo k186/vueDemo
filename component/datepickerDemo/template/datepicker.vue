@@ -29,7 +29,7 @@
                         <li>2021</li>
                         <li class="previousChoose">2022</li>
                     </ul>
-                </div strike>
+                </div>
                 <div class="chooseMonth" style="display: none">
                     <!--for 12 month-->
                     <ul class="monthList">
@@ -116,4 +116,4 @@
         }
     }
 </script>
-<style src="./../css/datapicker.scss"></style>
+<style src="./../css/datapicker.scss" lang="scss"></style>
