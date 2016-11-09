@@ -60,63 +60,9 @@ $titleHover:#eee;
   }
   .chooseBox{
     margin-top:5px;
-    .chooseYear{
-      .yearList{
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        li{
-          width: 65px;
-          height: 48px;
-          line-height: 48px;
-          text-align: center;
-          &:hover{
-            background: $singleChooseBG;
-            border-radius: $borderRadius;
-            color: $choosed;
-            cursor: pointer;
-          }
-        }
-        /*public use this css*/
-        .canNotChoose{
-          color: $canNotChoose;
-          &:hover{
-            background: none;
-            color: $canNotChoose;
-            cursor: not-allowed;
-          }
-        }
-        .previousChoose{
-          color: $canNotChoose;
-        }
-        .singleChoosed{
-          border-radius: $borderRadius;
-          background: $singleChooseBG;
-          color: $choosed;
-        }
-        .mulitChoosed,.mulitChoosedHead,.mulitChoosedEnd{
-          color: $choosed;
-          background: $singleChooseBG;
-        }
-        .mulitChoosed{
-          background: $mulitChooseBG;
-        }
-        .mulitChoosedHead{
-          border-top-left-radius:$borderRadius;
-          border-bottom-left-radius:$borderRadius;
-        }
-        .mulitChoosedEnd{
-          border-top-right-radius:$borderRadius;
-          border-bottom-right-radius:$borderRadius;
-        }
-        /*public use this css*/
-      }
-    }
     .chooseMonth{}
     .chooseDay{
       .dayTitle{
-        display: flex;
-        justify-content: space-around;
         li{
           width: 20px;
           height: 20px;
@@ -127,9 +73,6 @@ $titleHover:#eee;
         }
       }
       .dayList{
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
         margin-top: 5px;
         background: $paneBG;
         height:168px ;/*用来控制上下间距*/
@@ -147,44 +90,66 @@ $titleHover:#eee;
             cursor: pointer;
           }
         }
-        /*public use this css*/
-        .canNotChoose{
-          color: $canNotChoose;
-          &:hover{
-            background: none;
-            color: $canNotChoose;
-            cursor: not-allowed;
-          }
-        }
-        .previousChoose{
-          color: $canNotChoose;
-        }
-        .singleChoosed{
-          border-radius: $borderRadius;
-          background: $singleChooseBG;
-          color: $choosed;
-        }
-        .mulitChoosed,.mulitChoosedHead,.mulitChoosedEnd{
-          color: $choosed;
-          background: $singleChooseBG;
-        }
-        .mulitChoosed{
-          background: $mulitChooseBG;
-        }
-        .mulitChoosedHead{
-          border-top-left-radius:$borderRadius;
-          border-bottom-left-radius:$borderRadius;
-        }
-        .mulitChoosedEnd{
-          border-top-right-radius:$borderRadius;
-          border-bottom-right-radius:$borderRadius;
-        }
-        /*public use this css*/
       }
     }
   }
-
-  /*hover color*/
-
+  /*flex display*/
+  .dayList,.yearList,.monthList,.dayTitle{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  }
+  .dayTitle{
+    flex-wrap: nowrap;
+  }
+  /*set choose hover style*/
+  .chooseBox .chooseYear .yearList,.chooseBox .chooseDay .dayList{
+      .canNotChoose{
+        color: $canNotChoose;
+        &:hover{
+          background: none;
+          color: $canNotChoose;
+          cursor: not-allowed;
+        }
+      }
+      .previousChoose{
+        color: $canNotChoose;
+      }
+      .singleChoosed{
+        border-radius: $borderRadius;
+        background: $singleChooseBG;
+        color: $choosed;
+      }
+      .mulitChoosed,.mulitChoosedHead,.mulitChoosedEnd{
+        color: $choosed;
+        background: $singleChooseBG;
+      }
+      .mulitChoosed{
+        background: $mulitChooseBG;
+      }
+      .mulitChoosedHead{
+        border-top-left-radius:$borderRadius;
+        border-bottom-left-radius:$borderRadius;
+      }
+      .mulitChoosedEnd{
+        border-top-right-radius:$borderRadius;
+        border-bottom-right-radius:$borderRadius;
+      }
+  }
+  /*choose year and month is the same*/
+  .chooseYear .yearList,.chooseMonth .monthList{
+    li{
+      width: 65px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      &:hover{
+        background: $singleChooseBG;
+        border-radius: $borderRadius;
+        color: $choosed;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
