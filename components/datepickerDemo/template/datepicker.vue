@@ -108,12 +108,14 @@
     </div>
 </template>
 <script>
-    export default{
-        data(){
-            return{
-                msg:'hello vue'
+    export default {
+        data () {
+            return {
+                msg: 'Hello World!'
             }
         }
     }
 </script>
-<style src="./../css/datapicker.scss" lang="scss"></style>
+<style>
+    @import "../css/datapicker.scss";
+</style>
