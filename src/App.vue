@@ -1,15 +1,17 @@
 <template>
-  <div id="app">
-    <hello></hello>
+  <div>
+      <input type="text">
+    <aaa></aaa>
   </div>
 </template>
 
 <script>
-import hello from './components/Hello'
-
+import aaa from './components/Picker'
 export default {
   name: 'app',
-  components: {hello}
+  components: {
+      ppp:'aaa'
+  }
 }
 </script>
 

@@ -1,5 +1,4 @@
 <template>
-  <div class="hello">
       <div class="k-datePicker">
           <!-- <div class="inputBox">
                <div class="input">2016-1-8 15:04</div>
@@ -107,15 +106,14 @@
               </div>
           </div>
       </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
+  name:'kPicker',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: ' 1App'
     }
   }
 }
@@ -123,5 +121,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    @import "css/datapicker.css";
+    @import "./css/datapicker.css";
 </style>
