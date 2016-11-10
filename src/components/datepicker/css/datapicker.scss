@@ -19,7 +19,9 @@ $titleHover:#eee;
 
 /*dom structure and color*/
 .k-datePicker{
-  position: relative;
+  margin-top: 1px;
+  position: absolute;
+  z-index: 9999;
   width: 210px;
   /*max-height: 241px;*/
   padding: 5px 6px;
@@ -75,7 +77,7 @@ $titleHover:#eee;
       .dayList{
         margin-top: 5px;
         background: $paneBG;
-        height:168px ;/*用来控制上下间距*/
+        height:168px ;/*control up and down gaps*/
         border-radius: $borderRadius;
         color: $normalWord;
         li{
