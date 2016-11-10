@@ -110,7 +110,7 @@
 
 <script>
 export default {
-  name:'kPicker',
+  name: 'kPicker',
   data () {
     return {
       msg: ' 1App'

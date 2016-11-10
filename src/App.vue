@@ -1,17 +1,14 @@
 <template>
   <div>
-      <input type="text">
-    <aaa></aaa>
+    <k-picker></k-picker>
   </div>
 </template>
 
 <script>
-import aaa from './components/Picker'
+import kPicker from './components/datepicker/Picker'
 export default {
   name: 'app',
-  components: {
-      ppp:'aaa'
-  }
+  components: {kPicker}
 }
 </script>
 
