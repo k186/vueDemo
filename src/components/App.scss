@@ -1,0 +1,40 @@
+$border:#ccc;
+$mulitChooseBG:#86c3f6;
+body{
+  background: #f1f1f1;
+}
+.dateBox{
+  position: relative;
+  padding-top: 10%;
+ text-align: center;
+  .PickerGroup{
+    position: relative;
+    display: inline-block;
+  }
+  .formGroup{
+    .form-control{
+      border-radius: 3px;
+      border:1px solid $border;
+      height: 34px;
+      padding: 6px 12px;
+      min-width: 250px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      transition: border-color ease-in-out .15s,boxshadow ease-in-out .15s;
+      &:read-only:hover{
+        cursor: pointer;
+      }
+      &:read-only:focus{
+        border:1px solid $border;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+      }
+      &:focus{
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+      }
+    }
+  }
+}
