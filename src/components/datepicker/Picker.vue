@@ -27,14 +27,20 @@
                     <!--for 12 year-->
                     <ul class="yearList">
                         <!-- <li class="previousChoose">2011</li>-->
-                        <li v-for="year in yearList" v-on:click="selectYear(year)">{{ year }}</li>
+                        <li v-for="year in yearList"
+                            v-on:click="selectYear(year)"
+                            v-bind:class="{singleChoosed:isSelected('year',year)}"
+                        >{{ year }}</li>
                         <!--<li class="previousChoose">2022</li>-->
                     </ul>
                 </div>
                 <div class="chooseMonth" v-show="panelType=='month'">
                     <!--for 12 month-->
                     <ul class="monthList">
-                        <li v-for="(month,index) in monthList" v-on:click="selectMonth(index)">{{ month }}</li>
+                        <li v-for="(month,index) in monthList"
+                            v-on:click="selectMonth(index)"
+                            v-bind:class="{singleChoosed:isSelected('month',index)}"
+                      >{{ month }}</li>
                     </ul>
                 </div>
                 <div class="chooseDay" v-show="panelType=='day'">
@@ -44,7 +50,10 @@
                     </ul>
                     <ul class="dayList">
                         <!--  <li class="previousChoose">1</li>-->
-                        <li v-for="day in daylist" v-bind:class='{previousChoose:day.previousMonthDay||day.nextMonthDay,}'>{{day.value}}</li>
+                        <li v-for="day in daylist"
+                            v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day)}"
+                            v-on:click="selectDay(day)"
+                        >{{day.value}}</li>
                         <!-- <li class="singleChoosed">18</li>-->
                         <!-- <li class="mulitChoosedHead">25</li>
                          <li class="mulitChoosed">31</li>

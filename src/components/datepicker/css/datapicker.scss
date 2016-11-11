@@ -106,7 +106,7 @@ $titleHover:#eee;
     flex-wrap: nowrap;
   }
   /*set choose hover style*/
-  .chooseBox .chooseYear .yearList,.chooseBox .chooseDay .dayList{
+  .chooseBox .chooseYear .yearList,.chooseBox .chooseDay .dayList,.chooseMonth .monthList{
       .canNotChoose{
         color: $canNotChoose;
         &:hover{
