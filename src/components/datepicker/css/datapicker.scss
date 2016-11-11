@@ -85,6 +85,7 @@ $titleHover:#eee;
           height: 26px;
           line-height: 26px;
           text-align: center;
+          transition: background ease-in-out .15s;
           &:hover{
             background: $singleChooseBG;
             border-radius: $borderRadius;
@@ -145,6 +146,7 @@ $titleHover:#eee;
       height: 48px;
       line-height: 48px;
       text-align: center;
+      transition: background ease-in-out .15s;
       &:hover{
         background: $singleChooseBG;
         border-radius: $borderRadius;
