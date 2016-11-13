@@ -5,7 +5,7 @@
             <div class="yearBox" v-show="panelType =='day'">
                 <ul>
                     <li class="previousBtn" v-on:click="changeMonth('previous')"><i class="kDatePicker k-previous"></i></li>
-                    <li class="Title"  v-on:click="changeType('month')">{{tmpYear}} {{monthList[tmpMonth]}}</li>
+                    <li class="Title"  v-on:click="changeType('month')">{{tmpYear}} {{monthList[tmpMonth]|monthF(language)}}</li>
                     <li class="nextBtn" v-on:click="changeMonth('next')"><i class="kDatePicker k-next"></i></li>
                 </ul>
             </div>
@@ -49,18 +49,18 @@
                         <!-- for language title-->
                         <li v-for="week in weekList">{{week|weekF(language)}}</li>
                     </ul>
-                    <ul class="dayList">
-                        <!--  <li class="previousChoose">1</li>-->
-                        <li v-for="day in daylist"
-                            ref="input"
-                            v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day),canNotChoose:!validDay(day)}"
-                            v-on:click="selectDay(day)"
-                        >{{day.value}}</li>
-                        <!-- <li class="singleChoosed">18</li>-->
-                        <!-- <li class="mulitChoosedHead">25</li>
-                         <li class="mulitChoosed">31</li>
-                         <li class="mulitChoosedEnd">32</li>-->
-                        <!-- <li class="canNotChoose">39</li>-->
+                    <ul class="dayList dayList-item">
+                      <!--  <li class="previousChoose">1</li>-->
+                      <li v-for="day in daylist"
+                          ref="input"
+                          v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day),canNotChoose:!validDay(day)}"
+                          v-on:click="selectDay(day)"
+                      >{{day.value}}</li>
+                      <!-- <li class="singleChoosed">18</li>-->
+                      <!-- <li class="mulitChoosedHead">25</li>
+                       <li class="mulitChoosed">31</li>
+                       <li class="mulitChoosedEnd">32</li>-->
+                      <!-- <li class="canNotChoose">39</li>-->
                     </ul>
                 </div>
             </div>
