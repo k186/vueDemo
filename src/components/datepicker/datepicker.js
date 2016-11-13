@@ -133,8 +133,9 @@ export default {
                 if (!this.range) {
                     this.tmpDay = item.value;
                 }
-                this.visible = false;
+
                 this.$emit('input', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
+                this.visible = false;
             }
         },
         validYear(year){
@@ -224,7 +225,7 @@ export default {
                 daylist[daylist.length] = {nextMonthDay: true, range: false, value: day}
             }
             return daylist
-        },
+        }
     },
     watch: {
         valueStr(){

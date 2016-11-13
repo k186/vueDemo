@@ -23,7 +23,7 @@ $titleHover:#eee;
   position: absolute;
   z-index: 9999;
   width: 210px;
-  /*max-height: 241px;*/
+  max-height: 241px;
   padding: 5px 6px;
   background: $totalBG;
   border:1px solid $border;
@@ -62,6 +62,9 @@ $titleHover:#eee;
   }
   .chooseBox{
     margin-top:5px;
+    height: 192px;
+    position: relative;
+    overflow: hidden;
     .chooseDay{
       .dayTitle{
         li{
@@ -154,5 +157,25 @@ $titleHover:#eee;
       }
     }
   }
+  .chooseYear,.chooseMonth,.chooseDay{
+    position: absolute;
+  }
 }
-
+.datePicer-Toggle-enter-active, .datePicer-Togglee-leave-active {
+  transition: all .45s cubic-bezier(.26,.67,.75,.97)
+}
+.datePicer-Toggle-enter,.datePicer-Toggle-leave-active {
+  transform: translateY(20px);
+  opacity: 0
+}
+.change-panel-enter-active, .change-panel-leave-active {
+  transition: all .45s ease-in-out
+}
+.change-panel-enter{
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.change-panel-leave-active{
+  opacity: 0;
+  transform: translateX(-100%);
+}
