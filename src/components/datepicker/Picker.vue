@@ -1,5 +1,6 @@
 <template>
-    <div class="k-datePicker">
+  <transition name="slide-fade">
+    <div class="k-datePicker" v-if="visible">
         <div class="datePane">
             <div class="yearBox" v-show="panelType =='day'">
                 <ul>
@@ -29,7 +30,7 @@
                         <!-- <li class="previousChoose">2011</li>-->
                         <li v-for="year in yearList"
                             v-on:click="selectYear(year)"
-                            v-bind:class="{singleChoosed:isSelected('year',year)}"
+                            v-bind:class="{singleChoosed:isSelected('year',year),canNotChoose:!validYear(year)}"
                         >{{ year }}</li>
                         <!--<li class="previousChoose">2022</li>-->
                     </ul>
@@ -39,19 +40,20 @@
                     <ul class="monthList">
                         <li v-for="(month,index) in monthList"
                             v-on:click="selectMonth(index)"
-                            v-bind:class="{singleChoosed:isSelected('month',index)}"
-                      >{{ month }}</li>
+                            v-bind:class="{singleChoosed:isSelected('month',index),canNotChoose:!validMonth(index)}"
+                      >{{ month|monthF(language)}}</li>
                     </ul>
                 </div>
                 <div class="chooseDay" v-show="panelType=='day'">
                     <ul class="dayTitle">
                         <!-- for language title-->
-                        <li v-for="week in weekList">{{week}}</li>
+                        <li v-for="week in weekList">{{week|weekF(language)}}</li>
                     </ul>
                     <ul class="dayList">
                         <!--  <li class="previousChoose">1</li>-->
                         <li v-for="day in daylist"
-                            v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day)}"
+                            ref="input"
+                            v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day),canNotChoose:!validDay(day)}"
                             v-on:click="selectDay(day)"
                         >{{day.value}}</li>
                         <!-- <li class="singleChoosed">18</li>-->
@@ -64,6 +66,7 @@
             </div>
         </div>
     </div>
+    </transition>
 </template>
 
 <script src="./datepicker.js"></script>

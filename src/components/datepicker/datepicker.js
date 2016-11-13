@@ -6,15 +6,12 @@ export default {
     props: {
         valueStr: {
             type: String,
-            default: ''
+            default: '',
+            required: true
         },
         language: {
             type: String,
             default: 'cn'
-        },
-        range: {
-            type: Boolean,
-            default: false
         },
         startDate: {
             type: String,
@@ -23,38 +20,26 @@ export default {
         endDate: {
             type: String,
             default: '5000-01-01'
+        },
+        format:{
+            type:String,
+            default:'YY-MM-DD'
         }
     },
     data () {
         let now = new Date();
         return {
-            panelState: false, /*控制显隐*/
-            panelType: 'day', /*控制选择面板*/
-            monthList: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            weekList: ['日', '一', '二', '三', '四', '五', '六'],
+            panelType: 'day',
+            monthList: [1,2,3,4,5,6,7,8,9,10,11,12],
+            weekList: [0,1,2,3,4,5,6],
             yearList: Array.from({length: 12}, (value, index)=>now.getFullYear() + index),
             tmpYear: now.getFullYear(),
             tmpMonth: now.getMonth(),
             tmpDay: now.getDate(),
-            Year: now.getFullYear(),
-            Month: now.getMonth(),
-            Day: now.getDate()
+            visible: false
         }
     },
     methods: {
-        togglePanel(){
-            this.panelState = !this.panelState;
-            this.initFun();
-        },
-        initFun(){
-            let dateArr = this.valueStr.split('-');
-            this.tmpYear = dateArr[0];
-            this.tmpMonth = dateArr[1] - 1;
-            this.tmpDay = dateArr[2];
-            this.Year = dateArr[0];
-            this.Month = dateArr[1] - 1;
-            this.Day = dateArr[2];
-        },
         changeType(type){
             this.panelType = type;
         },
@@ -90,17 +75,20 @@ export default {
             }
         },
         selectYear(item){
-            this.tmpYear = item;
-            this.changeType('month');
+            if(this.validYear(item)){
+                this.tmpYear = item;
+                this.changeType('month');
+            }
         },
         selectMonth(item){
-            this.tmpMonth = item;
-            this.changeType('day');
+            if(this.validMonth(item)){
+                this.tmpMonth = item;
+                this.changeType('day');
+            }
         },
         isSelected(type, item){
             switch (type) {
                 case 'year':
-                    //todo 判断range
                     if (item == this.tmpYear) {
                         return true
                     } else {
@@ -108,8 +96,7 @@ export default {
                     }
                 case 'month':
                 {
-                    if (this.Year === this.tmpYear && item === this.tmpMonth) {
-                        //todo think about to solve chose year and month mont not select bugs there may be should set range compare
+                    if (this.orYear==this.tmpYear&&item === this.tmpMonth) {
                         return true
                     } else {
                         return false
@@ -117,7 +104,7 @@ export default {
                 }
                 case 'day':
                 {
-                    if (this.Day == item.value && this.Month === this.tmpMonth && item.currentMonth) {
+                    if (this.orDay == item.value && this.orMonth === this.tmpMonth && item.currentMonth) {
                         return true
                     } else {
                         return false
@@ -126,45 +113,95 @@ export default {
             }
         },
         selectDay(item){
-            /*choose currentMonthDay previous nex*/
-            if (item.previousMonthDay) {
-                if(this.tmpMonth===0){
-                    this.tmpYear-=1;
-                    this.Year=this.tmpYear;
-                    this.tmpMonth=this.Month=11;
-                }else{
-                    this.tmpMonth-=1;
-                    this.Month=this.tmpMonth;
+            if(this.validDay(item)){
+                /*choose currentMonthDay previous nex*/
+                if (item.previousMonthDay) {
+                    if (this.tmpMonth === 0) {
+                        this.tmpYear -= 1;
+                        this.tmpMonth = 11;
+                    } else {
+                        this.tmpMonth -= 1;
+                    }
+                } else if (item.nextMonthDay) {
+                    if (this.tmpMonth == 11) {
+                        this.tmpYear += 1;
+                        this.tmpMonth = 0;
+                    } else {
+                        this.tmpMonth += 1;
+                    }
                 }
-            }else if(item.nextMonthDay){
-                if(this.tmpMonth==11){
-                    this.tmpYear+=1;
-                    this.Year= this.tmpYear;
-                    this.tmpMonth=this.Month=0;
-                }else {
-                    this.tmpMonth+=1;
-                    this.Month=this.tmpMonth;
+                if (!this.range) {
+                    this.tmpDay = item.value;
                 }
+                this.visible = false;
+                this.$emit('input', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
             }
-            if(!this.range){
-                this.Year=this.tmpYear;
-                this.Month=this.tmpMonth;
-                this.Day=item.value;
-                alert(this.Year+'-'+Number(this.Month+1)+'-'+ this.Day)
-            }
-
         },
         validYear(year){
-            return true
+            if (this.DateStartArr[0] <= year && year <= this.DateEndArr[0]) {
+                return true
+            } else {
+                return false
+            }
         },
         validMonth(month){
-            return true
+            let satrDate = new Date(this.DateStartArr[0], this.DateStartArr[1] - 1).getTime();
+            let endDate = new Date(this.DateEndArr[0], this.DateEndArr[1] - 1).getTime();
+            let tempDate = new Date(this.tmpYear, month).getTime();
+            if (satrDate <= tempDate && tempDate <= endDate) {
+                return true
+            }
+            else {
+                return false
+            }
         },
         validDay(day){
-            return true
+            let satrDate = new Date(this.DateStartArr[0], this.DateStartArr[1] - 1,this.DateStartArr[2]).getTime();
+            let endDate = new Date(this.DateEndArr[0], this.DateEndArr[1] - 1,this.DateStartArr[2]).getTime();
+            let tempDate = new Date(this.tmpYear, this.tmpMonth,day.value).getTime();
+            if (satrDate <= tempDate && tempDate <= endDate) {
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        close(){
+            //todo 定位问题 控释显示关闭问题
         }
     },
     computed: {
+        DateStartArr (){
+            return this.startDate.split('-');
+        },
+        DateEndArr(){
+            return this.endDate.split('-');
+        },
+        orYear (){
+            if (this.valueStr != '') {
+                return this.tmpYear = Number(this.valueStr.split('-')[0])
+            } else {
+                return new Date().getFullYear();
+            }
+        },
+        orMonth (){
+            if (this.valueStr != '') {
+                this.tmpDay = Number(this.valueStr.split('-')[2]);
+                /*when month change the day is not ready so set day in month computed*/
+                return this.tmpMonth = Number(this.valueStr.split('-')[1] - 1)
+            } else {
+                this.tmpDay = new Date().getDate();
+                return new Date().getMonth();
+            }
+        },
+        orDay (){
+            if (this.valueStr != '') {
+                return Number(this.valueStr.split('-')[2]);
+            } else {
+                return new Date().getDate();
+            }
+
+        },
         daylist () {
             /* get currentMonthLenght */
             let currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate();
@@ -188,5 +225,38 @@ export default {
             }
             return daylist
         },
+    },
+    watch: {
+        valueStr(){
+            this.visible = true
+        }
+    },
+    filters:{
+        weekF:(item,lang)=>{
+            switch(lang){
+                case 'cn':
+                    return {0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六'}[item];
+                case 'en':
+                    return {0: 'Su', 1: 'Mo', 2: 'Tu', 3: 'We', 4: 'Th', 5: 'Fr', 6: 'Sa'}[item];
+                default:
+                    return item
+            }
+        },
+        monthF:(month,lang)=>{
+            switch(lang){
+                case 'cn':
+                 return {1: '一月', 2: '二月', 3: '三月', 4: '四月', 5: '五月', 6: '六月', 7: '七月',8:'八月',9:'九月',10:'十月',11:'十一月',12:'十二月'}[month];
+                case 'en':
+                    return {1: 'JAN', 2: 'FEB', 3: 'MAR', 4: 'APR', 5: 'MAY', 6: 'JUN', 7: 'JUL',8:'AUG',9:'SEP',10:'OCT',11:'NOV',12:'DEC'}[month];
+                default:
+                    return month
+            }
+        }
+    },
+    mounted(){
+        window.addEventListener('click', this.close)
+    },
+    beforeDestroy(){
+        window.removeEventListener('click', this.close)
     }
 }

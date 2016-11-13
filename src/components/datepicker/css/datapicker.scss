@@ -62,7 +62,6 @@ $titleHover:#eee;
   }
   .chooseBox{
     margin-top:5px;
-    .chooseMonth{}
     .chooseDay{
       .dayTitle{
         li{
@@ -87,7 +86,7 @@ $titleHover:#eee;
           text-align: center;
           transition: background ease-in-out .15s;
           &:hover{
-            background: $singleChooseBG;
+            background: $mulitChooseBG;
             border-radius: $borderRadius;
             color: $choosed;
             cursor: pointer;
@@ -146,7 +145,7 @@ $titleHover:#eee;
       height: 48px;
       line-height: 48px;
       text-align: center;
-      transition: background ease-in-out .15s;
+      transition:background ease-in-out .15s, background ease-in-out .15s;
       &:hover{
         background: $singleChooseBG;
         border-radius: $borderRadius;
@@ -155,5 +154,14 @@ $titleHover:#eee;
       }
     }
   }
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  opacity: 0;
 }
 
