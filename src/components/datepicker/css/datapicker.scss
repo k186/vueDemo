@@ -35,7 +35,15 @@ $titleHover:#eee;
 }
 
 .datePane{
+  .titlePanel{
+    overflow: hidden;
+    height: 30px;
+    width: 196px;
+  }
   .yearBox{
+    position: absolute;
+    height: inherit;
+    width: inherit;
     .previousBtn,.nextBtn{
       width: 30px;
     }
@@ -44,6 +52,22 @@ $titleHover:#eee;
       font-size: 16px;
       width: 128px;
       padding: 0 5px;
+      overflow: hidden;
+      position: relative;
+      .changeTitle,.changeYearTitle{
+        float: left;
+        position: relative;
+        height: inherit;
+        width: 59px;
+        span{
+          display: block;
+          position: absolute;
+          width: inherit;
+        }
+      }
+      .changeYearTitle{
+        width: inherit;
+      }
     }
     ul{
       display: flex;
@@ -66,7 +90,9 @@ $titleHover:#eee;
     position: relative;
     overflow: hidden;
     .chooseDay{
+      width: 100%;
       .dayTitle{
+        position: relative;
         li{
           width: 20px;
           height: 20px;
@@ -77,10 +103,9 @@ $titleHover:#eee;
         }
       }
       .dayList{
+        position: absolute;
         margin-top: 5px;
-        background: $paneBG;
         height:168px ;/*control up and down gaps*/
-        border-radius: $borderRadius;
         color: $normalWord;
         li{
           width: 28px;
@@ -164,7 +189,11 @@ $titleHover:#eee;
 .datePicer-Toggle-enter-active, .datePicer-Togglee-leave-active {
   transition: all .45s cubic-bezier(.26,.67,.75,.97)
 }
-.datePicer-Toggle-enter,.datePicer-Toggle-leave-active {
+.datePicer-Toggle-enter {
+  transform: translateY(-20px);
+  opacity: 0
+}
+.datePicer-Toggle-leave-active{
   transform: translateY(20px);
   opacity: 0
 }
@@ -177,5 +206,34 @@ $titleHover:#eee;
 }
 .change-panel-leave-active{
   opacity: 0;
+  transform: scale(0.8);
+}
+.change-Month-Box{
+  background: $paneBG;
+  border-radius: $borderRadius;
+  position: relative;
+  width: 196px;
+  height: 168px;
+}
+.change-Month-enter-active, .change-Month-leave-active {
+  transition: all .6s cubic-bezier(0.84, 0.05, 0.46, 0.52);
+}
+.change-Month-enter{
+  opacity: 0;
+  transform: translateX(100%);
+}
+.change-Month-leave-active{
+  opacity: 0;
   transform: translateX(-100%);
+}
+.change-Tiltle-enter-active, .change-Tiltle-leave-active {
+  transition: all .45s ease-in-out;
+}
+.change-Tiltle-enter{
+  transform: translateY(100%);
+  opacity: 0;
+}
+.change-Tiltle-leave-active{
+  transform: translateY(-100%);
+  opacity: 0;
 }

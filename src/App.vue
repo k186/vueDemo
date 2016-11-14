@@ -15,9 +15,9 @@ export default {
   name: 'app',
   data: function () {
     return {
-      date: '2016-10-15',
-      startDate:'2015-5-2',
-      endDate:'2017-2-1',
+      date: '2016-11-14',
+      startDate:'1992-1-1',
+      endDate:'2050-1-1',
       JsonP:'',
       dateStr:'',
     }
