@@ -3,7 +3,7 @@
     <div class="k-datePicker" v-if="visible">
       <div class="datePane">
         <transition-group name="change-panel" class='titlePanel' tag='div'>
-          <div class="yearBox" key="day"  v-show="panelType =='day'">
+          <div class="yearBox" key="day" v-show="panelType =='day'">
             <ul>
               <li class="previousBtn" v-on:click="changeMonth('previous')"><i class="kDatePicker k-previous"></i></li>
 
@@ -97,7 +97,4 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   @import "./css/datapicker.css";
-
-
-
 </style>
