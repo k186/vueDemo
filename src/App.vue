@@ -1,47 +1,51 @@
 <template>
-    <div class="dateBox">
-        <div class="formGroup PickerGroup">
-            <input type="text" class="form-control" v-on:click="showDatePicker" :value="date" readonly/>
-            <k-picker :valueStr="dateStr" :startDate="startDate" :endDate="endDate" :visible="visible" language="cn"  v-model="callback"></k-picker>
-        </div>
-    </div>
+	<div class="dateBox">
+		<div class="formGroup PickerGroup">
+			<input type="text" class="form-control" v-on:click="showDatePicker" :value="date" v-on:click.stop readonly/>
+			<k-picker :valueStr="date" :visible="visible" v-on:selectDay="hideDatePicker" :options="options"></k-picker>
+		</div>
+	</div>
 
 </template>
 
 <script>
-import kPicker from './components/datepicker/Picker'
-export default {
-  name: 'app',
-  data: function () {
-    return {
-      date: '',
-      startDate:'1992-1-1',
-      endDate:'2050-1-1',
-      visible:false,
-      dateStr:'',
-      callback:{}
-    }
-  },
-  methods:{
-    showDatePicker (){
-      this.visible=true;
-      this.dateStr=this.date;
-    }
-  },
-  watch:{
-    callback(){
-      var obj=JSON.parse(this.callback);
-      if(obj){
-        this.date= obj.date;
-        this.visible=obj.visible;
+  import kPicker from './components/datepicker/Picker'
+  export default {
+    name: 'app',
+    data: function () {
+      return {
+        date: '',
+        visible: false,
+        options:{
+						format:'YYYY-MM-DD',
+						startDate:'2015-01-01',
+						endDate:'2018-01-01',
+						language:'cn'
+        }
       }
-    }
-  },
-  //todo 封装接口 现在暴露接口太多
-  components: {kPicker}
-}
+    },
+    methods: {
+      showDatePicker (){
+        this.visible = true;
+
+      },
+      hideDatePicker(date){
+        if(typeof date=='string'){
+          this.date=date;
+        }
+        this.visible = false;
+
+      }
+    },
+    watch: {
+    },
+    //todo 封装接口 现在暴露接口太多
+    components: {kPicker}
+  }
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   @import "./components/App.css";
+
 </style>

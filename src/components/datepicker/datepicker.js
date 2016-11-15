@@ -8,26 +8,13 @@ export default {
             type: String,
             default: ''
         },
-        language: {
-            type: String,
-            default: 'cn'
-        },
-        startDate: {
-            type: String,
-            default: '1970-01-01'
-        },
-        endDate: {
-            type: String,
-            default: '5000-01-01'
-        },
-        format:{
-            type:String,
-            default:'YY-MM-DD'
-        },
         visible: {
             type:Boolean,
             default:false,
             required:true
+        },
+        options:{
+            type: Object,
         }
     },
     data () {
@@ -39,21 +26,30 @@ export default {
             yearList: Array.from({length: 12}, (value, index)=>now.getFullYear() + index),
             tmpYear: now.getFullYear(),
             tmpMonth: now.getMonth(),
-            tmpDay: now.getDate()
+            tmpDay: now.getDate(),
+            animateMonth:'off',
+            animatePanel:'off',
+            animateTitle:'toggle-title',
+            changeTiltle:'off'
         }
     },
     methods: {
         changeType(type){
+            this.animateMonth='off';
             this.panelType = type;
         },
         changeMonth(type){
             if (type === 'next') {
+                this.animateMonth='next-Month';
+                this.changeTiltle='next-Title';
                 this.tmpMonth += 1;
                 if (this.tmpMonth > 11) {
                     this.tmpMonth = 0;
                     this.tmpYear += 1;
                 }
             } else if (type === 'previous') {
+                this.animateMonth='previous-Month';
+                this.changeTiltle='previous-Title';
                 this.tmpMonth -= 1;
                 if (this.tmpMonth < 0) {
                     this.tmpMonth = 11;
@@ -64,17 +60,25 @@ export default {
         changeYear(type){
             if (type === 'next') {
                 this.tmpYear += 1;
+                this.changeTiltle='next-Title';
+                this.animateMonth='next-Month';
 
             } else if (type === 'previous') {
                 this.tmpYear -= 1;
+                this.changeTiltle='previous-Title';
+                this.animateMonth='previous-Month';
 
             }
         },
         changeYearRange(type){
             if (type === 'next') {
-                this.yearList = this.yearList.map((i)=>i + 12)
+                this.yearList = this.yearList.map((i)=>i + 12);
+                this.changeTiltle='next-Title';
+                this.animateMonth='next-Month';
             } else if (type === 'previous') {
-                this.yearList = this.yearList.map((i)=>i - 12)
+                this.yearList = this.yearList.map((i)=>i - 12);
+                this.changeTiltle='previous-Title';
+                this.animateMonth='previous-Month';
             }
         },
         selectYear(item){
@@ -136,24 +140,20 @@ export default {
                 if (!this.range) {
                     this.tmpDay = item.value;
                 }
-                var obj={
-                    date:this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay,
-                    state:false
-                };
-                obj=JSON.stringify(obj);
-                this.$emit('input', obj)
+                this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
+
             }
         },
         validYear(year){
-            if (this.DateStartArr[0] <= year && year <= this.DateEndArr[0]) {
+            if (this.startDate.split('-')[0] <= year && year <= this.endDate.split('-')[0]) {
                 return true
             } else {
                 return false
             }
         },
         validMonth(month){
-            let satrDate = new Date(this.DateStartArr[0], this.DateStartArr[1] - 1).getTime();
-            let endDate = new Date(this.DateEndArr[0], this.DateEndArr[1] - 1).getTime();
+            let satrDate = new Date(this.startDate.split('-')[0],this.startDate.split('-')[1] - 1).getTime();
+            let endDate = new Date(this.endDate.split('-')[0],this.endDate.split('-')[1]- 1).getTime();
             let tempDate = new Date(this.tmpYear, month).getTime();
             if (satrDate <= tempDate && tempDate <= endDate) {
                 return true
@@ -163,8 +163,8 @@ export default {
             }
         },
         validDay(day){
-            let satrDate = new Date(this.DateStartArr[0], this.DateStartArr[1] - 1,this.DateStartArr[2]).getTime();
-            let endDate = new Date(this.DateEndArr[0], this.DateEndArr[1] - 1,this.DateStartArr[2]).getTime();
+            let satrDate = new Date(this.startDate.split('-')[0], this.startDate.split('-')[1] - 1,this.startDate.split('-')[2]).getTime();
+            let endDate = new Date(this.endDate.split('-')[0], this.endDate.split('-')[1] - 1,this.endDate.split('-')[2]).getTime();
             let tempDate = new Date(this.tmpYear, this.tmpMonth,day.value).getTime();
             if (satrDate <= tempDate && tempDate <= endDate) {
                 return true
@@ -175,14 +175,26 @@ export default {
         },
         close(){
             //todo 定位问题 控释显示关闭问题
+        },
+        hideDatePicker(){
+            this.tmpYear=this.orYear;
+            this.tmpMonth=this.orMonth;
+            this.tmpDay=this.orDay;
+            this.$emit('selectDay');
         }
     },
     computed: {
-        DateStartArr (){
-            return this.startDate.split('-');
+        format (){
+            return this.options.format?this.options.format:'YYYY-MM-DD';
         },
-        DateEndArr(){
-            return this.endDate.split('-');
+        startDate(){
+            return this.options.startDate?this.options.startDate:'1970-01-01';
+        },
+        endDate(){
+            return this.options.endDate?this.options.endDate:'5000-01-01';
+        },
+        language(){
+            return this.options.language?this.options.language:'cn';
         },
         orYear (){
             if (this.valueStr != '') {
@@ -216,7 +228,6 @@ export default {
             let daylist = Array.from({length: currentMonthLength}, (value, index) => {
                 return {
                     currentMonth: true,
-                    range: false, /*is range choose*/
                     value: index + 1
                 }
             });
@@ -224,11 +235,11 @@ export default {
             let currentMonthStartDay = new Date(this.tmpYear, this.tmpMonth, 1).getDay();
             let previousMotnhLength = new Date(this.tmpYear, this.tmpMonth - 1, 0).getDate();
             for (let i = 0; i < currentMonthStartDay; i++) {
-                daylist = [{previousMonthDay: true, range: false, value: previousMotnhLength - i}].concat(daylist)
+                daylist = [{previousMonthDay: true, value: previousMotnhLength - i}].concat(daylist)
             }
             /* get nex day */
             for (let i = daylist.length, day = 1; i < 42; i++, day++) {
-                daylist[daylist.length] = {nextMonthDay: true, range: false, value: day}
+                daylist[daylist.length] = {nextMonthDay: true, value: day}
             }
             return daylist
         }
@@ -255,10 +266,27 @@ export default {
             }
         }
     },
-    mounted(){
-        window.addEventListener('click', this.close)
+    watch:{
+        panelType:function(val,oldVal){
+            this.changeTiltle='off'
+            if(val=='day'&&oldVal=='day'){
+
+            }else if (val=='month'&&oldVal=='day'){
+                this.animatePanel='next-panel'
+            }else if (val=='year'&&oldVal=='month'){
+                this.animatePanel='next-panel'
+            }else if (val=='month'&&oldVal=='year'){
+                this.animatePanel='previous-panel'
+            }else if (val=='day'&&oldVal=='month'){
+                this.animatePanel='previous-panel';
+            }
+        },
+        visible:function(val,oldVal){
+            if(val==true){
+                setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0)
+            }else {
+                document.removeEventListener('click', this.hideDatePicker)
+            }
+        }
     },
-    beforeDestroy(){
-        window.removeEventListener('click', this.close)
-    }
 }
