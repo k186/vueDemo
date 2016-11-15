@@ -6,8 +6,7 @@ export default {
     props: {
         valueStr: {
             type: String,
-            default: '',
-            required: true
+            default: ''
         },
         language: {
             type: String,
@@ -24,6 +23,11 @@ export default {
         format:{
             type:String,
             default:'YY-MM-DD'
+        },
+        visible: {
+            type:Boolean,
+            default:false,
+            required:true
         }
     },
     data () {
@@ -35,8 +39,7 @@ export default {
             yearList: Array.from({length: 12}, (value, index)=>now.getFullYear() + index),
             tmpYear: now.getFullYear(),
             tmpMonth: now.getMonth(),
-            tmpDay: now.getDate(),
-            visible: false
+            tmpDay: now.getDate()
         }
     },
     methods: {
@@ -133,9 +136,12 @@ export default {
                 if (!this.range) {
                     this.tmpDay = item.value;
                 }
-
-                this.$emit('input', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
-                this.visible = false;
+                var obj={
+                    date:this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay,
+                    state:false
+                };
+                obj=JSON.stringify(obj);
+                this.$emit('input', obj)
             }
         },
         validYear(year){
@@ -225,11 +231,6 @@ export default {
                 daylist[daylist.length] = {nextMonthDay: true, range: false, value: day}
             }
             return daylist
-        }
-    },
-    watch: {
-        valueStr(){
-            this.visible = true
         }
     },
     filters:{
