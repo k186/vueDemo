@@ -180,6 +180,7 @@ export default {
             this.tmpYear=this.orYear;
             this.tmpMonth=this.orMonth;
             this.tmpDay=this.orDay;
+            this.panelType='day';
             this.$emit('selectDay');
         }
     },

@@ -17,10 +17,10 @@
         date: '',
         visible: false,
         options:{
-						format:'YYYY-MM-DD',
-						startDate:'2015-01-01',
-						endDate:'2018-01-01',
-						language:'cn'
+			format:'YYYY-MM-DD',
+			startDate:'2015-01-01',
+			endDate:'2018-01-01',
+			language:'cn'
         }
       }
     },
