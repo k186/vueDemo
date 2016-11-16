@@ -37,6 +37,7 @@ export default {
         changeType(type){
             this.animateMonth='off';
             this.panelType = type;
+            this.yearList= Array.from({length: 12}, (value, index)=>this.tmpYear + index)
         },
         changeMonth(type){
             if (type === 'next') {
@@ -60,11 +61,13 @@ export default {
         changeYear(type){
             if (type === 'next') {
                 this.tmpYear += 1;
+                this.yearList = this.yearList.map((i)=>i + 1);
                 this.changeTiltle='next-Title';
                 this.animateMonth='next-Month';
 
             } else if (type === 'previous') {
                 this.tmpYear -= 1;
+                this.yearList = this.yearList.map((i)=>i - 1);
                 this.changeTiltle='previous-Title';
                 this.animateMonth='previous-Month';
 
@@ -111,7 +114,7 @@ export default {
                 }
                 case 'day':
                 {
-                    if (this.orDay == item.value && this.orMonth === this.tmpMonth && item.currentMonth) {
+                    if (this.orDay == item.value && this.orMonth === this.tmpMonth && item.currentMonth&&this.orYear==this.tmpYear) {
                         return true
                     } else {
                         return false
@@ -181,6 +184,7 @@ export default {
             this.tmpMonth=this.orMonth;
             this.tmpDay=this.orDay;
             this.panelType='day';
+            this.yearList=Array.from({length: 12}, (value, index)=>this.tmpYear + index)
             this.$emit('selectDay');
         }
     },
@@ -269,7 +273,7 @@ export default {
     },
     watch:{
         panelType:function(val,oldVal){
-            this.changeTiltle='off'
+            this.changeTiltle='off';
             if(val=='day'&&oldVal=='day'){
 
             }else if (val=='month'&&oldVal=='day'){
