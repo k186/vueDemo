@@ -99,26 +99,41 @@ export default {
         isSelected(type, item){
             switch (type) {
                 case 'year':
-                    if (item == this.orYear&&item==this.tmpYear) {
-                        return true
-                    } else {
+                    if(this.validYear(item)){
+                        if (item == this.tmpYear) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    }else {
                         return false
                     }
+
                 case 'month':
                 {
-                    if (this.orYear==this.tmpYear&&item === this.tmpMonth) {
-                        return true
+                    if(this.validMonth(item)){
+                        if (this.orYear==this.tmpYear&&item === this.tmpMonth) {
+                            return true
+                        } else {
+                            return false
+                        }
                     } else {
                         return false
                     }
+
                 }
                 case 'day':
                 {
-                    if (this.orDay == item.value && this.orMonth === this.tmpMonth && item.currentMonth&&this.orYear==this.tmpYear) {
-                        return true
+                    if(this.validDay(item)){
+                        if (this.orDay == item.value && this.orMonth === this.tmpMonth && item.currentMonth&&this.orYear==this.tmpYear) {
+                            return true
+                        } else {
+                            return false
+                        }
                     } else {
                         return false
                     }
+
                 }
             }
         },
