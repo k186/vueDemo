@@ -99,7 +99,7 @@ export default {
         isSelected(type, item){
             switch (type) {
                 case 'year':
-                    if (item == this.tmpYear) {
+                    if (item == this.orYear&&item==this.tmpYear) {
                         return true
                     } else {
                         return false
