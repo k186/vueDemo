@@ -46,6 +46,6 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import "./components/App.css";
+  @import "view/datepickerPC/static/App.css";
 
 </style>
