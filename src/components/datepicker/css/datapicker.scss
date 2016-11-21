@@ -71,8 +71,12 @@ $titleHover: #eee;
       }
     }
     ul {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      justify-content: space-between;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
       li {
         height: 30px;
         line-height: 30px;
@@ -113,6 +117,7 @@ $titleHover: #eee;
           height: 26px;
           line-height: 26px;
           text-align: center;
+          -webkit-transition: background ease-in-out .15s;
           transition: background ease-in-out .15s;
           &:hover {
             background: $mulitChooseBG;
@@ -126,15 +131,20 @@ $titleHover: #eee;
   }
   /*flex display*/
   .dayList, .yearList, .monthList, .dayTitle {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
   .monthList,.yearList{
     position: absolute;
   }
   .dayTitle {
-    flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
   }
   /*set choose hover style*/
   .chooseBox .chooseYear .yearList, .chooseBox .chooseDay .dayList, .chooseMonth .monthList {
@@ -177,6 +187,7 @@ $titleHover: #eee;
       height: 48px;
       line-height: 48px;
       text-align: center;
+      -webkit-transition: background ease-in-out .15s, background ease-in-out .15s;
       transition: background ease-in-out .15s, background ease-in-out .15s;
       &:hover {
         background: $singleChooseBG;
@@ -192,20 +203,24 @@ $titleHover: #eee;
 }
 
 .datePicer-Toggle-enter-active, .datePicer-Toggle-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.26, .67, .75, .97);
   transition: all .45s cubic-bezier(.26, .67, .75, .97)
 }
 
 .datePicer-Toggle-enter {
-  transform: translateY(-20px);
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
   opacity: 0;
 }
 
 .datePicer-Toggle-leave-active{
-  transform: translateY(-20px);
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
   opacity: 0;
 }
 
 .toggle-title-enter-active, .toggle-title-leave-active {
+  -webkit-transition: all .45s ease-in-out;
   transition: all .45s ease-in-out
 }
 
@@ -215,21 +230,25 @@ $titleHover: #eee;
 
 .toggle-title-leave-active {
   opacity: 0;
-  transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
 }
 
 .next-panel-enter-active, .next-panel-leave-active, .previous-panel-enter-active, .previous-panel-leave-active {
+  -webkit-transition: all .45s ease-in-out;
   transition: all .45s ease-in-out
 }
 
 .next-panel-enter, .previous-panel-leave-active {
   opacity: 0;
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 .next-panel-leave-active, .previous-panel-enter {
   opacity: 0;
-  transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
 }
 
 .change-Month-Box {
@@ -248,29 +267,35 @@ $titleHover: #eee;
 }
 
 .previous-Month-enter-active, .previous-Month-leave-active, .next-Month-enter-active, .next-Month-leave-active {
+  -webkit-transition: all .6s cubic-bezier(0.84, 0.05, 0.46, 0.52);
   transition: all .6s cubic-bezier(0.84, 0.05, 0.46, 0.52);
 }
 
 .previous-Month-enter, .next-Month-leave-active {
   opacity: 0;
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
 }
 
 .previous-Month-leave-active, .next-Month-enter {
   opacity: 0;
-  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
 }
 
 .previous-Title-enter-active, .previous-Title-leave-active, .next-Title-enter-active, .next-Title-leave-active {
+  -webkit-transition: all .45s ease-in-out;
   transition: all .45s ease-in-out;
 }
 
 .previous-Title-enter, .next-Title-leave-active {
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
   opacity: 0;
 }
 
 .previous-Title-leave-active, .next-Title-enter {
-  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
   opacity: 0;
 }
