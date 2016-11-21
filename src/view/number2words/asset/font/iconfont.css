@@ -1,0 +1,10 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1467285688'); /* IE9*/
+  src: url('iconfont.eot?t=1467285688#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1467285688') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1467285688') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1467285688#iconfont') format('svg'); /* iOS 4.1- */
+}
+.icon-github:before { content: "\e600"; }
+.icon-x:before { content: "\e601"; }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Number2words</title>
+    <script type="text/javascript" src="../../../static/pugin/number2word/number2words.min.js"></script>
+    <link rel="stylesheet" href="./asset/main.css">
+    <script>
+        eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('(h(b,o){5 8=b.11;5 k=8.19;5 a=8.S(\'t[u="N"]\');5 v=8.S(\'t[u="c"]\');5 4=0;5 7=0;5 p;5 c=o.c||(o.c={});6(a){1a.14(\'18\');5 9=a.T(\'i\').9(/s\\-7=([\\d\\.]+)/);6(9){7=g(9[1]);4=13(1/7)}}m 6(v){5 i=v.T(\'i\');6(i){5 y=i.9(/s\\-4=([\\d\\.]+)/);5 z=i.9(/Q\\-4=([\\d\\.]+)/);6(y){4=g(y[1]);7=g((1/4).U(2))}6(z){4=g(z[1]);7=g((1/4).U(2))}}}6(!4&&!7){5 16=b.I.K.9(/17/H);5 L=b.I.K.9(/15/H);5 r=b.r;6(L){6(r>=3&&(!4||4>=3)){4=3}m 6(r>=2&&(!4||4>=2)){4=2}m{4=1}}m{4=1}7=1/4}k.w(\'1b-4\',4);6(!a){a=8.F(\'t\');a.w(\'u\',\'N\');a.w(\'i\',\'s-7=\'+7+\', Q-7=\'+7+\', 1k-7=\'+7+\', 1o-1r=1q\');6(k.G){k.G.J(a)}m{5 x=8.F(\'1p\');x.J(a);8.1e(x.1m)}}h j(){5 n=k.1f().n;6(n/4>Y){n=Y*4}5 f=n/10;k.B.A=f+\'q\';c.f=b.f=f}b.E(\'1d\',h(){X(p);p=Z(j,V)},D);b.E(\'1i\',h(e){6(e.1j){X(p);p=Z(j,V)}},D);6(8.1g===\'1h\'){8.W.B.A=12*4+\'q\'}m{8.E(\'1c\',h(e){8.W.B.A=12*4+\'q\'},D)}j();c.4=b.4=4;c.j=j;c.1l=h(d){5 l=g(d)*P.f;6(R d===\'M\'&&d.9(/f$/)){l+=\'q\'}O l};c.1n=h(d){5 l=g(d)/P.f;6(R d===\'M\'&&d.9(/q$/)){l+=\'f\'}O l}})(C,C[\'o\']||(C[\'o\']={}));',62,90,'||||dpr|var|if|scale|doc|match|metaEl|win|flexible|||rem|parseFloat|function|content|refreshRem|docEl|val|else|width|lib|tid|px|devicePixelRatio|initial|meta|name|flexibleEl|setAttribute|wrap|initialDpr|maximumDpr|fontSize|style|window|false|addEventListener|createElement|firstElementChild|gi|navigator|appendChild|appVersion|isIPhone|string|viewport|return|this|maximum|typeof|querySelector|getAttribute|toFixed|300|body|clearTimeout|540|setTimeout||document||parseInt|warn|iphone|isAndroid|android|将根据已有的meta标签来设置缩放比例|documentElement|console|data|DOMContentLoaded|resize|write|getBoundingClientRect|readyState|complete|pageshow|persisted|minimum|rem2px|innerHTML|px2rem|user|div|no|scalable'.split('|'),0,{}))
+    </script>
+</head>
+<body>
+<div class="nav">
+    数字转中文（javascript）
+</div>
+<div class="containeer">
+    <div class="cell">
+        <div class="cell-title">通配</div>
+        <div class="cell-output" id="output1"></div>
+    </div>
+    <div class="cell">
+        <div class="cell-title">有数字标签(span)</div>
+        <div class="cell-output" id="output2"></div>
+    </div>
+    <div class="cell">
+        <div class="cell-title">有单位标签(div)</div>
+        <div class="cell-output" id="output3"></div>
+    </div>
+    <div class="cell">
+        <div class="cell-title">都有标签(span+div)</div>
+        <div class="cell-output" id="output4"></div>
+    </div>
+    <div class="cell github">
+        <a href="https://github.com/k186/number2words" target="_Blank" class="iconfont">&#xe600</a>
+        k186
+    </div>
+
+</div>
+<div class="foot">
+    <div class="input-box off">
+        <input id="inputs" type="text" value="8548"/>
+    </div>
+</div>
+</body>
+<script>
+    var output1=document.getElementById('output1');
+    var output2=document.getElementById('output2');
+    var output3=document.getElementById('output3');
+    var output4=document.getElementById('output4');
+    var inputs=document.getElementById('inputs');
+    var value=inputs.value;
+    var option1={
+        isTag:false
+    };
+    var option2={
+        isTag:true,
+        numTag:'span'
+    };
+    var option3={
+        isTag:true,
+        unitTag:'div'
+    };
+    var option4={
+        isTag:true,
+        numTag:'span',
+        unitTag:'div'
+    };
+    var value=inputs.value;
+    inputs.addEventListener('keyup',function () {
+        value=inputs.value;
+        Number2Wrods.config(option1).putStr(value,'output1');
+        Number2Wrods.config(option2).putStr(value,'output2');
+        Number2Wrods.config(option3).putStr(value,'output3');
+        output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+    });
+    Number2Wrods.config(option1).putStr(value,'output1');
+    Number2Wrods.config(option2).putStr(value,'output2');
+    Number2Wrods.config(option3).putStr(value,'output3');
+    output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+</script>
+</html>

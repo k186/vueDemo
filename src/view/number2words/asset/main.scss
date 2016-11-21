@@ -1,0 +1,205 @@
+@function px2rem($px, $base-font-size: 75px) {
+  @if (unitless($px)) {
+    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+    @return px2rem($px + 0px); // That may fail.
+  } @else if (unit($px) == rem) {
+    @return $px;
+  }
+  @return ($px / $base-font-size) * 1rem;
+}
+
+@import "font/iconfont.css";
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: px2rem(48px);
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@import "../../../../static/style/coreCss/reset.scss";
+@mixin border1pxBT {
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    background: #eee;
+    width: 100%;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    background: #eee;
+    width: 100%;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}
+
+@mixin border1pxT {
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    background: #eee;
+    width: 100%;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}
+
+@mixin border1pxB {
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    background: #eee;
+    width: 100%;
+    height: 1px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+}
+
+html[lang=apple] body {
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+  line-height: 1.8;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  height: 100%;
+}
+
+body {
+  background: white;
+}
+
+.nav {
+  font-size: px2rem(34px);
+  text-align: center;
+  height: px2rem(88px);
+  line-height: px2rem(88px);
+  background: #212224;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.containeer {
+  position: absolute;
+  left: px2rem(15px);
+  right: px2rem(15px);
+  top: px2rem(88px);
+  bottom: px2rem(160px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.cell {
+  color: #333;
+  margin-top: px2rem(70px);
+  .cell-title {
+    text-align: left;
+  }
+  .cell-output {
+    border-radius: 5px;
+    background: #f7f7f7;
+    min-height: px2rem(88px);
+    margin-top: px2rem(20px);
+    line-height: px2rem(88px);
+    padding:0 px2rem(10px);
+    font-size: px2rem(20px);
+  }
+}
+.github{
+  text-align: center;
+  height: px2rem(200px);
+  *{
+    color: #333333;
+  }
+}
+.foot{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: px2rem(160px);
+  background: #fafafa;
+  text-align: center;
+  @include border1pxT;
+  .input-box{
+    position: absolute;
+    height: px2rem(100px);
+    width: 90%;
+    padding: 0 px2rem(15px);
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    input{
+      width: inherit;
+      border: 1px solid #eeeeee;
+      -webkit-appearance: none;
+      border-radius: 5px;
+      font-size: px2rem(40px);
+      text-align: center;
+      font-family:'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+      &:focus{
+        outline: none;
+        outline-offset:0px
+      }
+    }
+    &:after{
+      content: '\e601';
+      font-family: "iconfont" !important;
+      font-size: px2rem(40px);
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke-width: 0.2px;
+      -moz-osx-font-smoothing: grayscale;
+      color: #e4e4e4;
+      position: absolute;
+      right: px2rem(40px);
+      line-height: px2rem(100px);
+      margin-top: px2rem(30px);
+    }
+
+  }
+  .input-box.off{
+    &:after{
+      display: none;
+    }
+  }
+}
+.cell-output{
+  span{
+    display: inline-block;
+    border-bottom: 1px solid #333;
+    line-height: px2rem(30px);
+    width: px2rem(40px);
+    text-align: center;
+  }
+  div{
+    display: inline-block;
+    width: px2rem(40px);
+    text-align: center;
+  }
+}
