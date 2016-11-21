@@ -1,51 +1,23 @@
 <template>
-	<div class="dateBox">
-		<div class="formGroup PickerGroup">
-			<input type="text" class="form-control" v-on:click="showDatePicker" :value="date" v-on:click.stop readonly/>
-			<k-picker :valueStr="date" :visible="visible" v-on:selectDay="hideDatePicker" :options="options"></k-picker>
-		</div>
-	</div>
-
+	<picker></picker>
 </template>
 
 <script>
-  import kPicker from './components/datepicker/Picker'
+  import picker from './view/datepickerPC/datepicker'
   export default {
     name: 'app',
     data: function () {
       return {
         date: '',
-        visible: false,
-        options:{
-			format:'YYYY-MM-DD',
-			startDate:'2015-01-01',
-			endDate:'2018-01-01',
-			language:'cn'
-        }
-      }
-    },
-    methods: {
-      showDatePicker (){
-        this.visible = true;
-
-      },
-      hideDatePicker(date){
-        if(typeof date=='string'){
-          this.date=date;
-        }
-        this.visible = false;
 
       }
-    },
-    watch: {
     },
     //todo 封装接口 现在暴露接口太多
-    components: {kPicker}
+    components: {picker}
   }
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import "view/datepickerPC/static/App.css";
-
+  @import "view/datepickerPC/static/datePickerPc.css";
 </style>
