@@ -1,9 +1,9 @@
 <template>
-	<picker></picker>
+	<picker-view></picker-view>
 </template>
 
 <script>
-  import picker from './view/datepickerPC/datepicker'
+  import pickerView from './view/datepickerPC/datepicker'
   export default {
     name: 'app',
     data: function () {
@@ -13,7 +13,7 @@
       }
     },
     //todo 封装接口 现在暴露接口太多
-    components: {picker}
+    components: {pickerView}
   }
 
 </script>

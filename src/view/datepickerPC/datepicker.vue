@@ -11,7 +11,7 @@
 <script>
     import kPicker from '../../components/datepicker/Picker'
     export default {
-        name: 'app',
+        name: 'pickerView',
         data: function () {
             return {
                 date: '',

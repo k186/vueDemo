@@ -159,7 +159,6 @@ export default {
                     this.tmpDay = item.value;
                 }
                 this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
-
             }
         },
         validYear(year){
@@ -215,6 +214,27 @@ export default {
         },
         language(){
             return this.options.language?this.options.language:'cn';
+        },
+        range(){
+            return this.options.range?this.options.range:false;
+        },
+        timeList(){
+            let total=1440,range=this.options.timeRange?this.options.timeRange:59;
+            let arr=[];
+            for(let i=0;i<Math.ceil(total/range)+1;i++){
+                let minite=i*range;
+                let tempH=0,tempM=0;
+                tempH=Number.parseInt(minite/60);
+                tempM=minite-60*tempH;
+                if(tempH==24&&tempM>=0){
+                    tempH=23;
+                    tempM=59;
+                }
+                tempH=tempH>=10?tempH:'0'+tempH;
+                tempM=tempM>=10?tempM:'0'+tempM;
+                arr.push({H:tempH,M:tempM})
+            }
+            return arr
         },
         orYear (){
             if (this.valueStr != '') {

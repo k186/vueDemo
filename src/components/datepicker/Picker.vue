@@ -91,6 +91,22 @@
 							</ul>
 						</transition-group>
 					</div>
+					<div class="chooseTime" key='time'>
+						<transition-group :name='animateMonth' class="change-Month-Box" tag="div">
+							<ul class="dayList" v-bind:key="tmpMonth">
+								<!--  <li class="previousChoose">1</li>-->
+								<li v-for="time in timeList"
+										ref="input"
+								>{{time.H}}
+								</li>
+								<!-- <li class="singleChoosed">18</li>-->
+								<!-- <li class="mulitChoosedHead">25</li>
+								 <li class="mulitChoosed">31</li>
+								 <li class="mulitChoosedEnd">32</li>-->
+								<!-- <li class="canNotChoose">39</li>-->
+							</ul>
+						</transition-group>
+					</div>
 				</transition-group>
 			</div>
 		</div>
