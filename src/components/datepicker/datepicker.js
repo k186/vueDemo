@@ -30,7 +30,7 @@ export default {
             animateMonth:'off',
             animatePanel:'off',
             animateTitle:'toggle-title',
-            changeTiltle:'off'
+            changeTiltle:'off',
         }
     },
     methods: {
@@ -218,8 +218,8 @@ export default {
         range(){
             return this.options.range?this.options.range:false;
         },
-        timeList(){
-            let total=1440,range=this.options.timeRange?this.options.timeRange:59;
+        allTimeList(){
+            let total=1440,range=this.options.timeRange?this.options.timeRange:13;
             let arr=[];
             for(let i=0;i<Math.ceil(total/range)+1;i++){
                 let minite=i*range;
@@ -235,6 +235,9 @@ export default {
                 arr.push({H:tempH,M:tempM})
             }
             return arr
+        },
+        timeList(){
+            return Array.from({length: 12}, (value, index)=>this.allTimeList[index].H+':'+this.allTimeList[index].M)
         },
         orYear (){
             if (this.valueStr != '') {

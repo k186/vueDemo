@@ -97,7 +97,7 @@
 								<!--  <li class="previousChoose">1</li>-->
 								<li v-for="time in timeList"
 										ref="input"
-								>{{time.H}}
+								>{{time}}
 								</li>
 								<!-- <li class="singleChoosed">18</li>-->
 								<!-- <li class="mulitChoosedHead">25</li>
