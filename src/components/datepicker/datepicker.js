@@ -37,6 +37,14 @@ export default {
             animatePanel: 'off',
             animateTitle: 'toggle-title',
             changeTiltle: 'off',
+            Format:{
+                year:'yyyy',
+                month:'M',
+                day:'d',
+                isHour:false,
+                hour:'HH',
+                minute:'mm'
+            }
         }
     },
     methods: {
@@ -181,7 +189,7 @@ export default {
                     this.tmpDay = item.value;
                 }
                 this.changeType('hour');
-                //this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
+                this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
             }
         },
         validYear(year){
@@ -214,8 +222,8 @@ export default {
             }
         },
         validHour(hour){
-            let satrDate = new Date(this.startDate.split('-')[0], this.startDate.split('-')[1] - 1, this.startDate.split('-')[2]).getTime();
-            let endDate = new Date(this.endDate.split('-')[0], this.endDate.split('-')[1] - 1, this.endDate.split('-')[2]).getTime();
+            let satrDate = new Date(this.startDate.split('-')[0], this.startDate.split('-')[1] - 1, this.startDate.split('-')[2],24).getTime();
+            let endDate = new Date(this.endDate.split('-')[0], this.endDate.split('-')[1] - 1, this.endDate.split('-')[2],24).getTime();
             let tempDate = new Date(this.tmpYear, this.tmpMonth, this.tmpDay, hour).getTime();
             if (satrDate <= tempDate && tempDate <= endDate) {
                 return true
@@ -234,11 +242,49 @@ export default {
             this.panelType='day';
             this.yearList=Array.from({length: 12}, (value, index)=>this.tmpYear + index)
             this.$emit('selectDay');
+        },
+        setFormat(){
+            /*
+            * d      without 0
+            * dd     with 01
+            * M      without 0
+            * MM     with 03
+            * yy     2016 16
+            * yyyy   2016
+            * h      12am 12pm 1 2
+            * hh     12am 12pm 01 02
+            * H      24h 1 2 3
+            * HH     24 01 02
+            * m      minute 1
+            * mm     minute 01
+            * */
+            let  format=this.format;
+            let reg1=/^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}\s[h,hh,H,HH]{1,2}\:[m,mm]{1,2}$|^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}$/;
+            let reg2=/^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}\s[h,hh,H,HH]{1,2}\:[m,mm]{1,2}$/;
+            let reg3=/^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}$/;
+            let reg4=/^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}\:\d{1,2}$|^\d{4}-\d{1,2}-\d{1,2}$/;
+            if(reg1.test(format)&&(format.split('\-').length==3||format.split('\/').length==3)){
+                if(reg2.test(format)){
+                    let dateArr=format.split('/\s');
+                    let yearArr=dateArr[0],hourArr=dateArr[1];
+                    this.Format.isHour=true;
+                    this.Format.year=yearArr[0];
+                    this.Format.month=yearArr[1];
+                    this.Format.day=yearArr[2];
+                    this.Format.hour=hourArr[0];
+                    this.Format.minute=hourArr[1];
+                }else if(reg3.test(format)){
+
+                }
+            }else {
+                throw Error.warn('format is wrong')
+            }
+
         }
     },
     computed: {
         format (){
-            return this.options.format?this.options.format:'YYYY-MM-DD';
+            return this.options.format?this.options.format:'YYYY-MM-DD HH:mm';
         },
         startDate(){
             return this.options.startDate?this.options.startDate:'1970-01-01';
