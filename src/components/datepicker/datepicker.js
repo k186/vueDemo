@@ -24,20 +24,31 @@ export default {
             monthList: [1,2,3,4,5,6,7,8,9,10,11,12],
             weekList: [0,1,2,3,4,5,6],
             yearList: Array.from({length: 12}, (value, index)=>now.getFullYear() + index),
+            hourList: Array.from({length: 24}, (value, index)=>0 + index),
             tmpYear: now.getFullYear(),
             tmpMonth: now.getMonth(),
             tmpDay: now.getDate(),
-            animateMonth:'off',
-            animatePanel:'off',
-            animateTitle:'toggle-title',
-            changeTiltle:'off',
+            tmpHour: now.getHours(),
+            selectedYear: now.getFullYear(),
+            selectedMonth: now.getMonth(),
+            selectedDay: now.getDate(),
+            selectedHour: now.getHours(),
+            animateMonth: 'off',
+            animatePanel: 'off',
+            animateTitle: 'toggle-title',
+            changeTiltle: 'off',
         }
     },
     methods: {
         changeType(type){
             this.animateMonth='off';
             this.panelType = type;
-            this.yearList= Array.from({length: 12}, (value, index)=>this.tmpYear + index)
+            if (type = 'year') {
+                this.yearList = Array.from({length: 12}, (value, index)=>this.tmpYear + index)
+            }
+        },
+        changeDay(type){
+
         },
         changeMonth(type){
             if (type === 'next') {
@@ -100,7 +111,7 @@ export default {
             switch (type) {
                 case 'year':
                     if(this.validYear(item)){
-                        if (item == this.tmpYear) {
+                        if (item == this.orYear) {
                             return true
                         } else {
                             return false
@@ -112,7 +123,7 @@ export default {
                 case 'month':
                 {
                     if(this.validMonth(item)){
-                        if (this.orYear==this.tmpYear&&item === this.tmpMonth) {
+                        if (this.orYear==this.tmpYear&&item === this.orMonth) {
                             return true
                         } else {
                             return false
@@ -134,6 +145,17 @@ export default {
                         return false
                     }
 
+                }
+                case 'hour': {
+                    if (this.validHour(item)) {
+                        if (this.orDay == this.tmpDay && this.orMonth === this.tmpMonth && this.orYear == this.tmpYear && item == this.orHour) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
                 }
             }
         },
@@ -158,7 +180,8 @@ export default {
                 if (!this.range) {
                     this.tmpDay = item.value;
                 }
-                this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
+                this.changeType('hour');
+                //this.$emit('selectDay', this.tmpYear + '-' + Number(this.tmpMonth + 1) + '-' + this.tmpDay)
             }
         },
         validYear(year){
@@ -183,6 +206,17 @@ export default {
             let satrDate = new Date(this.startDate.split('-')[0], this.startDate.split('-')[1] - 1,this.startDate.split('-')[2]).getTime();
             let endDate = new Date(this.endDate.split('-')[0], this.endDate.split('-')[1] - 1,this.endDate.split('-')[2]).getTime();
             let tempDate = new Date(this.tmpYear, this.tmpMonth,day.value).getTime();
+            if (satrDate <= tempDate && tempDate <= endDate) {
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        validHour(hour){
+            let satrDate = new Date(this.startDate.split('-')[0], this.startDate.split('-')[1] - 1, this.startDate.split('-')[2]).getTime();
+            let endDate = new Date(this.endDate.split('-')[0], this.endDate.split('-')[1] - 1, this.endDate.split('-')[2]).getTime();
+            let tempDate = new Date(this.tmpYear, this.tmpMonth, this.tmpDay, hour).getTime();
             if (satrDate <= tempDate && tempDate <= endDate) {
                 return true
             }
@@ -241,14 +275,14 @@ export default {
         },
         orYear (){
             if (this.valueStr != '') {
-                return this.tmpYear = Number(this.valueStr.split('-')[0])
+                return this.tmpYear =this.selectedYear= Number(this.valueStr.split('-')[0])
             } else {
                 return new Date().getFullYear();
             }
         },
         orMonth (){
             if (this.valueStr != '') {
-                this.tmpDay = Number(this.valueStr.split('-')[2]);
+                //this.tmpDay = Number(this.valueStr.split('-')[2]);
                 /*when month change the day is not ready so set day in month computed*/
                 return this.tmpMonth = Number(this.valueStr.split('-')[1] - 1)
             } else {
@@ -263,6 +297,13 @@ export default {
                 return new Date().getDate();
             }
 
+        },
+        orHour(){
+            if (this.valueStr != '') {
+                return this.tmpHour = this.selectHour = Number(this.valueStr.split(' ')[1].split(':')[0])
+            } else {
+                return this.selectHour = new Date().getHours();
+            }
         },
         daylist () {
             /* get currentMonthLenght */
@@ -309,19 +350,21 @@ export default {
             }
         }
     },
-    watch:{
-        panelType:function(val,oldVal){
-            this.changeTiltle='off';
-            if(val=='day'&&oldVal=='day'){
-
-            }else if (val=='month'&&oldVal=='day'){
-                this.animatePanel='next-panel'
-            }else if (val=='year'&&oldVal=='month'){
-                this.animatePanel='next-panel'
-            }else if (val=='month'&&oldVal=='year'){
-                this.animatePanel='previous-panel'
-            }else if (val=='day'&&oldVal=='month'){
-                this.animatePanel='previous-panel';
+    watch: {
+        panelType: function (val, oldVal) {
+            this.changeTiltle = 'off';
+            if (val == 'day' && oldVal == 'hour') {
+                this.animatePanel = 'next-panel'
+            } else if (val == 'month' && oldVal == 'day') {
+                this.animatePanel = 'next-panel'
+            } else if (val == 'year' && oldVal == 'month') {
+                this.animatePanel = 'next-panel'
+            } else if (val == 'month' && oldVal == 'year') {
+                this.animatePanel = 'previous-panel'
+            } else if (val == 'day' && oldVal == 'month') {
+                this.animatePanel = 'previous-panel';
+            } else if (val == 'hour' && oldVal == 'day') {
+                this.animatePanel = 'previous-panel';
             }
         },
         visible:function(val,oldVal){
