@@ -98,7 +98,7 @@
                                 <li v-for="day in daylist"
                                     v-bind:class="{previousChoose:day.previousMonthDay||day.nextMonthDay,singleChoosed:isSelected('day',day),canNotChoose:!validDay(day)}"
                                     v-on:click="selectDay(day)"
-                                >{{day.value}}
+                                >{{Format.day=='dd'&&day.value<10?'0':''}}{{day.value}}
                                 </li>
                                 <!-- <li class="singleChoosed">18</li>-->
                                 <!-- <li class="mulitChoosedHead">25</li>
@@ -115,7 +115,8 @@
                                 <!--  <li class="previousChoose">1</li>-->
                                 <li v-for="hour in hourList"
                                     v-bind:class="{singleChoosed:isSelected('hour',hour),canNotChoose:!validHour(hour)}"
-                                >{{hour}}:00
+                                    v-on:click="selectHour(hour)"
+                                >{{Format.hour=='HH'&&hour<10?'0':''}}{{hour}}:00
                                 </li>
                                 <!-- <li class="singleChoosed">18</li>-->
                                 <!-- <li class="mulitChoosedHead">25</li>
