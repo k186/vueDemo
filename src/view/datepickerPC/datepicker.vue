@@ -14,13 +14,14 @@
         name: 'pickerView',
         data: function () {
             return {
-                date: '2016-11-1',
+                date: '2016-11-1 15:18',
                 visible: false,
                 options:{
-                    format:'yyyy/M/dd H:mm',
+                    format:'yyyy/M/dd HH:mm',
                     startDate:'2015-01-01',
                     endDate:'2018-01-01',
-                    language:'cn'
+                    language:'cn',
+                    timeRange:1
                 }
             }
         },

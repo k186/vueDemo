@@ -55,13 +55,6 @@ $titleHover: #eee;
       padding: 0 5px;
       overflow: hidden;
       position: relative;
-     display: flex;
-     justify-content: space-around;
-     flex-wrap: nowrap;
-     span{
-       width: 100%;
-       text-align: center;
-     }
     }
     ul {
       display: -webkit-box;
@@ -79,6 +72,25 @@ $titleHover: #eee;
           border-radius: $borderRadius;
           cursor: pointer;
         }
+      }
+    }
+    .Title-ul{
+      .title-year,.title-month{
+        height: inherit;
+        position: relative;
+        width: 50px;
+        display: inline-block;
+      }
+      width: 100%;
+      text-align: center;
+      position: relative;
+      height: inherit;
+      div{
+        width: 100%;
+        position: absolute;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
       }
     }
   }
@@ -102,13 +114,12 @@ $titleHover: #eee;
       }
       .dayList {
         position: absolute;
-        margin-top: 5px;
         height: 168px; /*control up and down gaps*/
         color: $normalWord;
         li {
-          width: 28px;
-          height: 26px;
-          line-height: 26px;
+          width: 26px;
+          height: 28px;
+          line-height: 28px;
           text-align: center;
           -webkit-transition: background ease-in-out .15s;
           transition: background ease-in-out .15s;
@@ -140,7 +151,7 @@ $titleHover: #eee;
         flex-wrap: nowrap;
   }
   /*set choose hover style*/
-  .chooseBox .chooseYear .yearList, .chooseBox .chooseDay .dayList, .chooseMonth .monthList,.chooseHour .hourList {
+  .chooseBox .chooseYear .yearList, .chooseBox .chooseDay .dayList, .chooseMonth .monthList,.chooseHour .hourList ,.chooseMinute .hourList{
     .canNotChoose {
       color: $canNotChoose;
       &:hover {
@@ -191,6 +202,9 @@ $titleHover: #eee;
     }
   }
   .hourList {
+    position: absolute;
+    height: 192px;
+    align-content: flex-start;
     li {
       width: 49px;
       height: 32px;
@@ -268,7 +282,7 @@ $titleHover: #eee;
   height: 168px;
 }
 
-.change-year-Box {
+.change-year-Box ,.change-hour-Box,.change-minute-Box{
   background: $totalBG;
   position: relative;
   width: 196px;

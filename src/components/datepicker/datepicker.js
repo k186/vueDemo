@@ -23,13 +23,14 @@ export default {
             panelType: 'day',
             monthList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             weekList: [0, 1, 2, 3, 4, 5, 6],
-            yearList: Array.from({length: 12}, (value, index)=>now.getFullYear() + index),
-            hourList: Array.from({length: 24}, (value, index)=>0 + index),
+            yearList: Array.from({length: 12}, (value, index) => now.getFullYear() + index),
+            hourList: Array.from({length: 24}, (value, index) => 0 + index),
             tmpYear: now.getFullYear(),
             tmpMonth: now.getMonth(),
             tmpDay: now.getDate(),
             tmpHour: now.getHours(),
             tmpMinute: now.getMinutes(),
+            minuteIndex: 0,
             animateMonth: 'off',
             animatePanel: 'off',
             animateTitle: 'toggle-title',
@@ -53,29 +54,29 @@ export default {
             this.animateMonth = 'off';
             this.panelType = type;
             if (type = 'year') {
-                this.yearList = Array.from({length: 12}, (value, index)=>this.tmpYear + index)
+                this.yearList = Array.from({length: 12}, (value, index) => this.tmpYear + index)
             }
         },
         changeDay(type){
-            if(type=='next'){
+            if (type == 'next') {
                 this.animateMonth = 'next-Month';
                 this.changeTiltle = 'next-Title';
-                this.tmpDay+=1;
-                if(this.tmpDay>new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()){
-                    this.tmpMonth+=1;
-                    this.tmpDay=1;
+                this.tmpDay += 1;
+                if (this.tmpDay > new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()) {
+                    this.tmpMonth += 1;
+                    this.tmpDay = 1;
                     if (this.tmpMonth > 11) {
                         this.tmpMonth = 0;
                         this.tmpYear += 1;
                     }
                 }
-            }else if(type=='previous'){
+            } else if (type == 'previous') {
                 this.animateMonth = 'previous-Month';
                 this.changeTiltle = 'previous-Title';
-                this.tmpDay-=1;
-                if(this.tmpDay==0){
+                this.tmpDay -= 1;
+                if (this.tmpDay == 0) {
                     this.tmpMonth -= 1;
-                    this.tmpDay=  new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()
+                    this.tmpDay = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()
                     if (this.tmpMonth < 0) {
                         this.tmpMonth = 11;
                         this.tmpYear -= 1;
@@ -105,13 +106,13 @@ export default {
         changeYear(type){
             if (type === 'next') {
                 this.tmpYear += 1;
-                this.yearList = this.yearList.map((i)=>i + 1);
+                this.yearList = this.yearList.map((i) => i + 1);
                 this.changeTiltle = 'next-Title';
                 this.animateMonth = 'next-Month';
 
             } else if (type === 'previous') {
                 this.tmpYear -= 1;
-                this.yearList = this.yearList.map((i)=>i - 1);
+                this.yearList = this.yearList.map((i) => i - 1);
                 this.changeTiltle = 'previous-Title';
                 this.animateMonth = 'previous-Month';
 
@@ -119,16 +120,68 @@ export default {
         },
         changeYearRange(type){
             if (type === 'next') {
-                this.yearList = this.yearList.map((i)=>i + 12);
+                this.yearList = this.yearList.map((i) => i + 12);
                 this.changeTiltle = 'next-Title';
                 this.animateMonth = 'next-Month';
             } else if (type === 'previous') {
-                this.yearList = this.yearList.map((i)=>i - 12);
+                this.yearList = this.yearList.map((i) => i - 12);
                 this.changeTiltle = 'previous-Title';
                 this.animateMonth = 'previous-Month';
             }
         },
+        changeMinute(type){
+            if (type == 'next') {
+                this.animateMonth = 'next-Month';
+                this.changeTiltle = 'next-Title';
+                this.minuteIndex += 24;
+                /*current minute of total range*/
+                let flag = this.minuteIndex / this.allTimeList['rangeLength'];
+                if (flag >= 1) {
+                    this.minuteIndex = 0;
+                    this.tmpHour += 1;
+                    if (this.tmpHour > 23) {
+                        this.tmpHour = 0;
+                        this.tmpDay += 1;
+                        if (this.tmpDay > new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()) {
+                            this.tmpMonth += 1;
+                            this.tmpDay = 1;
+                            if (this.tmpMonth > 11) {
+                                this.tmpMonth = 0;
+                                this.tmpYear += 1;
+                            }
+                        }
+                    }
+                }
+            } else if (type == 'previous') {
+                this.animateMonth = 'previous-Month';
+                this.changeTiltle = 'previous-Title';
+                this.minuteIndex -= 24;
+                let flag = this.minuteIndex / this.allTimeList['rangeLength'];
+                //todo time next and previous have change bug
+                if(flag<0){
+                    flag=(this.allTimeList['rangeLength']-flag)/this.allTimeList['rangeLength'];
+                }
+                let flag2=Math.ceil(this.allTimeList['rangeLength']/24);
+                if (flag> flag2) {
+                    this.minuteIndex = this.allTimeList['rangeLength'] - 24;
+                    this.tmpHour -= 1;
+                    if (this.tmpHour < 0) {
+                        this.tmpHour = 23;
+                        this.tmpDay -= 1;
+                        if (this.tmpDay == 0) {
+                            this.tmpMonth -= 1;
+                            this.tmpDay = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate()
+                            if (this.tmpMonth < 0) {
+                                this.tmpMonth = 11;
+                                this.tmpYear -= 1;
+                            }
+                        }
+                    }
+                }
 
+
+            }
+        },
         selectYear(item){
             if (this.validYear(item)) {
                 this.tmpYear = item;
@@ -160,19 +213,23 @@ export default {
                     }
                 }
                 this.tmpDay = item.value;
-                //todo through this.Format.isHour to go hour choice panel
-                if(this.Format.isHour){
+                if (this.Format.isHour) {
                     this.changeType('hour');
-                }else {
-                    this.$emit('selectDay', this.outPutDate())
+                } else {
+                    this.$emit('selectDay', this.outPutDate());
                 }
             }
         },
         selectHour(item){
-            if(this.validHour(item)){
-                this.tmpHour=item;
-                //todo minute panel
-                //this.changeType('minute');
+            if (this.validHour(item)) {
+                this.tmpHour = item;
+                this.changeType('minute');
+            }
+        },
+        selectMinute(item){
+            if (this.validMinute(item)) {
+                this.tmpMinute = item.M;
+                this.$emit('selectDay', this.outPutDate());
             }
         },
         isSelected(type, item){
@@ -223,6 +280,17 @@ export default {
                         return false
                     }
                 }
+                case 'minute': {
+                    if (this.validMinute(item)) {
+                        if (this.orDay == this.tmpDay && this.orMonth === this.tmpMonth && this.orYear == this.tmpYear && this.tmpHour == this.orHour && this.orMinute == item.M) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    } else {
+                        return false
+                    }
+                }
             }
         },
         /*valid date*/
@@ -230,7 +298,7 @@ export default {
             let obj1 = this.validDateFormat(this.startDate);
             let obj2 = this.validDateFormat(this.endDate);
             if (obj1.statues && obj2.statues) {
-                if (Number(this.startDate.split(obj1.separator)[0]) <= year && year <=Number(this.endDate.split(obj2.separator)[0])) {
+                if (Number(this.startDate.split(obj1.separator)[0]) <= year && year <= Number(this.endDate.split(obj2.separator)[0])) {
                     return true
                 } else {
                     return false
@@ -252,7 +320,7 @@ export default {
                 else {
                     return false
                 }
-            }else {
+            } else {
                 return false
             }
 
@@ -270,7 +338,7 @@ export default {
                 else {
                     return false
                 }
-            }else {
+            } else {
                 return false
             }
         },
@@ -278,8 +346,8 @@ export default {
             let obj1 = this.validDateFormat(this.startDate);
             let obj2 = this.validDateFormat(this.endDate);
             if (obj1.statues && obj2.statues) {
-                let satrDate = new Date(this.startDate.split(obj1.separator)[0], this.startDate.split(obj1.separator)[1] - 1, this.startDate.split(obj1.separator)[2], this.startDate.split(/\s/)[1]?this.startDate.split(/\s/)[1].split(':')[0]: 24).getTime();
-                let endDate = new Date(this.endDate.split(obj1.separator)[0], this.endDate.split(obj1.separator)[1] - 1, this.endDate.split(obj1.separator)[2], this.endDate.split(/\s/)[1]?this.endDate.split(/\s/)[1].split(':')[0]: 24).getTime();
+                let satrDate = new Date(this.startDate.split(obj1.separator)[0], this.startDate.split(obj1.separator)[1] - 1, this.startDate.split(obj1.separator)[2], this.startDate.split(/\s/)[1] ? this.startDate.split(/\s/)[1].split(':')[0] ? this.startDate.split(/\s/)[1].split(':')[0] : 23 : 23).getTime();
+                let endDate = new Date(this.endDate.split(obj1.separator)[0], this.endDate.split(obj1.separator)[1] - 1, this.endDate.split(obj1.separator)[2], this.endDate.split(/\s/)[1] ? this.endDate.split(/\s/)[1].split(':')[0] ? this.endDate.split(/\s/)[1].split(':')[0] : 23 : 23).getTime();
                 let tempDate = new Date(this.tmpYear, this.tmpMonth, this.tmpDay, hour).getTime();
                 if (satrDate <= tempDate && tempDate <= endDate) {
                     return true
@@ -287,21 +355,34 @@ export default {
                 else {
                     return false
                 }
-            }else {
+            } else {
                 return false
             }
         },
-
-        close(){
-            //todo 定位问题 控释显示关闭问题
+        validMinute(minute){
+            let obj1 = this.validDateFormat(this.startDate);
+            let obj2 = this.validDateFormat(this.endDate);
+            if (obj1.statues && obj2.statues) {
+                let satrDate = new Date(this.startDate.split(obj1.separator)[0], this.startDate.split(obj1.separator)[1] - 1, this.startDate.split(obj1.separator)[2], this.startDate.split(/\s/)[1] ? this.startDate.split(/\s/)[1].split(':')[0] ? this.startDate.split(/\s/)[1].split(':')[0] : 23 : 23, this.startDate.split(/\s/)[1] ? this.startDate.split(/\s/)[1].split(':')[1] ? this.startDate.split(/\s/)[1].split(':')[1] : 59 : 59).getTime();
+                let endDate = new Date(this.endDate.split(obj1.separator)[0], this.endDate.split(obj1.separator)[1] - 1, this.endDate.split(obj1.separator)[2], this.endDate.split(/\s/)[1] ? this.endDate.split(/\s/)[1].split(':')[0] ? this.endDate.split(/\s/)[1].split(':')[0] : 23 : 23, this.endDate.split(/\s/)[1] ? this.endDate.split(/\s/)[1].split(':')[1] ? this.endDate.split(/\s/)[1].split(':')[1] : 59 : 59).getTime();
+                let tempDate = new Date(this.tmpYear, this.tmpMonth, this.tmpDay, this.tmpHour, minute.M).getTime();
+                if (satrDate <= tempDate && tempDate <= endDate) {
+                    return true
+                }
+                else {
+                    return false
+                }
+            } else {
+                return false
+            }
         },
         hideDatePicker(){
+            this.$emit('selectDay');
             this.tmpYear = this.orYear;
             this.tmpMonth = this.orMonth;
             this.tmpDay = this.orDay;
             this.panelType = 'day';
-            this.yearList = Array.from({length: 12}, (value, index)=>this.tmpYear + index)
-            this.$emit('selectDay');
+            this.yearList = Array.from({length: 12}, (value, index) => this.tmpYear + index)
         },
         setFormat(format){
             /*
@@ -374,10 +455,10 @@ export default {
             }
         },
         outPutDate(){
-            if(this.Format.isHour){
-
-            }else {
-                return this.tmpYear + this.Format.separator + Number(this.tmpMonth + 1) + this.Format.separator + this.tmpDay
+            if (this.Format.isHour) {
+                return this.tmpYear + this.Format.separator + Number(this.tmpMonth + 1) + this.Format.separator + this.tmpDay + ' ' + this.tmpHour + ':' + this.tmpMinute;
+            } else {
+                return this.tmpYear + this.Format.separator + Number(this.tmpMonth + 1) + this.Format.separator + this.tmpDay;
             }
         },
         setOutPutDateFormat(type){
@@ -395,40 +476,40 @@ export default {
              * m      minute 1
              * mm     minute 01
              * */
-            let result='';
-            switch (type){
+            let result = '';
+            switch (type) {
                 case 'd':
-                    result=Number(this.tmpDay);
+                    result = Number(this.tmpDay);
                     break;
                 case 'dd':
-                    result=Number(this.tmpDay)<10?'0'+Number(this.tmpDay):this.tmpDay;
+                    result = Number(this.tmpDay) < 10 ? '0' + Number(this.tmpDay) : this.tmpDay;
                     break;
                 case 'M':
-                    result=Number(this.tmpMonth);
+                    result = Number(this.tmpMonth);
                     break;
                 case 'MM':
-                    result=Number(this.tmpMonth)<10?'0'+Number(this.tmpMonth):this.tmpMonth;
+                    result = Number(this.tmpMonth) < 10 ? '0' + Number(this.tmpMonth) : this.tmpMonth;
                     break;
                 case 'yy':
                     break;
                 case 'yyyy':
-                    result=Number(this.tmpYear);
+                    result = Number(this.tmpYear);
                     break;
                 case 'h':
                     break;
                 case 'hh':
                     break;
                 case 'H':
-                    result=Number(this.tmpHour);
+                    result = Number(this.tmpHour);
                     break;
                 case 'HH':
-                    result=Number(this.tmpHour)<10?'0'+Number(this.tmpHour):this.tmpHour;
+                    result = Number(this.tmpHour) < 10 ? '0' + Number(this.tmpHour) : this.tmpHour;
                     break;
                 case 'm':
-                    result=Number(this.tmpMinute);
+                    result = Number(this.tmpMinute);
                     break;
                 case 'mm':
-                    result=Number(this.tmpMinute)<10?'0'+Number(this.tmpMinute):this.tmpMinute;
+                    result = Number(this.tmpMinute) < 10 ? '0' + Number(this.tmpMinute) : this.tmpMinute;
                     break;
             }
         }
@@ -444,25 +525,34 @@ export default {
             return this.options.language ? this.options.language : 'cn';
         },
         allTimeList(){
-            let total = 1440, range = this.options.timeRange ? this.options.timeRange : 13;
-            let arr = [];
+            let total = 1440, range = this.options.timeRange ? this.options.timeRange : 15;
+            let arr = {};
             for (let i = 0; i < Math.ceil(total / range) + 1; i++) {
                 let minite = i * range;
                 let tempH = 0, tempM = 0;
-                tempH = Number.parseInt(minite / 60);
-                tempM = minite - 60 * tempH;
-                if (tempH == 24 && tempM >= 0) {
-                    tempH = 23;
-                    tempM = 59;
+                if (!(tempH == 24 && tempM >= 0)) {
+                    tempH = Number.parseInt(minite / 60);
+                    tempM = minite - 60 * tempH;
+                    arr[tempH] = arr[tempH] ? arr[tempH] : [];
+                    arr[tempH].push({H: tempH, M: tempM})
                 }
-                tempH = tempH >= 10 ? tempH : '0' + tempH;
-                tempM = tempM >= 10 ? tempM : '0' + tempM;
-                arr.push({H: tempH, M: tempM})
             }
+            arr['rangeLength'] = arr[0].length;
             return arr
         },
-        timeList(){
-            return Array.from({length: 12}, (value, index)=>this.allTimeList[index].H + ':' + this.allTimeList[index].M)
+        minuteList(){
+            let arr = this.allTimeList;
+            let hourIndex = this.tmpHour, minuteIndex = this.minuteIndex;
+            /*minuteList length 12 and arr*/
+            let showArr = [];
+            for (let i = minuteIndex; i < 24 + minuteIndex; i++) {
+                if (arr[hourIndex][i]) {
+                    showArr.push(arr[hourIndex][i])
+                } else {
+                    break;
+                }
+            }
+            return showArr;
         },
         orYear (){
             let obj = this.validDateFormat(this.valueStr);
@@ -483,7 +573,7 @@ export default {
         orDay (){
             let obj = this.validDateFormat(this.valueStr);
             if (this.valueStr != '' && obj.statues) {
-                return this.tmpDay = Number(this.valueStr.split(obj.separator)[2]);
+                return this.tmpDay = this.valueStr.split(/\s/)[0] ? this.valueStr.split(/\s/)[0].split(obj.separator)[2] ? this.valueStr.split(/\s/)[0].split(obj.separator)[2] : this.valueStr.split(/\s/)[0].split(obj.separator)[2] : this.valueStr.split(obj.separator)[2];
             } else {
                 return new Date().getDate();
             }
@@ -491,12 +581,20 @@ export default {
         orHour(){
             if (this.Format.isHour) {
                 if (this.valueStr != '') {
-                    return this.tmpHour = Number(this.valueStr.split(/\s/)[1]?this.valueStr.split(/\s/)[1].split(':')[0]:24)
+                    return this.tmpHour = Number(this.valueStr.split(/\s/)[1] ? this.valueStr.split(/\s/)[1].split(':')[0] : 23)
                 } else {
                     return new Date().getHours();
                 }
             }
-
+        },
+        orMinute(){
+            if (this.Format.isHour) {
+                if (this.valueStr != '') {
+                    return this.tmpHour = Number(this.valueStr.split(/\s/)[1] ? this.valueStr.split(/\s/)[1].split(':')[1] : 59)
+                } else {
+                    return new Date().getHours();
+                }
+            }
         },
         daylist () {
             /* get currentMonthLenght */
@@ -522,7 +620,7 @@ export default {
         }
     },
     filters: {
-        weekF: (item, lang)=> {
+        weekF: (item, lang) => {
             switch (lang) {
                 case 'cn':
                     return {0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六'}[item];
@@ -532,7 +630,7 @@ export default {
                     return item
             }
         },
-        monthF: (month, lang)=> {
+        monthF: (month, lang) => {
             switch (lang) {
                 case 'cn':
                     return {1: '一月', 2: '二月', 3: '三月', 4: '四月', 5: '五月', 6: '六月', 7: '七月', 8: '八月', 9: '九月', 10: '十月', 11: '十一月', 12: '十二月'}[month];
@@ -548,6 +646,8 @@ export default {
             this.changeTiltle = 'off';
             if (val == 'day' && oldVal == 'hour') {
                 this.animatePanel = 'next-panel'
+            } else if (val == 'hour' && oldVal == 'minute') {
+                this.animatePanel = 'next-panel'
             } else if (val == 'month' && oldVal == 'day') {
                 this.animatePanel = 'next-panel'
             } else if (val == 'year' && oldVal == 'month') {
@@ -557,6 +657,8 @@ export default {
             } else if (val == 'day' && oldVal == 'month') {
                 this.animatePanel = 'previous-panel';
             } else if (val == 'hour' && oldVal == 'day') {
+                this.animatePanel = 'previous-panel';
+            } else if (val == 'minute' && oldVal == 'hour') {
                 this.animatePanel = 'previous-panel';
             }
         },

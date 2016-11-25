@@ -8,12 +8,14 @@
                         <ul>
                             <li class="previousBtn" v-on:click="changeMonth('previous')"><i class="kDatePicker k-previous"></i></li>
                             <li class="Title" v-on:click="changeType('month')">
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="tmpYear">{{tmpYear}}</span>
-                                </transition-group>
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</span>
-                                </transition-group>
+                                <div class="Title-ul">
+                                    <transition-group :name='changeTiltle' class="title-year" tag="div">
+                                        <div v-bind:key="tmpYear">{{tmpYear}}</div>
+                                    </transition-group>
+                                    <transition-group :name='changeTiltle' class="title-month" tag="div">
+                                        <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                                    </transition-group>
+                                </div>
                                 <!--<span v-bind:key="tmpMonth">{{tmpYear}} {{monthList[tmpMonth]|monthF(language)}}</span>-->
                             </li>
                             <li class="nextBtn" v-on:click="changeMonth('next')"><i class="kDatePicker k-next"></i></li>
@@ -22,9 +24,9 @@
                     <div class="yearBox" key="month" v-show="panelType =='month'">
                         <ul>
                             <li class="previousBtn" v-on:click="changeYear('previous')"><i class="kDatePicker k-previous"></i></li>
-                            <li class="Title" v-show="panelType =='month'" v-on:click="changeType('year')">
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="tmpYear">{{tmpYear}}</span>
+                            <li class="Title">
+                                <transition-group :name='changeTiltle' class="Title-ul" tag="div">
+                                    <div v-bind:key="tmpYear" v-on:click="changeType('year')">{{tmpYear}}</div>
                                 </transition-group>
                             </li>
                             <li class="nextBtn" v-on:click="changeYear('next')"><i class="kDatePicker k-next"></i></li>
@@ -34,8 +36,8 @@
                         <ul>
                             <li class="previousBtn" v-on:click="changeYearRange('previous')"><i class="kDatePicker k-previous"></i></li>
                             <li class="Title">
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="yearList[0]"> {{yearList[0]}}-{{yearList[yearList.length-1]}}</span>
+                                <transition-group :name='changeTiltle' class="Title-ul" tag="div">
+                                    <div v-bind:key="yearList[0]"> {{yearList[0]}}-{{yearList[yearList.length-1]}}</div>
                                 </transition-group>
                             </li>
                             <li class="nextBtn" v-on:click="changeYearRange('next')"><i class="kDatePicker k-next"></i></li>
@@ -43,20 +45,40 @@
                     </div>
                     <div class="yearBox" key="hour" v-show="panelType =='hour'">
                         <ul>
-                            <li class="previousBtn" v-on:click="changeDay('previous')"><i class="kDatePicker k-previous"></i></li>
-                            <li class="Title" v-on:click="changeType('day')">
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="tmpYear">{{tmpYear}}</span>
-                                </transition-group>
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</span>
-                                </transition-group>
-                                <transition-group :name='changeTiltle' tag="div">
-                                    <span v-bind:key='tmpDay'>{{tmpDay}}日</span>
-                                </transition-group>
-
+                            <li class="previousBtn" style="width:15px" v-on:click="changeDay('previous')"><i class="kDatePicker k-previous"></i></li>
+                            <li class="Title" style="width:161px;padding: 0" v-on:click="changeType('day')">
+                                <div class="Title-ul">
+                                    <transition-group :name='changeTiltle' class="title-year" tag="div">
+                                        <div v-bind:key="tmpYear">{{tmpYear}}</div>
+                                    </transition-group>
+                                    <transition-group :name='changeTiltle' class="title-month" tag="div">
+                                        <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                                    </transition-group>
+                                    <transition-group :name='changeTiltle' class="title-month" tag="div">
+                                        <div v-bind:key='tmpDay'>{{tmpDay}}日</div>
+                                    </transition-group>
+                                </div>
                             </li>
-                            <li class="nextBtn" v-on:click="changeDay('next')"><i class="kDatePicker k-next"></i></li>
+                            <li class="nextBtn" style="width:15px" v-on:click="changeDay('next')"><i class="kDatePicker k-next"></i></li>
+                        </ul>
+                    </div>
+                    <div class="yearBox" key="minute" v-show="panelType =='minute'">
+                        <ul>
+                            <li class="previousBtn" style="width:15px" v-on:click="changeMinute('previous')"><i class="kDatePicker k-previous"></i></li>
+                            <li class="Title" style="width:161px;padding: 0" v-on:click="changeType('hour')">
+                                <div class="Title-ul">
+                                    <transition-group :name='changeTiltle' class="title-year" tag="div">
+                                        <div v-bind:key="tmpYear">{{tmpYear}}</div>
+                                    </transition-group>
+                                    <transition-group :name='changeTiltle' class="title-month" tag="div">
+                                        <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                                    </transition-group>
+                                    <transition-group :name='changeTiltle' class="title-month" tag="div">
+                                        <div v-bind:key='tmpDay'>{{tmpDay}}日</div>
+                                    </transition-group>
+                                </div>
+                            </li>
+                            <li class="nextBtn" style="width:15px" v-on:click="changeMinute('next')"><i class="kDatePicker k-next"></i></li>
                         </ul>
                     </div>
                 </transition-group>
@@ -109,9 +131,9 @@
                         </transition-group>
                     </div>
                     <div class="chooseHour" key='hour' v-show="panelType=='hour'">
-                        <!--<transition-group :name='animateMonth' class="change-year-Box" tag="div">-->
-                        <div class="change-hour-Box">
-                            <ul class="hourList" v-bind:key="tmpMonth">
+                        <transition-group :name='animateMonth' class="change-hour-Box" tag="div">
+                            <!--<div class="change-hour-Box">-->
+                            <ul class="hourList" v-bind:key="tmpDay">
                                 <!--  <li class="previousChoose">1</li>-->
                                 <li v-for="hour in hourList"
                                     v-bind:class="{singleChoosed:isSelected('hour',hour),canNotChoose:!validHour(hour)}"
@@ -124,9 +146,27 @@
                                  <li class="mulitChoosedEnd">32</li>-->
                                 <!-- <li class="canNotChoose">39</li>-->
                             </ul>
-                        </div>
-
-                        <!--</transition-group>-->
+                            <!-- </div>-->
+                        </transition-group>
+                    </div>
+                    <div class="chooseMinute" key="minute" v-show="panelType=='minute'">
+                        <transition-group :name='animateMonth' class="change-minute-Box" tag="div">
+                            <!--<div class="change-hour-Box">-->
+                            <ul class="hourList" v-bind:key="minuteIndex">
+                                <!--  <li class="previousChoose">1</li>-->
+                                <li v-for="minute in minuteList"
+                                    v-bind:class="{singleChoosed:isSelected('minute',minute),canNotChoose:!validMinute(minute)}"
+                                    v-on:click="selectMinute(minute)"
+                                >{{Format.hour=='HH'&&tmpHour<10?'0':''}}{{tmpHour}}:{{Format.minute=='mm'&&minute.M<10?'0'+minute.M:minute.M}}
+                                </li>
+                                <!-- <li class="singleChoosed">18</li>
+                                 <li class="mulitChoosedHead">25</li>
+                                 <li class="mulitChoosed">31</li>
+                                 <li class="mulitChoosedEnd">32</li>
+                                 <li class="canNotChoose">39</li>-->
+                            </ul>
+                            <!-- </div>-->
+                        </transition-group>
                     </div>
                 </transition-group>
             </div>
@@ -137,9 +177,5 @@
 <script src="./datepicker.js"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  @import "./css/datapicker.css";
-
-
-
-
+    @import "./css/datapicker.css";
 </style>
