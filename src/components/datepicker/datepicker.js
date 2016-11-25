@@ -30,7 +30,7 @@ export default {
             tmpDay: now.getDate(),
             tmpHour: now.getHours(),
             tmpMinute: now.getMinutes(),
-            currentMinuteRange:0,
+            currentMinuteRange:1,
             minuteIndex: 0,
             animateMonth: 'off',
             animatePanel: 'off',
@@ -138,7 +138,7 @@ export default {
                 this.currentMinuteRange+=1;
                 /*current minute of total range*/
                 if ( this.currentMinuteRange>Math.ceil(this.allTimeList['rangeLength']/24)) {
-                    this.currentMinuteRange=0;
+                    this.currentMinuteRange=1;
                     this.minuteIndex = 0;
                     this.tmpHour += 1;
                     if (this.tmpHour > 23) {
@@ -162,7 +162,7 @@ export default {
                 if( this.currentMinuteRange==1){
                     this.minuteIndex=0;
                 }
-                if (this.currentMinuteRange<=0) {
+                if (this.currentMinuteRange<1) {
                     this.currentMinuteRange=Math.ceil(this.allTimeList['rangeLength']/24)
                     this.minuteIndex = this.allTimeList['rangeLength'] - 24;
                     this.tmpHour -= 1;
@@ -231,6 +231,7 @@ export default {
             if (this.validMinute(item)) {
                 this.tmpMinute = item.M;
                 this.$emit('selectDay', this.outPutDate());
+                this.changeType('day');
             }
         },
         isSelected(type, item){
@@ -378,12 +379,15 @@ export default {
             }
         },
         hideDatePicker(){
-            this.$emit('selectDay');
+            /*click body*/
             this.tmpYear = this.orYear;
             this.tmpMonth = this.orMonth;
             this.tmpDay = this.orDay;
+            this.tmpHour=this.orHour;
+            this.tmpMinute=this.orMinute;
             this.panelType = 'day';
-            this.yearList = Array.from({length: 12}, (value, index) => this.tmpYear + index)
+            this.yearList = Array.from({length: 12}, (value, index) => this.tmpYear + index);
+            this.$emit('selectDay')
         },
         setFormat(format){
             /*
