@@ -30,6 +30,7 @@ export default {
             tmpDay: now.getDate(),
             tmpHour: now.getHours(),
             tmpMinute: now.getMinutes(),
+            currentMinuteRange:0,
             minuteIndex: 0,
             animateMonth: 'off',
             animatePanel: 'off',
@@ -134,9 +135,10 @@ export default {
                 this.animateMonth = 'next-Month';
                 this.changeTiltle = 'next-Title';
                 this.minuteIndex += 24;
+                this.currentMinuteRange+=1;
                 /*current minute of total range*/
-                let flag = this.minuteIndex / this.allTimeList['rangeLength'];
-                if (flag >= 1) {
+                if ( this.currentMinuteRange>Math.ceil(this.allTimeList['rangeLength']/24)) {
+                    this.currentMinuteRange=0;
                     this.minuteIndex = 0;
                     this.tmpHour += 1;
                     if (this.tmpHour > 23) {
@@ -156,13 +158,12 @@ export default {
                 this.animateMonth = 'previous-Month';
                 this.changeTiltle = 'previous-Title';
                 this.minuteIndex -= 24;
-                let flag = this.minuteIndex / this.allTimeList['rangeLength'];
-                //todo time next and previous have change bug
-                if(flag<0){
-                    flag=(this.allTimeList['rangeLength']-flag)/this.allTimeList['rangeLength'];
+                this.currentMinuteRange-=1;
+                if( this.currentMinuteRange==1){
+                    this.minuteIndex=0;
                 }
-                let flag2=Math.ceil(this.allTimeList['rangeLength']/24);
-                if (flag> flag2) {
+                if (this.currentMinuteRange<=0) {
+                    this.currentMinuteRange=Math.ceil(this.allTimeList['rangeLength']/24)
                     this.minuteIndex = this.allTimeList['rangeLength'] - 24;
                     this.tmpHour -= 1;
                     if (this.tmpHour < 0) {
