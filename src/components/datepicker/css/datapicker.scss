@@ -32,6 +32,7 @@ $titleHover: #eee;
   text-align: center;
   cursor: default;
   color: $normalWord;
+  -webkit-transition: all .5s ease;
   transition: all .5s ease;
 }
 
@@ -62,8 +63,8 @@ $titleHover: #eee;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
       li {
         height: 30px;
         line-height: 30px;
@@ -75,8 +76,8 @@ $titleHover: #eee;
         }
       }
     }
-    .Title-ul{
-      .title-year,.title-month{
+    .Title-ul {
+      .title-year, .title-month {
         height: inherit;
         position: relative;
         width: 50px;
@@ -86,12 +87,16 @@ $titleHover: #eee;
       text-align: center;
       position: relative;
       height: inherit;
-      div{
+      div {
         width: 100%;
         position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
       }
     }
   }
@@ -135,7 +140,7 @@ $titleHover: #eee;
     }
   }
   /*flex display*/
-  .dayList, .yearList, .monthList, .dayTitle ,.hourList{
+  .dayList, .yearList, .monthList, .dayTitle, .hourList {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -144,15 +149,15 @@ $titleHover: #eee;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-  .monthList,.yearList,.timeList{
+  .monthList, .yearList, .timeList {
     position: absolute;
   }
   .dayTitle {
     -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
+    flex-wrap: nowrap;
   }
   /*set choose hover style*/
-  .chooseBox .chooseYear .yearList, .chooseBox .chooseDay .dayList, .chooseMonth .monthList,.chooseHour .hourList ,.chooseMinute .hourList{
+  .chooseBox .chooseYear .yearList, .chooseBox .chooseDay .dayList, .chooseMonth .monthList, .chooseHour .hourList, .chooseMinute .hourList {
     .canNotChoose {
       color: $canNotChoose;
       &:hover {
@@ -205,7 +210,11 @@ $titleHover: #eee;
   .hourList {
     position: absolute;
     height: 192px;
-    align-content: flex-start;
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     li {
       width: 49px;
       height: 32px;
@@ -221,10 +230,11 @@ $titleHover: #eee;
       }
     }
   }
-  .chooseYear, .chooseMonth, .chooseDay ,.chooseHour{
+  .chooseYear, .chooseMonth, .chooseDay, .chooseHour {
     position: absolute;
   }
 }
+
 /*animate*/
 .datePicer-Toggle-enter-active, .datePicer-Toggle-leave-active {
   -webkit-transition: all .45s cubic-bezier(.26, .67, .75, .97);
@@ -233,13 +243,13 @@ $titleHover: #eee;
 
 .datePicer-Toggle-enter {
   -webkit-transform: translateY(-20px);
-          transform: translateY(-20px);
+  transform: translateY(-20px);
   opacity: 0;
 }
 
-.datePicer-Toggle-leave-active{
+.datePicer-Toggle-leave-active {
   -webkit-transform: translateY(-20px);
-          transform: translateY(-20px);
+  transform: translateY(-20px);
   opacity: 0;
 }
 
@@ -255,7 +265,7 @@ $titleHover: #eee;
 .toggle-title-leave-active {
   opacity: 0;
   -webkit-transform: scale(0.8);
-          transform: scale(0.8);
+  transform: scale(0.8);
 }
 
 .next-panel-enter-active, .next-panel-leave-active, .previous-panel-enter-active, .previous-panel-leave-active {
@@ -266,13 +276,13 @@ $titleHover: #eee;
 .next-panel-enter, .previous-panel-leave-active {
   opacity: 0;
   -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .next-panel-leave-active, .previous-panel-enter {
   opacity: 0;
   -webkit-transform: scale(0.8);
-          transform: scale(0.8);
+  transform: scale(0.8);
 }
 
 .change-Month-Box {
@@ -283,12 +293,13 @@ $titleHover: #eee;
   height: 168px;
 }
 
-.change-year-Box ,.change-hour-Box,.change-minute-Box{
+.change-year-Box, .change-hour-Box, .change-minute-Box {
   background: $totalBG;
   position: relative;
   width: 196px;
   height: 192px;
 }
+
 //todo title brand roll effect
 
 .previous-Month-enter-active, .previous-Month-leave-active, .next-Month-enter-active, .next-Month-leave-active {
@@ -299,13 +310,13 @@ $titleHover: #eee;
 .previous-Month-enter, .next-Month-leave-active {
   opacity: 0;
   -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .previous-Month-leave-active, .next-Month-enter {
   opacity: 0;
   -webkit-transform: translateX(100%);
-          transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .previous-Title-enter-active, .previous-Title-leave-active, .next-Title-enter-active, .next-Title-leave-active {
@@ -315,12 +326,12 @@ $titleHover: #eee;
 
 .previous-Title-enter, .next-Title-leave-active {
   -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
+  transform: translateY(-100%);
   opacity: 0;
 }
 
 .previous-Title-leave-active, .next-Title-enter {
   -webkit-transform: translateY(100%);
-          transform: translateY(100%);
+  transform: translateY(100%);
   opacity: 0;
 }

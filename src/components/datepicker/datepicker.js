@@ -49,17 +49,13 @@ export default {
                 minute: 'mm',
                 separator: '-'
             },
-            inlineBlock:false,
-            position:{
-                top:0,
-                left:0,
-                right:0
+            inlineBlock: false,
+            position: {
+                top: 0,
+                left: 0,
+                right: 0
             }
         }
-    },
-    created(){
-        /*set output format*/
-        this.setFormat(this.options.format);
     },
     methods: {
         changeType(type){
@@ -174,8 +170,13 @@ export default {
                     this.minuteIndex = 0;
                 }
                 if (this.currentMinuteRange < 1) {
-                    this.currentMinuteRange = Math.ceil(this.allTimeList['rangeLength'] / 24)
-                    this.minuteIndex = this.allTimeList['rangeLength'] - 24;
+                    this.currentMinuteRange = Math.ceil(this.allTimeList['rangeLength'] / 24);
+                    if (this.currentMinuteRange == 1) {
+                        this.minuteIndex = 0;
+                    } else {
+                        this.minuteIndex = this.allTimeList['rangeLength'] - 24;
+                    }
+
                     this.tmpHour -= 1;
                     if (this.tmpHour < 0) {
                         this.tmpHour = 23;
@@ -538,43 +539,56 @@ export default {
              *
              * */
             let divs = document.getElementsByTagName("div");
-            let max=0;
-            for(let i=0; i<divs.length; i++){
-                max = Math.max( max,divs[i].style.zIndex || 0 );
+            let max = 0;
+            for (let i = 0; i < divs.length; i++) {
+                max = Math.max(max, divs[i].style.zIndex || 0);
             }
             /*if parent node display inline-block don't need top*/
-            let doc=document.getElementById(this.inputId);
-            if(doc){
-                let top,left,right,height,pickerWidth=210,pickerHeight=245;
-                top=doc.offsetTop+doc.offsetHeight;
-                height=Number.parseInt(window.getComputedStyle(document.body).height);
-                if(top>=height){
-                    top=top-doc.offsetHeight-pickerHeight
+            let doc = document.getElementById(this.inputId);
+            if (doc) {
+                let top, left, right, height, pickerWidth = 210, pickerHeight = 245;
+                top = doc.offsetTop;
+                let parent = doc.offsetParent;
+                while (top == 0 && parent.offsetParent) {//parent.tagName.toUpperCase()!='BODY'
+                    top += parent.offsetTop;
+                    parent = parent.offsetParent;
                 }
-                left=doc.offsetLeft;
-                if(doc.parentNode.style.display=='inline-block'){
-                    left=doc.parentNode.offsetLeft;
-                    this.inlineBlock=true;
+                top = top + doc.offsetHeight;
+                height = Number.parseInt(window.getComputedStyle(document.body).height);
+                if (top >= height) {
+                    top = top - doc.offsetHeight - pickerHeight
                 }
-                if(left+pickerWidth>document.body.clientWidth){
-                    right=0;
-                }
-                if(this.inlineBlock&&right!=0){
-                    this.position={
-                        left:left+'px'
+                /*all height is small than picker+input*/
+                if (pickerHeight + doc.offsetHeight > height) {
+                    top = doc.offsetTop;
+                    let parent = doc.offsetParent;
+                    while (top == 0 && parent.offsetParent) {
+                        top += parent.offsetTop;
+                        parent = parent.offsetParent;
                     }
-                }else if(!this.inlineBlock&&right!=0) {
-                    this.position={
-                        top:top+'px',
-                        left:left+'px',
+                    top = top + doc.offsetHeight;
+                }
+                left = doc.offsetLeft;
+                if (doc.parentNode.style.display == 'inline-block') {
+                    left = doc.parentNode.offsetLeft;
+                    this.inlineBlock = true;
+                }
+                if (left + pickerWidth > document.body.clientWidth) {
+                    right = 0;
+                }
+                if (right != 0) {
+                    this.position = {
+                        top: top + 'px',
+                        left: left + 'px'
                     }
-                }else{
-                    this.position={
-                        top:top+'px',
-                        right:right+'px'
+                } else {
+                    this.position = {
+                        top: top + 'px',
+                        right: right + 'px'
                     }
                 }
-            }else {
+                this.changeType('day')
+            } else {
                 throw TypeError('need input or other dom id to show date')
             }
         }
@@ -590,34 +604,53 @@ export default {
             return this.options.language ? this.options.language : 'cn';
         },
         allTimeList(){
-            let total = 1440, range = this.options.timeRange ? this.options.timeRange : 15;
-            let arr = {};
-            for (let i = 0; i < Math.ceil(total / range) + 1; i++) {
-                let minite = i * range;
-                let tempH = 0, tempM = 0;
-                if (!(tempH == 24 && tempM >= 0)) {
-                    tempH = Number.parseInt(minite / 60);
-                    tempM = minite - 60 * tempH;
-                    arr[tempH] = arr[tempH] ? arr[tempH] : [];
-                    arr[tempH].push({H: tempH, M: tempM})
+            if (this.Format.isHour) {
+                let /*total = 1440*/ total = 60, range = this.options.timeRange ? this.options.timeRange : 15;
+                let arr = {};
+                /* for (let i = 0; i < Math.ceil(total / range) + 1; i++) {
+                 let minite = i * range;
+                 let tempH = 0, tempM = 0;
+                 if (!(tempH == 24 && tempM >= 0)) {
+                 tempH = Number.parseInt(minite / 60);
+                 tempM = minite - 60 * tempH;
+                 arr[tempH] = arr[tempH] ? arr[tempH] : [];
+                 arr[tempH].push({H: tempH, M: tempM})
+                 }
+                 }*/
+                for (let i = 0; i < Math.ceil(60 / range) * 24; i++) {
+                    let tempH = i;
+                    let tempM = 0;
+                    for (let m = 0; m < Math.ceil(60 / range); m++) {
+                        tempM = m * range;
+                        if (tempM < 60) {
+                            arr[tempH] = arr[tempH] ? arr[tempH] : [];
+                            arr[tempH].push({H: tempH, M: tempM});
+                        }
+                    }
                 }
+                arr['rangeLength'] = arr[0].length;
+                return arr
+            } else {
+                return []
             }
-            arr['rangeLength'] = arr[0].length;
-            return arr
         },
         minuteList(){
-            let arr = this.allTimeList;
-            let hourIndex = this.tmpHour, minuteIndex = this.minuteIndex;
-            /*minuteList length 12 and arr*/
-            let showArr = [];
-            for (let i = minuteIndex; i < 24 + minuteIndex; i++) {
-                if (arr[hourIndex][i]) {
-                    showArr.push(arr[hourIndex][i])
-                } else {
-                    break;
+            if (this.Format.isHour) {
+                let arr = this.allTimeList;
+                let hourIndex = this.tmpHour, minuteIndex = this.minuteIndex;
+                /*minuteList length 12 and arr*/
+                let showArr = [];
+                for (let i = minuteIndex; i < 24 + minuteIndex; i++) {
+                    if (arr[hourIndex][i]) {
+                        showArr.push(arr[hourIndex][i])
+                    } else {
+                        break;
+                    }
                 }
+                return showArr;
+            } else {
+                return []
             }
-            return showArr;
         },
         orYear (){
             let obj = this.validDateFormat(this.valueStr);
@@ -729,10 +762,15 @@ export default {
         },
         visible: function (val, oldVal) {
             if (val == true) {
+                this.setFormat(this.options.format);
                 setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0);
             } else {
                 document.removeEventListener('click', this.hideDatePicker)
             }
-        }
+        },
+        options: function (val, oldVal) {
+            this.getPosition()
+        },
+
     },
 }

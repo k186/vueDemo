@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div style="height: 300px">
-            <input type="text" :value="date2" id="aaa" v-on:click.stop="showDatePicker(1)"/>
-        </div>
-        <div class="dateBox">
-            <div class="formGroup PickerGroup">
-                <input type="text" id="startDate" class="form-control" v-on:click.stop="showDatePicker(2)" :value="date" readonly/>
-            </div>
-        </div>
-        <k-picker :inputId="inputID" :valueStr="date3" :visible="visible" v-on:selectDay="hideDatePicker" :options="options"></k-picker>
+  <div>
+    <div class="dateBox">
+      <div class="formGroup PickerGroup" style="position: absolute;left: 0; top: 0;display: inline-block">
+        <input type="text" :value="date2" class="form-control" id="aaa" v-on:click.stop="showDatePicker(1)" readonly/>
+      </div>
+      <div class="formGroup PickerGroup">
+        <input type="text" id="startDate" class="form-control" v-on:click.stop="showDatePicker(2)" :value="date" readonly/>
+      </div>
     </div>
+    <k-picker :inputId="picker.id" :valueStr="picker.value" :visible="picker.visible" v-on:selectDay="hideDatePicker" :options="picker.options"></k-picker>
+  </div>
 
 
 </template>
@@ -22,46 +22,59 @@
             return {
                 date: '2016-11-1 15:18',
                 visible: false,
-                options:{
-                    format:'yyyy/M/dd HH:mm',
-                    startDate:'2015-01-01',
-                    endDate:'2018-01-01',
-                    language:'cn',
-                    timeRange:1
+                options: {
+                    format: 'yyyy/M/dd HH:mm',
+                    startDate: '2015-01-01',
+                    endDate: '2018-01-01',
+                    language: 'cn',
+                    timeRange: 2
                 },
-                date2: '2016-12-1 15:18',
-                options2:{
-                    format:'yyyy/M/dd HH:mm',
-                    startDate:'2016-01-01',
-                    endDate:'2018-01-01',
-                    timeRange:1
+                date2: '',
+                options2: {
+                    format: 'yyyy-M-dd',
+                    startDate: '2016-01-01',
+                    endDate: '2020-12-01',
+                    timeRange: 20,
                 },
-                date3:'',
-                inputID:''
+                picker: {
+                    id: '',
+                    value: '',
+                    visible: false,
+                    options: {
+                        format: 'yyyy/M/dd HH:mm',
+                        startDate: '2015-01-01',
+                        endDate: '2018-01-01',
+                        language: 'cn',
+                        timeRange: 35
+                    }
+                }
             }
         },
         methods: {
             showDatePicker (type){
-               this.visible=true
-                if(type==1){
-                   this.options=this.options2
-                    this.inputID='aaa';
-                        this.date3=this.date2;
-                }else {
-                    this.inputID='startDate';
-                    this.date3=this.date;
+                this.picker.visible = true;
+                if (type == 1) {
+                    this.picker.options = this.options2;
+                    this.picker.id = 'aaa';
+                    this.picker.value = this.date2;
+                } else {
+                    this.picker.options = this.options;
+                    this.picker.id = 'startDate';
+                    this.picker.value = this.date;
                 }
             },
             hideDatePicker(date){
-                if(typeof date=='string'){
-                    this.date=date;
+                if (typeof date == 'string') {
+                    if (this.picker.id == 'aaa') {
+                        this.date2 = date;
+                    } else {
+                        this.date = date;
+                    }
                 }
-                this.visible = false;
-
+                this.picker.visible = false;
             }
         },
-        watch: {
-        },
+        watch: {},
         //todo 封装接口 现在暴露接口太多
         components: {kPicker}
     }
@@ -69,5 +82,5 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    @import "./static/datePickerPc.css";
+  @import "./static/datePickerPc.css";
 </style>
