@@ -20,8 +20,8 @@ $titleHover: #eee;
 /*dom structure and color*/
 .k-datePicker {
   margin-top: 1px;
+  display: inline-block;
   position: absolute;
-  z-index: 9999;
   width: 210px;
   max-height: 241px;
   padding: 5px 6px;
@@ -32,6 +32,7 @@ $titleHover: #eee;
   text-align: center;
   cursor: default;
   color: $normalWord;
+  transition: all .5s ease;
 }
 
 .datePane {

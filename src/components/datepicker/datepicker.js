@@ -13,6 +13,10 @@ export default {
             default: false,
             required: true
         },
+        inputId: {
+            type: String,
+            required: true
+        },
         options: {
             type: Object,
         }
@@ -30,7 +34,7 @@ export default {
             tmpDay: now.getDate(),
             tmpHour: now.getHours(),
             tmpMinute: now.getMinutes(),
-            currentMinuteRange:1,
+            currentMinuteRange: 1,
             minuteIndex: 0,
             animateMonth: 'off',
             animatePanel: 'off',
@@ -44,11 +48,18 @@ export default {
                 hour: 'HH',
                 minute: 'mm',
                 separator: '-'
+            },
+            inlineBlock:false,
+            position:{
+                top:0,
+                left:0,
+                right:0
             }
         }
     },
-    mounted(){
-        this.setFormat(this.options.format)
+    created(){
+        /*set output format*/
+        this.setFormat(this.options.format);
     },
     methods: {
         changeType(type){
@@ -135,10 +146,10 @@ export default {
                 this.animateMonth = 'next-Month';
                 this.changeTiltle = 'next-Title';
                 this.minuteIndex += 24;
-                this.currentMinuteRange+=1;
+                this.currentMinuteRange += 1;
                 /*current minute of total range*/
-                if ( this.currentMinuteRange>Math.ceil(this.allTimeList['rangeLength']/24)) {
-                    this.currentMinuteRange=1;
+                if (this.currentMinuteRange > Math.ceil(this.allTimeList['rangeLength'] / 24)) {
+                    this.currentMinuteRange = 1;
                     this.minuteIndex = 0;
                     this.tmpHour += 1;
                     if (this.tmpHour > 23) {
@@ -158,12 +169,12 @@ export default {
                 this.animateMonth = 'previous-Month';
                 this.changeTiltle = 'previous-Title';
                 this.minuteIndex -= 24;
-                this.currentMinuteRange-=1;
-                if( this.currentMinuteRange==1){
-                    this.minuteIndex=0;
+                this.currentMinuteRange -= 1;
+                if (this.currentMinuteRange == 1) {
+                    this.minuteIndex = 0;
                 }
-                if (this.currentMinuteRange<1) {
-                    this.currentMinuteRange=Math.ceil(this.allTimeList['rangeLength']/24)
+                if (this.currentMinuteRange < 1) {
+                    this.currentMinuteRange = Math.ceil(this.allTimeList['rangeLength'] / 24)
                     this.minuteIndex = this.allTimeList['rangeLength'] - 24;
                     this.tmpHour -= 1;
                     if (this.tmpHour < 0) {
@@ -383,8 +394,8 @@ export default {
             this.tmpYear = this.orYear;
             this.tmpMonth = this.orMonth;
             this.tmpDay = this.orDay;
-            this.tmpHour=this.orHour;
-            this.tmpMinute=this.orMinute;
+            this.tmpHour = this.orHour;
+            this.tmpMinute = this.orMinute;
             this.panelType = 'day';
             this.yearList = Array.from({length: 12}, (value, index) => this.tmpYear + index);
             this.$emit('selectDay')
@@ -516,6 +527,55 @@ export default {
                 case 'mm':
                     result = Number(this.tmpMinute) < 10 ? '0' + Number(this.tmpMinute) : this.tmpMinute;
                     break;
+            }
+        },
+        getPosition(){
+            /*set picker position*/
+            /*
+             * container dom
+             * input from container offset
+             * max z-index
+             *
+             * */
+            let divs = document.getElementsByTagName("div");
+            let max=0;
+            for(let i=0; i<divs.length; i++){
+                max = Math.max( max,divs[i].style.zIndex || 0 );
+            }
+            /*if parent node display inline-block don't need top*/
+            let doc=document.getElementById(this.inputId);
+            if(doc){
+                let top,left,right,height,pickerWidth=210,pickerHeight=245;
+                top=doc.offsetTop+doc.offsetHeight;
+                height=Number.parseInt(window.getComputedStyle(document.body).height);
+                if(top>=height){
+                    top=top-doc.offsetHeight-pickerHeight
+                }
+                left=doc.offsetLeft;
+                if(doc.parentNode.style.display=='inline-block'){
+                    left=doc.parentNode.offsetLeft;
+                    this.inlineBlock=true;
+                }
+                if(left+pickerWidth>document.body.clientWidth){
+                    right=0;
+                }
+                if(this.inlineBlock&&right!=0){
+                    this.position={
+                        left:left+'px'
+                    }
+                }else if(!this.inlineBlock&&right!=0) {
+                    this.position={
+                        top:top+'px',
+                        left:left+'px',
+                    }
+                }else{
+                    this.position={
+                        top:top+'px',
+                        right:right+'px'
+                    }
+                }
+            }else {
+                throw TypeError('need input or other dom id to show date')
             }
         }
     },
@@ -669,7 +729,7 @@ export default {
         },
         visible: function (val, oldVal) {
             if (val == true) {
-                setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0)
+                setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0);
             } else {
                 document.removeEventListener('click', this.hideDatePicker)
             }

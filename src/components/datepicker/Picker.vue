@@ -1,7 +1,7 @@
 <template>
     <transition name="datePicer-Toggle">
         <!-- stop bubble-->
-        <div class="k-datePicker" v-if="visible" v-on:click.stop>
+        <div class="k-datePicker" v-if="visible" v-on:click.stop v-bind:style="position">
             <div class="datePane">
                 <transition-group :name="animateTitle" class='titlePanel' tag='div'>
                     <div class="yearBox" key="day" v-show="panelType =='day'">
