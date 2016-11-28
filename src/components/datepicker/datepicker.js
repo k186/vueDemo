@@ -595,6 +595,7 @@ export default {
     },
     computed: {
         startDate(){
+            //todo use es6
             return this.validDateFormat(this.options.startDate).statues ? this.options.startDate : '1970-01-01';
         },
         endDate(){
