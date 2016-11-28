@@ -2,7 +2,7 @@
   "name": "vuedemo",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "yixiong <yixiong@retail-tek.com>",
+  "author": "k186 <k1868548@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

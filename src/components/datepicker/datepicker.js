@@ -605,7 +605,7 @@ export default {
         },
         allTimeList(){
             if (this.Format.isHour) {
-                let /*total = 1440*/ total = 60, range = this.options.timeRange ? this.options.timeRange : 15;
+                let /*total = 1440*/ range = this.options.timeRange ? this.options.timeRange : 15;
                 let arr = {};
                 /* for (let i = 0; i < Math.ceil(total / range) + 1; i++) {
                  let minite = i * range;

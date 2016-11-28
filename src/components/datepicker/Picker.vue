@@ -13,10 +13,9 @@
                     <div v-bind:key="tmpYear">{{tmpYear}}</div>
                   </transition-group>
                   <transition-group :name='changeTiltle' class="title-month" tag="div">
-                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(language)}}</div>
                   </transition-group>
                 </div>
-                <!--<span v-bind:key="tmpMonth">{{tmpYear}} {{monthList[tmpMonth]|monthF(language)}}</span>-->
               </li>
               <li class="nextBtn" v-on:click="changeMonth('next')"><i class="kDatePicker k-next"></i></li>
             </ul>
@@ -52,7 +51,7 @@
                     <div v-bind:key="tmpYear">{{tmpYear}}</div>
                   </transition-group>
                   <transition-group :name='changeTiltle' class="title-month" tag="div">
-                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(language)}}</div>
                   </transition-group>
                   <transition-group :name='changeTiltle' class="title-month" tag="div">
                     <div v-bind:key='tmpDay'>{{tmpDay}}</div>
@@ -71,7 +70,7 @@
                     <div v-bind:key="tmpYear">{{tmpYear}}</div>
                   </transition-group>
                   <transition-group :name='changeTiltle' class="title-month" tag="div">
-                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(options.language)}}</div>
+                    <div v-bind:key="tmpMonth">{{monthList[tmpMonth]|monthF(language)}}</div>
                   </transition-group>
                   <transition-group :name='changeTiltle' class="title-month" tag="div">
                     <div v-bind:key='tmpDay'>{{tmpDay}}</div>
@@ -104,7 +103,7 @@
                 <li v-for="(month,index) in monthList"
                     v-on:click="selectMonth(index)"
                     v-bind:class="{singleChoosed:isSelected('month',index),canNotChoose:!validMonth(index)}"
-                >{{ month|monthF(options.language)}}
+                >{{ month|monthF(language)}}
                 </li>
               </ul>
             </transition-group>
@@ -112,7 +111,7 @@
           <div class="chooseDay" key='day' v-show="panelType=='day'">
             <ul class="dayTitle">
               <!-- for language title-->
-              <li v-for="week in weekList">{{week|weekF(options.language)}}</li>
+              <li v-for="week in weekList">{{week|weekF(language)}}</li>
             </ul>
             <transition-group :name='animateMonth' class="change-Month-Box" tag="div">
               <ul class="dayList" v-bind:key="tmpMonth">
