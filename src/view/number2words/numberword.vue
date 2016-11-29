@@ -46,29 +46,28 @@
             }
         },
         mounted(){
-            var output1=document.getElementById('output1');
-            var output2=document.getElementById('output2');
-            var output3=document.getElementById('output3');
-            var output4=document.getElementById('output4');
-            var inputs=document.getElementById('inputs');
-            var value=inputs.value;
-            var option1={
+            let output1=document.getElementById('output1');
+            let output2=document.getElementById('output2');
+            let output3=document.getElementById('output3');
+            let output4=document.getElementById('output4');
+            let inputs=document.getElementById('inputs');
+            let option1={
                 isTag:false
             };
-            var option2={
+            let option2={
                 isTag:true,
                 numTag:'span'
             };
-            var option3={
+            let option3={
                 isTag:true,
                 unitTag:'div'
             };
-            var option4={
+            let option4={
                 isTag:true,
                 numTag:'span',
                 unitTag:'div'
             };
-            var value=inputs.value;
+            let value=inputs.value;
             inputs.addEventListener('keyup',function () {
                 value=inputs.value;
                 Number2Wrods.config(option1).putStr(value,'output1');
