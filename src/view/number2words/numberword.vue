@@ -1,0 +1,85 @@
+<template>
+    <section>
+        <div class="nav">
+            数字转中文（javascript）
+        </div>
+        <div class="containeer">
+            <div class="cell">
+                <div class="cell-title">通配</div>
+                <div class="cell-output" id="output1"></div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">有数字标签(span)</div>
+                <div class="cell-output" id="output2"></div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">有单位标签(div)</div>
+                <div class="cell-output" id="output3"></div>
+            </div>
+            <div class="cell">
+                <div class="cell-title">都有标签(span+div)</div>
+                <div class="cell-output" id="output4"></div>
+            </div>
+            <div class="cell github">
+                <a href="https://github.com/k186/number2words" target="_Blank" class="iconfont">&#xe600</a>
+                k186
+            </div>
+
+        </div>
+        <div class="foot">
+            <div class="input-box off">
+                <input id="inputs" type="text" value="8548"/>
+            </div>
+        </div>
+    </section>
+</template>
+<style>
+    @import "./asset/main.css";
+</style>
+<script>
+    import '../../../static/pugin/number2word/number2words.js'
+    export default{
+        name:'numberString',
+        data:function () {
+            return {
+
+            }
+        },
+        mounted(){
+            var output1=document.getElementById('output1');
+            var output2=document.getElementById('output2');
+            var output3=document.getElementById('output3');
+            var output4=document.getElementById('output4');
+            var inputs=document.getElementById('inputs');
+            var value=inputs.value;
+            var option1={
+                isTag:false
+            };
+            var option2={
+                isTag:true,
+                numTag:'span'
+            };
+            var option3={
+                isTag:true,
+                unitTag:'div'
+            };
+            var option4={
+                isTag:true,
+                numTag:'span',
+                unitTag:'div'
+            };
+            var value=inputs.value;
+            inputs.addEventListener('keyup',function () {
+                value=inputs.value;
+                Number2Wrods.config(option1).putStr(value,'output1');
+                Number2Wrods.config(option2).putStr(value,'output2');
+                Number2Wrods.config(option3).putStr(value,'output3');
+                output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+            });
+            Number2Wrods.config(option1).putStr(value,'output1');
+            Number2Wrods.config(option2).putStr(value,'output2');
+            Number2Wrods.config(option3).putStr(value,'output3');
+            output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+        }
+    }
+</script>

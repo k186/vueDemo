@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import pickerView from './view/datepickerPC/datepicker'
+  import pickerView from './view/number2words/numberword'
   export default {
     name: 'app',
     data: function () {
