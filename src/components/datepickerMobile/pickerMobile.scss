@@ -171,7 +171,7 @@ $panel-bg:#eeeeee;
       line-height:px2rem(70px);
       overflow: hidden;
       position: absolute;
-      /*top:px2rem(190px);*/
+      top:px2rem(180px);
       left: 0;
       right: 0;
       border-top:1px solid $control-btn ;
@@ -191,7 +191,9 @@ $panel-bg:#eeeeee;
       color:$unchecked-date;
       .wheel-div{
         position: absolute;
-        top:px2rem(390px);
+        top:px2rem(180);
+        width: 100%;
+        text-align: center;
       }
     }
   }

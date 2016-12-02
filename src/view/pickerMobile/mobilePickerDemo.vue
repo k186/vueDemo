@@ -10,7 +10,6 @@
         name:'mobilePickerDemo',
         data(){
             return{
-
             }
         },
         components:{
