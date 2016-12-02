@@ -1,9 +1,10 @@
 <template>
-	<picker-view></picker-view>
+    <picker-mobile></picker-mobile>
 </template>
 
 <script>
-  import pickerView from './view/datepickerPC/datepicker'
+  import pickerMobile from './view/pickerMobile/mobilePickerDemo'
+
   export default {
     name: 'app',
     data: function () {
@@ -13,11 +14,12 @@
       }
     },
     //todo 封装接口 现在暴露接口太多
-    components: {pickerView}
+    components: {
+        pickerMobile
+    }
   }
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import "view/datepickerPC/static/datePickerPc.css";
 </style>

@@ -2,6 +2,7 @@
  * Created by K186 on 2016/11/3.
  */
 (function(){
+    var doc=window.document;
     var option={
         isTag:false,
         numTag:null,
@@ -20,7 +21,7 @@
         var unit = [ "元", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟"];
         var nums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
         result='';
-        var container=document.getElementById(containerId);
+        var container=doc.getElementById(containerId);
         /*验证最多3位小数*/
         if (!reg.test(numberStr)) {
             console.warn('请输入有效的数字,最多保留3位小数，整数部分最大12位');
@@ -129,5 +130,5 @@
         }
     };
     /*插件名字*/
-    this.Number2Wrods=api;
+   window.Number2Wrods=api;
 })();
