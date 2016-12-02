@@ -763,13 +763,13 @@ export default {
         },
         visible: function (val, oldVal) {
             if (val == true) {
-                this.setFormat(this.options.format);
                 setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0);
             } else {
                 document.removeEventListener('click', this.hideDatePicker)
             }
         },
         options: function (val, oldVal) {
+            this.setFormat(this.options.format);
             this.getPosition()
         },
 
