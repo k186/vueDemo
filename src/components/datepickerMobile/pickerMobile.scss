@@ -154,9 +154,13 @@ $panel-bg:#eeeeee;
       overflow: hidden;
       padding: px2rem(20px) px2rem(55px);
       box-shadow: inset 0px 0px 43px #fff;
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-around;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
       font-size: px2rem(40px);
       text-align: center;
     }
@@ -179,7 +183,8 @@ $panel-bg:#eeeeee;
       background: $picker-bg;
       z-index: 1;
       font-size: px2rem(48px);
-      transform: translate3d(0px, 0px, 88px);
+      -webkit-transform: translate3d(0px, 0px, 88px);
+              transform: translate3d(0px, 0px, 88px);
     }
     .year-wheel,.month-wheel,.day-wheel,.hour-wheel,.minute-wheel{
       position: absolute;
@@ -190,11 +195,15 @@ $panel-bg:#eeeeee;
       left: 0;
       right: 0;
       color:$unchecked-date;
+      -webkit-transform-style: preserve-3d;
+              transform-style: preserve-3d;
       .wheel-div{
         position: absolute;
         top:0;
         width: 100%;
         text-align: center;
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden
       }
     }
   }

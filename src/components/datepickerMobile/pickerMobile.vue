@@ -13,7 +13,7 @@
 
             </div>
           </div>
-          <div class="year-wheel" style=" transform: rotate3d(1, 0, 0,0deg);transition:all 1s ease-in-out">
+          <div class="year-wheel" style="transform: rotateX(0deg)">
             <div class="wheel-div" v-for="(year,index) in yearList" v-bind:style="wheelYear(index)">{{year}}</div>
           </div>
         </div>
@@ -51,7 +51,7 @@
             return {
                 monthList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 dayList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-                yearDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
+                yearDeg: [180,160,140,120,100,80, 60, 40, 20, 0, -20, -40, -60, -80,-100,-120,-140,-160],
                 monthDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 dayDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 y: {},
@@ -75,25 +75,29 @@
         },
         computed: {
             yearList(){
-                let a = [];
+                /*let a = [];
                 for (let i = 0; i < 4; i++) {
                     a.push(this.tempYear + i)
                 }
                 for (let i = 1; i <=5; i++) {
                     a.unshift(this.tempYear - i)
                 }
-                return a
+                return a*/
+
+                return Array.from({length: 17}, (value, index) => 2016 + index)
             }
         },
         mounted(){
         },
         methods: {
             wheelYear(index){
-                if (index < 9) {
+               /* if (index <9) {
                     return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
+
                 } else {
                     return {}
-                }
+                }*/
+                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
             },
             wheelMonth(index){
                 if (index < 9) {
@@ -114,7 +118,7 @@
                     e.preventDefault();
                     this.touchYear.startY = e.touches[0].pageY;
                     this.touchYear.startTime = e.timeStamp;
-                    console.log( this.touchYear.startY)
+                    console.log( this.touchYear.startY);
                     //console.log(new Date().getTime())
                 }
             },
@@ -139,26 +143,27 @@
                 if (e.touches[0]) {
                     e.preventDefault();
                     this.touchYear.endY = e.touches[0].pageY;
-
+                    this.ydis = Math.floor(this.ydis / 34) * 34;
                     this.touchYear.timeStamp = e.timeStamp;
                     this.touchYear.distance =this.touchYear.endY - this.touchYear.startY;
-                    if(this.touchYear.distance<0){
-                        this.touchYear.direction='up'
-                    }else {
-                        this.touchYear.direction='down'
-                    }
-                    console.log(this.touchYear.endY);
-                    if (Math.abs(this.touchYear.distance) > (34/4)*3) {
-                        this.ydis += this.touchYear.distance/50;
+                    if (Math.abs(this.touchYear.distance) > (34/2)) {
+                        if(this.touchYear.distance<0){
+                            this.touchYear.direction='up';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+Math.abs( Math.floor(this.ydis/34)*20)+'deg)';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transition='all 1s ease-in-out';
+                        }else {
+                            this.touchYear.direction='down';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+ Math.floor(this.ydis/34)*20+'deg)';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transition='all 1s ease-in-out';
+                        }
+                        this.ydis += this.touchYear.distance;
                         if(this.ydis<-34*8){
-                            this.ydis=-34*8
+                            this.ydis=-34*8;
                         }
                         if(this.ydis>0){
-                            this.ydis=0
+                            this.ydis=0;
                         }
-                        this.y = {transform: 'translateY(' + this.ydis + 'px)'};
-
-                        //this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+Math.floor(this.ydis/34)*34+'deg)';
+                        this.y = {transform: 'translateY(' + this.ydis + 'px)',transition: 'all 1s ease-in-out'};
                     }
                   /* scroll or  swipe*/
                 }
@@ -167,8 +172,6 @@
                 e.preventDefault();
               /* scroll or  swipe*/
                 //console.log(new Date().getTime());
-                this.ydis = Math.floor(this.ydis / 34) * 34;
-                this.y = {transform: 'translateY(' + this.ydis + 'px)', transition: 'all 1s ease-in-out'};
             }
         }
     }
