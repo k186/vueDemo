@@ -183,15 +183,16 @@ $panel-bg:#eeeeee;
     }
     .year-wheel,.month-wheel,.day-wheel,.hour-wheel,.minute-wheel{
       position: absolute;
-      overflow: hidden;
-      height: px2rem(390px);
+      overflow: visible;
+      height: px2rem(70px);
       font-size: px2rem(40px);
+      top:px2rem(180px);
       left: 0;
       right: 0;
       color:$unchecked-date;
       .wheel-div{
         position: absolute;
-        top:px2rem(180);
+        top:0;
         width: 100%;
         text-align: center;
       }
