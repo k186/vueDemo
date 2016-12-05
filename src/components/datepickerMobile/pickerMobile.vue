@@ -6,11 +6,10 @@
     </div>
     <div class="picker-panel">
       <div class="panel-box">
-        <div v-on:touchstart="touchStart" v-on:touchmove="touchMove" v-on:touchend="touchEnd" class="box-year">
+        <div v-touch:pan="touchStart" class="box-year">
           <div class="year-checked">
             <div class="year-list" v-bind:style="y">
               <div v-for="year in yearList">{{year}}</div>
-
             </div>
           </div>
           <div class="year-wheel" style="transform: rotateX(0deg)">
@@ -64,6 +63,8 @@
                     distance: 0,
                     direction:'up'
                 },
+                lastDis:0,
+                lastY:0,
                 tempYear: now.getFullYear()
             }
         },
@@ -114,13 +115,54 @@
                 }
             },
             touchStart(e){
-                if (e.touches[0]) {
+                /*if (e.touches[0]) {
                     e.preventDefault();
                     this.touchYear.startY = e.touches[0].pageY;
                     this.touchYear.startTime = e.timeStamp;
                     console.log( this.touchYear.startY);
                     //console.log(new Date().getTime())
+                }*/
+                let obj=e;
+                console.log(obj.distance<this.lastDis);
+                if(obj.direction==8&&obj.distance>this.lastDis){
+                    this.lastDis=obj.distance;
+                    this.ydis+=obj.distance;
+                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis + 'deg)';
+                        this.y = {
+                            transform: 'translateY(' + -this.ydis + 'px)'
+                        };
+                    console.log('up');
+                }else if(obj.direction==16&&obj.distance<this.lastDis){
+                    this.lastDis=obj.distance;
+                    this.ydis-=obj.distance;
+                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +this.lastY-this.ydis>0?this.lastY-this.ydis: this.ydis+ 'deg)';
+                    this.y = {
+                        transform: 'translateY(' + -this.ydis + 'px)'
+                    };
+                    console.log('up2');
+                }else if(obj.direction==8&&obj.distance<this.lastDis){
+                    this.lastDis=obj.distance;
+                    this.ydis+=obj.distance;
+                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  -this.ydis + 'deg)';
+                    this.y = {
+                        transform: 'translateY(' + this.ydis + 'px)'
+                    };
+                    console.log('up3');
                 }
+                else if(obj.direction==16&&obj.distance>this.lastDis){
+                    this.lastDis=obj.distance;
+                    this.ydis+=obj.distance;
+                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  -this.ydis + 'deg)';
+                        this.y = {
+                            transform: 'translateY(' + this.ydis + 'px)'
+                        };
+                    console.log('down');
+                }else {
+                    this.lastY=this.ydis;
+
+                    console.log(obj.direction)
+                }
+
             },
             touchMove(e){
               /*if(e.distance>34){
@@ -145,26 +187,28 @@
                     this.touchYear.distance =e.touches[0].pageY-this.touchYear.endY;
                     this.touchYear.endY = e.touches[0].pageY;
                     console.log( this.touchYear.distance);
-                   // this.ydis = Math.floor(this.ydis / 34) * 34;
                     this.touchYear.endTime = e.timeStamp;
                     let time=this.touchYear.endTime-this.touchYear.startTime;
-                   // if (Math.abs(this.touchYear.distance) > (34/2)) {
-                        this.ydis += (this.touchYear.endY-this.touchYear.startY)/50;
-                        if (this.touchYear.distance > 0) {
-                            this.touchYear.direction = 'up';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + Math.abs(this.ydis*0.6) + 'deg)';
-                            // this.$el.getElementsByClassName('year-wheel')[0].style.transition='all '+time +'ms ease-in-out';
-                        } else {
-                            this.touchYear.direction = 'down';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + - this.ydis*0.6 + 'deg)';
-                            //this.$el.getElementsByClassName('year-wheel')[0].style.transition='all'+time+'ms ease-in-out';
-                        }
+                    let ddd=this.touchYear.endY-this.touchYear.startY;
 
-
+                    if( ddd<0){
+                        this.ydis -=ddd/50;
+                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis*0.6 + 'deg)';
                         this.y = {
                             transform: 'translateY(' + this.ydis + 'px)'
-                        }
-                   // }
+                        };
+                    }else {
+                        this.ydis +=ddd/50;
+                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis*0.6 + 'deg)';
+                        this.y = {
+                            transform: 'translateY(' + this.ydis + 'px)'
+                        };
+
+                    }
+                    // this.$el.getElementsByClassName('year-wheel')[0].style.transition='all '+time +'ms ease-in-out';
+
+
+
                   /* scroll or  swipe*/
                 }
             },
