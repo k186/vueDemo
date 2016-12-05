@@ -142,29 +142,29 @@
                * */
                 if (e.touches[0]) {
                     e.preventDefault();
+                    this.touchYear.distance =e.touches[0].pageY-this.touchYear.endY;
                     this.touchYear.endY = e.touches[0].pageY;
-                    this.ydis = Math.floor(this.ydis / 34) * 34;
-                    this.touchYear.timeStamp = e.timeStamp;
-                    this.touchYear.distance =this.touchYear.endY - this.touchYear.startY;
-                    if (Math.abs(this.touchYear.distance) > (34/2)) {
-                        if(this.touchYear.distance<0){
-                            this.touchYear.direction='up';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+Math.abs( Math.floor(this.ydis/34)*20)+'deg)';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transition='all 1s ease-in-out';
-                        }else {
-                            this.touchYear.direction='down';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+ Math.floor(this.ydis/34)*20+'deg)';
-                            this.$el.getElementsByClassName('year-wheel')[0].style.transition='all 1s ease-in-out';
+                    console.log( this.touchYear.distance);
+                   // this.ydis = Math.floor(this.ydis / 34) * 34;
+                    this.touchYear.endTime = e.timeStamp;
+                    let time=this.touchYear.endTime-this.touchYear.startTime;
+                   // if (Math.abs(this.touchYear.distance) > (34/2)) {
+                        this.ydis += (this.touchYear.endY-this.touchYear.startY)/50;
+                        if (this.touchYear.distance > 0) {
+                            this.touchYear.direction = 'up';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + Math.abs(this.ydis*0.6) + 'deg)';
+                            // this.$el.getElementsByClassName('year-wheel')[0].style.transition='all '+time +'ms ease-in-out';
+                        } else {
+                            this.touchYear.direction = 'down';
+                            this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + - this.ydis*0.6 + 'deg)';
+                            //this.$el.getElementsByClassName('year-wheel')[0].style.transition='all'+time+'ms ease-in-out';
                         }
-                        this.ydis += this.touchYear.distance;
-                        if(this.ydis<-34*8){
-                            this.ydis=-34*8;
+
+
+                        this.y = {
+                            transform: 'translateY(' + this.ydis + 'px)'
                         }
-                        if(this.ydis>0){
-                            this.ydis=0;
-                        }
-                        this.y = {transform: 'translateY(' + this.ydis + 'px)',transition: 'all 1s ease-in-out'};
-                    }
+                   // }
                   /* scroll or  swipe*/
                 }
             },
