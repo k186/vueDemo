@@ -50,19 +50,28 @@
             return {
                 monthList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 dayList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-                yearDeg: [180,160,140,120,100,80, 60, 40, 20, 0, -20, -40, -60, -80,-100,-120,-140,-160],
+                yearDeg: [180, 160, 140, 120, 100, 80, 60, 40, 20, 0, -20, -40, -60, -80, -100, -120, -140, -160],
                 monthDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 dayDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 touchYear: {
                     startY: 0,
-                    lastY:0,
-                    lastTransZ:0,
-                    lastDeg:0
+                    lastY: 0,
+                    totalMove: 0,
+                    latMove: 0,
+                    velocity: 0,
+                    latsTime: 0,
+                    inertialTime: 0
                 },
-                bounce:{
-                    lastMoveTime:0,
-                    lastMoveStart:0,
-                    stopBounce:false
+                bounce: {
+                    lastMoveTime: 0,
+                    lastMoveStart: 0,
+                    stopBounce: false
+                },
+                wheel: {
+                    u: 4,
+                    mass: 1000,
+                    wheelRatio: 1000,
+                    touchRatio: 20
                 },
                 tempYear: now.getFullYear()
             }
@@ -75,14 +84,14 @@
         },
         computed: {
             yearList(){
-                /*let a = [];
-                for (let i = 0; i < 4; i++) {
-                    a.push(this.tempYear + i)
-                }
-                for (let i = 1; i <=5; i++) {
-                    a.unshift(this.tempYear - i)
-                }
-                return a*/
+              /*let a = [];
+               for (let i = 0; i < 4; i++) {
+               a.push(this.tempYear + i)
+               }
+               for (let i = 1; i <=5; i++) {
+               a.unshift(this.tempYear - i)
+               }
+               return a*/
 
                 return Array.from({length: 18}, (value, index) => 2016 + index)
             }
@@ -91,12 +100,12 @@
         },
         methods: {
             wheelYear(index){
-               /* if (index <9) {
-                    return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
+              /* if (index <9) {
+               return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
 
-                } else {
-                    return {}
-                }*/
+               } else {
+               return {}
+               }*/
                 return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
             },
             wheelMonth(index){
@@ -113,179 +122,167 @@
                     return {}
                 }
             },
-            myTouch(e,type){
+            myTouch(e, type){
                 e.preventDefault();
-                let wheel,List;
-                switch(type){
+                let wheel, List, Current;
+                switch (type) {
                     case 'year':
-                        wheel='year-wheel';
-                        List='year-list';
+                        wheel = 'year-wheel';
+                        List = 'year-list';
+                        Current = this.touchYear;
                         break;
                     case 'month':
-                        wheel='month-wheel';
-                        List='month-list';
+                        wheel = 'month-wheel';
+                        List = 'month-list';
                         break;
                     case 'day':
-                        wheel='day-wheel';
-                        List='day-list';
+                        wheel = 'day-wheel';
+                        List = 'day-list';
                         break;
                     case 'hour':
-                        wheel='hour-wheel';
-                        List='hour-list';
+                        wheel = 'hour-wheel';
+                        List = 'hour-list';
                         break;
                     case 'min':
-                        wheel='minute-wheel';
-                        List='minute-list';
+                        wheel = 'minute-wheel';
+                        List = 'minute-list';
                         break;
                 }
-                let startFinger=e.changedTouches[0];
-                /*touchStart*/
-                this.touchYear.startY=this.touchYear.lastY=startFinger.pageY;
-                /*bounce*/
-                this.bounce.lastMoveStart=this.touchYear.lastY;
-                this.bounce.lastMoveTime=e.timestamp||Date.now();
-                this.bounce.stopBounce=true;
+                let startFinger = e.changedTouches[0];
+              /*touchStart*/
+              /*
+               startY: 0,
+               lastY:0,
+               totalMove:0,
+               lastMove:0,
+               velocity:0,
+               latsTime:0,
+               inertialTime:0
+               * */
+                let now = startFinger.timeStamp || Date.now();
+                Current.startY = startFinger.pageY ;
+                Current.lastY = startFinger.pageY;
+                Current.totalMove = 0;
+                Current.lastMove = 0;
+                Current.velocity = 0;
+                Current.lastTime = now;
+                Current.inertialTime =  Current.lastTime;
+                this.setCss(Current.totalMove,List,wheel, Current.velocity);
             },
-            myMove(evt,type){
-                let wheel,List,lastY;
-                switch(type){
+            myMove(evt, type){
+                let wheel, List, Current;
+                switch (type) {
                     case 'year':
-                        wheel='year-wheel';
-                        List='year-list';
-                        lastY=this.touchYear.lastY;
+                        wheel = 'year-wheel';
+                        List = 'year-list';
+                        Current = this.touchYear;
                         break;
                     case 'month':
-                        wheel='month-wheel';
-                        List='month-list';
+                        wheel = 'month-wheel';
+                        List = 'month-list';
                         break;
                     case 'day':
-                        wheel='day-wheel';
-                        List='day-list';
+                        wheel = 'day-wheel';
+                        List = 'day-list';
                         break;
                     case 'hour':
-                        wheel='hour-wheel';
-                        List='hour-list';
+                        wheel = 'hour-wheel';
+                        List = 'hour-list';
                         break;
                     case 'min':
-                        wheel='minute-wheel';
-                        List='minute-list';
+                        wheel = 'minute-wheel';
+                        List = 'minute-list';
                         break;
                 }
                 evt.preventDefault();
-                let nowFinger=evt.changedTouches[0];
-                let nowY= nowFinger.pageY;
-                let move=nowY-lastY;
-
-                /*bounce*/
-                let nowTime=evt.timestamp||Date.now();
-                this.bounce.stopBounce=false;
-                let timing=nowTime-this.bounce.lastMoveTime;
-                if(timing>300){
-                    this.bounce.lastMoveTime=nowTime;
-                    this.bounce.lastMoveStart=nowY;
-                }
-                /*set css*/
-                this.setCss(move,List,wheel);
-                /*update lastY*/
-                lastY=nowY;
-
-                console.log('move')
-
-            },
-            myEnd(evt,type){
-                let wheel,List;
-                switch(type){
-                    case 'year':
-                        wheel='year-wheel';
-                        List='year-list';
-                        break;
-                    case 'month':
-                        wheel='month-wheel';
-                        List='month-list';
-                        break;
-                    case 'day':
-                        wheel='day-wheel';
-                        List='day-list';
-                        break;
-                    case 'hour':
-                        wheel='hour-wheel';
-                        List='hour-list';
-                        break;
-                    case 'min':
-                        wheel='minute-wheel';
-                        List='minute-list';
-                        break;
-                }
-                evt.preventDefault();
-                let nowFinger=evt.changedTouches[0];
-                let nowY= nowFinger.pageY;
-                let move=nowY-this.touchYear.lastY;
-                /*set css*/
-                this.setCss(move,List,wheel);
-                /*update lastY*/
-                this.touchYear.lastY=nowY;
-                console.log('end');
-
-                /*bounce*/
-                let nowTime=evt.timestamp||Date.now();
-                console.log(nowTime);
-                let v=(nowY-this.bounce.lastMoveStart)/(nowTime-this.bounce.lastMoveTime);
-                this.bounce.stopBounce=false;
+                let now =evt.timeStamp||Date.now();
+                let nowFinger = evt.changedTouches[0];
+                let nowY = nowFinger.pageY;
+                Current.lastTime=now;
+                Current.lastMove=nowY-Current.lastY;
+                let v=this.caculateVelocity(Current);
+               /*update lastY*/
+                Current.lastY = nowY;
+               /*set css*/
+                this.setCss(Current.totalMove, List, wheel,v);
+                console.log('move');
                 let vm=this;
-                (function (v, startTime) {
-                    let C=v>0?-1:1;/*加速度方向*/
-                    let deceleration=C/1000;/*加速度 摩擦系数*/
-                    let duration=v/deceleration;/*速度减到0需要的时间*/
-                    let dis=v*duration/2;
-                    function bounceMove () {
-                        if(vm.bounce.stopBounce)return;
-                            let nowTimeIn=evt.timestamp||Date.now();
-                            console.log(nowTimeIn);
-                            let t=nowTimeIn-startTime;
-                            let nowV=v/(1+deceleration*v*t);
-                            //let nowV=v+t*deceleration;
-                            if(t>Math.abs(duration)){
-                                return;
-                            }
-                            let move=v*t+(deceleration*t*t)/2;
-                            //let move=(v+nowV)/10*t;
-                            move=vm.px2rem(move);
-                            console.log('move'+move);
-                            /*if(move<0&&dir<0){
-                                return;
-                            }else if(move>0&&dir>0) {
-                                return
-                            }*/
-                            let singleHeight=vm.px2rem(70);
-                            let singDegree=20/singleHeight;
-                            /*set css*/
-                            let currentListRem=vm.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig,"");
-                            let currentWheelDeg=vm.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig,"");
-                            /*update css*/
-                            let remHeight=vm.px2rem(move) +parseFloat(currentListRem);
-                            let remDeg=parseFloat(currentWheelDeg)-vm.px2rem(move)*singDegree;
-                            vm.$el.getElementsByClassName(List)[0].style.transform='translateY('+remHeight+'rem)';
-                            vm.$el.getElementsByClassName(wheel)[0].style.transform='rotate3d(1, 0, 0, ' + remDeg + 'deg)';
 
-                            setTimeout(bounceMove,10);
-                            console.log(111)
-
+              /*delay function*/
+                (function inertia() {
+                  /*
+                   u: 4,
+                   mass: 1000,
+                   wheelRatio: 1000,
+                   touchRatio: 20
+                   */
+                    let vv=!isNaN(Current.velocity)?Current.velocity:0;
+                    if(!Current.inertialTime){
+                        Current.inertialTime=Date.now();
+                    }else if(vv!=0){
+                        let now =Date.now(),
+                            force=v*vm.wheel.u,
+                            acc=force/vm.wheel.mass,
+                            deltaTime=now-Current.inertialTime,
+                            velocity=v-(acc*deltaTime);
+                        vv=!isNaN(velocity)?velocity:0;
+                        let move=vv*deltaTime;
+                        Current.totalMove+=move;
+                        Current.inertialTime=now;
+                        vm.setCss(Current.totalMove, List, wheel,vv);
+                        console.log('vvv');
                     }
-                    bounceMove();
-                })(v,nowTime);
+                    if(window.requestAnimationFrame){
+                        requestAnimationFrame(inertia);
+                    }else{
+                        setTimeout(inertia, 1000/60);
+                    }
+                })();
             },
-            setCss(move,List,wheel){
-                let singleHeight=this.px2rem(70);
-                let singDegree=20/singleHeight;
-                /*set css*/
-                let currentListRem=this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig,"");
-                let currentWheelDeg=this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig,"");
-                /*update css*/
-                let remHeight=this.px2rem(move) +parseFloat(currentListRem);
-                let remDeg=parseFloat(currentWheelDeg)-this.px2rem(move)*singDegree;
-                this.$el.getElementsByClassName(List)[0].style.transform='translateY('+remHeight+'rem)';
-               // this.$el.getElementsByClassName(List)[0].style.transition='all '+time+'s ease-in-out';
-                this.$el.getElementsByClassName(wheel)[0].style.transform='rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+            myEnd(evt, type){
+                let wheel, List,Current;
+                switch (type) {
+                    case 'year':
+                        wheel = 'year-wheel';
+                        List = 'year-list';
+                        Current=this.touchYear;
+                        break;
+                    case 'month':
+                        wheel = 'month-wheel';
+                        List = 'month-list';
+                        break;
+                    case 'day':
+                        wheel = 'day-wheel';
+                        List = 'day-list';
+                        break;
+                    case 'hour':
+                        wheel = 'hour-wheel';
+                        List = 'hour-list';
+                        break;
+                    case 'min':
+                        wheel = 'minute-wheel';
+                        List = 'minute-list';
+                        break;
+                }
+                evt.preventDefault();
+                let v=this.caculateVelocity(Current);
+               /*set css*/
+                this.setCss(Current.totalMove, List, wheel,v);
+                console.log('end');
+                Current.inertialTime=null;
+            },
+            setCss(move, List, wheel,v){
+                let singleHeight = this.px2rem(70);
+                let singDegree = 20 / singleHeight;
+              /*set css*/
+                let currentListRem = this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
+                let currentWheelDeg = this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
+              /*update css*/
+                let remHeight = this.px2rem(move) + parseFloat(currentListRem);
+                let remDeg = parseFloat(currentWheelDeg) - this.px2rem(move) * singDegree;
+                this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + remHeight + 'rem)';
+                // this.$el.getElementsByClassName(List)[0].style.transition='all '+time+'s ease-in-out';
+                this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
                 //this.$el.getElementsByClassName(wheel)[0].style.transition='all '+time+'s ease-in-out';
             },
             px2rem(d){
@@ -301,6 +298,13 @@
                     val += 'px';
                 }
                 return val;
+            },
+            caculateVelocity(obj){
+                let now = Date.now(),
+                    deltaTime = now - obj.lastTime,
+                    velocity = obj.velocity + ((obj.lastMove / deltaTime) /this.wheel.touchRatio);
+                velocity=!isNaN(velocity)?velocity:0;
+                return velocity;
             }
         }
     }
