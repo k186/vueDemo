@@ -55,7 +55,9 @@
                 dayDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 touchYear: {
                     startY: 0,
-                    lastY:0
+                    lastY:0,
+                    lastTransZ:0,
+                    lastDeg:0
                 },
                 bounce:{
                     lastMoveTime:0,
@@ -139,18 +141,18 @@
                 let startFinger=e.changedTouches[0];
                 /*touchStart*/
                 this.touchYear.startY=this.touchYear.lastY=startFinger.pageY;
-                console.log('start');
                 /*bounce*/
                 this.bounce.lastMoveStart=this.touchYear.lastY;
                 this.bounce.lastMoveTime=e.timestamp||Date.now();
                 this.bounce.stopBounce=true;
             },
             myMove(evt,type){
-                let wheel,List;
+                let wheel,List,lastY;
                 switch(type){
                     case 'year':
                         wheel='year-wheel';
                         List='year-list';
+                        lastY=this.touchYear.lastY;
                         break;
                     case 'month':
                         wheel='month-wheel';
@@ -172,19 +174,23 @@
                 evt.preventDefault();
                 let nowFinger=evt.changedTouches[0];
                 let nowY= nowFinger.pageY;
-                let move=nowY-this.touchYear.lastY;
-                /*set css*/
-                this.setCss(move,List,wheel);
-                /*update lastY*/
-                this.touchYear.lastY=nowY;
-                console.log('move');
+                let move=nowY-lastY;
+
                 /*bounce*/
                 let nowTime=evt.timestamp||Date.now();
                 this.bounce.stopBounce=false;
-                if(nowTime-this.bounce.lastMoveTime>300){
+                let timing=nowTime-this.bounce.lastMoveTime;
+                if(timing>300){
                     this.bounce.lastMoveTime=nowTime;
                     this.bounce.lastMoveStart=nowY;
                 }
+                /*set css*/
+                this.setCss(move,List,wheel);
+                /*update lastY*/
+                lastY=nowY;
+
+                console.log('move')
+
             },
             myEnd(evt,type){
                 let wheel,List;
@@ -222,33 +228,34 @@
 
                 /*bounce*/
                 let nowTime=evt.timestamp||Date.now();
-                console.log(nowTime)
+                console.log(nowTime);
                 let v=(nowY-this.bounce.lastMoveStart)/(nowTime-this.bounce.lastMoveTime);
                 this.bounce.stopBounce=false;
                 let vm=this;
                 (function (v, startTime) {
-                    let dir=v>0?-1:1;
-                    let deceleration=dir*0.0006;
-                    let duration=v/deceleration;
+                    let C=v>0?-1:1;/*加速度方向*/
+                    let deceleration=C/1000;/*加速度 摩擦系数*/
+                    let duration=v/deceleration;/*速度减到0需要的时间*/
                     let dis=v*duration/2;
                     function bounceMove () {
                         if(vm.bounce.stopBounce)return;
                             let nowTimeIn=evt.timestamp||Date.now();
                             console.log(nowTimeIn);
                             let t=nowTimeIn-startTime;
-                            let nowV=v+t*deceleration;
-                           /* if(dir*nowV<0){
+                            let nowV=v/(1+deceleration*v*t);
+                            //let nowV=v+t*deceleration;
+                            if(t>Math.abs(duration)){
                                 return;
-                            }*/
-                            let move=(v+nowV)/2*t;
+                            }
+                            let move=v*t+(deceleration*t*t)/2;
+                            //let move=(v+nowV)/10*t;
                             move=vm.px2rem(move);
                             console.log('move'+move);
-                            if(move<0&&dir<0){
+                            /*if(move<0&&dir<0){
                                 return;
                             }else if(move>0&&dir>0) {
                                 return
-                            }
-
+                            }*/
                             let singleHeight=vm.px2rem(70);
                             let singDegree=20/singleHeight;
                             /*set css*/
@@ -277,7 +284,9 @@
                 let remHeight=this.px2rem(move) +parseFloat(currentListRem);
                 let remDeg=parseFloat(currentWheelDeg)-this.px2rem(move)*singDegree;
                 this.$el.getElementsByClassName(List)[0].style.transform='translateY('+remHeight+'rem)';
+               // this.$el.getElementsByClassName(List)[0].style.transition='all '+time+'s ease-in-out';
                 this.$el.getElementsByClassName(wheel)[0].style.transform='rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+                //this.$el.getElementsByClassName(wheel)[0].style.transition='all '+time+'s ease-in-out';
             },
             px2rem(d){
                 var val = parseFloat(d) / 75;
