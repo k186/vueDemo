@@ -6,13 +6,13 @@
     </div>
     <div class="picker-panel">
       <div class="panel-box">
-        <div v-touch:pan="touchStart" class="box-year">
+        <div v-on:touchstart="myTouch($event,'year')" v-on:touchmove="myMove($event,'year')" v-on:touchend="myEnd($event,'year')" class="box-year">
           <div class="year-checked">
-            <div class="year-list" v-bind:style="y">
+            <div class="year-list" style="transform: translateY(0rem)">
               <div v-for="year in yearList">{{year}}</div>
             </div>
           </div>
-          <div class="year-wheel" style="transform: rotateX(0deg)">
+          <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg)">
             <div class="wheel-div" v-for="(year,index) in yearList" v-bind:style="wheelYear(index)">{{year}}</div>
           </div>
         </div>
@@ -53,18 +53,15 @@
                 yearDeg: [180,160,140,120,100,80, 60, 40, 20, 0, -20, -40, -60, -80,-100,-120,-140,-160],
                 monthDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
                 dayDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
-                y: {},
-                ydis: 0,
                 touchYear: {
                     startY: 0,
-                    startTime: 0,
-                    endY: 0,
-                    endTime: 0,
-                    distance: 0,
-                    direction:'up'
+                    lastY:0
                 },
-                lastDis:0,
-                lastY:0,
+                bounce:{
+                    lastMoveTime:0,
+                    lastMoveStart:0,
+                    stopBounce:false
+                },
                 tempYear: now.getFullYear()
             }
         },
@@ -85,7 +82,7 @@
                 }
                 return a*/
 
-                return Array.from({length: 17}, (value, index) => 2016 + index)
+                return Array.from({length: 18}, (value, index) => 2016 + index)
             }
         },
         mounted(){
@@ -114,108 +111,187 @@
                     return {}
                 }
             },
-            touchStart(e){
-                /*if (e.touches[0]) {
-                    e.preventDefault();
-                    this.touchYear.startY = e.touches[0].pageY;
-                    this.touchYear.startTime = e.timeStamp;
-                    console.log( this.touchYear.startY);
-                    //console.log(new Date().getTime())
-                }*/
-                let obj=e;
-                console.log(obj.distance<this.lastDis);
-                if(obj.direction==8&&obj.distance>this.lastDis){
-                    this.lastDis=obj.distance;
-                    this.ydis+=obj.distance;
-                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis + 'deg)';
-                        this.y = {
-                            transform: 'translateY(' + -this.ydis + 'px)'
-                        };
-                    console.log('up');
-                }else if(obj.direction==16&&obj.distance<this.lastDis){
-                    this.lastDis=obj.distance;
-                    this.ydis-=obj.distance;
-                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +this.lastY-this.ydis>0?this.lastY-this.ydis: this.ydis+ 'deg)';
-                    this.y = {
-                        transform: 'translateY(' + -this.ydis + 'px)'
-                    };
-                    console.log('up2');
-                }else if(obj.direction==8&&obj.distance<this.lastDis){
-                    this.lastDis=obj.distance;
-                    this.ydis+=obj.distance;
-                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  -this.ydis + 'deg)';
-                    this.y = {
-                        transform: 'translateY(' + this.ydis + 'px)'
-                    };
-                    console.log('up3');
+            myTouch(e,type){
+                e.preventDefault();
+                let wheel,List;
+                switch(type){
+                    case 'year':
+                        wheel='year-wheel';
+                        List='year-list';
+                        break;
+                    case 'month':
+                        wheel='month-wheel';
+                        List='month-list';
+                        break;
+                    case 'day':
+                        wheel='day-wheel';
+                        List='day-list';
+                        break;
+                    case 'hour':
+                        wheel='hour-wheel';
+                        List='hour-list';
+                        break;
+                    case 'min':
+                        wheel='minute-wheel';
+                        List='minute-list';
+                        break;
                 }
-                else if(obj.direction==16&&obj.distance>this.lastDis){
-                    this.lastDis=obj.distance;
-                    this.ydis+=obj.distance;
-                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  -this.ydis + 'deg)';
-                        this.y = {
-                            transform: 'translateY(' + this.ydis + 'px)'
-                        };
-                    console.log('down');
-                }else {
-                    this.lastY=this.ydis;
-
-                    console.log(obj.direction)
-                }
-
+                let startFinger=e.changedTouches[0];
+                /*touchStart*/
+                this.touchYear.startY=this.touchYear.lastY=startFinger.pageY;
+                console.log('start');
+                /*bounce*/
+                this.bounce.lastMoveStart=this.touchYear.lastY;
+                this.bounce.lastMoveTime=e.timestamp||Date.now();
+                this.bounce.stopBounce=true;
             },
-            touchMove(e){
-              /*if(e.distance>34){
-               if(e.direction==8){
-               this.ydis-=e.distance;
-               this.ydis=Math.floor(this.ydis/34)*34;
-               this.y={transform: 'translateY('+ this.ydis+ 'px)',transition:'all 1s ease-in-out'};
-               }else {
-               this.ydis+=e.distance;
-               this.ydis=Math.floor(this.ydis/34)*34;
-               this.y={transform: 'translateY('+ this.ydis+ 'px)',transition:'all 1s ease-in-out'}
-               }
-               //this.$el.getElementsByClassName('year-wheel')[0].style.transform='rotate3d(1, 0, 0, '+Math.floor(this.ydis/34)*34+'deg)';
-               }*/
-              /*
-               * height single 70px 0.93333rem
-               * deg single 20 deg
-               *
-               * */
-                if (e.touches[0]) {
-                    e.preventDefault();
-                    this.touchYear.distance =e.touches[0].pageY-this.touchYear.endY;
-                    this.touchYear.endY = e.touches[0].pageY;
-                    console.log( this.touchYear.distance);
-                    this.touchYear.endTime = e.timeStamp;
-                    let time=this.touchYear.endTime-this.touchYear.startTime;
-                    let ddd=this.touchYear.endY-this.touchYear.startY;
+            myMove(evt,type){
+                let wheel,List;
+                switch(type){
+                    case 'year':
+                        wheel='year-wheel';
+                        List='year-list';
+                        break;
+                    case 'month':
+                        wheel='month-wheel';
+                        List='month-list';
+                        break;
+                    case 'day':
+                        wheel='day-wheel';
+                        List='day-list';
+                        break;
+                    case 'hour':
+                        wheel='hour-wheel';
+                        List='hour-list';
+                        break;
+                    case 'min':
+                        wheel='minute-wheel';
+                        List='minute-list';
+                        break;
+                }
+                evt.preventDefault();
+                let nowFinger=evt.changedTouches[0];
+                let nowY= nowFinger.pageY;
+                let move=nowY-this.touchYear.lastY;
+                /*set css*/
+                this.setCss(move,List,wheel);
+                /*update lastY*/
+                this.touchYear.lastY=nowY;
+                console.log('move');
+                /*bounce*/
+                let nowTime=evt.timestamp||Date.now();
+                this.bounce.stopBounce=false;
+                if(nowTime-this.bounce.lastMoveTime>300){
+                    this.bounce.lastMoveTime=nowTime;
+                    this.bounce.lastMoveStart=nowY;
+                }
+            },
+            myEnd(evt,type){
+                let wheel,List;
+                switch(type){
+                    case 'year':
+                        wheel='year-wheel';
+                        List='year-list';
+                        break;
+                    case 'month':
+                        wheel='month-wheel';
+                        List='month-list';
+                        break;
+                    case 'day':
+                        wheel='day-wheel';
+                        List='day-list';
+                        break;
+                    case 'hour':
+                        wheel='hour-wheel';
+                        List='hour-list';
+                        break;
+                    case 'min':
+                        wheel='minute-wheel';
+                        List='minute-list';
+                        break;
+                }
+                evt.preventDefault();
+                let nowFinger=evt.changedTouches[0];
+                let nowY= nowFinger.pageY;
+                let move=nowY-this.touchYear.lastY;
+                /*set css*/
+                this.setCss(move,List,wheel);
+                /*update lastY*/
+                this.touchYear.lastY=nowY;
+                console.log('end');
 
-                    if( ddd<0){
-                        this.ydis -=ddd/50;
-                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis*0.6 + 'deg)';
-                        this.y = {
-                            transform: 'translateY(' + this.ydis + 'px)'
-                        };
-                    }else {
-                        this.ydis +=ddd/50;
-                        this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' +  this.ydis*0.6 + 'deg)';
-                        this.y = {
-                            transform: 'translateY(' + this.ydis + 'px)'
-                        };
+                /*bounce*/
+                let nowTime=evt.timestamp||Date.now();
+                console.log(nowTime)
+                let v=(nowY-this.bounce.lastMoveStart)/(nowTime-this.bounce.lastMoveTime);
+                this.bounce.stopBounce=false;
+                let vm=this;
+                (function (v, startTime) {
+                    let dir=v>0?-1:1;
+                    let deceleration=dir*0.0006;
+                    let duration=v/deceleration;
+                    let dis=v*duration/2;
+                    function bounceMove () {
+                        if(vm.bounce.stopBounce)return;
+                            let nowTimeIn=evt.timestamp||Date.now();
+                            console.log(nowTimeIn);
+                            let t=nowTimeIn-startTime;
+                            let nowV=v+t*deceleration;
+                           /* if(dir*nowV<0){
+                                return;
+                            }*/
+                            let move=(v+nowV)/2*t;
+                            move=vm.px2rem(move);
+                            console.log('move'+move);
+                            if(move<0&&dir<0){
+                                return;
+                            }else if(move>0&&dir>0) {
+                                return
+                            }
+
+                            let singleHeight=vm.px2rem(70);
+                            let singDegree=20/singleHeight;
+                            /*set css*/
+                            let currentListRem=vm.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig,"");
+                            let currentWheelDeg=vm.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig,"");
+                            /*update css*/
+                            let remHeight=vm.px2rem(move) +parseFloat(currentListRem);
+                            let remDeg=parseFloat(currentWheelDeg)-vm.px2rem(move)*singDegree;
+                            vm.$el.getElementsByClassName(List)[0].style.transform='translateY('+remHeight+'rem)';
+                            vm.$el.getElementsByClassName(wheel)[0].style.transform='rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+
+                            setTimeout(bounceMove,10);
+                            console.log(111)
 
                     }
-                    // this.$el.getElementsByClassName('year-wheel')[0].style.transition='all '+time +'ms ease-in-out';
-
-
-
-                  /* scroll or  swipe*/
-                }
+                    bounceMove();
+                })(v,nowTime);
             },
-            touchEnd(e){
-                e.preventDefault();
-              /* scroll or  swipe*/
-                //console.log(new Date().getTime());
+            setCss(move,List,wheel){
+                let singleHeight=this.px2rem(70);
+                let singDegree=20/singleHeight;
+                /*set css*/
+                let currentListRem=this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig,"");
+                let currentWheelDeg=this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig,"");
+                /*update css*/
+                let remHeight=this.px2rem(move) +parseFloat(currentListRem);
+                let remDeg=parseFloat(currentWheelDeg)-this.px2rem(move)*singDegree;
+                this.$el.getElementsByClassName(List)[0].style.transform='translateY('+remHeight+'rem)';
+                this.$el.getElementsByClassName(wheel)[0].style.transform='rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+            },
+            px2rem(d){
+                var val = parseFloat(d) / 75;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            },
+            rem2px(d){
+                var val = parseFloat(d) * 75;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
             }
         }
     }
