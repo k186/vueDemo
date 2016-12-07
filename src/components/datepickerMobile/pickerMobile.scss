@@ -169,16 +169,22 @@ $panel-bg:#eeeeee;
       width: 100%;
       text-align: center;
       position: relative;
+      height: px2rem(400px);
+    }
+    .year-list,.month-list,.day-list,.minute-list{
+      position: absolute;
+      top:-1px;
+      width: 100%;
     }
     .year-checked,.month-checked,.day-checked,.hour-checked,.minute-checked{
-      height: px2rem(70px);
-      line-height:px2rem(70px);
+      height: px2rem(68px);
+      line-height:px2rem(68px);
       overflow: hidden;
       position: absolute;
       top:px2rem(180px);
       left: 0;
       right: 0;
-      border-top:1px solid $control-btn ;
+      border-top: 1px solid $control-btn ;
       border-bottom: 1px solid $control-btn;
       background: $picker-bg;
       z-index: 1;

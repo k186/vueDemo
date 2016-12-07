@@ -11,101 +11,30 @@
           <div class="year-checked">
             <div class="year-list" style="transform: translateY(0rem)">
               <!--<div v-for="year in yearList">{{year}}</div>-->
-                <div>1992</div>
-                <div>1992</div>
-                <div>1994</div>
-                <div>1995</div>
-                <div>1996</div>
-                <div>1997</div>
-                <div>1998</div>
-                <div>1999</div>
-                <div>2000</div>
-                <div>2001</div>
-                <div>2001</div>
-                <div>2003</div>
-                <div>2004</div>
-                <div>2005</div>
-                <div>2006</div>
-                <div>2007</div>
-                <div>2008</div>
-                <div>2009</div>
-                <div>2010</div>
-                <div>2011</div>
-                <div>2012</div>
-                <div>2013</div>
-                <div>2014</div>
-                <div>2014</div>
-                <div>2015</div>
-                <div>2016</div>
-                <div>2017</div>
-                <div>2018</div>
-                <div>2019</div>
-                <div>2020</div>
-                <div>2021</div>
-                <div>2022</div>
-                <div>2023</div>
-                <div>2024</div>
-                <div>2025</div>
-                <div>2026</div>
-                <div>2027</div>
-                <div>2028</div>
-                <div>2029</div>
-                <div>2030</div>
-                <div>2031</div>
-                <div>2032</div>
-                <div>2033</div>
-                <div>2034</div>
-                <div>2035</div>
-                <div>2036</div>
-                <div>2037</div>
-                <div>2038</div>
-                <div>2039</div>
-                <div>2040</div>
-                <div>2041</div>
-                <div>2042</div>
-                <div>2043</div>
-                <div>2044</div>
-                <div>2045</div>
-                <div>2046</div>
-                <div>2047</div>
-                <div>2048</div>
-                <div>2049</div>
-                <div>2050</div>
-                <div>2051</div>
-                <div>2052</div>
-                <div>2053</div>
-                <div>2054</div>
-                <div>2055</div>
-                <div>2056</div>
-                <div>2057</div>
-                <div>2058</div>
-                <div>2059</div>
-                <div>2060</div>
-
             </div>
           </div>
           <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="(year,index) in yearList" v-bind:style="wheelYear(index)">{{year}}</div>
+            <div class="wheel-div"></div>
           </div>
         </div>
-        <div class="box-month">
+        <div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
           <div class="month-checked">
-            <div class="month-list">
-              <div v-for="month in monthList">{{month}}</div>
+            <div class="month-list" style="transform: translateY(0rem)">
+              <div></div>
             </div>
           </div>
           <div class="month-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="(month,index) in monthList" v-bind:style="wheelMonth(index)">{{month}}</div>
+            <div class="wheel-div"></div>
           </div>
         </div>
-        <div class="box-day">
+        <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
           <div class="day-checked">
-            <div class="day-list">
-              <div v-for="day in dayList">{{day}}</div>
+            <div class="day-list" style="transform: translateY(0rem)">
+              <div v-for="day in dayList">{{day.value}}</div>
             </div>
           </div>
-          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg) translate3d(0px, 0px,2.6rem);">
-            <div class="wheel-div" v-for="day,index in dayList" v-bind:style="wheelDay(index)">{{day}}</div>
+          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+            <div class="wheel-div" v-for="day,index in dayList" v-bind:style="{transform: 'rotate3d(1, 0, 0,'+day.deg+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
           </div>
         </div>
         <!--   <div class="box-hour"></div>
@@ -120,12 +49,33 @@
         data(){
             let now = new Date();
             return {
-                monthList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                dayList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-                yearDeg: [180, 160, 140, 120, 100, 80, 60, 40, 20, 0, -20, -40, -60, -80, -100, -120, -140, -160],
-                monthDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
-                dayDeg: [80, 60, 40, 20, 0, -20, -40, -60, -80],
+                monthList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                weekList: [0, 1, 2, 3, 4, 5, 6],
+                yearList: Array.from({length: 12}, (value, index) => now.getFullYear() + index),
+                hourList: Array.from({length: 24}, (value, index) => 0 + index),
+                tmpYear: now.getFullYear(),
+                tmpMonth: now.getMonth(),
+                tmpDay: now.getDate(),
+                tmpHour: now.getHours(),
+                tmpMinute: now.getMinutes(),
+
                 touchYear: {
+                    startY: 0,
+                    lastY: 0,
+                    velocity: 0,
+                    startTime:0,
+                    latsTime: 0,
+                    lastMove:0,
+                },
+                touchMonth: {
+                    startY: 0,
+                    lastY: 0,
+                    velocity: 0,
+                    startTime:0,
+                    latsTime: 0,
+                    lastMove:0,
+                },
+                touchDay: {
                     startY: 0,
                     lastY: 0,
                     velocity: 0,
@@ -153,44 +103,32 @@
             }
         },
         computed: {
-            yearList(){
-              /*let a = [];
-               for (let i = 0; i < 4; i++) {
-               a.push(this.tempYear + i)
-               }
-               for (let i = 1; i <=5; i++) {
-               a.unshift(this.tempYear - i)
-               }
-               return a*/
-
-                return Array.from({length: 18}, (value, index) => 2016 + index)
+            dayList () {
+              /* get currentMonthLenght */
+                let currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate();
+              /* get currentMonth day */
+                let daylist = Array.from({length: currentMonthLength}, (value, index) => {
+                    return {
+                        currentMonth: true,
+                        value: index + 1,
+                        deg:-index*20
+                    }
+                });
+                return daylist;
             }
         },
         mounted(){
+
         },
         methods: {
             wheelYear(index){
-              /* if (index <9) {
-               return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
-
-               } else {
-               return {}
-               }*/
                 return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
             },
             wheelMonth(index){
-                if (index < 9) {
-                    return {transform: 'rotate3d(1, 0, 0,' + this.monthDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
-                } else {
-                    return {}
-                }
+                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
             },
             wheelDay(index){
-                if (index < 9) {
-                    return {transform: 'rotate3d(1, 0, 0,' + this.dayDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'}
-                } else {
-                    return {}
-                }
+                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
             },
             myTouch(e, type){
                 e.preventDefault();
@@ -204,10 +142,12 @@
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
+                        Box = this.touchMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
+                        Box = this.touchDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
@@ -248,10 +188,12 @@
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
+                        Box = this.touchMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
+                        Box = this.touchDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
@@ -279,8 +221,9 @@
                 this.Time.delay=now-Box.lastTime;
 
                 if(now-Box.lastTime<30){
-                    this.wheel.inertia=true;
-                    //this.inertia(V,now,move,List,wheel)
+                    //this.wheel.inertia=true;
+                    //todo inertia
+                    this.wheel.inertia=false;
                 }else {
                     this.wheel.inertia=false;
                 }
@@ -291,16 +234,6 @@
                 this.setCss(move, List, wheel,V);
                 /*inertia*/
                 this.Time.move=move;
-
-
-
-               /* if(now-Box.startTime<300&&Math.abs(Box.lastY-Box.startY)>140){
-                    this.wheel.inertia=true;
-                    //this.inertia(V,now,move,List,wheel)
-                }else {
-                    this.wheel.inertia=false;
-                }*/
-                console.log(delta);
             },
             myEnd(evt, type){
                 let wheel, List,Box;
@@ -313,10 +246,12 @@
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
+                        Box = this.touchMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
+                        Box = this.touchDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
@@ -338,14 +273,15 @@
                 Box.lastY=Box.startY;
                 Box.lastTime=now;
                 Box.lastMove=move;
-                this.setCss(move, List, wheel,V);
+                this.setCss(move, List, wheel,V,true);
                 let vm=this;
                 //vm.wheel.inertia=false;
-                (function (v,startTime) {
+                //todo inertial
+               /* (function (v,startTime) {
                         let dir=v>0? -1:1;//速度方向
                         let acc=dir*vm.wheel.u/vm.wheel.mass;//摩擦系数~=加速度
-                        let duration=Math.abs(v/acc);/*时间*/
-                        let distance=((v+v*acc)/2 )*duration;/*距离*/
+                        let duration=Math.abs(v/acc);/!*时间*!/
+                        let distance=((v+v*acc)/2 )*duration;/!*距离*!/
                         let singleHeight = vm.px2rem(70);
                         let singDegree = 20 / singleHeight;
                         function inertialMove () {
@@ -356,10 +292,10 @@
                                 let nowMove=v*t+acc*t*t/2;
                                 console.log('v'+nowV);
                                 console.log('move'+nowMove);
-                                /*set css*/
+                                /!*set css*!/
                                 let currentListRem = vm.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
                                 let currentWheelDeg = vm.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
-                                /*update css*/
+                                /!*update css*!/
                                 let remHeight = vm.px2rem(nowMove) + parseFloat(currentListRem);
                                 let remDeg = parseFloat(currentWheelDeg) - vm.px2rem(nowMove) * singDegree;
 
@@ -387,15 +323,16 @@
                         }
                         inertialMove();
 
-                })(V,now);
+                })(V,now);*/
 
                /*set css*/
                 //this.setCss(Box.totalMove, List, wheel,v);
                 console.log('end');
 
+
             },
-            setCss(move, List, wheel,v){
-                let singleHeight = this.px2rem(70);
+            setCss(move, List, wheel,v,isEnd){
+                let singleHeight = this.px2rem(68);
                 let singDegree = 20 / singleHeight;
               /*set css*/
                 let currentListRem = this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
@@ -403,11 +340,19 @@
               /*update css*/
                 let remHeight = this.px2rem(move) + parseFloat(currentListRem);
                 let remDeg = parseFloat(currentWheelDeg) - this.px2rem(move) * singDegree;
+                //todo int rem
+                let Px=Math.round(this.rem2px(remHeight)/68)*68;
+                let rem=this.px2rem(Px);
+                let aim=Math.round(remDeg/20)*20;
+                if(isEnd){
+                    remHeight=rem;
+                    remDeg=aim;
+                    //todo end animation
+                }
                 this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + remHeight + 'rem)';
                 //this.$el.getElementsByClassName(List)[0].style.transition='';
                 this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
                 //this.$el.getElementsByClassName(wheel)[0].style.transition='';
-
                 return {remHeight:remHeight,remDeg:remDeg}
             },
             px2rem(d){
@@ -429,6 +374,9 @@
                 velocity=!isNaN(velocity)?velocity:0;
                 return velocity;
             },
+            renderDom(){
+
+            }
         }
     }
 </script>
