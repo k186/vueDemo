@@ -2,7 +2,6 @@
   <div class="mobile-picker">
     <div class="picker-control">
       <div class="control-cancel">取消</div>
-        <div style="position: absolute;left: 2rem">{{Time.delay}}-{{Time.move}}</div>
       <div class="control-ok">确定</div>
     </div>
     <div class="picker-panel">
@@ -17,7 +16,7 @@
             <div class="wheel-div"></div>
           </div>
         </div>
-        <div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
+        <!--<div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
           <div class="month-checked">
             <div class="month-list" style="transform: translateY(0rem)">
               <div></div>
@@ -29,14 +28,14 @@
         </div>
         <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
           <div class="day-checked">
-            <div class="day-list" style="transform: translateY(-2.72rem)">
+            <div class="day-list" style="transform: translateY(0rem)">
               <div v-for="day in dayList">{{day.value}}</div>
             </div>
           </div>
-          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,80deg)">
+          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
             <div class="wheel-div" v-for="day in renderDayList" v-bind:style="{transform: 'rotate3d(1, 0, 0,'+day.deg+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
           </div>
-        </div>
+        </div>-->
         <!--   <div class="box-hour"></div>
            <div class="box-minute"></div>-->
       </div>
@@ -47,18 +46,7 @@
     export default{
         name: 'pickerMobile',
         data(){
-            let now = new Date();
             return {
-                monthList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                weekList: [0, 1, 2, 3, 4, 5, 6],
-                yearList: Array.from({length: 12}, (value, index) => now.getFullYear() + index),
-                hourList: Array.from({length: 24}, (value, index) => 0 + index),
-                minuteList:[],
-                tmpYear: now.getFullYear(),
-                tmpMonth: now.getMonth(),
-                tmpDay: now.getDate(),
-                tmpHour: now.getHours(),
-                tmpMinute: now.getMinutes(),
                 checkedYear:{
                     Deg:0,
                     Y:0
@@ -103,22 +91,14 @@
                     latsTime: 0,
                     lastMove:0,
                 },
+                data:[1,2,3,4,5,6,7,8,9],
                 wheel: {
                     u: 2,
                     mass: 1000,
                     inertia:false,
                     frameRate:60,
-                },
-                Time:{
-                  delay:0,
-                    move:0
-                },
-                /*renderList*/
-                renderYearList:[],
-                renderMonthList:[],
-                renderDayList:[],
-                renderHourList:[],
-                renderMinuteList:[],
+                }
+
             }
         },
         props: {
@@ -128,33 +108,11 @@
             }
         },
         computed: {
-            dayList () {
-              /* get currentMonthLenght */
-                let currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate();
-              /* get currentMonth day */
-                let daylist = Array.from({length: currentMonthLength}, (value, index) => {
-                    return {
-                        currentMonth: true,
-                        value: index + 1,
-                        deg:0
-                    }
-                });
-                return daylist;
-            }
         },
         mounted(){
-
+            console.log(this.data);
         },
         methods: {
-            wheelYear(index){
-                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
-            },
-            wheelMonth(index){
-                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
-            },
-            wheelDay(index){
-                return {transform: 'rotate3d(1, 0, 0,' + this.yearDeg[index] + 'deg) translate3d(0px, 0px, 2.5rem)'};
-            },
             myTouch(e, type){
                 e.preventDefault();
                 let wheel, List,Box,checked;
@@ -252,7 +210,6 @@
                 let delta=now-Box.lastTime;
                 let V=this.calculateVelocity(Box.velocity,move,delta);
 
-                this.Time.delay=now-Box.lastTime;
 
                 if(now-Box.lastTime<30){
                     //this.wheel.inertia=true;
@@ -267,7 +224,7 @@
                 Box.lastMove=move;
                 this.setCss(move, List, wheel,V,false,checked);
                 /*inertia*/
-                this.Time.move=move;
+
             },
             myEnd(evt, type){
                 let wheel, List,Box,checked;
@@ -447,42 +404,8 @@
                 }
 
             },
-            intRenderList(type){
-                let renderList,List;
-                switch (type) {
-                    case 'year':
-                        renderList=this.renderYearList;
-                        List=this.yearList;
-                        break;
-                    case 'month':
-                        renderList=this.renderMonthList;
-                        List=this.monthList;
-                        break;
-                    case 'day':
-                        renderList=this.renderDayList;
-                        List=this.dayList;
-                        break;
-                    case 'hour':
-                        renderList=this.renderHourList;
-                        List=this.hourList;
-                        break;
-                    case 'min':
-                        renderList=this.renderMinuteList;
-                        List=this.minuteList;
-                        break;
-                }
-                /*for(let k=List.length-4,i=0;i<18;k++,i++){
-                    if(List[k]){
-                        List[k].deg=i*(-20);
-                        renderList.push(List[k]);
-                    }else {
-                        k=0;
-                        List[k].deg=i*(-20);
-                        renderList.push(List[k]);
-                    }
-                }*/
 
-            }
+
 
         }
     }
