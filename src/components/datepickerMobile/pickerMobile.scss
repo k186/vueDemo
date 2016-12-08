@@ -211,6 +211,9 @@ $panel-bg:#eeeeee;
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden
       }
+      .wheel-div-hide{
+        visibility: hidden;
+      }
     }
   }
 }

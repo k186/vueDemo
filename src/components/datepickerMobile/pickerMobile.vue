@@ -29,12 +29,12 @@
         </div>
         <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
           <div class="day-checked">
-            <div class="day-list" style="transform: translateY(0rem)">
+            <div class="day-list" style="transform: translateY(-2.72rem)">
               <div v-for="day in dayList">{{day.value}}</div>
             </div>
           </div>
-          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="day,index in dayList" v-bind:style="{transform: 'rotate3d(1, 0, 0,'+day.deg+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
+          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,80deg)">
+            <div class="wheel-div" v-for="day in renderDayList" v-bind:style="{transform: 'rotate3d(1, 0, 0,'+day.deg+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
           </div>
         </div>
         <!--   <div class="box-hour"></div>
@@ -53,12 +53,32 @@
                 weekList: [0, 1, 2, 3, 4, 5, 6],
                 yearList: Array.from({length: 12}, (value, index) => now.getFullYear() + index),
                 hourList: Array.from({length: 24}, (value, index) => 0 + index),
+                minuteList:[],
                 tmpYear: now.getFullYear(),
                 tmpMonth: now.getMonth(),
                 tmpDay: now.getDate(),
                 tmpHour: now.getHours(),
                 tmpMinute: now.getMinutes(),
-
+                checkedYear:{
+                    Deg:0,
+                    Y:0
+                },
+                checkedMonth:{
+                    Deg:0,
+                    Y:0,
+                },
+                checkedDay:{
+                    Deg:0,
+                    Y:0,
+                },
+                checkedHour:{
+                    Deg:0,
+                    Y:0,
+                },
+                checkedMinute:{
+                    Deg:0,
+                    Y:0,
+                },
                 touchYear: {
                     startY: 0,
                     lastY: 0,
@@ -93,7 +113,12 @@
                   delay:0,
                     move:0
                 },
-                tempYear: now.getFullYear()
+                /*renderList*/
+                renderYearList:[],
+                renderMonthList:[],
+                renderDayList:[],
+                renderHourList:[],
+                renderMinuteList:[],
             }
         },
         props: {
@@ -111,7 +136,7 @@
                     return {
                         currentMonth: true,
                         value: index + 1,
-                        deg:-index*20
+                        deg:0
                     }
                 });
                 return daylist;
@@ -132,30 +157,35 @@
             },
             myTouch(e, type){
                 e.preventDefault();
-                let wheel, List, Box;
+                let wheel, List,Box,checked;
                 switch (type) {
                     case 'year':
                         wheel = 'year-wheel';
                         List = 'year-list';
-                        Box = this.touchYear;
+                        Box=this.touchYear;
+                        checked=this.checkedYear;
                         break;
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
                         Box = this.touchMonth;
+                        checked=this.checkedMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
                         Box = this.touchDay;
+                        checked=this.checkedDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
                         List = 'hour-list';
+                        checked=this.checkedHour;
                         break;
                     case 'min':
                         wheel = 'minute-wheel';
                         List = 'minute-list';
+                        checked=this.checkedMinute;
                         break;
                 }
               /*touchStart*/
@@ -170,38 +200,42 @@
               Box.velocity=0;
               Box.lastTime=Box.startTime=startFinger.timeStamp||Date.now();
               Box.lastMove=0;
-              let vm=this;
               /*get speed*/
               //Box.velocity=vm.calculateVelocity(0,0,0);
               /*set css*/
-              this.setCss(0,List,wheel, Box.velocity);
+              this.setCss(0,List,wheel, Box.velocity,false);
             },
             myMove(evt, type){
                 evt.preventDefault();
-                let wheel, List, Box;
+                let wheel, List,Box,checked;
                 switch (type) {
                     case 'year':
                         wheel = 'year-wheel';
                         List = 'year-list';
-                        Box = this.touchYear;
+                        Box=this.touchYear;
+                        checked=this.checkedYear;
                         break;
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
                         Box = this.touchMonth;
+                        checked=this.checkedMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
                         Box = this.touchDay;
+                        checked=this.checkedDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
                         List = 'hour-list';
+                        checked=this.checkedHour;
                         break;
                     case 'min':
                         wheel = 'minute-wheel';
                         List = 'minute-list';
+                        checked=this.checkedMinute;
                         break;
                 }
                 /*touchMove*/
@@ -231,35 +265,40 @@
                 Box.lastY=Finger.pageY;
                 Box.lastTime=now;
                 Box.lastMove=move;
-                this.setCss(move, List, wheel,V);
+                this.setCss(move, List, wheel,V,false,checked);
                 /*inertia*/
                 this.Time.move=move;
             },
             myEnd(evt, type){
-                let wheel, List,Box;
+                let wheel, List,Box,checked;
                 switch (type) {
                     case 'year':
                         wheel = 'year-wheel';
                         List = 'year-list';
                         Box=this.touchYear;
+                        checked=this.checkedYear;
                         break;
                     case 'month':
                         wheel = 'month-wheel';
                         List = 'month-list';
                         Box = this.touchMonth;
+                        checked=this.checkedMonth;
                         break;
                     case 'day':
                         wheel = 'day-wheel';
                         List = 'day-list';
                         Box = this.touchDay;
+                        checked=this.checkedDay;
                         break;
                     case 'hour':
                         wheel = 'hour-wheel';
                         List = 'hour-list';
+                        checked=this.checkedHour;
                         break;
                     case 'min':
                         wheel = 'minute-wheel';
                         List = 'minute-list';
+                        checked=this.checkedMinute;
                         break;
                 }
                 evt.preventDefault();
@@ -273,7 +312,7 @@
                 Box.lastY=Box.startY;
                 Box.lastTime=now;
                 Box.lastMove=move;
-                this.setCss(move, List, wheel,V,true);
+                this.setCss(move, List, wheel,V,true,checked);
                 let vm=this;
                 //vm.wheel.inertia=false;
                 //todo inertial
@@ -328,10 +367,8 @@
                /*set css*/
                 //this.setCss(Box.totalMove, List, wheel,v);
                 console.log('end');
-
-
             },
-            setCss(move, List, wheel,v,isEnd){
+            setCss(move, List, wheel,v,isEnd,checked){
                 let singleHeight = this.px2rem(68);
                 let singDegree = 20 / singleHeight;
               /*set css*/
@@ -339,7 +376,12 @@
                 let currentWheelDeg = this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
               /*update css*/
                 let remHeight = this.px2rem(move) + parseFloat(currentListRem);
-                let remDeg = parseFloat(currentWheelDeg) - this.px2rem(move) * singDegree;
+                //let remDeg = parseFloat(currentWheelDeg) - this.px2rem(move) * singDegree;
+                let remDeg =  - remHeight* singDegree;
+                if(checked){
+                    checked.Deg=remDeg;
+                    checked.Y=remHeight;
+                }
                 //todo int rem
                 let Px=Math.round(this.rem2px(remHeight)/68)*68;
                 let rem=this.px2rem(Px);
@@ -347,7 +389,10 @@
                 if(isEnd){
                     remHeight=rem;
                     remDeg=aim;
+                    checked.Deg=aim;
+                    checked.Y=rem;
                     //todo end animation
+                    //if don't loop should set end and start point
                 }
                 this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + remHeight + 'rem)';
                 //this.$el.getElementsByClassName(List)[0].style.transition='';
@@ -374,9 +419,71 @@
                 velocity=!isNaN(velocity)?velocity:0;
                 return velocity;
             },
-            renderDom(){
+            /* is show wheel -80 <index*deg+x<80*/
+            isShowWheel(obj,type){
+                let checked;
+                switch (type) {
+                    case 'year':
+                        checked=this.checkedYear;
+                        break;
+                    case 'month':
+                        checked=this.checkedMonth;
+                        break;
+                    case 'day':
+                        checked=this.checkedDay;
+                        break;
+                    case 'hour':
+                        checked=this.checkedHour;
+                        break;
+                    case 'min':
+                        checked=this.checkedMinute;
+                        break;
+                }
+                let rangeDeg=Math.floor(obj.deg+checked.Deg);
+                if(rangeDeg>=-80&&rangeDeg<=80){
+                    return 'wheel-div';
+                }else {
+                    return 'wheel-div wheel-div-hide';
+                }
+
+            },
+            intRenderList(type){
+                let renderList,List;
+                switch (type) {
+                    case 'year':
+                        renderList=this.renderYearList;
+                        List=this.yearList;
+                        break;
+                    case 'month':
+                        renderList=this.renderMonthList;
+                        List=this.monthList;
+                        break;
+                    case 'day':
+                        renderList=this.renderDayList;
+                        List=this.dayList;
+                        break;
+                    case 'hour':
+                        renderList=this.renderHourList;
+                        List=this.hourList;
+                        break;
+                    case 'min':
+                        renderList=this.renderMinuteList;
+                        List=this.minuteList;
+                        break;
+                }
+                /*for(let k=List.length-4,i=0;i<18;k++,i++){
+                    if(List[k]){
+                        List[k].deg=i*(-20);
+                        renderList.push(List[k]);
+                    }else {
+                        k=0;
+                        List[k].deg=i*(-20);
+                        renderList.push(List[k]);
+                    }
+                }*/
 
             }
+
         }
     }
 </script>
