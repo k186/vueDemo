@@ -9,11 +9,10 @@
         <div v-on:touchstart="myTouch($event,'year')" v-on:touchmove="myMove($event,'year')" v-on:touchend="myEnd($event,'year')" class="box-year">
           <div class="year-checked">
             <div class="year-list" style="transform: translateY(0rem)">
-              <!--<div v-for="year in yearList">{{year}}</div>-->
             </div>
           </div>
           <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div"></div>
+
           </div>
         </div>
         <!--<div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
@@ -47,6 +46,9 @@
         name: 'pickerMobile',
         data(){
             return {
+                renderList:{
+                    year:[]
+                },
                 checkedYear:{
                     Deg:0,
                     Y:0
@@ -91,13 +93,18 @@
                     latsTime: 0,
                     lastMove:0,
                 },
-                data:[1,2,3,4,5,6,7,8,9],
+                List:{
+                    year:[1,2,3,4,5,6,7,8,9],
+                },
+
                 wheel: {
                     u: 2,
                     mass: 1000,
                     inertia:false,
                     frameRate:60,
-                }
+                },
+                /*checklist 个数*/
+                branch:40
 
             }
         },
@@ -110,7 +117,7 @@
         computed: {
         },
         mounted(){
-            console.log(this.data);
+            this.init('year')
         },
         methods: {
             myTouch(e, type){
@@ -404,9 +411,35 @@
                 }
 
             },
+            getData(idx,type){
+                return this.List[type][idx%this.List[type].length >= 0 ? idx%this.List[type].length: idx%this.List[type].length +  this.List[type].length];
+            },
+            createDom(type,start,end,is3d){
+                let template=''
+                for(let k=start;k<end;k++){
+                    let data={
+                        value:this.getData(k,type),
+                        index:k,
+                    };
+                   /* this.renderList[type].push(data);*/
+                   if(is3d){
+                       template+= '<div class="wheel-div"  style="transform: rotate3d(1, 0, 0, '+ -k*20%360+'deg) translate3d(0px, 0px, 2.5rem)">'+this.getData(k,type)+'</div>';
+                   }else {
+                       template+= '<div>'+this.getData(k,type)+'</div>';
+                   }
 
+                }
+                return template
 
+            },
+            init(type){
+                /*create yearWheel*/
+                this.$el.getElementsByClassName('year-wheel')[0].innerHTML=this.createDom(type,-40,40,true);
+                /*create yearCheck*/
+                this.$el.getElementsByClassName('year-list')[0].innerHTML=this.createDom(type,-40,40,false);
+                this.$el.getElementsByClassName('year-list')[0].style.transform='translateY(' + -68*40/75 + 'rem)';
 
+            }
         }
     }
 </script>
