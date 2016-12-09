@@ -146,8 +146,8 @@
         },
         mounted(){
             /*初始化checkList角度*/
-            this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + -9*68/75/2 + 'rem)';
-            this.$el.getElementsByClassName('day-list')[0].style.marginTop =  -9*68/75/2 + 'rem';
+            this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + -9*68/75 + 'rem)';
+            this.$el.getElementsByClassName('day-list')[0].style.marginTop =  0 + 'rem';
         },
         methods: {
             myTouch(e, type){
@@ -199,7 +199,7 @@
                 /*get speed*/
                 //Box.velocity=vm.calculateVelocity(0,0,0);
                 /*set css*/
-                this.setCss(0, List, wheel, Box.velocity, false);
+               // this.setCss(0, List, wheel, Box.velocity, false);
             },
             myMove(evt, type){
                 evt.preventDefault();
@@ -260,7 +260,11 @@
                 Box.lastY = Finger.pageY;
                 Box.lastTime = now;
                 Box.lastMove = move;
-                this.setCss(move, List, wheel, V, false);
+                let that=this;
+                that.setCss(move, List, wheel, V, false);
+                console.log(11111)
+
+
                 /*inertia*/
 
             },
@@ -368,28 +372,24 @@
                 let singDegree = 20 / singleHeight;
                 /*set css*/
                 let currentListRem = this.$el.getElementsByClassName(List)[0].getAttribute('data-translateY');
-                let lastRem = this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
-                let marginRem = this.$el.getElementsByClassName(List)[0].style.marginTop.replace(/[^0-9.-]/ig, "");
                 let currentWheelDeg = this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
                 /*update css*/
                 let remHeight = this.px2rem(move) + parseFloat(currentListRem);
-                //let remDeg = parseFloat(currentWheelDeg) - this.px2rem(move) * singDegree;
                 let remDeg = -remHeight * singDegree;
+                let offsetHeight=remHeight-9*singleHeight;
                 //todo int rem
                 let Px = Math.round(this.rem2px(remHeight) / 68) * 68;
                 let rem = this.px2rem(Px);
                 let aim = Math.round(remDeg / 20) * 20;
-
-
+                let checkRem=this.px2rem(Math.round(-remDeg / 20)*68-9*68);
                 /*change spin*/
                 if (Math.abs(aim - currentWheelDeg) >= 10) {
                     if (aim - currentWheelDeg > 0) {
                         this.spin.day.head += Math.round((aim - currentWheelDeg) / 20);
-                        this.spin.day.last += Math.round((aim - currentWheelDeg) / 20);
-                        console.log('1')
+                        this.spin.day.last = this.spin.day.head +18
                     } else {
                         this.spin.day.head += Math.round((aim - currentWheelDeg) / 20);
-                        this.spin.day.last += Math.round((aim - currentWheelDeg) / 20);
+                        this.spin.day.last = this.spin.day.head +18
                     }
                 }
                 /*------------*/
@@ -397,14 +397,12 @@
                 if (isEnd) {
                     remHeight = rem;
                     remDeg = aim;
+                    offsetHeight=checkRem
                 }
                 this.$el.getElementsByClassName(List)[0].setAttribute('data-translatey',remHeight);
-                this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + lastRem+ remHeight + 'rem)';
-                this.$el.getElementsByClassName(List)[0].style.marginTop = 'translateY(' + lastRem+ marginRem + 'rem)';
-                //this.$el.getElementsByClassName(List)[0].style.transition='';
-                //this.$el.getElementsByClassName(List)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+                this.$el.getElementsByClassName(List)[0].style.transform = 'translateY('  + offsetHeight + 'rem)';
+                this.$el.getElementsByClassName(List)[0].style.marginTop = -rem + 'rem';
                 this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
-                //this.$el.getElementsByClassName(wheel)[0].style.transition='';
                 return {remHeight: remHeight, remDeg: remDeg}
             },
             px2rem(d){
@@ -447,7 +445,8 @@
                 }
             },
             test(){
-                this.tmpMonth-=1;
+                this.spin.day.head +=27
+                this.spin.day.last +=27
             }
         }
     }
