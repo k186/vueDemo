@@ -28,9 +28,9 @@
                 </div>
                 <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
                     <div class="day-checked">
-                    </div>
-                    <div class="day-list" data-translateY="0" style="transform: rotate3d(1, 0, 0,0deg)">
-                        <div class="list-div" v-for="day in renderListDay" v-bind:data-index="day.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
+                        <div class="day-list" data-translateY="0" style="transform: translateY(0rem)">
+                            <div class="list-div" v-for="day in renderListDay" v-bind:data-index="day.index">{{day.value}}</div>
+                        </div>
                     </div>
                     <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
                         <div class="wheel-div" v-for="day in renderListDay" v-bind:data-index="day.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
@@ -146,6 +146,8 @@
         },
         mounted(){
             /*初始化checkList角度*/
+            this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + -9*68/75/2 + 'rem)';
+            this.$el.getElementsByClassName('day-list')[0].style.marginTop =  -9*68/75/2 + 'rem';
         },
         methods: {
             myTouch(e, type){
@@ -366,6 +368,8 @@
                 let singDegree = 20 / singleHeight;
                 /*set css*/
                 let currentListRem = this.$el.getElementsByClassName(List)[0].getAttribute('data-translateY');
+                let lastRem = this.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
+                let marginRem = this.$el.getElementsByClassName(List)[0].style.marginTop.replace(/[^0-9.-]/ig, "");
                 let currentWheelDeg = this.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
                 /*update css*/
                 let remHeight = this.px2rem(move) + parseFloat(currentListRem);
@@ -395,9 +399,10 @@
                     remDeg = aim;
                 }
                 this.$el.getElementsByClassName(List)[0].setAttribute('data-translatey',remHeight);
-                //this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + remHeight + 'rem)';
+                this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + lastRem+ remHeight + 'rem)';
+                this.$el.getElementsByClassName(List)[0].style.marginTop = 'translateY(' + lastRem+ marginRem + 'rem)';
                 //this.$el.getElementsByClassName(List)[0].style.transition='';
-                this.$el.getElementsByClassName(List)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+                //this.$el.getElementsByClassName(List)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
                 this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
                 //this.$el.getElementsByClassName(wheel)[0].style.transition='';
                 return {remHeight: remHeight, remDeg: remDeg}
@@ -445,7 +450,6 @@
                 this.tmpMonth-=1;
             }
         }
-
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

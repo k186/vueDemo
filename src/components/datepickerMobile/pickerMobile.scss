@@ -173,11 +173,11 @@ $panel-bg:#eeeeee;
     }
     .year-list,.month-list,.day-list,.minute-list{
       position: absolute;
+      top:-1px;
       z-index: 1;
       overflow: visible;
       height: px2rem(68px);
       font-weight: bold;
-      top:px2rem(180px);
       left: 0;
       right: 0;
       color: $checked-date;
@@ -187,12 +187,9 @@ $panel-bg:#eeeeee;
       .list-div{
         height: px2rem(68px);
         line-height: px2rem(68px);
-        position: absolute;
         top:0;
         width: 100%;
         text-align: center;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
         background: $picker-bg;
       }
     }
