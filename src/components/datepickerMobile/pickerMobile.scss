@@ -131,17 +131,22 @@ $panel-bg:#eeeeee;
     width: 100%;
     @include border1pxB;
     height: px2rem(90px);
-    .control-cancel,.control-ok{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .control-cancel,.control-ok,.control-date{
       line-height:px2rem(90px);
       color: $control-btn;
       width: px2rem(130px);
       padding:0 px2rem(20px);
-      text-align: left;
-      display: inline-block;
+      font-size: px2rem(30px);
+      text-align: center;
     }
-    .control-ok{
-      text-align: right;
-      float: right;
+    .control-date{
+      padding:0;
+      width:px2rem(410px);
+      text-align: center;
+      font-size: px2rem(34px);
     }
   }
   .picker-panel{
@@ -171,19 +176,19 @@ $panel-bg:#eeeeee;
       position: relative;
       height: px2rem(400px);
     }
-    .year-list,.month-list,.day-list,.minute-list{
+    .year-list,.month-list,.day-list,.minute-list,.hour-list{
       position: absolute;
       top:-1px;
       z-index: 1;
       overflow: visible;
-      font-weight: bold;
       left: 0;
       right: 0;
       color: $checked-date;
-      font-size: px2rem(48px);
+      font-size: px2rem(38px);
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
       .list-div{
+        text-shadow: 0 1px 1px rgba(102, 102, 102, 0.6);
         height: px2rem(68px);
         line-height: px2rem(68px);
         top:0;
@@ -211,7 +216,7 @@ $panel-bg:#eeeeee;
       position: absolute;
       overflow: visible;
       height: px2rem(68px);
-      font-size: px2rem(40px);
+      font-size: px2rem(36px);
       top:px2rem(180px);
       left: 0;
       right: 0;
@@ -229,8 +234,5 @@ $panel-bg:#eeeeee;
                 backface-visibility: hidden
       }
     }
-  }
-  .div-hide{
-    display: none;
   }
 }
