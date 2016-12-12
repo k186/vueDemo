@@ -11,11 +11,12 @@
       <div class="panel-box">
         <div v-on:touchstart="myTouch($event,'year')" v-on:touchmove="myMove($event,'year')" v-on:touchend="myEnd($event,'year')" class="box-year">
           <div class="year-checked">
-            <div class="year-list" data-translateY="0" style="transform: translateY(0rem)">
+            <div class="year-list" data-translateY="0" style="transform: translateY(0rem);transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);">
+
               <div class="list-div" v-for="year in renderListYear" v-bind:data-index="year.index">{{year.value}}</div>
             </div>
           </div>
-          <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg)">
+          <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg);transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);">
             <div class="wheel-div" v-for="year in renderListYear" v-bind:data-index="year.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-year.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{year.value}}</div>
           </div>
         </div>
@@ -406,10 +407,16 @@
                     remDeg = aim;
                     offsetHeight = checkRem;
                   /*set css*/
+                    /*this.$el.getElementsByClassName(List)[0].style.transition='-webkit-transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);';
+                    this.$el.getElementsByClassName(wheel)[0].style.transition='-webkit-transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);';*/
+
                     this.$el.getElementsByClassName(List)[0].setAttribute('data-translatey', remHeight);
                     this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + offsetHeight + 'rem)';
                     this.$el.getElementsByClassName(List)[0].style.marginTop = -rem + 'rem';
                     this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
+
+
+                    /*cubic-bezier(0.190, 1.000, 0.220, 1.000)*/
                   /*get check data*/
                     this.setCheckData(type, aim)
                 } else {
