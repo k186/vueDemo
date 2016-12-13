@@ -1,59 +1,75 @@
 <template>
-  <div class="mobile-picker">
-    <div class="picker-control">
-      <div class="control-cancel">取消</div>
-      <div class="control-date">
-        {{tmpYear}}-{{tmpMonth+1}}-{{tmpDay}}
-      </div>
-      <div class="control-ok">确定</div>
-    </div>
-    <div class="picker-panel">
-      <div class="panel-box">
-        <div v-on:touchstart="myTouch($event,'year')" v-on:touchmove="myMove($event,'year')" v-on:touchend="myEnd($event,'year')" class="box-year">
-          <div class="year-checked">
-            <div class="year-list" data-translateY="0" style="transform: translateY(0rem);transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);">
+    <div class="mobile-picker" v-show="visible">
+        <div class="picker-control">
+            <div class="control-cancel">取消</div>
+            <div class="control-date">
+                <span>{{tmpYear}}</span>
+                <span>-</span>
+                <span>{{tmpMonth+1}}</span>
+                <span>-</span>
+                <span>{{tmpDay}}</span>
+                <span>&nbsp;</span>
+                <span>{{tmpHour}}</span>
+                <span>:</span>
+                <span>{{tmpMinute}}</span>
+            </div>
+            <div class="control-ok">确定</div>
+        </div>
+        <div class="picker-panel">
+            <div class="panel-box">
+                <div v-on:touchstart="myTouch($event,'year')" v-on:touchmove="myMove($event,'year')" v-on:touchend="myEnd($event,'year')" class="box-year">
+                    <div class="year-checked">
+                        <div class="year-list" data-translateY="0" style="transform: translateY(0rem);">
 
-              <div class="list-div" v-for="year in renderListYear" v-bind:data-index="year.index">{{year.value}}</div>
+                            <div class="list-div" v-for="year in renderListYear" v-bind:data-index="year.index">{{year.value}}</div>
+                        </div>
+                    </div>
+                    <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg);">
+                        <div class="wheel-div" v-for="year in renderListYear" v-bind:data-index="year.index"
+                             v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-year.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{year.value}}
+                        </div>
+                    </div>
+                </div>
+                <div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
+                    <div class="month-checked">
+                        <div class="month-list" data-translateY="0" style="transform: translateY(0rem)">
+                            <div class="list-div" v-for="month in renderListMonth" v-bind:data-index="month.index">{{month.value}}</div>
+                        </div>
+                    </div>
+                    <div class="month-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                        <div class="wheel-div" v-for="month in renderListMonth" v-bind:data-index="month.index"
+                             v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-month.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{month.value}}
+                        </div>
+                    </div>
+                </div>
+                <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
+                    <div class="day-checked">
+                        <div class="day-list" data-translateY="0" style="transform: translateY(0rem)">
+                            <div class="list-div" v-for="day in renderListDay" v-bind:data-index="day.index">{{day.value}}</div>
+                        </div>
+                    </div>
+                    <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                        <div class="wheel-div" v-for="day in renderListDay" v-bind:data-index="day.index"
+                             v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}
+                        </div>
+                    </div>
+                </div>
+                <div style="display: none" class="box-hour">
+                    <div class="hour-checked">
+                        <div class="hour-list" data-translateY="0" style="transform: translateY(0rem)">
+                            <div class="list-div" v-for="hour in renderListHour" v-bind:data-index="hour.index">{{hour.value}}</div>
+                        </div>
+                    </div>
+                    <div class="hour-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                        <div class="wheel-div" v-for="hour in renderListHour" v-bind:data-index="hour.index"
+                             v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-hour.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{hour.value}}
+                        </div>
+                    </div>
+                </div>
+                <div style="display: none" class="box-minute"></div>
             </div>
-          </div>
-          <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg);transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);">
-            <div class="wheel-div" v-for="year in renderListYear" v-bind:data-index="year.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-year.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{year.value}}</div>
-          </div>
         </div>
-        <div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
-          <div class="month-checked">
-            <div class="month-list" data-translateY="0" style="transform: translateY(0rem)">
-              <div class="list-div" v-for="month in renderListMonth" v-bind:data-index="month.index">{{month.value}}</div>
-            </div>
-          </div>
-          <div class="month-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="month in renderListMonth" v-bind:data-index="month.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-month.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{month.value}}</div>
-          </div>
-        </div>
-        <div class="box-day" v-on:touchstart="myTouch($event,'day')" v-on:touchmove="myMove($event,'day')" v-on:touchend="myEnd($event,'day')">
-          <div class="day-checked">
-            <div class="day-list" data-translateY="0" style="transform: translateY(0rem)">
-              <div class="list-div" v-for="day in renderListDay" v-bind:data-index="day.index">{{day.value}}</div>
-            </div>
-          </div>
-          <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="day in renderListDay" v-bind:data-index="day.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{day.value}}</div>
-          </div>
-        </div>
-        <div style="display: none" class="box-hour">
-          <div class="hour-checked">
-            <div class="hour-list" data-translateY="0" style="transform: translateY(0rem)">
-              <div class="list-div" v-for="hour in renderListHour" v-bind:data-index="hour.index">{{hour.value}}</div>
-            </div>
-          </div>
-          <div class="hour-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-            <div class="wheel-div" v-for="hour in renderListHour" v-bind:data-index="hour.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-hour.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{hour.value}}</div>
-          </div>
-        </div>
-        <div style="display: none" class="box-minute"></div>
-      </div>
     </div>
-  </div>
 </template>
 <script>
     export default{
@@ -69,11 +85,11 @@
                 tmpDay: now.getDate(),
                 tmpHour: now.getHours(),
                 tmpMinute: now.getMinutes(),
-                Range:{
-                  year:{
-                      max:2050,
-                      min:1992
-                  }
+                Range: {
+                    year: {
+                        max: 2050,
+                        min: 1992
+                    }
                 },
                 spin: {
                     year: {
@@ -103,7 +119,6 @@
                     startTime: 0,
                     latsTime: 0,
                     lastMove: 0,
-                    diff: 0
                 },
                 touchMonth: {
                     lastY: 0,
@@ -111,7 +126,6 @@
                     startTime: 0,
                     latsTime: 0,
                     lastMove: 0,
-                    diff: 0
                 },
                 touchDay: {
                     lastY: 0,
@@ -119,7 +133,6 @@
                     startTime: 0,
                     latsTime: 0,
                     lastMove: 0,
-                    diff: 0
                 },
                 touchHour: {
                     lastY: 0,
@@ -127,43 +140,52 @@
                     startTime: 0,
                     latsTime: 0,
                     lastMove: 0,
-                    diff: 0
                 },
                 touchMinute: {
                     lastY: 0,
                     velocity: 0,
                     latsTime: 0,
                     lastMove: 0,
-                    diff: 0
                 },
-                wheel: {
-                    u: 2,
-                    mass: 1000,
-                    inertia: false,
-                    frameRate: 60,
+                /*左右分支 个数*/
+                branch: 9,
+                Format: {
+                    year: 'yyyy',
+                    month: 'M',
+                    day: 'd',
+                    isHour: false,
+                    hour: 'HH',
+                    minute: 'mm',
+                    separator: '-'
                 },
-              /*左右分支 个数*/
-                branch: 9
             }
         },
         props: {
-            value: {
+            valueStr: {
                 type: String,
                 default: ''
+            },
+            visible: {
+                type: Boolean,
+                default: false,
+                required: true
+            },
+            options: {
+                type: Object,
             }
         },
         computed: {
             yearList(){
-              // [current,.......,max,min,.....current-1]
-                let current=2016;
-                let List=[];
-                for(let k=0;k<this.Range.year.max-this.Range.year.min+1;k++){
-                    List.push(this.Range.year.min+k)
+                // [current,.......,max,min,.....current-1]
+                let current = 2016;
+                let List = [];
+                for (let k = 0; k < this.Range.year.max - this.Range.year.min + 1; k++) {
+                    List.push(this.Range.year.min + k)
                 }
                 return List
             },
             renderListYear(){
-                let list=[];
+                let list = [];
                 for (let k = this.spin.year.head; k <= this.spin.year.last; k++) {
                     let obj = {
                         value: this.getData(k, 'year'),
@@ -174,9 +196,9 @@
                 return list
             },
             dayList () {
-              /* get currentMonthLenght */
+                /* get currentMonthLenght */
                 let currentMonthLength = new Date(this.tmpYear, this.tmpMonth + 1, 0).getDate();
-              /* get currentMonth day */
+                /* get currentMonth day */
                 let daylist = Array.from({length: currentMonthLength}, (value, index) => {
                     return index + 1
                 });
@@ -214,31 +236,62 @@
                     list.push(obj)
                 }
                 return list
-            }
-          /*
-           *  renderList:{
-           /* year:[],
-           month:[],
-           day:[],
-           hour:[],
-           minute:[]*/
+            },
+            /*-------------*/
+            startDate(){
+                //todo use es6
+                return this.validDateFormat(this.options.startDate).statues ? this.options.startDate : '1970-01-01';
+            },
+            endDate(){
+                return this.validDateFormat(this.options.endDate).statues ? this.options.endDate : '5000-01-01';
+            },
+            language(){
+                return this.options.language ? this.options.language : 'cn';
+            },
+            orYear (){
+                let obj = this.validDateFormat(this.valueStr);
+                if (this.valueStr != '' && obj.statues) {
+                    return this.tmpYear = Number(this.valueStr.split(obj.separator)[0])
+                } else {
+                    return new Date().getFullYear();
+                }
+            },
+            orMonth (){
+                let obj = this.validDateFormat(this.valueStr);
+                if (this.valueStr != '' && obj.statues) {
+                    return this.tmpMonth = Number(this.valueStr.split(obj.separator)[1] - 1)
+                } else {
+                    return new Date().getMonth();
+                }
+            },
+            orDay (){
+                let obj = this.validDateFormat(this.valueStr);
+                if (this.valueStr != '' && obj.statues) {
+                    return this.tmpDay = this.valueStr.split(/\s/)[0] ? this.valueStr.split(/\s/)[0].split(obj.separator)[2] ? this.valueStr.split(/\s/)[0].split(obj.separator)[2] : this.valueStr.split(/\s/)[0].split(obj.separator)[2] : this.valueStr.split(obj.separator)[2];
+                } else {
+                    return new Date().getDate();
+                }
+            },
+            orHour(){
+                if (this.Format.isHour) {
+                    if (this.valueStr != '') {
+                        return this.tmpHour = Number(this.valueStr.split(/\s/)[1] ? this.valueStr.split(/\s/)[1].split(':')[0] : 23)
+                    } else {
+                        return new Date().getHours();
+                    }
+                }
+            },
+            orMinute(){
+                if (this.Format.isHour) {
+                    if (this.valueStr != '') {
+                        return this.tmpHour = Number(this.valueStr.split(/\s/)[1] ? this.valueStr.split(/\s/)[1].split(':')[1] : 59)
+                    } else {
+                        return new Date().getHours();
+                    }
+                }
+            },
         },
         mounted(){
-          /*初始化checkList角度*/
-            this.$el.getElementsByClassName('year-list')[0].style.transform = 'translateY(' + -this.branch * 68 / 75 + 'rem)';
-            this.$el.getElementsByClassName('year-list')[0].style.marginTop = 0 + 'rem';
-
-            this.$el.getElementsByClassName('month-list')[0].style.transform = 'translateY(' + -this.branch * 68 / 75 + 'rem)';
-            this.$el.getElementsByClassName('month-list')[0].style.marginTop = 0 + 'rem';
-
-            this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + -this.branch * 68 / 75 + 'rem)';
-            this.$el.getElementsByClassName('day-list')[0].style.marginTop = 0 + 'rem';
-
-            this.$el.getElementsByClassName('hour-list')[0].style.transform = 'translateY(' + -this.branch * 68 / 75 + 'rem)';
-            this.$el.getElementsByClassName('hour-list')[0].style.marginTop = 0 + 'rem';
-
-           /* this.spin.day.head+=this.tmpDay-1
-            this.spin.day.last+=this.tmpDay-1*/
         },
         methods: {
             myTouch(e, type){
@@ -248,22 +301,21 @@
                 wheel = roller.wheel;
                 List = roller.List;
                 Box = roller.Box;
-              /*touchStart*/
-              /*
-               * startY
-               * lastY
-               * velocity
-               * latsTime
-               * */
+                /*touchStart*/
+                /*
+                 * startY
+                 * lastY
+                 * velocity
+                 * latsTime
+                 * */
                 let startFinger = e.changedTouches[0];
                 Box.lastY = startFinger.pageY;
                 Box.velocity = 0;
-                Box.lastTime = startFinger.timeStamp || Date.now();
+                Box.lastTime = Box.startTime = startFinger.timeStamp || Date.now();
                 Box.lastMove = 0;
-                Box.diff = startFinger.pageY;
-              /*get speed*/
-                //Box.velocity=vm.calculateVelocity(0,0,0);
-              /*set css*/
+                /*get speed*/
+                Box.startPoint = startFinger.pageY;
+                /*set css*/
                 this.setCss(0, type, Box.velocity, false);
             },
             myMove(evt, type){
@@ -273,112 +325,51 @@
                 wheel = roller.wheel;
                 List = roller.List;
                 Box = roller.Box;
-              /*touchMove*/
-              /*
-               * startY
-               * lastY
-               * velocity
-               * latsTime
-               * */
+                /*touchMove*/
+                /*
+                 * startY
+                 * lastY
+                 * velocity
+                 * latsTime
+                 * */
 
                 let Finger = evt.changedTouches[0];
                 let move = Finger.pageY - Box.lastY;
                 let now = Finger.timeStamp || Date.now();
-
-                let delta = now - Box.lastTime;
-                let V = this.calculateVelocity(Box.velocity, move, delta);
-                if (now - Box.lastTime < 30) {
-                    //this.wheel.inertia=true;
-                    //todo inertia
-                    this.wheel.inertia = false;
-                } else {
-                    this.wheel.inertia = false;
-                }
-                Box.velocity = V;
+                this.setCss(move, type, false);
                 Box.lastY = Finger.pageY;
                 Box.lastTime = now;
                 Box.lastMove = move;
-                let that = this;
-                that.setCss(move, type, V, false);
-
-
-              /*inertia*/
-
             },
             myEnd(evt, type){
-                let wheel, List, Box, checked;
+                let wheel, List, Box;
                 let roller = this.getType(type);
                 wheel = roller.wheel;
                 List = roller.List;
                 Box = roller.Box;
                 evt.preventDefault();
                 let Finger = evt.changedTouches[0];
-                Box.startY = Finger.pageY;
                 let move = Finger.pageY - Box.lastY;
                 let now = Finger.timeStamp || Date.now();
-                let delta = now - Box.lastTime;
-                let V = this.calculateVelocity(Box.velocity, move, delta);
-                Box.velocity = V;
-                Box.lastY = Box.startY;
+                this.setCss(move, type, true);
+                Box.lastY = Finger.pageY;
                 Box.lastTime = now;
                 Box.lastMove = move;
-                this.setCss(move, type, V, true, checked);
-                let vm = this;
-                //vm.wheel.inertia=false;
+                let delta = now - Box.startTime;
+                /* is flicker*/
                 //todo inertial
-              /* (function (v,startTime) {
-               let dir=v>0? -1:1;//速度方向
-               let acc=dir*vm.wheel.u/vm.wheel.mass;//摩擦系数~=加速度
-               let duration=Math.abs(v/acc);/!*时间*!/
-               let distance=((v+v*acc)/2 )*duration;/!*距离*!/
-               let singleHeight = vm.px2rem(70);
-               let singDegree = 20 / singleHeight;
-               function inertialMove () {
-               if(vm.wheel.inertia){
-               let now=Date.now();
-               let t=now-startTime;
-               let nowV=(v+t*(acc))/2;
-               let nowMove=v*t+acc*t*t/2;
-               console.log('v'+nowV);
-               console.log('move'+nowMove);
-               /!*set css*!/
-               let currentListRem = vm.$el.getElementsByClassName(List)[0].style.transform.replace(/[^0-9.-]/ig, "");
-               let currentWheelDeg = vm.$el.getElementsByClassName(wheel)[0].style.transform.split(',')[3].replace(/[^0-9.-]/ig, "");
-               /!*update css*!/
-               let remHeight = vm.px2rem(nowMove) + parseFloat(currentListRem);
-               let remDeg = parseFloat(currentWheelDeg) - vm.px2rem(nowMove) * singDegree;
-
-               //console.log('v'+dir*nowV);
-               // console.log('move'+nowMove);
-               if(dir*nowV>0){
-               return
-               }
-
-               //vm.$el.getElementsByClassName(List)[0].style.transition='all '+t*1000+'ms cubic-bezier(0,.81,.31,.81)';
-               vm.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + remHeight + 'rem)';
-
-               //vm.$el.getElementsByClassName(wheel)[0].style.transition='all '+t*1000+'ms cubic-bezier(0,.81,.31,.81)';
-               vm.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
-
-               if(window.requestAnimationFrame){
-               requestAnimationFrame(inertialMove)
-               }else {
-               setTimeout(inertialMove,1000/vm.wheel.frameRate)
-               }
-               }else {
-               return
-               }
-
-               }
-               inertialMove();
-
-               })(V,now);*/
-
-              /*set css*/
-                //this.setCss(Box.totalMove, List, wheel,v);
-                console.log('end');
+                let distance = Finger.pageY - Box.startPoint;
+                let v = distance / delta;
+                let time = 1000;
+                let a = 2;//加速度
+                /*小于300ms*/
+                if (delta < 300) {
+                    distance = v * delta * a;
+                    time += delta * a;
+                    this.setCss(distance, type, true, time);
+                }
             },
-            setCss(move, type, v, isEnd){
+            setCss(move, type, isEnd, time){
                 let wheel, List, Box;
                 let roller = this.getType(type);
                 wheel = roller.wheel;
@@ -387,44 +378,47 @@
 
                 let singleHeight = this.px2rem(68);
                 let singDegree = 20 / singleHeight;
-              /*set css*/
+                /*set css*/
                 let currentListRem = this.$el.getElementsByClassName(List)[0].getAttribute('data-translateY');
-              /*update css*/
+                /*update css*/
                 let remHeight = this.px2rem(move) + parseFloat(currentListRem);
                 let remDeg = -remHeight * singDegree;
                 let offsetHeight = remHeight - this.branch * singleHeight;
-              /*int data*/
+                /*int data*/
                 let Px = Math.round(this.rem2px(remHeight) / 68) * 68;
                 let rem = this.px2rem(Px);
                 let aim = Math.round(remDeg / 20) * 20;
                 let checkRem = this.px2rem(Math.round(-remDeg / 20) * 68 - this.branch * 68);
-              /*change spin*/
+                /*change spin*/
                 this.setSpin(type, aim);
-              /*------------*/
+                /*------------*/
                 if (isEnd) {
-                  /*data get int */
+                    /*data get int */
                     remHeight = rem;
                     remDeg = aim;
                     offsetHeight = checkRem;
-                  /*set css*/
-                    /*this.$el.getElementsByClassName(List)[0].style.transition='-webkit-transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);';
-                    this.$el.getElementsByClassName(wheel)[0].style.transition='-webkit-transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);';*/
-
+                    /*set css*/
+                    if (time) {
+                        this.$el.getElementsByClassName(List)[0].style.transition = 'transform ' + time + 'ms cubic-bezier(0.19, 1, 0.22, 1)';
+                        this.$el.getElementsByClassName(wheel)[0].style.transition = 'transform ' + time + 'ms cubic-bezier(0.19, 1, 0.22, 1)';
+                    } else {
+                        this.$el.getElementsByClassName(List)[0].style.transition = 'transform 1000ms cubic-bezier(0.19, 1, 0.22, 1)';
+                        this.$el.getElementsByClassName(wheel)[0].style.transition = 'transform 1000ms cubic-bezier(0.19, 1, 0.22, 1)';
+                    }
                     this.$el.getElementsByClassName(List)[0].setAttribute('data-translatey', remHeight);
                     this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + offsetHeight + 'rem)';
                     this.$el.getElementsByClassName(List)[0].style.marginTop = -rem + 'rem';
                     this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
-
-
-                    /*cubic-bezier(0.190, 1.000, 0.220, 1.000)*/
-                  /*get check data*/
-                    this.setCheckData(type, aim)
                 } else {
+                    this.$el.getElementsByClassName(List)[0].style.transition = '';
+                    this.$el.getElementsByClassName(wheel)[0].style.transition = '';
                     this.$el.getElementsByClassName(List)[0].setAttribute('data-translateY', remHeight);
                     this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + offsetHeight + 'rem)';
                     this.$el.getElementsByClassName(List)[0].style.marginTop = -rem + 'rem';
                     this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';
                 }
+                /*get check data*/
+                this.setCheckData(type, aim)
             },
             getType(type){
                 let wheel, List, Box, spin;
@@ -485,13 +479,13 @@
                 }
             },
             setCheckData(type, deg){
-                let index=deg/20;
+                let index = deg / 20;
                 if (type == 'year') {
-                    this.tmpYear=this.getData(index,type)
+                    this.tmpYear = this.getData(index, type)
                 } else if (type == 'month') {
-                    this.tmpMonth=this.getData(index,type)-1
+                    this.tmpMonth = this.getData(index, type) - 1
                 } else if (type == 'day') {
-                    this.tmpDay=this.getData(index,type);
+                    this.tmpDay = this.getData(index, type);
                 } else if (type == 'hour') {
 
                 } else if (type == 'minute') {
@@ -512,11 +506,6 @@
                 }
                 return val;
             },
-            calculateVelocity(startV, move, deltaTime){
-                let velocity = startV + ((move / deltaTime) / this.wheel.touchRatio);
-                velocity = !isNaN(velocity) ? velocity : 0;
-                return velocity;
-            },
             getData(idx, type){
                 if (type == 'year') {
                     return this.yearList[idx % this.yearList.length >= 0 ? idx % this.yearList.length : idx % this.yearList.length + this.yearList.length];
@@ -530,10 +519,120 @@
                     //return this.dayList[idx % this.dayList.length >= 0 ? idx % this.dayList.length : idx % this.dayList.length + this.dayList.length];
                 }
             },
+
+            setWheelCurrent(){
+                /* this.$el.getElementsByClassName(List)[0].setAttribute('data-translateY', remHeight);
+                 this.$el.getElementsByClassName(List)[0].style.transform = 'translateY(' + offsetHeight + 'rem)';
+                 this.$el.getElementsByClassName(List)[0].style.marginTop = -rem + 'rem';
+                 this.$el.getElementsByClassName(wheel)[0].style.transform = 'rotate3d(1, 0, 0, ' + remDeg + 'deg)';*/
+            },
+
+            setFormat(format){
+                /*
+                 * d      without 0
+                 * dd     with 01
+                 * M      without 0
+                 * MM     with 03
+                 * yy     2016 16
+                 * yyyy   2016
+                 * h      12am 12pm 1 2
+                 * hh     12am 12pm 01 02
+                 * H      24h 1 2 3
+                 * HH     24 01 02
+                 * m      minute 1
+                 * mm     minute 01
+                 * */
+                /*let  format=this.options.format;*/
+                let reg1 = /^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}\s[h,hh,H,HH]{1,2}\:[m,mm]{1,2}$|^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}$/;
+                let reg2 = /^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}\s[h,hh,H,HH]{1,2}\:[m,mm]{1,2}$/;
+                let reg3 = /^[yyyy]{4}-?\/?[M,MM]{1,2}-?\/?[d,dd]{1,2}$/;
+                //todo different format set different this.Format when you finished pick ,you should set out put date format base on this.Format value
+                if (reg1.test(format)) {
+                    /*get separator - or / */
+                    if (format.split('\-').length === 3) {
+                        this.Format.separator = '-'
+                    } else if (format.split('\/').length === 3) {
+                        this.Format.separator = '/'
+                    } else {
+                        throw new TypeError('format must be like yyyy-M-dd, do not set like yyyy/M-dd');
+                    }
+                    if (reg2.test(format)) {
+                        let dateArr = format.split(/\s/);
+                        let yearArr = dateArr[0].split(this.Format.separator), hourArr = dateArr[1].split(/\:/);
+                        this.Format.isHour = true;
+                        this.Format.year = yearArr[0];
+                        this.Format.month = yearArr[1];
+                        this.Format.day = yearArr[2];
+                        this.Format.hour = hourArr[0];
+                        this.Format.minute = hourArr[1];
+                    } else if (reg3.test(format)) {
+                        let dateArr = format.split(/\s/);
+                        let yearArr = dateArr[0].split(this.Format.separator);
+                        this.Format.isHour = false;
+                        this.Format.year = yearArr[0];
+                        this.Format.month = yearArr[1];
+                        this.Format.day = yearArr[2];
+                    }
+                } else {
+                    throw TypeError('format is wrong,try yyy-M-dd or find api advices')
+                }
+
+            },
+            validDateFormat(DateStr){
+                let reg4 = /^\d{4}-?\/?\d{1,2}-?\/?\d{1,2}\s\d{1,2}\:\d{1,2}$|^\d{4}-?\/?\d{1,2}-?\/?\d{1,2}$/;
+                let obj = {
+                    separator: '-',
+                    statues: false
+                };
+                if (reg4.test(DateStr)) {
+
+                    if (DateStr.split('\-').length === 3) {
+                        obj.separator = '-'
+                    } else if (DateStr.split('\/').length === 3) {
+                        obj.separator = '/'
+                    }
+                    obj.statues = true;
+                    return obj
+                } else {
+                    return obj
+                }
+            },
+        },
+        watch:{
+            visible:function (val,old) {
+                if(val){
+                    this.$el.getElementsByClassName('year-list')[0].style.transform = 'translateY('+ ((-(this.tmpYear-1992)-this.branch) * 68 / 75 )+ 'rem)';
+                    this.$el.getElementsByClassName('year-list')[0].style.marginTop = (this.tmpYear-1992) * 68/75 + 'rem';
+                    this.$el.getElementsByClassName('year-list')[0].setAttribute('data-translatey', -(this.tmpYear-1992) * 68 / 75);
+                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.tmpYear-1992) * 20 + 'deg)';
+
+                    this.$el.getElementsByClassName('month-list')[0].style.transform = 'translateY(' + (- this.tmpMonth * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                    this.$el.getElementsByClassName('month-list')[0].style.marginTop = this.tmpMonth * 68/75 + 'rem';
+                    this.$el.getElementsByClassName('month-list')[0].setAttribute('data-translatey', -this.tmpMonth * 68 / 75);
+                    this.$el.getElementsByClassName('month-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + this.tmpMonth * 20 + 'deg)';
+
+
+                    this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + (- this.tmpDay * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                    this.$el.getElementsByClassName('day-list')[0].style.marginTop = this.tmpDay * 68/75 + 'rem';
+                    this.$el.getElementsByClassName('day-list')[0].setAttribute('data-translatey', -this.tmpDay * 68 / 75);
+                    this.$el.getElementsByClassName('day-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + this.tmpDay * 20 + 'deg)';
+
+                    this.$el.getElementsByClassName('hour-list')[0].style.transform = 'translateY(' + -this.branch * 68 / 75 + 'rem)';
+                    this.$el.getElementsByClassName('hour-list')[0].style.marginTop = 0 + 'rem';
+
+                    this.spin.year.head = this.tmpYear-1992 - 9;
+                    this.spin.year.last = this.tmpYear-1992 + 9;
+                    this.spin.month.head = this.tmpMonth - 9;
+                    this.spin.month.last = this.tmpMonth + 9;
+                    this.spin.day.head = this.tmpDay - 9;
+                    this.spin.day.last = this.tmpDay + 9;
+                }
+
+            }
         }
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  @import "pickerMobile.css";
+<style scoped>
+    @import "pickerMobile.css";
 </style>

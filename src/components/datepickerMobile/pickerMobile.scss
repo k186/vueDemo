@@ -144,9 +144,12 @@ $panel-bg:#eeeeee;
     }
     .control-date{
       padding:0;
-      width:px2rem(410px);
+      width:px2rem(480px);
       text-align: center;
       font-size: px2rem(34px);
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
     }
   }
   .picker-panel{
