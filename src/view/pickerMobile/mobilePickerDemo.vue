@@ -3,7 +3,7 @@
         <div class="row">
            <div class="input" v-on:click="showDatePicker(1)">{{date}}</div>
         </div>
-        <mobile-picker :valueStr="picker.value" :visible="picker.visible" :options="picker.options"></mobile-picker>
+        <mobile-picker :valueStr="picker.value" :visible="picker.visible" :options="picker.options" v-on:checked="hideDatePicker"></mobile-picker>
         <slot></slot>
     </div>
 </template>
@@ -18,11 +18,11 @@
                     value: '',
                     visible: false,
                     options: {
-                        format: 'yyyy/M/dd HH:mm',
-                        startDate: '2015-01-01',
-                        endDate: '2018-01-01',
+                        format: 'yyyy/MM/dd HH:mm',
+                        startDate: '1992-01-01',
+                        endDate: '2500-01-01',
                         language: 'cn',
-                        timeRange: 35
+                        timeRange: 10
                     }
                 }
             }
@@ -33,6 +33,12 @@
                     this.picker.visible=true;
                     this.picker.value=this.date;
                 }
+            },
+            hideDatePicker(date){
+                if (typeof date == 'string') {
+                    this.date=date
+                }
+                this.picker.visible=false;
             }
         },
         components:{
