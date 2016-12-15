@@ -34,6 +34,7 @@
                     format: 'yyyy-M-dd',
                     startDate: '2016-01-01',
                     endDate: '2020-12-01',
+                    language: 'en',
                     timeRange: 20,
                 },
                 picker: {
