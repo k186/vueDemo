@@ -1,79 +1,116 @@
 <template>
-    <transition name="picker-Toggle">
-        <div class="mobile-picker" v-show="visible">
-            <div class="picker-control">
-                <div class="control-cancel" v-if="panelType=='1'||panelType=='2'" v-on:click="cancel">取消</div>
-                <div class="control-cancel" v-if="panelType=='3'" v-on:click="changeType('2')">上一步</div>
-                <div class="control-date">
-                    <span>{{tmpYear}}</span>
-                    <span>-</span>
-                    <span>{{Format.month=='MM'&&(tmpMonth+1)<10?0:''}}{{tmpMonth+1}}</span>
-                    <span>-</span>
-                    <span>{{tmpDay}}</span>
-                    <span>&nbsp;</span>
-                    <span>{{tmpHour}}</span>
-                    <span>:</span>
-                    <span>{{tmpMinute}}</span>
+    <transition name="toggle-mask">
+        <div class="mobile-mask" v-show="visible">
+            <transition name="picker-Toggle">
+                <div class="mobile-picker" v-show="visible">
+                    <div class="picker-control" v-if="!Format.isHour">
+                        <div class="control-cancel" v-on:click="cancel">{{'Cancel'|btnF(language)}}</div>
+                        <div class="control-date">
+                            <span>{{tmpYear}}</span>
+                            <span>-</span>
+                            <span>{{Format.month=='MM'&&(tmpMonth+1)<10?0:''}}{{tmpMonth+1}}</span>
+                            <span>-</span>
+                            <span>{{Format.day=='dd'&&tmpDay<10?0:''}}{{tmpDay}}</span>
+                            <span>&nbsp;</span>
+                            <span>{{tmpHour}}</span>
+                            <span>:</span>
+                            <span>{{tmpMinute}}</span>
+                        </div>
+                        <div class="control-ok" v-on:click="checked">{{'Confirm'|btnF(language)}}</div>
+                    </div>
+                    <div class="picker-control" v-if="Format.isHour&&panelType==1">
+                        <div class="control-cancel" v-on:click="cancel">{{'Cancel'|btnF(language)}}</div>
+                        <div class="control-date">
+                            <span>{{tmpYear}}</span>
+                            <span>-</span>
+                            <span>{{Format.month=='MM'&&(tmpMonth+1)<10?0:''}}{{tmpMonth+1}}</span>
+                            <span>-</span>
+                            <span>{{Format.day=='dd'&&tmpDay<10?0:''}}{{tmpDay}}</span>
+                            <span>&nbsp;</span>
+                            <span>{{tmpHour}}</span>
+                            <span>:</span>
+                            <span>{{tmpMinute}}</span>
+                        </div>
+                        <div class="control-ok" v-on:click="changeType(2)">{{'Next'|btnF(language)}}</div>
+                    </div>
+                    <div class="picker-control" v-if="Format.isHour&&panelType==2">
+                        <div class="control-cancel" v-on:click="changeType(1)">{{'Previous'|btnF(language)}}</div>
+                        <div class="control-date">
+                            <span>{{tmpYear}}</span>
+                            <span>-</span>
+                            <span>{{Format.month=='MM'&&(tmpMonth+1)<10?0:''}}{{tmpMonth+1}}</span>
+                            <span>-</span>
+                            <span>{{Format.day=='dd'&&tmpDay<10?0:''}}{{tmpDay}}</span>
+                            <span>&nbsp;</span>
+                            <span>{{tmpHour}}</span>
+                            <span>:</span>
+                            <span>{{tmpMinute}}</span>
+                        </div>
+                        <div class="control-ok" v-on:click="checked">{{'Confirm'|btnF(language)}}</div>
+                    </div>
+                    <div class="picker-panel">
+                        <div class="panel-box">
+                            <div class="box-year"   v-show="!Format.isHour||Format.isHour&&panelType==1"  v-on:touchstart="myTouch($event,'year')"   v-on:touchmove="myMove($event,'year')"    v-on:touchend="myEnd($event,'year')" >
+                                <div class="check-line"></div>
+                                <div class="year-checked">
+                                    <div class="year-list" data-translateY="0" style="transform: translateY(0rem);">
+                                        <div class="list-div" v-bind:class="{canNotChoose:!validYear(year.value)}" v-for="year in renderListYear" v-bind:data-index="year.index">{{year.value}}{{language=='cn'?'年':''}}</div>
+                                    </div>
+                                </div>
+                                <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg);">
+                                    <div class="wheel-div" v-for="year in renderListYear" v-bind:data-index="year.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-year.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{year.value}}{{language=='cn'?'年':''}}</div>
+                                </div>
+                            </div>
+                            <div class="box-month"  v-show="!Format.isHour||Format.isHour&&panelType==1"  v-on:touchstart="myTouch($event,'month')"  v-on:touchmove="myMove($event,'month')"   v-on:touchend="myEnd($event,'month')">
+                                <div class="check-line"></div>
+                                <div class="month-checked">
+                                    <div class="month-list" data-translateY="0" style="transform: translateY(0rem)">
+                                        <div class="list-div" v-bind:class="{canNotChoose:!validMonth(month.value-1)}" v-for="month in renderListMonth" v-bind:data-index="month.index">{{month.value|monthF(language)}}</div>
+                                    </div>
+                                </div>
+                                <div class="month-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                                    <div class="wheel-div" v-for="month in renderListMonth" v-bind:data-index="month.index"
+                                         v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-month.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{month.value|monthF(language)}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-day"    v-show="!Format.isHour||Format.isHour&&panelType==1"  v-on:touchstart="myTouch($event,'day')"    v-on:touchmove="myMove($event,'day')"     v-on:touchend="myEnd($event,'day')">
+                                <div class="check-line"></div>
+                                <div class="day-checked">
+                                    <div class="day-list" data-translateY="0" style="transform: translateY(0rem)">
+                                        <div class="list-div" v-bind:class="{canNotChoose:!validDay(day)}" v-for="day in renderListDay" v-bind:data-index="day.index">{{Format.day=='dd'&&day.value<10?'0':''}}{{day.value}}{{day.value|weekF(tmpYear,tmpMonth,language)}}</div>
+                                    </div>
+                                </div>
+                                <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                                    <div class="wheel-div" v-for="day in renderListDay" v-bind:data-index="day.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.day=='dd'&&day.value<10?'0':''}}{{day.value}}{{day.value|weekF(tmpYear,tmpMonth,language)}}</div>
+                                </div>
+                            </div>
+                            <div class="box-hour"   v-show="Format.isHour&&panelType==2"  v-on:touchstart="myTouch($event,'hour')"   v-on:touchmove="myMove($event,'hour')"    v-on:touchend="myEnd($event,'hour')">
+                                <div class="check-line"></div>
+                                <div class="hour-checked">
+                                    <div class="hour-list" data-translateY="0" style="transform: translateY(0rem)">
+                                        <div class="list-div" v-for="hour in renderListHour" v-bind:data-index="hour.index">{{Format.hour=='HH'&&hour.value<10?'0':''}}{{hour.value}}</div>
+                                    </div>
+                                </div>
+                                <div class="hour-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                                    <div class="wheel-div" v-for="hour in renderListHour" v-bind:data-index="hour.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-hour.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.hour=='HH'&&hour.value<10?'0':''}}{{hour.value}}</div>
+                                </div>
+                            </div>
+                            <div class="box-minute" v-show="Format.isHour&&panelType==2" v-on:touchstart="myTouch($event,'minute')" v-on:touchmove="myMove($event,'minute')"  v-on:touchend="myEnd($event,'minute')">
+                                <div class="check-line"></div>
+                                <div class="minute-checked">
+                                    <div class="minute-list" data-translateY="0" style="transform: translateY(0rem)">
+                                        <div class="list-div" v-for="minute in renderListMinute" v-bind:data-index="minute.index">{{Format.minute=='mm'&&minute.value<10?'0':''}}{{minute.value}}</div>
+                                    </div>
+                                </div>
+                                <div class="minute-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
+                                    <div class="wheel-div" v-for="minute in renderListMinute" v-bind:data-index="minute.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-minute.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.minute=='mm'&&minute.value<10?'0':''}}{{minute.value}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="control-ok" v-if="panelType=='2'" v-on:click="changeType('3')">下一步</div>
-                <div class="control-ok" v-if="panelType=='1'||panelType=='3'" v-on:click="checked">确定</div>
-            </div>
-            <div class="picker-panel">
-                <div class="panel-box">
-                    <div class="box-year"  v-on:touchstart="myTouch($event,'year')"  v-on:touchmove="myMove($event,'year')"  v-on:touchend="myEnd($event,'year')" >
-                        <div class="year-checked">
-                            <div class="year-list" data-translateY="0" style="transform: translateY(0rem);">
-                                <div class="list-div" v-bind:class="{canNotChoose:!validYear(year.value)}" v-for="year in renderListYear" v-bind:data-index="year.index">{{year.value}}{{language=='cn'?'年':''}}</div>
-                            </div>
-                        </div>
-                        <div class="year-wheel" style="transform: rotate3d(1, 0, 0,0deg);">
-                            <div class="wheel-div" v-for="year in renderListYear" v-bind:data-index="year.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-year.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{year.value}}{{language=='cn'?'年':''}}</div>
-                        </div>
-                    </div>
-                    <div class="box-month" v-on:touchstart="myTouch($event,'month')" v-on:touchmove="myMove($event,'month')" v-on:touchend="myEnd($event,'month')">
-                        <div class="month-checked">
-                            <div class="month-list" data-translateY="0" style="transform: translateY(0rem)">
-                                <div class="list-div" v-bind:class="{canNotChoose:!validMonth(month.value-1)}" v-for="month in renderListMonth" v-bind:data-index="month.index">{{month.value|monthF(language)}}</div>
-                            </div>
-                        </div>
-                        <div class="month-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-                            <div class="wheel-div" v-for="month in renderListMonth" v-bind:data-index="month.index"
-                                 v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-month.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{month.value|monthF(language)}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-day"   v-on:touchstart="myTouch($event,'day')"   v-on:touchmove="myMove($event,'day')"   v-on:touchend="myEnd($event,'day')">
-                        <div class="day-checked">
-                            <div class="day-list" data-translateY="0" style="transform: translateY(0rem)">
-                                <div class="list-div" v-bind:class="{canNotChoose:!validDay(day)}" v-for="day in renderListDay" v-bind:data-index="day.index">{{Format.day=='dd'&&day.value<10?'0':''}}{{day.value}}{{day.value|weekF(tmpYear,tmpMonth,language)}}</div>
-                            </div>
-                        </div>
-                        <div class="day-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-                            <div class="wheel-div" v-for="day in renderListDay" v-bind:data-index="day.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-day.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.day=='dd'&&day.value<10?'0':''}}{{day.value}}{{day.value|weekF(tmpYear,tmpMonth,language)}}</div>
-                        </div>
-                    </div>
-                    <div class="box-hour"  v-on:touchstart="myTouch($event,'hour')"   v-on:touchmove="myMove($event,'hour')"   v-on:touchend="myEnd($event,'hour')">
-                        <div class="hour-checked">
-                            <div class="hour-list" data-translateY="0" style="transform: translateY(0rem)">
-                                <div class="list-div" v-for="hour in renderListHour" v-bind:data-index="hour.index">{{Format.hour=='HH'&&hour.value<10?'0':''}}{{hour.value}}</div>
-                            </div>
-                        </div>
-                        <div class="hour-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-                            <div class="wheel-div" v-for="hour in renderListHour" v-bind:data-index="hour.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-hour.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.hour=='HH'&&hour.value<10?'0':''}}{{hour.value}}</div>
-                        </div>
-                    </div>
-                    <div class="box-minute" v-on:touchstart="myTouch($event,'minute')"   v-on:touchmove="myMove($event,'minute')"   v-on:touchend="myEnd($event,'minute')">
-                        <div class="minute-checked">
-                            <div class="minute-list" data-translateY="0" style="transform: translateY(0rem)">
-                                <div class="list-div" v-for="minute in renderListMinute" v-bind:data-index="minute.index">{{Format.minute=='mm'&&minute.value<10?'0':''}}{{minute.value}}</div>
-                            </div>
-                        </div>
-                        <div class="minute-wheel" style=" transform: rotate3d(1, 0, 0,0deg)">
-                            <div class="wheel-div" v-for="minute in renderListMinute" v-bind:data-index="minute.index" v-bind:style="{transform: 'rotate3d(1, 0, 0, '+ (-minute.index)*20%360+'deg) translate3d(0px, 0px, 2.5rem)'}">{{Format.minute=='mm'&&minute.value<10?'0':''}}{{minute.value}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </transition>
         </div>
     </transition>
 </template>
@@ -159,6 +196,7 @@
                     minute: 'mm',
                     separator: '-'
                 },
+                panelType:1
             }
         },
         props: {
@@ -740,7 +778,8 @@
             },
             /*btn*/
             cancel(){
-                this.$emit('checked', '');
+                this.$emit('checked', this.outPutDate(false));
+                this.initWheel();
             },
             checked(){
                 if( this.validCheckeDate()){
@@ -751,74 +790,92 @@
                         this.orHour=this.tmpHour;
                         this.orMinute=this.tmpMinute;
                     }
-                    this.$emit('checked', this.outPutDate());
+                    this.panelType=1;
+                    this.$emit('checked', this.outPutDate(true));
                 }else {
                     alert('所选时间超出设定范围,请重新选择')
                 }
             },
             /*output */
-            outPutDate(){
-                if (this.Format.isHour) {
-                    return this.tmpYear + this.Format.separator +(this.Format.month=='MM'&&(this.tmpMonth + 1)<10?'0':'') + Number(this.tmpMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.tmpDay <10?'0':'') +this.tmpDay + ' ' +(this.Format.hour=='HH'&&this.tmpHour <10?'0':'')+ this.tmpHour + ':' + (this.Format.minute=='mm'&&this.tmpMinute <10?'0':'')+this.tmpMinute;
-                } else {
-                    return this.tmpYear + this.Format.separator +(this.Format.month=='MM'&&(this.tmpMonth + 1)<10?'0':'') + Number(this.tmpMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.tmpDay <10?'0':'') +this.tmpDay
+            outPutDate(type){
+                if(type){
+                    if (this.Format.isHour) {
+                        return this.tmpYear + this.Format.separator +(this.Format.month=='MM'&&(this.tmpMonth + 1)<10?'0':'') + Number(this.tmpMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.tmpDay <10?'0':'') +this.tmpDay + ' ' +(this.Format.hour=='HH'&&this.tmpHour <10?'0':'')+ this.tmpHour + ':' + (this.Format.minute=='mm'&&this.tmpMinute <10?'0':'')+this.tmpMinute;
+                    } else {
+                        return this.tmpYear + this.Format.separator +(this.Format.month=='MM'&&(this.tmpMonth + 1)<10?'0':'') + Number(this.tmpMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.tmpDay <10?'0':'') +this.tmpDay
+                    }
+                }else {
+                    if (this.Format.isHour) {
+                        return this.orYear + this.Format.separator +(this.Format.month=='MM'&&(this.orMonth + 1)<10?'0':'') + Number(this.orMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.orDay <10?'0':'') +this.orDay + ' ' +(this.Format.hour=='HH'&&this.orHour <10?'0':'')+ this.orHour + ':' + (this.Format.minute=='mm'&&this.orMinute <10?'0':'')+this.orMinute;
+                    } else {
+                        return this.orYear + this.Format.separator +(this.Format.month=='MM'&&(this.orMonth + 1)<10?'0':'') + Number(this.orMonth + 1) + this.Format.separator +(this.Format.day=='dd'&&this.orDay <10?'0':'') +this.orDay
+                    }
                 }
+
             },
             /*changeType*/
             changeType(type){
                 this.panelType=type
+            },
+            /*init wheel*/
+            initWheel(){
+                /*init wheel and list */
+                this.$el.getElementsByClassName('year-list')[0].style.transform = 'translateY(' + ((-(this.orYear - this.RangeYear.min) - this.branch) * 68 / 75 ) + 'rem)';
+                this.$el.getElementsByClassName('year-list')[0].style.marginTop = (this.orYear - this.RangeYear.min) * 68 / 75 + 'rem';
+                this.$el.getElementsByClassName('year-list')[0].setAttribute('data-translatey', -(this.orYear - this.RangeYear.min) * 68 / 75);
+                this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orYear - this.RangeYear.min) * 20 + 'deg)';
+
+                this.$el.getElementsByClassName('month-list')[0].style.transform = 'translateY(' + (-this.orMonth * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                this.$el.getElementsByClassName('month-list')[0].style.marginTop = this.orMonth * 68 / 75 + 'rem';
+                this.$el.getElementsByClassName('month-list')[0].setAttribute('data-translatey', -this.orMonth * 68 / 75);
+                this.$el.getElementsByClassName('month-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + this.orMonth * 20 + 'deg)';
+
+                this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + (-(this.orDay - this.dayList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                this.$el.getElementsByClassName('day-list')[0].style.marginTop = (this.orDay - this.dayList[0]) * 68 / 75 + 'rem';
+                this.$el.getElementsByClassName('day-list')[0].setAttribute('data-translatey', -(this.orDay - this.dayList[0]) * 68 / 75);
+                this.$el.getElementsByClassName('day-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orDay - this.dayList[0]) * 20 + 'deg)';
+
+                this.$el.getElementsByClassName('hour-list')[0].style.transform = 'translateY(' + (-(this.orHour - this.hourList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                this.$el.getElementsByClassName('hour-list')[0].style.marginTop = (this.orHour - this.hourList[0]) * 68 / 75 + 'rem';
+                this.$el.getElementsByClassName('hour-list')[0].setAttribute('data-translatey', -(this.orHour - this.hourList[0]) * 68 / 75);
+                this.$el.getElementsByClassName('hour-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orHour - this.hourList[0]) * 20 + 'deg)';
+
+                this.$el.getElementsByClassName('minute-list')[0].style.transform = 'translateY(' + (-(this.orMinute - this.minuteList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
+                this.$el.getElementsByClassName('minute-list')[0].style.marginTop = (this.orMinute - this.minuteList[0]) * 68 / 75 + 'rem';
+                this.$el.getElementsByClassName('minute-list')[0].setAttribute('data-translatey', -(this.orMinute - this.minuteList[0]) * 68 / 75);
+                this.$el.getElementsByClassName('minute-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orMinute - this.minuteList[0]) * 20 + 'deg)';
+
+                this.spin.year.head = this.orYear - this.RangeYear.min - this.branch;
+                this.spin.year.last = this.orYear - this.RangeYear.min + this.branch;
+
+                this.spin.month.head = this.orMonth - this.branch;
+                this.spin.month.last = this.orMonth + this.branch;
+
+                this.spin.day.head = (this.orDay - this.dayList[0]) - this.branch;
+                this.spin.day.last = (this.orDay - this.dayList[0]) + this.branch;
+
+                this.spin.hour.head = (this.orHour - this.hourList[0]) - this.branch;
+                this.spin.hour.last = (this.orHour - this.hourList[0]) + this.branch;
+
+                this.spin.minute.head = (this.orMinute - this.minuteList[0]) - this.branch;
+                this.spin.minute.last = (this.orMinute - this.minuteList[0]) + this.branch;
             }
         },
         watch: {
             visible: function (val, old) {
                 if (val) {
-                    /*init wheel and list */
-                    this.$el.getElementsByClassName('year-list')[0].style.transform = 'translateY(' + ((-(this.orYear - this.RangeYear.min) - this.branch) * 68 / 75 ) + 'rem)';
-                    this.$el.getElementsByClassName('year-list')[0].style.marginTop = (this.orYear - this.RangeYear.min) * 68 / 75 + 'rem';
-                    this.$el.getElementsByClassName('year-list')[0].setAttribute('data-translatey', -(this.orYear - this.RangeYear.min) * 68 / 75);
-                    this.$el.getElementsByClassName('year-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orYear - this.RangeYear.min) * 20 + 'deg)';
-
-                    this.$el.getElementsByClassName('month-list')[0].style.transform = 'translateY(' + (-this.orMonth * 68 / 75 - this.branch * 68 / 75) + 'rem)';
-                    this.$el.getElementsByClassName('month-list')[0].style.marginTop = this.orMonth * 68 / 75 + 'rem';
-                    this.$el.getElementsByClassName('month-list')[0].setAttribute('data-translatey', -this.orMonth * 68 / 75);
-                    this.$el.getElementsByClassName('month-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + this.orMonth * 20 + 'deg)';
-
-                    this.$el.getElementsByClassName('day-list')[0].style.transform = 'translateY(' + (-(this.orDay - this.dayList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
-                    this.$el.getElementsByClassName('day-list')[0].style.marginTop = (this.orDay - this.dayList[0]) * 68 / 75 + 'rem';
-                    this.$el.getElementsByClassName('day-list')[0].setAttribute('data-translatey', -(this.orDay - this.dayList[0]) * 68 / 75);
-                    this.$el.getElementsByClassName('day-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orDay - this.dayList[0]) * 20 + 'deg)';
-
-                    this.$el.getElementsByClassName('hour-list')[0].style.transform = 'translateY(' + (-(this.orHour - this.hourList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
-                    this.$el.getElementsByClassName('hour-list')[0].style.marginTop = (this.orHour - this.hourList[0]) * 68 / 75 + 'rem';
-                    this.$el.getElementsByClassName('hour-list')[0].setAttribute('data-translatey', -(this.orHour - this.hourList[0]) * 68 / 75);
-                    this.$el.getElementsByClassName('hour-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orHour - this.hourList[0]) * 20 + 'deg)';
-
-                    this.$el.getElementsByClassName('minute-list')[0].style.transform = 'translateY(' + (-(this.orMinute - this.minuteList[0]) * 68 / 75 - this.branch * 68 / 75) + 'rem)';
-                    this.$el.getElementsByClassName('minute-list')[0].style.marginTop = (this.orMinute - this.minuteList[0]) * 68 / 75 + 'rem';
-                    this.$el.getElementsByClassName('minute-list')[0].setAttribute('data-translatey', -(this.orMinute - this.minuteList[0]) * 68 / 75);
-                    this.$el.getElementsByClassName('minute-wheel')[0].style.transform = 'rotate3d(1, 0, 0, ' + (this.orMinute - this.minuteList[0]) * 20 + 'deg)';
-
-                    this.spin.year.head = this.orYear - this.RangeYear.min - this.branch;
-                    this.spin.year.last = this.orYear - this.RangeYear.min + this.branch;
-
-                    this.spin.month.head = this.orMonth - this.branch;
-                    this.spin.month.last = this.orMonth + this.branch;
-
-                    this.spin.day.head = (this.orDay - this.dayList[0]) - this.branch;
-                    this.spin.day.last = (this.orDay - this.dayList[0]) + this.branch;
-
-                    this.spin.hour.head = (this.orHour - this.hourList[0]) - this.branch;
-                    this.spin.hour.last = (this.orHour - this.hourList[0]) + this.branch;
-
-                    this.spin.minute.head = (this.orMinute - this.minuteList[0]) - this.branch;
-                    this.spin.minute.last = (this.orMinute - this.minuteList[0]) + this.branch;
+                   this.initWheel();
                 }
                 /*init format*/
-                this.setFormat(this.options.format);
+                if(this.options.format){
+                    this.setFormat(this.options.format);
+                }
             },
             options: function (val, oldVal) {
                 /*init format*/
-                this.setFormat(this.options.format);
+                if(this.options.format){
+                    this.setFormat(this.options.format);
+                }
             },
         },
         filters: {
@@ -841,6 +898,16 @@
                         return {1: 'JAN', 2: 'FEB', 3: 'MAR', 4: 'APR', 5: 'MAY', 6: 'JUN', 7: 'JUL', 8: 'AUG', 9: 'SEP', 10: 'OCT', 11: 'NOV', 12: 'DEC'}[month];
                     default:
                         return month
+                }
+            },
+            btnF:(btn,lang)=>{
+                switch (lang) {
+                    case 'cn':
+                        return {Cancel:'取消',Confirm:'确认',Previous:'上一步',Next:'下一步'}[btn];
+                    case 'en':
+                        return {Cancel:'Cancel',Confirm:'Confirm',Previous:'Previous',Next:'Next'}[btn];
+                    default:
+                        return btn
                 }
             }
         },
