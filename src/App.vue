@@ -1,25 +1,31 @@
 <template>
-    <picker-mobile></picker-mobile>
+   <!-- <picker-mobile></picker-mobile>-->
+    <div>
+        <index-head></index-head>
+        <nav-list></nav-list>
+    </div>
+
 </template>
 
 <script>
-  import pickerMobile from './view/pickerMobile/mobilePickerDemo'
+ /* import pickerMobile from './view/pickerMobile/mobilePickerDemo'*/
+  import indexHead from './components/indexHead/indexHead'
+  import navList from './components/navList/nav'
 
   export default {
     name: 'app',
     data: function () {
       return {
-        date: '',
-
       }
     },
-    //todo 封装接口 现在暴露接口太多
     components: {
-        pickerMobile
+        indexHead,
+        navList
     }
   }
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
+    @import "../static/style/coreCss/reset.scss";
 </style>

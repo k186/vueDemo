@@ -1,0 +1,26 @@
+@import "../../../static/style/coreCss/px2rem.scss";
+.label{
+  color: #333;
+  font-size: px2rem(30px);
+  height: px2rem(90px);
+  padding: 0 px2rem(10px);
+  background: #efeff4;
+  position: relative;
+  &:before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top:px2rem(25px);
+    background: #fecd33;
+    width: px2rem(8px);
+    height: px2rem(40px);
+    border-radius: px2rem(8px);
+  }
+  .label-text{
+    position: absolute;
+    top:px2rem(25px);
+    height: px2rem(40px);
+    line-height: px2rem(42px);
+    padding-left: px2rem(20px);
+  }
+}

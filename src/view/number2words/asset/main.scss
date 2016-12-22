@@ -17,8 +17,6 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-
-@import "../../../../static/style/coreCss/reset.scss";
 @mixin border1pxBT {
   &:before {
     content: '';
