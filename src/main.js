@@ -1,10 +1,12 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 import Index from './router/routerindex'
 import Mapping from './router/routerMapping'
 
-Vue.use(Router);
-const router = new Router({
+/*router*/
+Vue.use(VueRouter);
+const router = new VueRouter({
     routes:Mapping.routes()
 });
 /* compatible weChat change title */
@@ -24,9 +26,9 @@ let setDocumentTitle = function (title) {
     }
 };
 router.afterEach(routes=>{
-    console.log(routes)
     typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title)
 });
+/*router end*/
 new Vue({
     router,
     render(tpl){
