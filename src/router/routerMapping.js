@@ -51,7 +51,6 @@ export default {
             }
         ]
     }
-    //todo lazy load
     /*config nav ../view/home/home.vue */
 
 }
