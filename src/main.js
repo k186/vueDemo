@@ -24,10 +24,10 @@ let setDocumentTitle = function (title) {
     }
 };
 router.afterEach(routes=>{
+    console.log(routes)
     typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title)
 });
 new Vue({
-    el: '#app',
     router,
     render(tpl){
        return tpl(Index)
@@ -35,5 +35,5 @@ new Vue({
     methods:{
 
     }
-});
+}).$mount('#app');
 

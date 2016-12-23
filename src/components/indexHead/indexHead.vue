@@ -5,7 +5,7 @@
         </div>
         <div class="head-main">
             <div class="main-head"></div>
-            <div class="main-name">4524324</div>
+            <div class="main-name">k186 Studio</div>
         </div>
     </div>
 </template>
