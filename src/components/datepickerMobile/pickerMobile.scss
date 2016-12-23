@@ -138,6 +138,7 @@ $panel-bg:#eeeeee;
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
+      background: $picker-bg;
       .control-cancel,.control-ok,.control-date{
         line-height:px2rem(90px);
         color: $control-btn;
