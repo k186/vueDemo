@@ -6,7 +6,6 @@
   overflow: hidden;
   position: relative;
   .head-blur{
-    border:1px solid red;
     height: px2rem(400px);
     width:px2rem(300px) ;
     border-radius: 100%;
@@ -17,7 +16,7 @@
     margin: auto;
     left: 0;
     right: 0;
-    top: px2rem(-450);
+    top: px2rem(-430);
     z-index:2;
   }
   .head-BG {

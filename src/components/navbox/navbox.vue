@@ -1,9 +1,9 @@
 <template>
     <div class="nav-box">
-        <div class="nav-btn" v-for="nav in data">
-            <i class="btn-icon"></i>
-            <span class="btn-word">{{nav.name}}</span>
-        </div>
+        <router-link :to="nav.router" class="nav-btn" v-for="nav in data">
+            <i class="btn-icon" :class="nav.color"  v-html="nav.icon"></i>
+          <span class="btn-word">{{nav.name}}</span>
+        </router-link>
     </div>
 </template>
 <script>
@@ -17,6 +17,3 @@
         },
     }
 </script>
-<style scoped>
-@import "./navbox.css";
-</style>

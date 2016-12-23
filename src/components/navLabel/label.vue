@@ -14,6 +14,5 @@
         }
     }
 </script>
-<style scoped>
-@import "./label.css";
+<style>
 </style>

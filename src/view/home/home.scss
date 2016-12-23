@@ -1,0 +1,93 @@
+@import "../../../static/style/coreCss/px2rem.scss";
+
+.label {
+  color: #333;
+  font-size: px2rem(30px);
+  height: px2rem(90px);
+  padding: 0 px2rem(10px);
+  background: #efeff4;
+  position: relative;
+  &:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: px2rem(25px);
+    background: #fecd33;
+    width: px2rem(8px);
+    height: px2rem(40px);
+    border-radius: px2rem(8px);
+  }
+  .label-text {
+    position: absolute;
+    top: px2rem(25px);
+    height: px2rem(40px);
+    line-height: px2rem(42px);
+    padding-left: px2rem(20px);
+  }
+}
+
+.nav-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-top: 1px solid #c8c7cc;
+  .nav-btn {
+    border-right: 1px solid #c8c7cc;
+    border-bottom: 1px solid #c8c7cc;
+    width: px2rem(250px);
+    height: px2rem(200px);
+    position: relative;
+  }
+  .btn-icon {
+    display: block;
+    position: absolute;
+    width: px2rem(80);
+    height: px2rem(80);
+    top:px2rem(40px);
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    line-height: px2rem(80);
+  }
+  .btn-word {
+    font-size: px2rem(24px);
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    color: #333;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: px2rem(25px);
+    margin: auto;
+  }
+}
+
+@font-face {
+  font-family: 'homeIcon';  /* project id 185202 */
+  src: url('//at.alicdn.com/t/font_amznfmj5gvte29.eot');
+  src: url('//at.alicdn.com/t/font_amznfmj5gvte29.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_amznfmj5gvte29.woff') format('woff'),
+  url('//at.alicdn.com/t/font_amznfmj5gvte29.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_amznfmj5gvte29.svg#iconfont') format('svg');
+}
+
+.btn-icon {
+  font-family: "homeIcon" !important;
+  font-size: .8rem;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.pc{
+  color: #488dc9;
+}
+.translate{
+  color:#f19333
+}
+.ios{
+  color: #47a6df;
+}
+
