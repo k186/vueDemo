@@ -2,12 +2,14 @@
     <div>
         <index-head></index-head>
         <nav-list :Nav="Nav"></nav-list>
+        <loading></loading>
     </div>
 </template>
 
 <script>
     import indexHead from '../../components/indexHead/indexHead'
     import navList from '../../components/navList/nav'
+    import loading from '../../components/loading/loading'
     export default {
         name: 'home',
         data: function () {
@@ -46,7 +48,8 @@
         },
         components: {
             indexHead,
-            navList
+            navList,
+            loading
         }
     }
 </script>
