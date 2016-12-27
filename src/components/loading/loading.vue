@@ -73,15 +73,6 @@
     import {mapGetters} from 'vuex'
     export default{
         name:'loading',
-        data(){
-          return  {
-              loading:{
-                  message:'432432',
-                  type:'loading',
-                  visible:true
-              }
-          }
-        },
         computed:mapGetters({
           loading:'loading'
         }),
