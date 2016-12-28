@@ -1,2 +1,0 @@
-export const LOADING_OPEN='LOADING_OPEN'
-export const LOADING_CLOSED='LOADING_CLOSED'

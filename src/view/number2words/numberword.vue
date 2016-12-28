@@ -31,6 +31,7 @@
                 <input id="inputs" type="text" value="8548"/>
             </div>
         </div>
+        <loading></loading>
     </section>
 </template>
 <style>
@@ -38,6 +39,7 @@
 </style>
 <script>
     import '../../../static/pugin/number2word/number2words.js'
+    import loading from '../../components/loading/loading'
     export default{
         name:'numberString',
         data:function () {
@@ -79,6 +81,9 @@
             Number2Wrods.config(option2).putStr(value,'output2');
             Number2Wrods.config(option3).putStr(value,'output3');
             output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+        },
+        components:{
+            loading
         }
     }
 </script>

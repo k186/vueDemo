@@ -1,10 +1,10 @@
 <template>
-<div class="loading-bg" v-if="loading.visible">
+<div class="loading-bg" v-if="loadingControl.visible">
     <div class="loading-box normal">
-        <div v-if="type=='loading.success'" class="loading-icon success">&#xe697;</div>
-        <div v-if="type=='loading.failed'" class="loading-icon failed">&#xe61c;</div>
-        <div v-if="type=='loading.loading'" class="loading-icon loading">&#xe638;</div>
-        <div class="loading-text">{{loading.message}}</div>
+        <div v-if="loadingControl.type=='success'" class="loading-icon success">&#xe697;</div>
+        <div v-if="loadingControl.type=='failed'" class="loading-icon failed">&#xe61c;</div>
+        <div v-if="loadingControl.type=='loading'" class="loading-icon loading">&#xe638;</div>
+        <div class="loading-text">{{loadingControl.message}}</div>
     </div>
 </div>
 </template>
@@ -74,20 +74,22 @@
     export default{
         name:'loading',
         computed:mapGetters({
-          loading:'loading'
+            loadingControl: 'loadingControl'
         }),
         mounted(){
             /*updating z-index value*/
-            this.$nextTick(function () {
-                let divs = document.getElementsByTagName("div");
-                let max = 0;
-                for (let i = 0; i < divs.length; i++) {
-                    if( /^\d+$/.test(getComputedStyle(divs[i])['z-index'])){
-                        max = Math.max(max, getComputedStyle(divs[i])['z-index'] || 0);
+            if(this.loadingControl.visible){
+                this.$nextTick(function () {
+                    let divs = document.getElementsByTagName("div");
+                    let max = 0;
+                    for (let i = 0; i < divs.length; i++) {
+                        if( /^\d+$/.test(getComputedStyle(divs[i])['z-index'])){
+                            max = Math.max(max, getComputedStyle(divs[i])['z-index'] || 0);
+                        }
                     }
-                }
-                document.getElementsByClassName('loading-bg')[0].style.zIndex=max
-            })
+                    document.getElementsByClassName('loading-bg')[0].style.zIndex=max
+                })
+            }
         }
     }
 </script>
