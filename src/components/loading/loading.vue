@@ -80,7 +80,7 @@
             /*updating z-index value*/
             if(this.loadingControl.visible){
                 this.$nextTick(function () {
-                    let divs = document.getElementsByTagName("div");
+                    let divs = document.getElementsByTagName("*");
                     let max = 0;
                     for (let i = 0; i < divs.length; i++) {
                         if( /^\d+$/.test(getComputedStyle(divs[i])['z-index'])){
