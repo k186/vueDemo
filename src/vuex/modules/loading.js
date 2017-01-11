@@ -4,7 +4,7 @@ const state = {
     loadingControl: {
         visible: true,
         type: 'success',
-        message: 'loading',
+        message: '请稍候...',
         mask: false,
     }
 };

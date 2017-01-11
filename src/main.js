@@ -27,11 +27,11 @@ let setDocumentTitle = function (title) {
 
 };
 router.afterEach(routes=>{
-    typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title)
+    typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title);
     let loading={
         visible: true,
         type: 'loading',
-        message: 'loading',
+        message: '请稍候...',
         mask: false,
     };
     /*fake loading test*/

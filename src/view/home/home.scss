@@ -100,6 +100,11 @@
     bottom: px2rem(25px);
     margin: auto;
   }
+  em{
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+  }
 }
 @font-face {
   font-family: 'homeIcon';  /* project id 185202 */

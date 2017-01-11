@@ -1,5 +1,5 @@
 <template>
-<div class="loading-bg" v-if="loadingControl.visible">
+<div class="loading-bg" v-show="loadingControl.visible">
     <div class="loading-box normal">
         <div v-if="loadingControl.type=='success'" class="loading-icon success">&#xe697;</div>
         <div v-if="loadingControl.type=='failed'" class="loading-icon failed">&#xe61c;</div>
@@ -24,12 +24,17 @@
         -webkit-text-stroke-width: 0.001rem;
         -moz-osx-font-smoothing: grayscale;
     }
+    .loading-icon{
+        position: relative;
+        height:2.26667rem ;
+        line-height: 2.26667rem;
+    }
     .loading-text,.loading-icon{
         text-align: center;
         color: white;
     }
     .loading-text{
-        font-size: .4rem;
+        font-size: .37333rem;
     }
     .loading-bg{
         position: absolute;
@@ -41,8 +46,8 @@
     }
     .loading-box{
         position: absolute;
-        width: 4rem;
-        height: 2.6667rem;
+        width: 3.2rem;
+        height: 3.2rem;
         margin: auto;
         top:0;
         bottom: 0;
@@ -65,8 +70,7 @@
         100%{transform: rotate(360deg)}
     }
     .normal{
-        background: rgba(0,0,0,.8);
-        box-shadow: 0 1px 20px 2px rgba(140, 140, 140, 0.9);
+        background: rgba(0,0,0,.75);
     }
 </style>
 <script>
@@ -80,14 +84,14 @@
             /*updating z-index value*/
             if(this.loadingControl.visible){
                 this.$nextTick(function () {
-                    let divs = document.getElementsByTagName("*");
+                    let divs = window.document.getElementsByTagName("*");
                     let max = 0;
                     for (let i = 0; i < divs.length; i++) {
                         if( /^\d+$/.test(getComputedStyle(divs[i])['z-index'])){
                             max = Math.max(max, getComputedStyle(divs[i])['z-index'] || 0);
                         }
                     }
-                    document.getElementsByClassName('loading-bg')[0].style.zIndex=max
+                    window.document.getElementsByClassName('loading-bg')[0].style.zIndex=max
                 })
             }
         }
