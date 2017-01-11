@@ -37,8 +37,8 @@
                             {
                                 name: '弹窗',
                                 router: '',
-                                icon: '&#xe62b',
-                                color: 'ios',
+                                icon: '&#xe609',
+                                color: 'alert',
                                 callback:function () {
                                     let alertBox = {
                                         title: '提示信息',

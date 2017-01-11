@@ -4,7 +4,7 @@
             <div class="alert-title">{{alert.title}}</div>
             <div class="alert-body">{{alert.body}}</div>
             <div class="alert-control">
-                <div class="alert-btn column"><a @click="confirm">{{alert.btn.ok}}</a></div>
+                <div class="alert-btn" :class="alert.type=='confirm'?'column':''"><a @click="confirm">{{alert.btn.ok}}</a></div>
                 <div v-if="alert.type=='confirm'" class="alert-btn"><a @click="cancel">{{alert.btn.cancel}}</a></div>
             </div>
         </div>
