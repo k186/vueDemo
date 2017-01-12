@@ -1,15 +1,16 @@
 <template>
-    <div class="container clearfloat">
-        <div class="row">
-           <div class="input" v-on:click="showDatePicker(1)">{{date}}</div>
-        </div>
-        <div class="row">
-            <div class="input" v-on:click="showDatePicker(2)">{{date2}}</div>
-        </div>
-        <div class="row">
-            <input class="input" v-model="format" placeholder="时间格式 yyyy/MM/dd">
-        </div>
-        <span>时间格式设置说明：
+    <div>
+        <div class="container clearfloat">
+            <div class="row">
+                <div class="input" v-on:click="showDatePicker(1)">{{date}}</div>
+            </div>
+            <div class="row">
+                <div class="input" v-on:click="showDatePicker(2)">{{date2}}</div>
+            </div>
+            <div class="row">
+                <input class="input" v-model="format" placeholder="时间格式 yyyy/MM/dd">
+            </div>
+            <span>时间格式设置说明：
               <br>* d      without 0 &nbsp;&nbsp;&nbsp;  * yy     2016 16
               <br>* dd     with 01   &nbsp;&nbsp;&nbsp;  * yyyy   2016
               <br>* M      without 0 &nbsp;&nbsp;  * h      12am 12pm 1 2
@@ -19,7 +20,8 @@
               <br>年月日分隔符只能 是 '/' 或者 '- ' 小时分钟 英文冒号':'
             <br> 时间12小时制暂未实现，年份取最后2位暂未实现
         </span>
-        <mobile-picker :valueStr="picker.value" :visible="picker.visible" :options="picker.options" v-on:checked="hideDatePicker"></mobile-picker>
+            <mobile-picker :valueStr="picker.value" :visible="picker.visible" :options="picker.options" v-on:checked="hideDatePicker"></mobile-picker>
+        </div>
     </div>
 </template>
 <script>

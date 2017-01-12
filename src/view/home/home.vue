@@ -1,10 +1,14 @@
 <template>
     <div>
-        <index-head></index-head>
-        <nav-list :Nav="Nav"></nav-list>
-        <loading></loading>
-        <alert></alert>
+        <div style="background: #efeff4">
+            <index-head></index-head>
+            <nav-list :Nav="Nav"></nav-list>
+            <loading></loading>
+            <alert></alert>
+            <my-footer></my-footer>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -12,6 +16,7 @@
     import navList from '../../components/navList/nav'
     import loading from '../../components/loading/loading'
     import alert from '../../components/alert/alert'
+    import MyFooter from '../../components/footer/footer'
     import {} from 'vuex'
     export default {
         name: 'home',
@@ -91,7 +96,8 @@
             indexHead,
             navList,
             loading,
-            alert
+            alert,
+            MyFooter
         }
     }
 </script>
