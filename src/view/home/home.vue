@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div><!--this div will be replaced by router-view -->
         <div style="background: #efeff4">
             <index-head></index-head>
             <nav-list :Nav="Nav"></nav-list>
