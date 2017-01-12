@@ -1,6 +1,6 @@
-# vuedemo
+# vueDemo 
 
-> A Vue.js project
+> A Vue.js project,only use vue.js,vuex,vue-router,roginal js
 
 ###Demo [demo](http://k186studio.com)
 
