@@ -3,6 +3,11 @@ const App = resolve => require(['../view/home/home'], resolve);
 const ios = resolve => require(['../view/pickerMobile/mobilePickerDemo'], resolve);
 const pcPicker = resolve => require(['../view/datepickerPC/datepicker'], resolve);
 const number2words = resolve => require(['../view/number2words/numberword'], resolve);
+/*single all load*/
+/*import App from '../view/home/home';
+import ios from '../view/pickerMobile/mobilePickerDemo';
+import pcPicker from '../view/datepickerPC/datepicker';
+import number2words from'../view/number2words/numberword';*/
 export default {
     name: 'routerMapping',
     routes(){
