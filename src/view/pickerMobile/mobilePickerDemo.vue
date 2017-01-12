@@ -20,12 +20,10 @@
             <br> 时间12小时制暂未实现，年份取最后2位暂未实现
         </span>
         <mobile-picker :valueStr="picker.value" :visible="picker.visible" :options="picker.options" v-on:checked="hideDatePicker"></mobile-picker>
-        <loading></loading>
     </div>
 </template>
 <script>
     import mobilePicker from '../../components/datepickerMobile/pickerMobile'
-    import loading from '../../components/loading/loading'
     export default{
         name:'mobilePickerDemo',
         data(){
@@ -89,8 +87,7 @@
             }
         },
         components:{
-            mobilePicker,
-            loading
+            mobilePicker
         }
     }
 </script>

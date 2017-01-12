@@ -16,7 +16,7 @@
     export default {
         name: 'home',
         data: function () {
-            let that=this;
+            let that = this;
             return {
                 Nav: [
                     {
@@ -39,10 +39,10 @@
                                 router: '',
                                 icon: '&#xe609',
                                 color: 'alert',
-                                callback:function () {
+                                callback: function () {
                                     let alertBox = {
                                         title: '提示信息',
-                                        body: '',
+                                        body: '这里是简短的内容',
                                         callbackConfirm: function () {
                                             window.alert('确定回调')
                                         },
@@ -52,7 +52,25 @@
                                     };
                                     that.$store.dispatch('alertInit', {alertBox})
                                 }
-                            }
+                            },
+                            {
+                                name: 'loading',
+                                router: '',
+                                icon: '&#xe63f',
+                                color: 'loading',
+                                callback: function () {
+                                    let loadingControl = {
+                                        visible: false,
+                                        type: '',
+                                        message: '',
+                                        mask: true,
+                                    };
+                                    that.$store.dispatch('loadingShow', {loadingControl});
+                                    setTimeout(function () {
+                                        that.$store.dispatch('loadingClose')
+                                    },1500)
+                                }
+                            },
                         ]
                     },
                     {

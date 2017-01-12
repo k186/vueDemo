@@ -1,14 +1,16 @@
 <template>
-    <div class="alert-mask" v-if="alert.visible">
-        <div class="alert-box">
-            <div class="alert-title">{{alert.title}}</div>
-            <div class="alert-body">{{alert.body}}</div>
-            <div class="alert-control">
-                <div class="alert-btn" :class="alert.type=='confirm'?'column':''"><a @click="confirm">{{alert.btn.ok}}</a></div>
-                <div v-if="alert.type=='confirm'" class="alert-btn"><a @click="cancel">{{alert.btn.cancel}}</a></div>
+    <transition tag="div" name="alert">
+        <div class="alert-mask" v-if="alert.visible">
+            <div class="alert-box">
+                <div class="alert-title">{{alert.title}}</div>
+                <div class="alert-body">{{alert.body}}</div>
+                <div class="alert-control">
+                    <div class="alert-btn" :class="alert.type=='confirm'?'column':''"><a @click="confirm">{{alert.btn.ok}}</a></div>
+                    <div v-if="alert.type=='confirm'" class="alert-btn"><a @click="cancel">{{alert.btn.cancel}}</a></div>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 <style>
     .alert-mask,.alert-box{
@@ -96,6 +98,26 @@
     }
     .alert-btn a:active{
         background: #e8e8e8;
+    }
+    /*animation*/
+    .alert-enter-active {
+        -webkit-transition: all 1s cubic-bezier(0, 0.99, 0, 1);
+        transition: all 1s cubic-bezier(0, 0.99, 0, 1);
+        opacity: 1;
+    }
+    .alert-leave-active{
+        -webkit-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+        opacity: 1;
+    }
+    .alert-enter {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
+    .alert-leave-active {
+        opacity: 0;
     }
 </style>
 <script>

@@ -28,18 +28,6 @@ let setDocumentTitle = function (title) {
 };
 router.afterEach(routes=>{
     typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title);
-    let loading={
-        visible: true,
-        type: 'loading',
-        message: '请稍候...',
-        mask: false,
-    };
-    /*fake loading test*/
-    store.commit(TYPE.LOADING_OPEN,loading);
-    setTimeout(function () {
-        loading.visible=false;
-        store.commit(TYPE.LOADING_CLOSED,{loading})
-    },1000)
 });
 /*router end*/
 new Vue({

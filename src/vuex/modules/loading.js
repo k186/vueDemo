@@ -2,9 +2,9 @@ import * as TYPE from '../mutation-types'
 
 const state = {
     loadingControl: {
-        visible: true,
-        type: 'success',
-        message: '请稍候...',
+        visible: false,
+        type: '',
+        message: '',
         mask: false,
     }
 };
@@ -16,21 +16,22 @@ const getters = {
     }
 };
 const mutations = {
-    [TYPE.LOADING_OPEN](state, loadingControl){
-        loadingControl.visible = true;
-        state.loadingControl = loadingControl
+    [TYPE.LOADING_OPEN](state, {loadingControl}){
+        state.loadingControl.visible = true;
+        state.loadingControl.type = loadingControl.type?loadingControl.type:"loading";
+        state.loadingControl.message = loadingControl.message?loadingControl.message:"请稍候...";
+        state.loadingControl.mask = loadingControl.mask?loadingControl.mask:false;
     },
-    [TYPE.LOADING_CLOSED](state, loadingControl){
-        loadingControl.visible = false;
-        state.loadingControl = loadingControl
+    [TYPE.LOADING_CLOSED](state){
+        state.loadingControl.visible = false
     }
 };
 const actions = {
-    loadingShow({commit}, loadingControl){
-        commit(TYPE.LOADING_OPEN, loadingControl)
+    loadingShow({commit}, {loadingControl}){
+        commit(TYPE.LOADING_OPEN, {loadingControl})
     },
-    loadingClose({commit}, loadingControl){
-        commit(TYPE.LOADING_CLOSED, loadingControl)
+    loadingClose({commit}){
+        commit(TYPE.LOADING_CLOSED)
     }
 };
 export default {

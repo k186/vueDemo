@@ -10,8 +10,6 @@
     </div>
     <k-picker :inputId="picker.id" :valueStr="picker.value" :visible="picker.visible" v-on:selectDay="hideDatePicker" :options="picker.options"></k-picker>
   </div>
-
-
 </template>
 
 <script>
