@@ -1,6 +1,6 @@
 # vueDemo 
 
-> A Vue.js project,only use vue.js,vuex,vue-router,roginal js
+> A Vue.js project,only use vue.js,vuex,vue-router,original js
 
 ###click here to see whole demo [k186](http://k186studio.com)
 
