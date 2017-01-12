@@ -8,9 +8,7 @@
             <my-footer></my-footer>
         </div>
     </div>
-
 </template>
-
 <script>
     import indexHead from '../../components/indexHead/indexHead'
     import navList from '../../components/navList/nav'

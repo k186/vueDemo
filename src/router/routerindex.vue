@@ -21,7 +21,6 @@
     }
 </style>
 <script>
-    import scroll from 'iscroll'
     export default{
         name:'rouertpl',
         mounted(){
