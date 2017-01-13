@@ -1,6 +1,6 @@
 <template>
-    <div><!--this div will be replaced by router-view -->
-        <div style="background: #efeff4">
+    <div id="wrapper"><!--this div will be replaced by router-view -->
+        <div id="scroller" style="background: #efeff4">
             <index-head></index-head>
             <nav-list :Nav="Nav"></nav-list>
             <loading></loading>
@@ -15,6 +15,7 @@
     import loading from '../../components/loading/loading'
     import alert from '../../components/alert/alert'
     import MyFooter from '../../components/footer/footer'
+    import publicJs from  '../../publicJs/publicJs'
     import {} from 'vuex'
     export default {
         name: 'home',
@@ -96,6 +97,9 @@
             loading,
             alert,
             MyFooter
+        },
+        mounted(){
+            publicJs.initScroll();
         }
     }
 </script>

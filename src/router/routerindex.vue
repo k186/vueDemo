@@ -20,19 +20,3 @@
         transform: translateX(-100%);
     }
 </style>
-<script>
-    export default{
-        name:'rouertpl',
-        mounted(){
-            /*this.$nextTick(function () {
-                let myScroll = new scroll('#wrapper', {
-                    click:true,
-                    disableMouse: true,
-                    disablePointer: true,
-                    momentum:true
-                });
-                console.log(11111)
-            })*/
-        },
-    }
-</script>
