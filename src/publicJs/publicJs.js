@@ -6,11 +6,11 @@ export default {
         let timer=window.setInterval(function(){
             let myScroll = new IScroll('#wrapper', { mouseWheel: true,click:that.isClick() });
             let scrollerHeight = window.document.getElementById("scroller").clientHeight;
-            if(scrollerHeight==myScroll.scrollerHeight){
+            if(scrollerHeight){
                 window.clearInterval(timer);
             }
             myScroll.refresh();
-        },500);
+        },50);
         document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     },
     isClick:function () {

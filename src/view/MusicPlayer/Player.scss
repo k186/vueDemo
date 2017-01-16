@@ -1,0 +1,190 @@
+@import "../../../static/style/coreCss/reset";
+@import "../../../static/style/coreCss/px2rem";
+
+$mainGreen: #31c27c;
+$DeepMainGreen: rgba(0, 0, 0, .12);
+$tipsRed: #fc4c24;
+$listBorder: #e6e6e6;
+$listButton: #8a8a8b;
+$checkBoxBorder: #a9a9a9;
+$mainTitle: #000000;
+$secondTitle: #666666;
+$markTips: #ff6701;
+$grayButton: #a5a5a5;
+$grayButtonText: #8f8f8f;
+$white: #fff;
+
+@font-face {
+  font-family: 'iconfont';  /* project id 185202 */
+  src: url('//at.alicdn.com/t/font_obdsjld28ykqpvi.eot');
+  src: url('//at.alicdn.com/t/font_obdsjld28ykqpvi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_obdsjld28ykqpvi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_obdsjld28ykqpvi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_obdsjld28ykqpvi.svg#iconfont') format('svg');
+}
+
+#wrapper {
+  overflow: hidden;
+}
+
+.clearFix {
+  &:after, &:before {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+}
+
+/*searchBar*/
+.icon {
+  font-family: "iconfont" !important;
+  font-size: px2rem(20);
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.searchBar-Box {
+  position: fixed;
+  width: 100%;
+}
+
+.searchBar {
+  height: px2rem(84);
+  background: $mainGreen;
+  padding: px2rem(10) px2rem(12);
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.searchBar-icon {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  height: px2rem(64);
+  line-height: px2rem(64);
+  color: $white;
+  padding-left: px2rem(10);
+}
+
+.searchBar-inputBox {
+  position: relative;
+  background: $DeepMainGreen;
+  width: 100%;
+}
+
+.searchBar-input, .searchBar-inputBox {
+  border-radius: 5px;
+  height: px2rem(64);
+  line-height: px2rem(40);
+}
+
+.searchBar-input {
+  position: absolute;
+  width: inherit;
+  right: 0;
+  background: transparent;
+  color: $white;
+  padding: px2rem(12) px2rem(40);
+}
+
+.searchBar-button {
+  background: transparent;
+  color: $white;
+}
+
+.searchBar-icon, .searchBar-button, .searchBar-input {
+  font-size: px2rem(34);
+}
+
+input::-webkit-input-placeholder {
+  color: $white;
+}
+
+input::-moz-placeholder {
+  color: $white;
+}
+
+input::-moz-placeholder {
+  color: $white;
+}
+
+input:-ms-input-placeholder {
+  color: $white;
+}
+
+.clearBtn {
+  display: inline-block;
+  height: px2rem(64);
+  line-height: px2rem(64);
+  position: absolute;
+  width: px2rem(64);
+  text-align: center;
+  right: 0;
+}
+
+/*searchHistory*/
+.history-BG {
+  position: fixed;
+  top: px2rem(84);
+  bottom: 0;
+  width: 100%;
+  background: $white;
+}
+
+.hot-search-bg {
+  padding: 0 px2rem(40);
+}
+
+.hot-title {
+  padding-top: px2rem(40);
+  color: $secondTitle;
+  font-size: px2rem(30);
+}
+
+.hot-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.hot-tag {
+  font-size: px2rem(28);
+  color: $mainTitle;
+  border: 1px solid #c4c4c4;
+  border-radius: px2rem(28);
+  padding: 0 px2rem(20);
+  margin-right: px2rem(12);
+  margin-bottom: px2rem(20);
+}
+
+.hot-tag.active {
+  border: 1px solid $mainGreen;
+  color: $mainGreen;
+}
+
+.list-btn {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  font-size: px2rem(28);
+  color: $secondTitle;
+}
+.list-clear{
+  color: $mainGreen;
+}
+.list-box{
+  border-top:1px solid $listBorder;
+  font-size: px2rem(32);
+  color: $mainTitle;
+  height: px2rem(100);
+  line-height: px2rem(100);
+  display: flex;
+  justify-content: space-between;
+}
+.list-clear-btn{
+  width: px2rem(50);
+  color: #7f7f7f;
+
+}

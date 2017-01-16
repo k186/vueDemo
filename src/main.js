@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from './router/routerindex'
 import Mapping from './router/routerMapping'
 import store from './vuex'
+import JQ from 'jquery'
 import * as TYPE from './vuex/mutation-types'
 /*router*/
 Vue.use(VueRouter);

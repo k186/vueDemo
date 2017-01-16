@@ -3,6 +3,7 @@ const App = resolve => require(['../view/home/home'], resolve);
 const ios = resolve => require(['../view/pickerMobile/mobilePickerDemo'], resolve);
 const pcPicker = resolve => require(['../view/datepickerPC/datepicker'], resolve);
 const number2words = resolve => require(['../view/number2words/numberword'], resolve);
+const MusicHome=resolve=>require(['../view/MusicPlayer/home'],resolve);
 /*single all load*/
 /*import App from '../view/home/home';
 import ios from '../view/pickerMobile/mobilePickerDemo';
@@ -47,6 +48,14 @@ export default {
                 component: number2words,
                 meta: {
                     title: '数字转换'
+                }
+            },
+            {
+                path: "/MusicHome",
+                name:'MusicHome',
+                component: MusicHome,
+                meta: {
+                    title: 'MusicPlayer'
                 }
             },
             {
