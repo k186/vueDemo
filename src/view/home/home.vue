@@ -75,6 +75,12 @@
                                     },1500)
                                 }
                             },
+                            {
+                                name: 'MusicPlayer',
+                                router: '/MusicHome',
+                                icon: '&#xe63f',
+                                color: 'loading'
+                            },
                         ]
                     },
                     {

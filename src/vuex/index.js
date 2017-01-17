@@ -4,6 +4,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import loading from './modules/loading'
 import alert from './modules/alert'
+import history from './modules/searchHistory'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     getters,
     modules:{
         loading,
-        alert
+        alert,
+        history
     }
 })

@@ -17,6 +17,7 @@
 </template>
 <script>
     import publicJs from  '../../publicJs/publicJs'
+    import urlMapping from '../../api/urlMapping'
     export default{
         name: 'searchBar',
         data(){
@@ -26,6 +27,8 @@
             }
         },
         mounted(){
+            this.initHistory();
+
 
         },
         methods: {
@@ -54,7 +57,24 @@
             },
             onBlur(){
                 window.document.getElementsByClassName('searchBar-input')[0].blur();
-            }
+            },
+            initHistory(){
+                let that=this;
+                let Map=new urlMapping();
+                Map.ajaxGetData({
+                    url: 'GET_SEARCH_HISTORY',
+                    method: 'get',
+                    data: {},
+                    callback:function (data) {
+                        if(data.success){
+                            if(data.model){
+                                let searchHistory=data.model;
+                                that.$store.dispatch('intHistory',{searchHistory})
+                            }
+                        }
+                    }
+                })
+            },
         },
         computed: {}
     }
