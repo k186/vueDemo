@@ -1,9 +1,43 @@
 import Vue from 'vue'
-import App from './App'
+import VueRouter from 'vue-router'
+import Index from './router/routerindex'
+import Mapping from './router/routerMapping'
+import store from './vuex'
+import * as TYPE from './vuex/mutation-types'
+/*router*/
+Vue.use(VueRouter);
+const router = new VueRouter({
+    routes:Mapping.routes()
+});
+/* compatible weChat change title */
+let setDocumentTitle = function (title) {
+    document.title = title;
+    let ua = navigator.userAgent;
+    if (/\bMicroMessenger\/([\d\.]+)/.test(ua) && /ip(hone|od|ad)/i.test(ua)) {
+        var i = document.createElement('iframe');
+        i.src = '/favicon.ico';
+        i.style.display = 'none';
+        i.onload = function () {
+            setTimeout(function () {
+                i.remove();
+            }, 9);
+        };
+        document.body.appendChild(i);
+    }
 
-/* eslint-disable no-new */
+};
+router.afterEach(routes=>{
+    typeof routes.meta.title !== undefined && setDocumentTitle(routes.meta.title);
+});
+/*router end*/
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App }
-})
+    router,
+    store,
+    render(tpl){
+       return tpl(Index)
+    },
+    methods:{
+
+    }
+}).$mount('#app');
+

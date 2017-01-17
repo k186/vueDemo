@@ -1,0 +1,4 @@
+export const LOADING_OPEN='LOADING_OPEN';
+export const LOADING_CLOSED='LOADING_CLOSED';
+export const ALERT_INIT='ALERT_INIT';
+export const ALERT_CANCEL='ALERT_CANCEL';

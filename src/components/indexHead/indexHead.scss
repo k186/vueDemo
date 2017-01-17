@@ -1,0 +1,58 @@
+@import "../../../static/style/coreCss/px2rem.scss";
+
+.k-headBox {
+  height: px2rem(370px);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  .head-blur{
+    height: px2rem(400px);
+    width:px2rem(300px) ;
+    border-radius: 100%;
+    background: #fff;
+    box-shadow: 0 30px 50px rgba(255,255,255,1),
+                0 40px 100px  rgba(255,255,255,0.7);
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: px2rem(-430);
+    z-index:2;
+  }
+  .head-BG {
+    background: #1e1f20;
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    z-index:1;
+  }
+  .head-main{
+    position: absolute;
+    width: inherit;
+    top:px2rem(80px);
+    z-index: 3;
+    text-align: center;
+    .main-head{
+      height: px2rem(160);
+      width: px2rem(160);
+      margin: auto;
+      background: #333;
+      background: url("./image/IMG_0393.jpg") no-repeat center;
+      background-size: cover;
+      border:2px solid #f6f6f6;
+      box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2),
+                  0 -5px 0 -3px #f6f6f6,
+                  0 -6px 1px -3px rgba(0, 0, 0, 0.2),
+                  0 -10px 0 -6px #f6f6f6,
+                  0 -10px 2px -6px rgba(0, 0, 0, 0.2),
+                  0 5px 15px rgba(0,0,0,.4),
+                  0 10px 20px rgba(0,0,0,.2),
+    }
+    .main-name{
+      margin-top: px2rem(20px);
+      font-size: px2rem(36px);
+      color: #fff;
+      text-shadow: 0 px2rem(2px) rgba(0,0,0,.9);
+    }
+  }
+}

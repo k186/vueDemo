@@ -7,7 +7,7 @@
     var devicePixelRatio=win.devicePixelRatio;
     var scale=0;
     var tid;
-    var H5fit=fit.H5fit||(fit.H5fit={});
+    var H5fit=fit||(fit={});
 
     if(metaEl){
         console.warn('根据自定义的meta标签设置缩放');
@@ -57,6 +57,20 @@
         docEl.style.fontSize=rem+'px';
         H5fit.rem=win.rem=rem;
     };
+    H5fit.rem2px=function (d) {
+        var val = parseFloat(d) * this.rem;
+        if (typeof d === 'string' && d.match(/rem$/)) {
+            val += 'px';
+        }
+        return val;
+    };
+    H5fit.px2rem = function(d) {
+        var val = parseFloat(d) / this.rem;
+        if (typeof d === 'string' && d.match(/px$/)) {
+            val += 'rem';
+        }
+        return val;
+    }
     //监听窗口大小变化
     win.addEventListener('resize',function () {
         clearTimeout(tid);
@@ -80,4 +94,4 @@
     }
     H5fit.refreshRem();
     H5fit.dpr=win.dpr=dpr;
-})(window,window['fit']||(window['fit']={}));
+})(window,window['H5fit']||(window['H5fit']={}));

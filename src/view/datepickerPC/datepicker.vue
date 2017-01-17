@@ -10,8 +10,6 @@
     </div>
     <k-picker :inputId="picker.id" :valueStr="picker.value" :visible="picker.visible" v-on:selectDay="hideDatePicker" :options="picker.options"></k-picker>
   </div>
-
-
 </template>
 
 <script>
@@ -34,6 +32,7 @@
                     format: 'yyyy-M-dd',
                     startDate: '2016-01-01',
                     endDate: '2020-12-01',
+                    language: 'en',
                     timeRange: 20,
                 },
                 picker: {
