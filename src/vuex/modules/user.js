@@ -43,26 +43,6 @@ const state = {
                     }
                 ]
             },
-            playList: [
-                {
-                    "sheetCodes": "2342,32432,43243,2342",
-                    "SongCode": 3423,
-                    "name": "Mc大队长",
-                    "singer": "暴走漫画",
-                    "album": "mccc",
-                    "url": "sjafdlsajf.mp3",
-                    "tag": {
-                        "sq": true,
-                        "hq": true,
-                        "mv": true,
-                        "exclusive": true
-                    },
-                    "mark": {
-                        "isDownload": true,
-                        "isInternet": true
-                    }
-                }
-            ],
             totalSong: [
                 {
                     "sheetCodes": "2342,32432,43243,2342",
