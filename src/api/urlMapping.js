@@ -8,7 +8,11 @@ class urlMapping {
 
     Mapping (url) {
         let urls = {
-            'GET_SEARCH_HISTORY': (this.isLocal ? '../../static/mokData/' : this.hostname) + 'musicPlayer/history' + (this.isLocal ? '.json' : ''),
+            /*获取搜索历史记录*/
+            'GET_SEARCH_HISTORY': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/history' + (this.isLocal ? '.json' : '.json'),
+            /*搜索结构*/
+            'GET_SEARCH_RESULT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
+
 
         };
         return urls[url]

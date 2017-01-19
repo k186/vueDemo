@@ -12,7 +12,9 @@
             </div>
             <input v-show="isFocus" type="button" class="searchBar-button" value="取消" @click="toggleSearch">
         </div>
-        <slot v-if="isFocus"></slot>
+        <transition name="history">
+            <slot v-if="isFocus"></slot>
+        </transition>
     </div>
 </template>
 <script>
@@ -23,13 +25,17 @@
         data(){
             return {
                 isFocus: false,
-                searchValue: 342432
+                searchValue: ''
             }
         },
         mounted(){
             this.initHistory();
-
-
+            let that=this;
+            $('.searchBar-input').on('keydown',function (e) {
+                if(e.keyCode==13){
+                   that.searchEvt();
+                }
+            })
         },
         methods: {
             toggleSearch(){
@@ -75,6 +81,36 @@
                     }
                 })
             },
+            searchEvt(){
+                let Map=new urlMapping();
+                let that=this;
+                if(that.searchValue!=''){
+                    Map.ajaxGetData({
+                        url: 'GET_SEARCH_RESULT',
+                        method: 'get',
+                        data: {searchValue:that.searchValue},
+                        callback:function (data) {
+                            if(data.success){
+                                if(data.model){
+                                    //todo set list data
+                                    window.alert('获取搜索结果成功')
+                                }
+                            }
+                        }
+                    })
+                }else {
+                    let loadingControl={
+                        visible: true,
+                        type: 'failed',
+                        message: '请输入搜索内容',
+                        mask: false,
+                    };
+                 that.$store.dispatch('loadingShow',{loadingControl});
+                 setTimeout(function () {
+                     that.$store.dispatch('loadingClose');
+                 },1500);
+                }
+            }
         },
         computed: {}
     }
