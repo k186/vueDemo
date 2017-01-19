@@ -3,6 +3,7 @@
         <search-bar>
             <search-history>
             </search-history>
+            <song-list></song-list>
         </search-bar>
         <main-nav></main-nav>
         <loading></loading>
@@ -13,13 +14,15 @@
     import searchBar from '../../components/MusicPlayer/searchBar'
     import searchHistory from '../../components/MusicPlayer/searchHistory'
     import loading from '../../components/loading/loading'
+    import songList from '../../components/MusicPlayer/songList'
     export default{
         name:'musicHome',
         components:{
             mainNav,
             searchBar,
             searchHistory,
-            loading
+            loading,
+            songList
         }
     }
 </script>

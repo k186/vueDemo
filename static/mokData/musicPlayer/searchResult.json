@@ -3,7 +3,8 @@
   "model":{
     "single":[
       {
-        "code":3423,
+        "sheetCodes":"2342,32432,43243,2342",
+        "songCode":3423,
         "name":"Mc大队长",
         "singer":"暴走漫画",
         "album":"mccc",
@@ -16,7 +17,8 @@
         "mark":"code1 网络 code2已下载"
       },
       {
-        "code":3423,
+        "sheetCodes":"2342,32432,43243,2342",
+        "songCode":3423,
         "name":"Mc大队长",
         "singer":"暴走漫画",
         "album":"mccc",
@@ -31,8 +33,10 @@
     ],
     "MV":[
       {
-        "code":3423,
+        "sheetCodes":"2342,32432,43243,2342",
+        "songCode":3423,
         "name":"Mc大队长",
+        "url":"sjafdlsajf.mp3",
         "singer":"暴走漫画",
         "album":"mccc",
         "tag":{
@@ -41,7 +45,10 @@
           "mv":true,
           "exclusive":true
         },
-        "mark":"code1 网络 code2已下载"
+        "mark":{
+          "isDownload":true,
+          "isInternet":true
+        }
       }
     ],
     "album":[],
