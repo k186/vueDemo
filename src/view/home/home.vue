@@ -77,7 +77,7 @@
                             },
                             {
                                 name: 'MusicPlayer',
-                                router: '/MusicHome',
+                                router: '/Music',
                                 icon: '&#xe63f',
                                 color: 'loading'
                             },

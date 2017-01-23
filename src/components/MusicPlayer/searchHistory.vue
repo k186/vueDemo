@@ -19,46 +19,45 @@
                     </div>
                 </div>
             </div>
-            <slot></slot>
         </div>
     </div>
 </template>
 <script>
     import publicJs from  '../../publicJs/publicJs'
-    import {mapGetters,mapActions} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     export default{
-        name:'searchHistory',
-        computed:mapGetters({
-            history:'searchHistory'
+        name: 'searchHistory',
+        computed: mapGetters({
+            history: 'searchHistory'
         }),
         mounted(){
             publicJs.initScroll();
         },
-        methods:{
+        methods: {
             updateHistory(){
 
             },
             search(){
 
             },
-            clearHistory(type,index){
-                if(type=='all'){
-                    let searchHistory={
-                        historyData:[],
+            clearHistory(type, index){
+                if (type == 'all') {
+                    let searchHistory = {
+                        historyData: [],
                     };
-                    this.$store.dispatch('updateHistory',{searchHistory})
-                }else {
-                    if(index!==null&&index!==undefined&&index!==''){
-                        let newArr=[];
-                        for(let i=0;i<this.history.historyData.length;i++){
-                            if(i!==index){
+                    this.$store.dispatch('updateHistory', {searchHistory})
+                } else {
+                    if (index !== null && index !== undefined && index !== '') {
+                        let newArr = [];
+                        for (let i = 0; i < this.history.historyData.length; i++) {
+                            if (i !== index) {
                                 newArr.push(this.history.historyData[i])
                             }
                         }
-                        let searchHistory={
-                            historyData:newArr,
+                        let searchHistory = {
+                            historyData: newArr,
                         };
-                        this.$store.dispatch('updateHistory',{searchHistory})
+                        this.$store.dispatch('updateHistory', {searchHistory})
                     }
                 }
             }

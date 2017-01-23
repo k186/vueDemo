@@ -12,14 +12,13 @@
             </div>
             <input v-show="isFocus" type="button" class="searchBar-button" value="取消" @click="toggleSearch">
         </div>
-        <transition name="history">
-            <slot v-if="isFocus"></slot>
-        </transition>
     </div>
 </template>
 <script>
     import publicJs from  '../../publicJs/publicJs'
     import urlMapping from '../../api/urlMapping'
+    import VueRouter from 'vue-router'
+    const router = new VueRouter();
     export default{
         name: 'searchBar',
         data(){
@@ -44,9 +43,11 @@
                     let that = this;
                     this.$nextTick(function () {
                         that.onFocus();
+                        router.push({ path: '/Music/searchHistory' })
                     })
                 } else {
                     this.clearSearchBar();
+                    router.push({ path: '/Music' })
                 }
             },
             clearSearchBar(){
