@@ -5,7 +5,6 @@ const pcPicker = resolve => require(['../view/datepickerPC/datepicker'], resolve
 const number2words = resolve => require(['../view/number2words/numberword'], resolve);
 const MusicHome=resolve=>require(['../view/MusicPlayer/homeRouter'],resolve);
 const MusicMain=resolve=>require(['../view/MusicPlayer/main'],resolve);
-const MusicHistory=resolve=>require(['../view/MusicPlayer/search'],resolve);
 /*single all load*/
 /*import App from '../view/home/home';
 import ios from '../view/pickerMobile/mobilePickerDemo';
@@ -62,13 +61,6 @@ export default {
                         component: MusicMain,
                         meta: {
                             title: 'MusicPlayer'
-                        }
-                    },
-                    {
-                        path: "searchHistory",
-                        component: MusicHistory,
-                        meta: {
-                            title: 'Search'
                         }
                     }
                 ]

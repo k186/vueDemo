@@ -3,8 +3,8 @@
         <div class="nav">
             数字转中文（javascript）
         </div>
-        <div class="containeer" id="wrapper">
-            <div id="scroller">
+        <div class="containeer wrapper" id="number-wrapper">
+            <div id="number-scroller" class="scroller">
                 <div class="cell">
                     <div class="cell-title">通配</div>
                     <div class="cell-output" id="output1"></div>
@@ -76,7 +76,7 @@
             Number2Wrods.config(option2).putStr(value,'output2');
             Number2Wrods.config(option3).putStr(value,'output3');
             output4.innerHTML= Number2Wrods.config(option4).putStr(value);
-            publicJs.initScroll();
+            publicJs.initScroll('number-wrapper','number-scroller');
         }
     }
 </script>

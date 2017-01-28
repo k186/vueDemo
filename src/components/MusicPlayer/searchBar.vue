@@ -1,26 +1,31 @@
 <template>
     <div class="searchBar-Box">
-        <div class="searchBar">
-            <div v-show="!isFocus" class="searchBar-inputBox">
-                <div class="searchBar-icon" @click="toggleSearch">
-                    <i class="icon">&#xe609;</i>搜索
-                </div>
-            </div>
-            <div v-show="isFocus" class="searchBar-inputBox">
-                <input v-show="isFocus" class="searchBar-input" type="text" v-model.trim="searchValue" placeholder="搜索音乐、歌词、歌单">
-                <i v-show="searchValue.length!=0" class="icon clearBtn" @click="clearSearchBar">&#xe609;</i>
-            </div>
-            <input v-show="isFocus" type="button" class="searchBar-button" value="取消" @click="toggleSearch">
+      <div class="searchBar">
+        <div v-show="!isFocus" class="searchBar-inputBox">
+          <div class="searchBar-icon" @click="toggleSearch">
+            <i class="icon">&#xe603;</i>搜索
+          </div>
         </div>
+        <div v-show="isFocus" class="searchBar-inputBox">
+          <input v-show="isFocus" class="searchBar-input" type="text" v-model.trim="searchValue" placeholder="搜索音乐、歌词、歌单">
+          <i v-show="searchValue.length!=0" class="icon clearBtn" @click="clearSearchBar">&#xe6bf;</i>
+        </div>
+        <input v-show="isFocus" type="button" class="searchBar-button" value="取消" @click="toggleSearch">
+      </div>
+        <transition name="history">
+            <search-history v-if="isFocus"></search-history>
+        </transition>
     </div>
 </template>
 <script>
     import publicJs from  '../../publicJs/publicJs'
     import urlMapping from '../../api/urlMapping'
-    import VueRouter from 'vue-router'
-    const router = new VueRouter();
+    import searchHistory from './searchHistory'
     export default{
         name: 'searchBar',
+        components:{
+            searchHistory
+        },
         data(){
             return {
                 isFocus: false,
@@ -28,6 +33,7 @@
             }
         },
         mounted(){
+            publicJs.setIndex('searchBar-Box');
             this.initHistory();
             let that=this;
             $('.searchBar-input').on('keydown',function (e) {
@@ -43,11 +49,9 @@
                     let that = this;
                     this.$nextTick(function () {
                         that.onFocus();
-                        router.push({ path: '/Music/searchHistory' })
                     })
                 } else {
                     this.clearSearchBar();
-                    router.push({ path: '/Music' })
                 }
             },
             clearSearchBar(){
@@ -70,7 +74,7 @@
                 let Map=new urlMapping();
                 Map.ajaxGetData({
                     url: 'GET_SEARCH_HISTORY',
-                    method: 'get',
+                    type: 'get',
                     data: {},
                     callback:function (data) {
                         if(data.success){
@@ -88,7 +92,7 @@
                 if(that.searchValue!=''){
                     Map.ajaxGetData({
                         url: 'GET_SEARCH_RESULT',
-                        method: 'get',
+                        type: 'get',
                         data: {searchValue:that.searchValue},
                         callback:function (data) {
                             if(data.success){

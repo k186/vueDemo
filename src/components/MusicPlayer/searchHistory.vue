@@ -1,6 +1,6 @@
 <template>
-    <div class="history-BG" id="wrapper">
-        <div id="scroller" class="hot-search-bg">
+    <div class="history-BG wrapper" id="history-wrapper">
+        <div id="history-scroller" class="hot-search-bg scroller">
             <div class="hot-search">
                 <div class="hot-title">热门搜索</div>
                 <div class="hot-tags">
@@ -14,11 +14,12 @@
                 </div>
                 <div>
                     <div class="list-box" v-for="list,index in history.historyData">
-                        <div>{{list.value}}</div>
-                        <div class="icon list-clear-btn" @click="clearHistory('',index)">X</div>
+                        <div class="list-box-title">{{list.value}}</div>
+                        <div class="icon list-clear-btn" @click="clearHistory('',index)">&#xe6bf;</div>
                     </div>
                 </div>
             </div>
+            <div class="Scroll-Add-On"></div>
         </div>
     </div>
 </template>
@@ -31,7 +32,7 @@
             history: 'searchHistory'
         }),
         mounted(){
-            publicJs.initScroll();
+            publicJs.initScroll('history-wrapper','history-scroller');
         },
         methods: {
             updateHistory(){

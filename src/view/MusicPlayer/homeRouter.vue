@@ -1,7 +1,7 @@
 <template>
-    <div style="background: #f4f4f4">
+    <div>
         <search-bar></search-bar>
-        <router-view></router-view>
+        <router-view  class="Player-BG"></router-view>
         <player></player>
         <loading></loading>
     </div>

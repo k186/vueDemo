@@ -1,6 +1,6 @@
 <template>
-    <div id="wrapper"><!--this div will be replaced by router-view -->
-        <div id="scroller" style="background: #efeff4">
+    <div id="home-wrapper" class="wrapper"><!--this div will be replaced by router-view -->
+        <div id="home-scroller" class="scroller" style="background: #efeff4">
             <index-head></index-head>
             <nav-list :Nav="Nav"></nav-list>
             <loading></loading>
@@ -105,7 +105,7 @@
             MyFooter
         },
         mounted(){
-            publicJs.initScroll();
+            publicJs.initScroll('home-wrapper','home-scroller');
         }
     }
 </script>
