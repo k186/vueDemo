@@ -19,12 +19,12 @@
         <div class="nav-box-enter">
             <div class="box-enter-row">
                 <div class="box-enter-nav">
-                    <div class="enter-nav-icon  icon">&#xe6d5;</div>
+                    <div class="enter-nav-icon  icon markPoint">&#xe6d5;</div>
                     <div class="enter-nav-name">全部歌曲</div>
                     <div class="enter-nav-count">2013</div>
                 </div>
                 <div class="box-enter-nav">
-                    <div class="enter-nav-icon  icon">&#xe627;</div>
+                    <div class="enter-nav-icon  icon markPoint">&#xe627;</div>
                     <div class="enter-nav-name">下载歌曲</div>
                     <div class="enter-nav-count">991</div>
                 </div>

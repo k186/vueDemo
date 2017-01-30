@@ -1,14 +1,18 @@
 <template>
-    <div id="main-wrapper" class="main-box wrapper">
-        <div id="main-scroller" class="scroller">
-            <user-nav></user-nav>
-            <personal-radio></personal-radio>
-            <song-sheet></song-sheet>
-            <div class="Scroll-Add-On"></div>
+    <div>
+        <search-bar></search-bar>
+        <div id="main-wrapper" class="main-box wrapper">
+            <div id="main-scroller" class="scroller">
+                <user-nav></user-nav>
+                <personal-radio></personal-radio>
+                <song-sheet></song-sheet>
+                <div class="Scroll-Add-On"></div>
+            </div>
         </div>
     </div>
 </template>
 <script>
+    import searchBar from '../../components/MusicPlayer/searchBar'
     import userNav from '../../components/MusicPlayer/userNav'
     import personalRadio from '../../components/MusicPlayer/pseronalRadio'
     import songSheet from '../../components/MusicPlayer/songSheet'
@@ -21,7 +25,8 @@
         components:{
             userNav,
             personalRadio,
-            songSheet
+            songSheet,
+            searchBar
         }
     }
 </script>

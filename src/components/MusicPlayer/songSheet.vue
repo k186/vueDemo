@@ -2,39 +2,45 @@
     <div class="song-sheet-box">
         <div class="song-sheet-box-header">
             <div class="song-sheet-box-header-title">我的歌单 <span>32</span></div>
-            <div class="song-sheet-box-header-btn icon">&#xe99c;</div>
+            <router-link to="/Music/songSheet" class="song-sheet-box-header-btn icon">&#xe99c;</router-link>
         </div>
-        <div class="song-sheet-box-list">
-            <div class="song-sheet-box-list-item">
-                <img src="../../../static/imgs/poster/defalut.png" class="song-sheet-box-list-item-poster">
-                <div class="song-sheet-box-list-item-text">
-                    <div class="song-sheet-box-list-item-text-box">
-                        <div class="song-sheet-box-list-item-text-title">222</div>
-                        <div class="song-sheet-box-list-item-text-described">
-                            <span class="icon"></span><span>82首,31首已下载</span>
-                        </div>
-                    </div>
-                    <div class="song-sheet-box-list-item-btn icon">&#xe639;</div>
-                </div>
-            </div>
-            <!---->
-            <div class="song-sheet-box-list-item">
-                <img src="../../../static/imgs/poster/defalut.png" class="song-sheet-box-list-item-poster">
-                <div class="song-sheet-box-list-item-text">
-                    <div class="song-sheet-box-list-item-text-box">
-                        <div class="song-sheet-box-list-item-text-title">222</div>
-                        <div class="song-sheet-box-list-item-text-described">
-                            <span class="icon"></span><span>82首,31首已下载</span>
-                        </div>
-                    </div>
-                    <div class="song-sheet-box-list-item-btn icon">&#xe639;</div>
-                </div>
-            </div>
-        </div>
+        <song-sheet-single :listData="listData"></song-sheet-single>
+        <router-link to="/Music/songSheet" class="song-sheet-box-seeAll">查看全部歌单>></router-link>
     </div>
 </template>
 <script>
+    import songSheetSingle from './songSheetSingle'
     export default{
-        name:'songSheet'
+        name:'songSheet',
+        data(){
+          return{
+              listData:{
+                  count:32,
+                  list:[
+                      {
+                          poster:'../../../static/imgs/poster/defalut.png',
+                          title:'3242',
+                          count:83,
+                          download:32
+                      },
+                      {
+                          poster:'../../../static/imgs/poster/defalut.png',
+                          title:'3242',
+                          count:83,
+                          download:32
+                      },
+                      {
+                          poster:'../../../static/imgs/poster/defalut.png',
+                          title:'3242',
+                          count:83,
+                          download:32
+                      }
+                  ]
+              }
+          }
+        },
+        components:{
+            songSheetSingle
+        }
     }
 </script>
