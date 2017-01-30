@@ -61,6 +61,7 @@
                         this.$store.dispatch('updateHistory', {searchHistory})
                     }
                 }
+                publicJs.refresh();
             }
         }
     }
