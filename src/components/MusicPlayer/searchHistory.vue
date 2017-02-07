@@ -33,6 +33,7 @@
         }),
         mounted(){
             publicJs.initScroll('history-wrapper','history-scroller');
+            publicJs.setIndex('history-BG')
         },
         methods: {
             updateHistory(){

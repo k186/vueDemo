@@ -5,11 +5,11 @@ import * as TYPE from '../mutation-types'
 
 const state = {
     PlayerComp: {
-        playType: 2, /*1 random order singleLoop*/
+        playType: 3, /*1 random order singleLoop*/
         playStatus: 0, /*0 pause 1 play*/
         currentPlay: {
             audio: {},
-            currentTime: 190,
+            currentTime:195,
             process:0,
             duration: 0,
             url: '',
@@ -88,6 +88,7 @@ const state = {
                 {
                     isPlay: false,
                     song: {
+                        /*http://okzvi7b4z.bkt.clouddn.com*/
                         url: 'http://k186studio.com/static/music/1232.mp3',
                         poster: '../../../static/imgs/poster/1232.jpg',
                         title: 'Reality',
@@ -130,6 +131,7 @@ const mutations = {
     },
     [TYPE.PLAYER_EVENT_PROCESS](state, {PlayerComp}){
         state.PlayerComp.currentPlay.process=PlayerComp.currentPlay.process;
+        state.PlayerComp.currentPlay.duration=PlayerComp.currentPlay.duration;
     },
     [TYPE.PLAYER_EVENT_PLAY](state, {PlayerComp}){
         state.PlayerComp.playStatus = 1;

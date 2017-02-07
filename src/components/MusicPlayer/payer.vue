@@ -2,14 +2,16 @@
     <div class="player-box">
         <div class="player-box-bg">
             <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
-                <div class="player-box-poster" :key="PlayerComp.currentPlay.poster">
-                    <img v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
-                    <img v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
-                </div>
-                <div class="player-box-text" :key="PlayerComp.currentPlay.poster">
-                    <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
-                    <div v-show="PlayerComp.currentPlay.title!=''" class="player-box-text-title">{{PlayerComp.currentPlay.title}}</div>
-                    <div class="player-box-text-lyric"></div>
+                <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
+                    <div class="player-box-poster" >
+                        <img v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
+                        <img v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
+                    </div>
+                    <div class="player-box-text">
+                        <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
+                        <div v-show="PlayerComp.currentPlay.title!=''" class="player-box-text-title">{{bufferedPercent}}{{PlayerComp.currentPlay.title}}</div>
+                        <div class="player-box-text-lyric"></div>
+                    </div>
                 </div>
             </transition-group>
             <div class="player-box-btn">
@@ -29,7 +31,14 @@
             return {
                 playOrder: [],
                 currentIndex: 0,
-                swipeChange:''
+                swipeChange:'',
+                bufferedPercent:0,
+                touchData:{
+                    startTimeStamp:0,
+                    startPointX:0,
+                    endPointX:0,
+                    endTimeStamp:0
+                }
             }
         },
         computed: mapGetters({
@@ -55,6 +64,7 @@
                     };
                     this.$store.dispatch('playerPlay', {PlayerComp});
                     this.isPlayEnd('start');
+                    this.getBuffered();
                 }
             },
             pause(){
@@ -72,22 +82,29 @@
                 }
             },
             next(){
-                this.currentIndex += 1;
-                if (this.currentIndex > this.playOrder.length - 1) {
-                    this.currentIndex = 0
+                /*is loop*/
+                if(this.PlayerComp.playType!=3){
+                    this.currentIndex += 1;
+                    if (this.currentIndex > this.playOrder.length - 1) {
+                        this.currentIndex = 0
+                    }
+                    this.swipeChange='right2left';
+                    this.getUid();
                 }
-                this.swipeChange='right2left';
-                this.getUid();
-                //todo when load to play
+                this.$nextTick(function () {
+                    this.play();
+                });
             },
             previous(){
                 this.currentIndex -= 1;
                 if (this.currentIndex < 0) {
-                    this.currentIndex = 0
+                    this.currentIndex = this.playOrder.length - 1;
                 }
                 this.swipeChange='left2right';
                 this.getUid();
-                //todo when load to play
+                this.$nextTick(function () {
+                    this.play();
+                });
             },
             getUid(){
                 let uid = this.playOrder[this.currentIndex];
@@ -116,10 +133,12 @@
                     let that = this;
                     let loop = setInterval(function () {
                         let currentTime = that.PlayerComp.currentPlay.audio.currentTime;
-                        let duration = that.PlayerComp.currentPlay.duration;
+                        let duration = that.PlayerComp.currentPlay.audio.duration;
+                        //todo get buffer set download process
                         let PlayerComp = {
                             currentPlay: {
-                                process: currentTime / duration
+                                process: currentTime / duration,
+                                duration:duration
                             }
                         };
                         that.$store.dispatch('playerProcess', {PlayerComp});
@@ -144,6 +163,70 @@
                         }
                     }, 1000)
                 }
+            },
+            /*滑动手势*/
+            //todo  set custom directive todo
+            playerTouch(e){
+                let that=this;
+                let El=document.getElementById('playerTouch');
+                El.addEventListener('touchmove',that.playerTouchMove,false);
+                El.addEventListener('touchend',that.playerTouchEnd,false);
+                let finger=e.changedTouches[0];
+                that.touchData.startPointX=finger.pageX;
+                that.touchData.startTimeStamp=Date.now();
+                e.preventDefault();
+            },
+            playerTouchMove(e){
+                let that=this;
+                let finger=e.changedTouches[0];
+                that.touchData.endPointX=finger.pageX;
+                that.touchData.endTimeStamp=Date.now();
+                e.preventDefault();
+            },
+            playerTouchEnd(e){
+                let that=this;
+                let El=document.getElementById('playerTouch');
+                let finger=e.changedTouches[0];
+                that.touchData.endPointX=finger.pageX;
+                that.touchData.endTimeStamp=Date.now();
+                let time=that.touchData.endTimeStamp-that.touchData.startTimeStamp;
+                let distance=that.touchData.endPointX-that.touchData.startPointX;
+                let direction=true;/*true to right(next) false to left*/
+                direction=distance>0;
+                if(time<300){
+                    if(Math.abs(distance)>=150){
+                        if(direction){
+                            that.$nextTick(function () {
+                                that.pause();
+                                that.previous();
+                            })
+                        }else {
+                            that.$nextTick(function () {
+                                that.pause();
+                                that.next();
+                            })
+                        }
+                    }
+                }
+                e.preventDefault();
+                El.removeEventListener('touchemove',that.playerTouchMove);
+                El.removeEventListener('touchend',that.playerTouchEnd);
+            },
+            getBuffered(){
+                let that=this;
+                let bufferedTime=0;
+                let loop=setInterval(function () {
+                    let buffered= that.PlayerComp.currentPlay.audio.buffered;
+                    if(buffered.length!=0){
+                        bufferedTime=buffered.end(buffered.length-1);
+                        that.bufferedPercent=bufferedTime/that.PlayerComp.currentPlay.audio.duration;
+                    }else {
+                        that.bufferedPercent=0;
+                    }
+                    if(that.bufferedPercent==1){
+                        clearInterval(loop);
+                    }
+                },1000)
             }
         }
     }

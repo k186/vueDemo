@@ -66,7 +66,7 @@ $rgbaWhite: rgba(255, 255, 255, .5);
 }
 
 .Scroll-Add-On {
-  height: 80px; //todo get player height
+  height: px2rem(110);
   width: 100%;
 }
 
@@ -573,15 +573,20 @@ input:-ms-input-placeholder {
   height: px2rem(110);
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background: rgba(248, 248, 248, 0.98);
 }
 .player-box-currentPlay{
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: inherit;
+}
+.player-box-currentPlay-box{
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
+  position: absolute;
+  width: 100%;
 }
 .player-box-poster-img {
   width: px2rem(90);
@@ -607,14 +612,14 @@ input:-ms-input-placeholder {
   font-size: px2rem(24);
 }
 
-.player-box-text-lyric, .player-box-text-title {
-  width: px2rem(410);
+.player-box-text-lyric, .player-box-text-title{
+  width: px2rem(400);
   min-height: px2rem(43);
   @include wordEllipsis();
 }
 
 .player-box-btn {
-  width: 100%;
+  width: px2rem(300);
   height: 100%;
   line-height: px2rem(110);
   padding: 0 px2rem(10);

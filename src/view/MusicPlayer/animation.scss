@@ -16,8 +16,8 @@
 }
 
 .right2left-enter-active, .right2left-leave-active,.left2right-enter-active, .left2right-leave-active {
-  -webkit-transition: all .3s cubic-bezier(.26, .67, .75, .97);
-  transition: all .3s cubic-bezier(.26, .67, .75, .97)
+  -webkit-transition: all .45s cubic-bezier(.26, .67, .75, .97);
+  transition: all .45s cubic-bezier(.26, .67, .75, .97)
 }
 
 .right2left-enter,.left2right-leave-active {
