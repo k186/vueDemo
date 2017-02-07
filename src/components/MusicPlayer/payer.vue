@@ -4,8 +4,8 @@
             <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
                 <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
                     <div class="player-box-poster" >
-                        <img v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
-                        <img v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
+                        <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
+                        <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
                     </div>
                     <div class="player-box-text">
                         <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
@@ -38,7 +38,8 @@
                     startPointX:0,
                     endPointX:0,
                     endTimeStamp:0
-                }
+                },
+                circleLoop:''
             }
         },
         computed: mapGetters({
@@ -65,6 +66,7 @@
                     this.$store.dispatch('playerPlay', {PlayerComp});
                     this.isPlayEnd('start');
                     this.getBuffered();
+                    this.circleLoop='circleLoop';
                 }
             },
             pause(){
@@ -79,6 +81,7 @@
                     };
                     this.$store.dispatch('playerPause', {PlayerComp});
                     this.isPlayEnd('pause');
+                    this.circleLoop='circleLoopPause';
                 }
             },
             next(){
@@ -108,6 +111,14 @@
             },
             getUid(){
                 let uid = this.playOrder[this.currentIndex];
+                let PlayerComp = {
+                    currentPlay: {
+                        audio: this.PlayerComp.currentPlay.audio,
+                        duration: 0,
+                        currentTime: 0,
+                    }
+                };
+                this.$store.dispatch('playerPlay', {PlayerComp});
                 this.$store.dispatch('playerNext', {uid})
             },
             initPlayOrder(){

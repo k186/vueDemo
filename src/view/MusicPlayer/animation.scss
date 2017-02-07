@@ -30,3 +30,25 @@
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
 }
+.circleLoop{
+  animation-name: roate;
+  animation-duration: 38s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+.circleLoopPause{
+  animation-name: roate;
+  animation-duration: 38s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state:paused;
+}
+@keyframes roate {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

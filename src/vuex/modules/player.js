@@ -5,7 +5,7 @@ import * as TYPE from '../mutation-types'
 
 const state = {
     PlayerComp: {
-        playType: 3, /*1 random order singleLoop*/
+        playType: 1, /*1 random order singleLoop*/
         playStatus: 0, /*0 pause 1 play*/
         currentPlay: {
             audio: {},
