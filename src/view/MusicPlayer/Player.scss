@@ -15,6 +15,8 @@ $grayButton: #a5a5a5;
 $grayButtonText: #8f8f8f;
 $white: #fff;
 $rgbaWhite: rgba(255, 255, 255, .5);
+$mask:rgba(0,0,0,.4);
+$playListBtn:#898989;
 
 @mixin wordEllipsis {
   white-space: nowrap;
@@ -680,4 +682,78 @@ input:-ms-input-placeholder {
   font-size: px2rem(38);
   padding:0 px2rem(10);
 
+}
+/*playList -----------------------------------------*/
+.play-list-mask{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  width: 100%;
+  background: $mask;
+}
+.play-list-box{
+  position: absolute;
+  bottom: 0;
+  width: inherit;
+  height: px2rem(932);
+  background: $white;
+}
+.play-list-box-head{
+  height: px2rem(110);
+  line-height: px2rem(110);
+  border-bottom: 1px solid $listBorder;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  color: $playListBtn;
+  font-size: px2rem(32);
+}
+.play-list-box-head-btn{
+  position: relative;
+  height: inherit;
+}
+.play-list-box-head-btn,.play-list-box-head-function{
+  width: 100%;
+}
+.play-list-box-head-btn-function{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-right: px2rem(10);
+}
+.play-list-box-head-btn-playTypes{
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  height: inherit;
+}
+.play-list-box-head-btn-playType,.play-list-box-head-btn-addDownloadDelete{
+  font-size: px2rem(34);
+}
+.play-list-box-body,.play-list-box-footer,.play-list-box-head-btn-playType{
+  padding: 0 px2rem(30);
+}
+.play-list-box-head-btn-addDownloadDelete{
+  padding: 0 px2rem(20);
+}
+.play-list-box-wrapper{
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  bottom: px2rem(160);
+  top:0;
+}
+
+.play-list-box-A{
+  position: relative;
+  width: 100%;
+  &:last-child{
+    left: 100%;
+  }
+}
+.play-list-box-footer{
+  position: fixed;
+  bottom: 0;
+  height: px2rem(160);
 }
