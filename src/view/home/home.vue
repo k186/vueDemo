@@ -3,10 +3,10 @@
         <div id="home-scroller" class="scroller" style="background: #efeff4">
             <index-head></index-head>
             <nav-list :Nav="Nav"></nav-list>
-            <loading></loading>
-            <alert></alert>
             <my-footer></my-footer>
         </div>
+        <alert></alert>
+        <loading></loading>
     </div>
 </template>
 <script>
