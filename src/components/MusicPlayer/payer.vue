@@ -1,32 +1,41 @@
 <template>
-    <div class="player-box">
-        <div class="player-box-bg">
-            <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
-                <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
-                    <div class="player-box-poster" >
-                        <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
-                        <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
-                    </div>
-                    <div class="player-box-text">
-                        <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
-                        <div v-show="PlayerComp.currentPlay.title!=''" class="player-box-text-title">{{bufferedPercent}}{{PlayerComp.currentPlay.title}}</div>
-                        <div class="player-box-text-lyric"></div>
+    <div>
+        <transition name="playerToggle">
+            <div class="player-box" v-show="PlayerComp.visible">
+                <div class="player-box-bg">
+                    <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
+                        <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
+                            <div class="player-box-poster" >
+                                <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
+                                <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
+                            </div>
+                            <div class="player-box-text">
+                                <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
+                                <div v-show="PlayerComp.currentPlay.title!=''" class="player-box-text-title">{{PlayerComp.currentPlay.title}}</div>
+                                <div class="player-box-text-lyric"></div>
+                            </div>
+                        </div>
+                    </transition-group>
+                    <div class="player-box-btn">
+                        <i v-if="PlayerComp.playStatus==0" class="player-box-btn-play icon" @click="play">&#xe675;</i>
+                        <i v-if="PlayerComp.playStatus==1" class="player-box-btn-play icon" @click="pause">&#xe6ab;</i>
+                        <i class="player-box-btn-playList icon" @click="showPlayList">&#xe841;</i>
                     </div>
                 </div>
-            </transition-group>
-            <div class="player-box-btn">
-                <i v-if="PlayerComp.playStatus==0" class="player-box-btn-play icon" @click="play">&#xe675;</i>
-                <i v-if="PlayerComp.playStatus==1" class="player-box-btn-play icon" @click="pause">&#xe6ab;</i>
-                <i class="player-box-btn-playList icon">&#xe841;</i>
+                <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
             </div>
-        </div>
-        <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
+        </transition>
+        <play-list></play-list>
     </div>
 </template>
 <script>
+    import playList from './playList'
     import {mapActions, mapGetters} from 'vuex'
     export default{
         name: 'player',
+        components:{
+            playList
+        },
         data(){
             return {
                 playOrder: [],
@@ -172,6 +181,7 @@
                         if (that.PlayerComp.playStatus == 0) {
                             clearInterval(loop);
                         }
+                        console.log('loopIsPlayEnd')
                     }, 1000)
                 }
             },
@@ -186,6 +196,7 @@
                 that.touchData.startPointX=finger.pageX;
                 that.touchData.startTimeStamp=Date.now();
                 e.preventDefault();
+                console.log('touch')
             },
             playerTouchMove(e){
                 let that=this;
@@ -193,6 +204,7 @@
                 that.touchData.endPointX=finger.pageX;
                 that.touchData.endTimeStamp=Date.now();
                 e.preventDefault();
+                console.log('move')
             },
             playerTouchEnd(e){
                 let that=this;
@@ -222,6 +234,7 @@
                 e.preventDefault();
                 El.removeEventListener('touchemove',that.playerTouchMove);
                 El.removeEventListener('touchend',that.playerTouchEnd);
+                console.log('touchEnd')
             },
             getBuffered(){
                 let that=this;
@@ -234,10 +247,17 @@
                     }else {
                         that.bufferedPercent=0;
                     }
-                    if(that.bufferedPercent==1){
+                    if(that.bufferedPercent==1||that.PlayerComp.playStatus==0){
                         clearInterval(loop);
                     }
+                    console.log('getBuffered')
                 },1000)
+            },
+            showPlayList(){
+                let toggle={
+                    PlayerVisible:false
+                };
+                this.$store.dispatch('playerToggle',{toggle})
             }
         }
     }

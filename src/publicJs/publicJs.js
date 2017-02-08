@@ -2,21 +2,33 @@ import IScroll from 'iscroll'
 export default {
     name:'InitScroll',
     myScroll:{},
-    initScroll:function (wrapper,scrooler) {
+    initScroll:function (wrapper,scrooler,option) {
         let that=this;
         let timer=window.setInterval(function(){
-            that.myScroll = new IScroll('#'+wrapper, { mouseWheel: true,click:that.isClick() });
+            if(option){
+                option.click=that.isClick();
+                that.myScroll = new IScroll('#'+wrapper,option);
+            }else {
+                that.myScroll = new IScroll('#'+wrapper, { mouseWheel: false,click:that.isClick() });
+            }
             let scrollerHeight = window.document.getElementById(scrooler).clientHeight;
             if(scrollerHeight){
+                window.addEventListener('resize',function () {
+                    let tid;
+                    clearTimeout(tid);
+                    tid=setTimeout(function(){
+                        that.refresh(that.myScroll)
+                    },300);
+                    console.log('refreshScroll')
+                },false);
                 window.clearInterval(timer);
             }
-            that.myScroll.refresh();
+            that.refresh(that.myScroll);
         },50);
         document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     },
-    refresh:function () {
-        let that=this;
-        that.myScroll.refresh();
+    refresh:function (myScroll) {
+        myScroll.refresh();
     },
     isClick:function () {
         if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return true;

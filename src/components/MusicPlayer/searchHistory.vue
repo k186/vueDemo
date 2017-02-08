@@ -62,7 +62,7 @@
                         this.$store.dispatch('updateHistory', {searchHistory})
                     }
                 }
-                publicJs.refresh();
+                publicJs.initScroll('history-wrapper','history-scroller');
             }
         }
     }
