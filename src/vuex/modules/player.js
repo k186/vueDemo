@@ -5,7 +5,7 @@ import * as TYPE from '../mutation-types'
 const state = {
     PlayerComp: {
         visible:true,
-        playType: 1, /*1 random order singleLoop*/
+        playType: 2, /*1 random order singleLoop*/
         playStatus: 0, /*0 pause 1 play*/
         playOrder:[],
         currentPlay: {
@@ -27,15 +27,18 @@ const state = {
             currentPlayList: {
                 count:0,
                 sheetCode:'',
+                title:'',
                 list:[]
             },
             historyList: {
                 count:0,
+                title:'',
                 sheetCode:'',
                 list:[]
             },
             radioList:{
                 count:0,
+                title:'',
                 sheetCode:'',
                 list:[]
             },
@@ -115,6 +118,9 @@ const mutations = {
     [TYPE.PLAYER_EVENT_UPDATE_lIST](state,{list}){
         state.PlayerComp.SheetLists=list.SheetLists;
         //todo
+    },
+    [TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX](state,{playIndex}){
+        state.PlayerComp.currentPlay.playOrderIndex=playIndex.playOrderIndex;
     }
 };
 const actions = {
@@ -143,6 +149,7 @@ const actions = {
                     audio: state.PlayerComp.currentPlay.audio,
                     duration: state.PlayerComp.currentPlay.audio.duration,
                     currentTime: state.PlayerComp.currentPlay.currentTime,
+                    playOrderIndex:state.PlayerComp.playOrder.indexOf(state.PlayerComp.currentPlay.uid)
                 }
             };
             commit(TYPE.PLAYER_EVENT_PLAY, {PlayerComp});
@@ -202,7 +209,8 @@ const actions = {
                         radioList:{
                             count:0,
                             sheetCode:'',
-                            list:[]
+                            list:[],
+                            title:''
                         },
                         initOrder:true
                     };
@@ -254,6 +262,7 @@ const actions = {
                             count:count,
                             sheetCode:sheetCode,
                             list:tmpArr,
+                            title:currentPlayList.title
                         },
                         historyList:currentPlayList,
                         radioList:{
@@ -282,7 +291,9 @@ const actions = {
             dispatch('initPlayOrder')
         }
     },
-
+    updatePlayOrderIndex({commit},{playIndex}){
+        commit(TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX,{playIndex})
+    },
     initPlayOrder({commit}){
         let playOrder = [];
         let DataArr = state.PlayerComp.playList.currentPlayList.list;
@@ -295,7 +306,7 @@ const actions = {
             playOrder.sort(function () {
                 return 0.5 - Math.random()
             });
-        } else if (this.PlayerComp.playType == 2 || this.PlayerComp.playType == 3) {
+        } else if (state.PlayerComp.playType == 2 || state.PlayerComp.playType == 3) {
             /*order*/
         }
         commit(TYPE.PLAYER_EVENT_PLAY_ORDER,{playOrder})
@@ -312,7 +323,7 @@ const actions = {
         };
         commit(TYPE.PLAYER_EVENT_PAUSE, {PlayerComp})
     },
-    playerNext({commit}){
+    playerNext({commit,dispatch}){
         let currentPlay={
             currentTime: 0,
             process:0,
@@ -324,8 +335,20 @@ const actions = {
             artist: '',
             album: '',
         };
-        if(state.PlayerComp.playList.list.length!=0){
-            let songList=state.PlayerComp.playList.list;
+        let $index=state.PlayerComp.currentPlay.playOrderIndex;
+        if(state.PlayerComp.playType!=3){/*3 loop*/
+            $index+=1;
+            if($index>state.PlayerComp.playOrder.length-1){
+                $index=0;
+            }
+        }
+        let playIndex={
+            playOrderIndex:$index
+        };
+        dispatch('updatePlayOrderIndex',{playIndex});
+        let uid=state.PlayerComp.playOrder[state.PlayerComp.currentPlay.playOrderIndex];
+        if(state.PlayerComp.playList.currentPlayList.list.length!=0){
+            let songList=state.PlayerComp.playList.currentPlayList.list;
             for(let i=0;i<songList.length;i++){
                 if(songList[i].song.uid==uid){
                     currentPlay.uid=uid;
@@ -339,8 +362,44 @@ const actions = {
         }
         commit(TYPE.PLAYER_EVENT_NEXT, {currentPlay});
     },
-    playerPrevious({commit}){
-
+    playerPrevious({commit,dispatch}){
+        let currentPlay={
+            currentTime: 0,
+            process:0,
+            duration: 0,
+            url: '',
+            poster:'',
+            uid:'',
+            title: '',
+            artist: '',
+            album: '',
+        };
+        let $index=state.PlayerComp.currentPlay.playOrderIndex;
+        if(state.PlayerComp.playType!=3){/*3 loop*/
+            $index-=1;
+            if($index<0){
+                $index=state.PlayerComp.playOrder.length-1;
+            }
+        }
+        let playIndex={
+            playOrderIndex:$index
+        };
+        dispatch('updatePlayOrderIndex',{playIndex});
+        let uid=state.PlayerComp.playOrder[state.PlayerComp.currentPlay.playOrderIndex];
+        if(state.PlayerComp.playList.currentPlayList.list.length!=0){
+            let songList=state.PlayerComp.playList.currentPlayList.list;
+            for(let i=0;i<songList.length;i++){
+                if(songList[i].song.uid==uid){
+                    currentPlay.uid=uid;
+                    currentPlay.url=songList[i].song.url;
+                    currentPlay.poster=songList[i].song.poster;
+                    currentPlay.title=songList[i].song.title;
+                    currentPlay.artist=songList[i].song.artist;
+                    currentPlay.album=songList[i].song.album;
+                }
+            }
+        }
+        commit(TYPE.PLAYER_EVENT_PREVIOUS, {currentPlay});
     },
     playerProcess({commit}){
         let currentTime = state.PlayerComp.currentPlay.audio.currentTime;
@@ -367,8 +426,15 @@ const actions = {
     playerToggle({commit},{toggle}){
         commit(TYPE.PLAYER_EVENT_TOGGLE,{toggle})
     },
-    playerTogglePlayType({commit},{playType}){
-        commit(TYPE.PLAYER_EVENT_TOGGLE_PLAY_TYPE,{playType})
+    playerTogglePlayType({commit,dispatch}){
+        let currentPlayType=state.PlayerComp.playType;
+        currentPlayType+=1;
+        currentPlayType=currentPlayType>3?1:currentPlayType;
+        let playType={
+            playType:currentPlayType
+        };
+        commit(TYPE.PLAYER_EVENT_TOGGLE_PLAY_TYPE,{playType});
+        dispatch('initPlayOrder');
     },
 };
 export default {

@@ -67,7 +67,7 @@
             next(){
                 /*is loop*/
                 this.swipeChange='right2left';
-                this.$store.dispatch('playerPrevious');
+                this.$store.dispatch('playerNext');
                 let that=this;
                 this.$nextTick(function () {
                     that.play()
@@ -81,28 +81,6 @@
                 this.$nextTick(function () {
                     that.play()
                 })
-            },
-            getUid(){
-                let uid = this.playOrder[this.currentIndex];
-                this.$store.dispatch('playerNext', {uid})
-            },
-            initPlayOrder(){
-                let uidArr = [];
-                let DataArr = this.PlayerComp.playList.list;
-                for (let i = 0; i < DataArr.length; i++) {
-                    uidArr[i] = DataArr[i].song.uid;
-                }
-                /*set playOrder list*/
-                if (this.PlayerComp.playType == 1) {
-                    /*random*/
-                    uidArr.sort(function () {
-                        return 0.5 - Math.random()
-                    });
-                    this.playOrder = uidArr;
-                } else if (this.PlayerComp.playType == 2 || this.PlayerComp.playType == 3) {
-                    /*order*/
-                    this.playOrder = uidArr;
-                }
             },
             /*滑动手势*/
             //todo  set custom directive todo

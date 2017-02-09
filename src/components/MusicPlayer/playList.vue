@@ -8,11 +8,11 @@
                         <!--current-->
                         <div class="play-list-box-body-box" id="currentPlay">
                             <div class="play-list-box-body-box-head">
-                                <div class="play-list-head-btn">
-                                    <span class="play-list-head-btn-icon icon" v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
-                                    <span class="play-list-head-btn-text" v-if="PlayerComp.playType==1">随机播放</span>
-                                    <span class="play-list-head-btn-text" v-if="PlayerComp.playType==2">顺序播放</span>
-                                    <span class="play-list-head-btn-text" v-if="PlayerComp.playType==3">单曲循环</span>
+                                <div class="play-list-head-btn" @click="toggleType">
+                                    <span stop class="play-list-head-btn-icon-playType icon" v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
+                                    <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==1">随机播放</span>
+                                    <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==2">顺序播放</span>
+                                    <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==3">单曲循环</span>
                                 </div>
                                 <div class="play-list-head-btn">
                                     <span class="play-list-head-btn-icon icon">&#xe627;</span>
@@ -117,6 +117,10 @@
                     PlayerVisible: true
                 };
                 this.$store.dispatch('playerToggle', {toggle})
+            },
+            toggleType(){
+                this.$store.dispatch('playerTogglePlayType')
+                console.log('1111')
             }
         },
         components:{

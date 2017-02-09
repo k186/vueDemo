@@ -42,11 +42,11 @@ $listBackground:rgba(228, 228, 228, 0.98);
 
 @font-face {
   font-family: 'iconfont';  /* project id 226254 */
-  src: url('//at.alicdn.com/t/font_c1sawuxpbxk73nmi.eot');
-  src: url('//at.alicdn.com/t/font_c1sawuxpbxk73nmi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_c1sawuxpbxk73nmi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_c1sawuxpbxk73nmi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_c1sawuxpbxk73nmi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_kmi1pslxdh1tt9.eot');
+  src: url('//at.alicdn.com/t/font_kmi1pslxdh1tt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_kmi1pslxdh1tt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_kmi1pslxdh1tt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_kmi1pslxdh1tt9.svg#iconfont') format('svg');
 }
 
 .Player-BG {
@@ -749,7 +749,7 @@ input:-ms-input-placeholder {
   .play-list-head-btn{
     line-height: inherit;
   }
-  .play-list-head-btn-icon{
+  .play-list-head-btn-icon,.play-list-head-btn-icon-playType{
     color: $playListBtn;;
     line-height: inherit;
     vertical-align: middle;
@@ -761,6 +761,10 @@ input:-ms-input-placeholder {
     &:last-child{
       padding-right: 0;
     }
+  }
+  .play-list-head-btn-icon-playType{
+    padding-right: 0;
+    font-size: px2rem(42);
   }
 }
 .play-list-box-body-box-wrapper{
