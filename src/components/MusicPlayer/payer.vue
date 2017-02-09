@@ -6,12 +6,12 @@
                     <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
                         <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
                             <div class="player-box-poster" >
-                                <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster!=''" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
-                                <img :class="circleLoop" v-if="PlayerComp.currentPlay.poster==''" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
+                                <img :class="PlayerComp.playStatus==1?'circleLoop':'circleLoopPause'" v-if="PlayerComp.currentPlay.poster" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
+                                <img v-if="!PlayerComp.currentPlay.poster" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
                             </div>
                             <div class="player-box-text">
-                                <div v-show="PlayerComp.currentPlay.title==''" class="player-box-text-title">QQ音乐</div>
-                                <div v-show="PlayerComp.currentPlay.title!=''" class="player-box-text-title">{{PlayerComp.currentPlay.title}}</div>
+                                <div v-show="!PlayerComp.currentPlay.title" class="player-box-text-title">QQ音乐</div>
+                                <div v-show="PlayerComp.currentPlay.title" class="player-box-text-title">{{PlayerComp.currentPlay.title}}</div>
                                 <div class="player-box-text-lyric"></div>
                             </div>
                         </div>
@@ -47,87 +47,43 @@
                     startPointX:0,
                     endPointX:0,
                     endTimeStamp:0
-                },
-                circleLoop:''
+                }
             }
         },
         computed: mapGetters({
             PlayerComp: 'PlayerComp'
         }),
         mounted(){
-            this.PlayerComp.currentPlay.audio = document.getElementById('audio');
-            let PlayerComp = null;
-            this.$store.dispatch('playerInit', {PlayerComp});
-            this.initPlayOrder();
+            this.$store.dispatch('playerInit');
+            //todo init play list
         },
         methods: {
             play(){
-                if (this.PlayerComp.currentPlay.url != '') {
-                    this.PlayerComp.currentPlay.audio.currentTime = this.PlayerComp.currentPlay.currentTime;
-                    this.PlayerComp.currentPlay.audio.play();
-                    let PlayerComp = {
-                        currentPlay: {
-                            audio: this.PlayerComp.currentPlay.audio,
-                            duration: this.PlayerComp.currentPlay.audio.duration,
-                            currentTime: this.PlayerComp.currentPlay.currentTime,
-                        }
-                    };
-                    this.$store.dispatch('playerPlay', {PlayerComp});
-                    this.isPlayEnd('start');
-                    this.getBuffered();
-                    this.circleLoop='circleLoop';
-                }
+                this.$store.dispatch('playerPlay');
             },
             pause(){
-                if (this.PlayerComp.currentPlay.url != '') {
-                    this.PlayerComp.currentPlay.audio.pause();
-                    let PlayerComp = {
-                        currentPlay: {
-                            audio: this.PlayerComp.currentPlay.audio,
-                            duration: this.PlayerComp.currentPlay.audio.duration,
-                            currentTime: this.PlayerComp.currentPlay.audio.currentTime,
-                        }
-                    };
-                    this.$store.dispatch('playerPause', {PlayerComp});
-                    this.isPlayEnd('pause');
-                    this.circleLoop='circleLoopPause';
-                }
+                this.$store.dispatch('playerPause');
             },
             next(){
                 /*is loop*/
-                if(this.PlayerComp.playType!=3){
-                    this.currentIndex += 1;
-                    if (this.currentIndex > this.playOrder.length - 1) {
-                        this.currentIndex = 0
-                    }
-                    this.swipeChange='right2left';
-                    this.getUid();
-                }
+                this.swipeChange='right2left';
+                this.$store.dispatch('playerPrevious');
+                let that=this;
                 this.$nextTick(function () {
-                    this.play();
-                });
+                    that.play()
+                })
             },
             previous(){
-                this.currentIndex -= 1;
-                if (this.currentIndex < 0) {
-                    this.currentIndex = this.playOrder.length - 1;
-                }
                 this.swipeChange='left2right';
-                this.getUid();
+                //this.getUid();
+                this.$store.dispatch('playerPrevious');
+                let that=this;
                 this.$nextTick(function () {
-                    this.play();
-                });
+                    that.play()
+                })
             },
             getUid(){
                 let uid = this.playOrder[this.currentIndex];
-                let PlayerComp = {
-                    currentPlay: {
-                        audio: this.PlayerComp.currentPlay.audio,
-                        duration: 0,
-                        currentTime: 0,
-                    }
-                };
-                this.$store.dispatch('playerPlay', {PlayerComp});
                 this.$store.dispatch('playerNext', {uid})
             },
             initPlayOrder(){
@@ -148,55 +104,20 @@
                     this.playOrder = uidArr;
                 }
             },
-            isPlayEnd(type){
-                if (type == 'start') {
-                    let that = this;
-                    let loop = setInterval(function () {
-                        let currentTime = that.PlayerComp.currentPlay.audio.currentTime;
-                        let duration = that.PlayerComp.currentPlay.audio.duration;
-                        //todo get buffer set download process
-                        let PlayerComp = {
-                            currentPlay: {
-                                process: currentTime / duration,
-                                duration:duration
-                            }
-                        };
-                        that.$store.dispatch('playerProcess', {PlayerComp});
-                        /*auto end*/
-                        if (currentTime == duration) {
-                            that.isPlayEnd('pause');
-                            that.pause();
-                            let PlayerComp = {
-                                currentPlay: {
-                                    audio: that.PlayerComp.currentPlay.audio,
-                                    duration: 0,
-                                    currentTime: 0,
-                                }
-                            };
-                            that.$store.dispatch('playerPause', {PlayerComp});
-                            that.next();
-                            clearInterval(loop);
-                        }
-                        /*press pause*/
-                        if (that.PlayerComp.playStatus == 0) {
-                            clearInterval(loop);
-                        }
-                        console.log('loopIsPlayEnd')
-                    }, 1000)
-                }
-            },
             /*滑动手势*/
             //todo  set custom directive todo
             playerTouch(e){
-                let that=this;
-                let El=document.getElementById('playerTouch');
-                El.addEventListener('touchmove',that.playerTouchMove,false);
-                El.addEventListener('touchend',that.playerTouchEnd,false);
-                let finger=e.changedTouches[0];
-                that.touchData.startPointX=finger.pageX;
-                that.touchData.startTimeStamp=Date.now();
-                e.preventDefault();
-                console.log('touch')
+                if(this.PlayerComp.currentPlay.url){
+                    let that=this;
+                    let El=document.getElementById('playerTouch');
+                    El.addEventListener('touchmove',that.playerTouchMove,false);
+                    El.addEventListener('touchend',that.playerTouchEnd,false);
+                    let finger=e.changedTouches[0];
+                    that.touchData.startPointX=finger.pageX;
+                    that.touchData.startTimeStamp=Date.now();
+                    e.preventDefault();
+                    console.log('touch')
+                }
             },
             playerTouchMove(e){
                 let that=this;
@@ -235,23 +156,6 @@
                 El.removeEventListener('touchemove',that.playerTouchMove);
                 El.removeEventListener('touchend',that.playerTouchEnd);
                 console.log('touchEnd')
-            },
-            getBuffered(){
-                let that=this;
-                let bufferedTime=0;
-                let loop=setInterval(function () {
-                    let buffered= that.PlayerComp.currentPlay.audio.buffered;
-                    if(buffered.length!=0){
-                        bufferedTime=buffered.end(buffered.length-1);
-                        that.bufferedPercent=bufferedTime/that.PlayerComp.currentPlay.audio.duration;
-                    }else {
-                        that.bufferedPercent=0;
-                    }
-                    if(that.bufferedPercent==1||that.PlayerComp.playStatus==0){
-                        clearInterval(loop);
-                    }
-                    console.log('getBuffered')
-                },1000)
             },
             showPlayList(){
                 let toggle={

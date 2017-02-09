@@ -23,6 +23,7 @@ export default {
                 },false);
                 window.clearInterval(timer);
             }
+            console.log('initScroll');
             that.refresh(that.myScroll);
         },50);
         document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

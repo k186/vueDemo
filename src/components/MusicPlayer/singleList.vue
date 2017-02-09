@@ -5,7 +5,7 @@
             <span class="single-list-text-quality">{{Data.song.markTitle.quality}}</span>
             <span class="single-list-text-artist">-&nbsp;{{Data.song.artist}}</span>
         </div>
-        <div  class="single-list-control" v-if="type==1">
+        <div  class="single-list-control" v-if="from!='history'">
             <div class="single-list-isPlay" v-if="Data.song.uid==PlayerComp.currentPlay.uid" :class="PlayerComp.playStatus==0?'playing':'pause'"></div>
             <div class="single-list-isLike"><span class="icon" :class="Data.isLike?'like':''" v-html="Data.isLike?'&#xe99f;':'&#xe613;'"></span></div>
             <div class="single-list-delete"><span class="icon">&#xe6bf;</span></div>
@@ -20,19 +20,29 @@
             PlayerComp: 'PlayerComp'
         }),
         props:{
-            type:{
-                type:Number,
+            from:{
                 required:true
             },
             Data:{
                 type:Object,
                 required:true
+            },
+            sheetCode:{
+                required:true
             }
         },
         methods:{
             play(uid){
-                this.$store.dispatch('playerNext',{uid});
-                //todo 把播放方法放到 player js 里面
+                let option={
+                    uid:uid,
+                    sheetCode:this.sheetCode,
+                    from:this.from
+                };
+                this.$store.dispatch('playerSet',{option});
+                let that=this;
+                this.$nextTick(function () {
+                    that.$store.dispatch('playerPlay')
+                })
             }
         }
     }

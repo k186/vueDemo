@@ -705,7 +705,7 @@ input:-ms-input-placeholder {
 }
 .play-list-box-body-scroller{
   height: px2rem(932-176);
-  width: px2rem(750*2);
+ /* width: px2rem(750*2);*/
   position: absolute;
   z-index: 1;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -800,6 +800,9 @@ input:-ms-input-placeholder {
   line-height: px2rem(108);
   color: $mainTitle;
   font-size: px2rem(32);
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   border-top:1px solid $playListBtn;
 }
 /*singleList -----------------------------*/

@@ -20,6 +20,5 @@ export default new Vuex.Store({
         searchBar,
         user,
         player
-
     }
 })

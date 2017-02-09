@@ -6,7 +6,7 @@
                 <div class="play-list-box-body-wrapper" id="play-list-box-body-wrapper">
                     <div class="play-list-box-body-scroller" id="play-list-box-body-scroller">
                         <!--current-->
-                        <div class="play-list-box-body-box" v-if="PlayerComp.playList.type==1" id="currentPlay">
+                        <div class="play-list-box-body-box" id="currentPlay">
                             <div class="play-list-box-body-box-head">
                                 <div class="play-list-head-btn">
                                     <span class="play-list-head-btn-icon icon" v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
@@ -22,36 +22,37 @@
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="currentPlay-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="currentPlay-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.list" :Data="song" :type="1"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :Data="song" from="list" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
                         <!--radio-->
-                        <div class="play-list-box-body-box" v-if="PlayerComp.playList.type==2" id="RadioList">
+                        <div v-if="PlayerComp.playList.radioList.list.length!=0" class="play-list-box-body-box" id="RadioList">
                             <div class="play-list-box-body-box-head">
 
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="RadioList-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="RadioList-scroller">
-
+                                    <single-list v-for="song in PlayerComp.playList.radioList.list" :Data="song" from="radio" :sheetCode="PlayerComp.playList.radioList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
                         <!--history-->
-                        <div class="play-list-box-body-box" id="historyList">
+                        <!--todo-->
+                        <div v-if="PlayerComp.playList.historyList.list.length!=0" class="play-list-box-body-box" id="historyList">
                             <div class="play-list-box-body-box-head">
                                 上次试听列表(82首):歌单·222
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="historyList-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="historyList-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.historyList" :Data="song" :type="3"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.historyList.list" :Data="song" from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="play-list-box-footer">
-                    <div class="play-list-box-point">
+                    <div class="play-list-box-point" v-show="PlayerComp.playList.historyList.list.length!=0">
                         <ul class="play-list-point-ul">
                             <li class="play-list-point-li active"></li>
                             <li class="play-list-point-li"></li>
@@ -78,7 +79,10 @@
         }),
         mounted(){
             publicJs.setIndex('play-list-mask');
-            publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
+            if(this.PlayerComp.playList.currentPlayList.list.length!=0){
+                publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
+                //todo radio history
+            }
         },
         watch: {
             'PlayerComp.playList.visible': function (val, oldVal) {
@@ -95,6 +99,15 @@
                     setTimeout(function () {
                         El.style.display = 'none';
                     }, 500)
+                }
+                let markA=this.PlayerComp.playList.radioList.list.length!=0;
+                let markB=this.PlayerComp.playList.historyList.list.length!=0;
+                if(markA&&markB){
+                    document.getElementById('play-list-box-body-scroller').style=(750*3)/75+'rem'
+                }else if(markA||markB){
+                    document.getElementById('play-list-box-body-scroller').style=(750*2)/75+'rem'
+                }else if(!markA&&!markB){
+                    document.getElementById('play-list-box-body-scroller').style=(750)/75+'rem'
                 }
             }
         },

@@ -1,7 +1,7 @@
 <template>
     <div class="song-sheet-box">
         <div class="song-sheet-box-header">
-            <div class="song-sheet-box-header-title">我的歌单 <span>32</span></div>
+            <div class="song-sheet-box-header-title" @click="inittest">我的歌单 <span>32</span></div>
             <router-link to="/Music/songSheet" class="song-sheet-box-header-btn icon">&#xe99c;</router-link>
         </div>
         <song-sheet-single :listData="listData"></song-sheet-single>
@@ -41,6 +41,20 @@
         },
         components:{
             songSheetSingle
+        },
+        methods:{
+            inittest(){
+                let option={
+                    uid:8548,
+                    sheetCode:1,
+                    from:'sheet'
+                };
+                this.$store.dispatch('playerSet',{option});
+                let that=this;
+                this.$nextTick(function () {
+                    that.$store.dispatch('playerPlay')
+                })
+            }
         }
     }
 </script>
