@@ -1,6 +1,6 @@
 <template>
     <div class="personal-radio">
-        <div class="radio-poster">
+        <div class="radio-poster" @click="playPersonalRadio">
             <div class="poster-play icon">&#xe675;</div>
             <img src="../../../static/imgs/poster/defalut.png" class="poster-img">
         </div>
@@ -11,8 +11,17 @@
     </div>
 </template>
 <script>
+    import {mapActions,mapGetters} from 'vuex'
     export default{
-        name:'personalRadio'
+        name:'personalRadio',
+        methods:{
+            playPersonalRadio(){
+                let option={
+                    from:'radio'
+                };
+                this.$store.dispatch('playerSet',{option});
+            }
+        }
     }
 </script>
 <style>

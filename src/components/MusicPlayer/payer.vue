@@ -22,10 +22,10 @@
                         <i class="player-box-btn-playList icon" @click="showPlayList">&#xe841;</i>
                     </div>
                 </div>
-                <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
             </div>
         </transition>
-        <play-list></play-list>
+        <play-list v-if="PlayerComp.playList.visible"></play-list>
+        <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
     </div>
 </template>
 <script>
@@ -65,22 +65,12 @@
                 this.$store.dispatch('playerPause');
             },
             next(){
-                /*is loop*/
                 this.swipeChange='right2left';
                 this.$store.dispatch('playerNext');
-                let that=this;
-                this.$nextTick(function () {
-                    that.play()
-                })
             },
             previous(){
                 this.swipeChange='left2right';
-                //this.getUid();
                 this.$store.dispatch('playerPrevious');
-                let that=this;
-                this.$nextTick(function () {
-                    that.play()
-                })
             },
             /*滑动手势*/
             //todo  set custom directive todo
@@ -119,12 +109,10 @@
                     if(Math.abs(distance)>=150){
                         if(direction){
                             that.$nextTick(function () {
-                                that.pause();
                                 that.previous();
                             })
                         }else {
                             that.$nextTick(function () {
-                                that.pause();
                                 that.next();
                             })
                         }

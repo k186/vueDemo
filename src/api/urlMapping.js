@@ -12,8 +12,8 @@ class urlMapping {
             'GET_SEARCH_HISTORY': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/history' + (this.isLocal ? '.json' : '.json'),
             /*搜索结构*/
             'GET_SEARCH_RESULT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
-
-
+            /*个性电台*/
+            'GET_PERSONAL_RADIO': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/peraonalRadio' + (this.isLocal ? '.json' : '.json'),
         };
         return urls[url]
     }

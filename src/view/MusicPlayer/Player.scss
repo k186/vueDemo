@@ -684,10 +684,6 @@ input:-ms-input-placeholder {
   top:0;
   bottom: 0;
   width: 100%;
-  -webkit-transition: all .45s ease-in-out;
-  transition: all .45s ease-in-out;
-  display: none;
-  background: $mask;
 }
 .play-list-box{
   position: absolute;
@@ -758,6 +754,15 @@ input:-ms-input-placeholder {
   .play-list-head-btn-icon-playType{
     padding-right: 0;
     font-size: px2rem(42);
+  }
+  .play-list-head-btn-text{
+    font-size: px2rem(32);
+    color: $mainTitle;
+    vertical-align: middle;
+  }
+  .play-list-head-current-title{
+    font-size: px2rem(28);
+    font-style: normal;
   }
 }
 .play-list-box-body-box-wrapper{

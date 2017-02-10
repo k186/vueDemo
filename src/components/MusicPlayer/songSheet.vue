@@ -50,10 +50,6 @@
                     from:'sheet'
                 };
                 this.$store.dispatch('playerSet',{option});
-                let that=this;
-                this.$nextTick(function () {
-                    that.$store.dispatch('playerPlay')
-                })
             }
         }
     }

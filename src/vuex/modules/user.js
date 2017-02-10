@@ -295,10 +295,7 @@ const getters = {
     userData: state => state.userData
 };
 const mutations = {
-    [TYPE.USER_EVENT_UPDATE_PLAYER](state){
-       state.PlayerComp.SheetLists=list.SheetList;
-       //todo  more list
-    },
+
 };
 const actions = {
     updatePlayer({dispatch}){
