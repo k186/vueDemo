@@ -353,23 +353,16 @@ input:-ms-input-placeholder {
   width: px2rem(20);
   background: rgba(255, 255, 255, .5);
   position: relative;
-  -webkit-transform: rotate(20deg);
-  transform: rotate(20deg);
-  -webkit-filter: blur(2px);
   filter: blur(2px);
-  animation: shinning 5s infinite;
+  animation: shinning 3s infinite;
 
 }
-
 @keyframes shinning {
   0% {
-    left: 0;
-  }
-  15% {
-    left: 100%;
+    transform:  translateX(0)   rotateY(20deg);
   }
   100% {
-    left: 200%;
+    transform:   translateX(px2rem(250)) rotateY(20deg);
   }
 }
 
