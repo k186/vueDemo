@@ -6,7 +6,7 @@
                 <div class="play-list-box-body-wrapper" id="play-list-box-body-wrapper">
                     <div class="play-list-box-body-scroller" id="play-list-box-body-scroller">
                         <!--current-->
-                        <div v-if="PlayerComp.playList.radioList.list.length==0"class="play-list-box-body-box" id="currentPlay">
+                        <div class="play-list-box-body-box" id="currentPlay">
                             <div class="play-list-box-body-box-head">
                                 <div class="play-list-head-btn" @click="toggleType">
                                     <span stop class="play-list-head-btn-icon-playType icon" v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
@@ -23,20 +23,6 @@
                             <div class="play-list-box-body-box-wrapper" id="currentPlay-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="currentPlay-scroller">
                                     <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :Data="song" from="list" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
-                                </div>
-                            </div>
-                        </div>
-                        <!--radio-->
-                        <div v-if="PlayerComp.playList.radioList.list.length!=0" class="play-list-box-body-box" id="RadioList">
-                            <div class="play-list-box-body-box-head">
-                                <div class="play-list-head-btn">
-                                    个性电台
-                                    <span>换一批</span>
-                                </div>
-                            </div>
-                            <div class="play-list-box-body-box-wrapper" id="RadioList-wrapper">
-                                <div class="play-list-box-body-box-scroller" id="RadioList-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.radioList.list" :Data="song" from="radio" :sheetCode="PlayerComp.playList.radioList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
@@ -79,17 +65,11 @@
         }),
         mounted(){
             publicJs.setIndex('play-list-mask');
-            let markA=this.PlayerComp.playList.radioList.list.length!=0;
             let markB=this.PlayerComp.playList.historyList.list.length!=0;
             /*init scroll*/
             if(this.PlayerComp.playList.currentPlayList.list.length!=0){
                 this.$nextTick(function () {
                     publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
-                });
-            }
-            if(markA){
-                this.$nextTick(function () {
-                    publicJs.initScroll('RadioList-wrapper','RadioList-scroller',{scrollX: false, scrollY: true})
                 });
             }
             if(markB){
@@ -99,14 +79,9 @@
             }
             /*---scroll end*/
             this.$nextTick(function () {
-                if(markA&&markB){
-                    document.getElementById('play-list-box-body-scroller').style.width=(750*3)/75+'rem';
-                }else if(markA){
-                    document.getElementById('play-list-box-body-scroller').style.width=(750)/75+'rem';
-                }else if(markB){
+                if(markB){
                     document.getElementById('play-list-box-body-scroller').style.width=(750*2)/75+'rem';
-                    publicJs.initScroll('play-list-box-body-wrapper','play-list-box-body-scroller',{scrollX:true, scrollY: false,momentum: false, snap: true})
-                }else if(!markA&&!markB){
+                }else if(!markB){
                     document.getElementById('play-list-box-body-scroller').style.width=(750)/75+'rem';
                 }
             })
@@ -120,7 +95,6 @@
             },
             toggleType(){
                 this.$store.dispatch('playerTogglePlayType');
-                console.log('1111')
             }
         },
         components:{

@@ -3,7 +3,7 @@ import * as TYPE from '../mutation-types'
 const state = {
     loadingControl: {
         visible: false,
-        type: '',
+        type: '',/* success  failed loading*/
         message: '',
         mask: false,
     }

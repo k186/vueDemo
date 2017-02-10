@@ -55,7 +55,6 @@
         }),
         mounted(){
             this.$store.dispatch('playerInit');
-            //todo init play list
         },
         methods: {
             play(){
@@ -103,8 +102,7 @@
                 that.touchData.endTimeStamp=Date.now();
                 let time=that.touchData.endTimeStamp-that.touchData.startTimeStamp;
                 let distance=that.touchData.endPointX-that.touchData.startPointX;
-                let direction=true;/*true to right(next) false to left*/
-                direction=distance>0;
+                let direction=distance>0;/*true to right(next) false to left*/
                 if(time<300){
                     if(Math.abs(distance)>=150){
                         if(direction){

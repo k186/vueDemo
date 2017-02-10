@@ -8,7 +8,7 @@ const state = {
         basicInfo: {
             name: 'K186 Studio',
             img: 'url',
-            vip:3,
+            vip: 3,
             SheetList: {
                 count: 32,
                 SheetLists: [
@@ -22,7 +22,7 @@ const state = {
                         summary: '这个是简介',
                         list: [
                             {
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8545.mp3',
                                     poster: '../../../static/imgs/poster/8545.jpg',
@@ -42,7 +42,7 @@ const state = {
                                 }
                             },
                             {
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8548.mp3',
                                     poster: '../../../static/imgs/poster/8548.jpg',
@@ -63,7 +63,7 @@ const state = {
                             },
                             {
                                 isPlay: false,
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8546.mp3',
                                     poster: '../../../static/imgs/poster/8546.jpg',
@@ -84,7 +84,7 @@ const state = {
                             },
                             {
                                 isPlay: false,
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8543.mp3',
                                     poster: '../../../static/imgs/poster/8543.jpg',
@@ -116,7 +116,7 @@ const state = {
                         list: [
                             {
                                 isPlay: false,
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8546.mp3',
                                     poster: '../../../static/imgs/poster/8546.jpg',
@@ -137,7 +137,7 @@ const state = {
                             },
                             {
                                 isPlay: false,
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8543.mp3',
                                     poster: '../../../static/imgs/poster/8543.jpg',
@@ -157,7 +157,7 @@ const state = {
                                 }
                             },
                             {
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8545.mp3',
                                     poster: '../../../static/imgs/poster/8545.jpg',
@@ -177,7 +177,7 @@ const state = {
                                 }
                             },
                             {
-                                isLike:true,
+                                isLike: true,
                                 song: {
                                     url: 'http://k186studio.com/static/music/8548.mp3',
                                     poster: '../../../static/imgs/poster/8548.jpg',
@@ -202,7 +202,7 @@ const state = {
             },
             totalSong: [
                 {
-                    isLike:true,
+                    isLike: true,
                     song: {
                         url: 'http://k186studio.com/static/music/8545.mp3',
                         poster: '../../../static/imgs/poster/8545.jpg',
@@ -222,7 +222,7 @@ const state = {
                     }
                 },
                 {
-                    isLike:true,
+                    isLike: true,
                     song: {
                         url: 'http://k186studio.com/static/music/8548.mp3',
                         poster: '../../../static/imgs/poster/8548.jpg',
@@ -243,7 +243,7 @@ const state = {
                 },
                 {
                     isPlay: false,
-                    isLike:true,
+                    isLike: true,
                     song: {
                         url: 'http://k186studio.com/static/music/8546.mp3',
                         poster: '../../../static/imgs/poster/8546.jpg',
@@ -264,7 +264,7 @@ const state = {
                 },
                 {
                     isPlay: false,
-                    isLike:true,
+                    isLike: true,
                     song: {
                         url: 'http://k186studio.com/static/music/8543.mp3',
                         poster: '../../../static/imgs/poster/8543.jpg',
@@ -284,8 +284,8 @@ const state = {
                     }
                 }
             ],
-            favourite:[],
-            purchased:[],
+            favourite: [],
+            purchased: [],
         },
 
     }
@@ -295,14 +295,37 @@ const getters = {
     userData: state => state.userData
 };
 const mutations = {
-
+    [TYPE.USER_EVENT_UPDATE_PLAY_LSIT]({commit}){
+        //todo maybe use timeFlag tu update user data
+    }
 };
 const actions = {
-    updatePlayer({dispatch}){
-        let list={
-            SheetLists:state.userData.basicInfo.SheetList.SheetLists
+    updatePlayer({commit,dispatch}, {sheetCode}){
+        let currentPlayListData = null;
+        function returnList() {
+            let currentPlayList = null;
+            let dataObj = state.userData.basicInfo.SheetList.SheetLists;
+            for (let i = 0; i < dataObj.length; i++) {
+                if (dataObj[i].sheetCode == sheetCode) {
+                    currentPlayList = {
+                        count: dataObj[i].count,
+                        sheetCode: sheetCode,
+                        list: dataObj[i].list,
+                        title: dataObj[i].title
+                    };
+                    break;
+                }
+            }
+            return currentPlayList;
+        }
+        currentPlayListData = returnList();
+        let playList = {
+            currentPlayList: currentPlayListData ? currentPlayListData : {count: 0, sheetCode: '', list: [], title: ''},
+            historyList: null,
+            initOrder: true
         };
-        dispatch('updateList',{list})
+        dispatch('updatePlaylist', {playList});
+        commit(TYPE.USER_EVENT_UPDATE_PLAY_LSIT)
     }
 };
 export default {

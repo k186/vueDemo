@@ -13,14 +13,17 @@ class urlMapping {
             /*搜索结构*/
             'GET_SEARCH_RESULT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
             /*个性电台*/
-            'GET_PERSONAL_RADIO': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/peraonalRadio' + (this.isLocal ? '.json' : '.json'),
+            'GET_PERSONAL_RADIO': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/personalRadio' + (this.isLocal ? '.json' : '.json'),
         };
         return urls[url]
     }
 
     ajaxGetData (options) {
         let that=this;
-        let url=that.Mapping(options.url)
+        let url=that.Mapping(options.url);
+        if(!url){
+            return  options.callback({success: false,message:'路由错误'});
+        }
         $.ajax({
             url: url,
             type: options.type || 'get',
