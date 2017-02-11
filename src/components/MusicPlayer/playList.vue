@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <!--history-->
-                        <div v-if="PlayerComp.playList.historyList.list.length!=0" class="play-list-box-body-box" id="historyList">
+                        <div class="play-list-box-body-box" id="historyList">
                             <div class="play-list-box-body-box-head">
                                 <div class="play-list-head-btn">
                                     <span stop class="play-list-head-btn-icon-playType icon"> 上次试听列表({{PlayerComp.playList.historyList.count}}首):歌单·<i class="play-list-head-current-title">:{{PlayerComp.playList.historyList.title}}</i></span>
@@ -65,28 +65,38 @@
         }),
         mounted(){
             publicJs.setIndex('play-list-mask');
-            let markB=this.PlayerComp.playList.historyList.list.length!=0;
-            /*init scroll*/
-            if(this.PlayerComp.playList.currentPlayList.list.length!=0){
-                this.$nextTick(function () {
-                    publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
-                });
-            }
-            if(markB){
-                this.$nextTick(function () {
-                    publicJs.initScroll('historyList-wrapper','historyList-scroller',{scrollX: false, scrollY: true})
-                });
-            }
-            /*---scroll end*/
-            this.$nextTick(function () {
-                if(markB){
-                    document.getElementById('play-list-box-body-scroller').style.width=(750*2)/75+'rem';
-                }else if(!markB){
-                    document.getElementById('play-list-box-body-scroller').style.width=(750)/75+'rem';
-                }
-            })
+            this.initScroll();
         },
         methods: {
+            initScroll(){
+                let markB=this.PlayerComp.playList.historyList.list.length!=0;
+                /*init scroll*/
+                if(this.PlayerComp.playList.currentPlayList.list.length!=0){
+                    this.$nextTick(function () {
+                        publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
+                    });
+                }
+                if(markB){
+                    this.$nextTick(function () {
+                        publicJs.initScroll('historyList-wrapper','historyList-scroller',{scrollX: false, scrollY: true})
+                    });
+                }
+                /*---scroll end*/
+                this.$nextTick(function () {
+                    if(markB){
+                        document.getElementById('play-list-box-body-scroller').style.width=(750*2)/75+'rem';
+                        publicJs.initScroll('play-list-box-body-wrapper','play-list-box-body-scroller',
+                            {
+                            scrollX: true,
+                            scrollY: false,
+                            momentum: false,
+                            snap: true,}
+                            )
+                    }else if(!markB){
+                        document.getElementById('play-list-box-body-scroller').style.width=(750)/75+'rem';
+                    }
+                })
+            },
             hidePlayList(){
                 let toggle = {
                     PlayerVisible: true
