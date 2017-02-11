@@ -338,17 +338,27 @@ const actions = {
                 album: '',
             };
             let tmpArr = state.PlayerComp.playList.currentPlayList.list;
-            for (let k = 0; k < tmpArr.length; k++) {
-                if (tmpArr[k].song.uid == option.uid) {
-                    currentPlay.uid = option.uid;
-                    currentPlay.url = tmpArr[k].song.url;
-                    currentPlay.poster = tmpArr[k].song.poster;
-                    currentPlay.title = tmpArr[k].song.title;
-                    currentPlay.artist = tmpArr[k].song.artist;
-                    currentPlay.album = tmpArr[k].song.album;
-                    break;
+            if(option.uid){
+                for (let k = 0; k < tmpArr.length; k++) {
+                    if (tmpArr[k].song.uid == option.uid) {
+                        currentPlay.uid = option.uid;
+                        currentPlay.url = tmpArr[k].song.url;
+                        currentPlay.poster = tmpArr[k].song.poster;
+                        currentPlay.title = tmpArr[k].song.title;
+                        currentPlay.artist = tmpArr[k].song.artist;
+                        currentPlay.album = tmpArr[k].song.album;
+                        break;
+                    }
                 }
+            }else {
+                currentPlay.uid = tmpArr[0].song.uid;
+                currentPlay.url = tmpArr[0].song.url;
+                currentPlay.poster = tmpArr[0].song.poster;
+                currentPlay.title = tmpArr[0].song.title;
+                currentPlay.artist = tmpArr[0].song.artist;
+                currentPlay.album = tmpArr[0].song.album;
             }
+
             commit(TYPE.PLAYER_EVENT_SET_CURRENT, {currentPlay});
             if (callback) {
                 callback();
@@ -384,34 +394,13 @@ const actions = {
                 }
             });
         } else if (option.from == 'radio') {
-            let Map = new urlMapping();
-            Map.ajaxGetData({
-                url: 'GET_PERSONAL_RADIO',
-                type: 'get',
-                data: {},
-                callback: function (data) {
-                    /*if success set playlist */
-                    if (data.success) {
-                        if (!isPlayCurrent(option.uid)) {
-                            playPause();
-                            if (data.model) {
-                                updatePlayList(data.model, false, true, function () {
-                                    setCurrent();
-                                    playPlay();
-                                });
-                            }
-                        } else {
-                            updatePlayList(data.model, false, true);
-                        }
-                    } else {
-                        let loadingControl = {type: 'failed', message: data.message};
-                        dispatch('loadingShow', {loadingControl});
-                        setTimeout(function () {
-                            dispatch('loadingClose');
-                        }, 1500)
-                    }
+            dispatch('updateRadioToPlayList',{callback:function () {
+                if (!isPlayCurrent(option.uid)) {
+                    playPause();
+                    setCurrent();
+                    playPlay();
                 }
-            })
+            }});
         } else if (option.from == 'sheet') {
             /*get data from user sheet whit sheet code*/
             dispatch('updatePlayer', {sheetCode: option.sheetCode});

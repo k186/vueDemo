@@ -295,7 +295,7 @@ const getters = {
     userData: state => state.userData
 };
 const mutations = {
-    [TYPE.USER_EVENT_UPDATE_PLAY_LSIT]({commit}){
+    [TYPE.USER_EVENT_UPDATE_PLAY_LIST]({state}){
         //todo maybe use timeFlag tu update user data
     }
 };
@@ -325,7 +325,7 @@ const actions = {
             initOrder: true
         };
         dispatch('updatePlaylist', {playList});
-        commit(TYPE.USER_EVENT_UPDATE_PLAY_LSIT)
+        commit(TYPE.USER_EVENT_UPDATE_PLAY_LIST)
     }
 };
 export default {

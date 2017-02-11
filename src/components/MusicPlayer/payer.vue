@@ -40,7 +40,7 @@
             return {
                 playOrder: [],
                 currentIndex: 0,
-                swipeChange:'',
+                swipeChange:'right2left',
                 bufferedPercent:0,
                 touchData:{
                     startTimeStamp:0,

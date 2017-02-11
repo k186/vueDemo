@@ -2,11 +2,12 @@
     <div class="personal-radio">
         <div class="radio-poster" @click="playPersonalRadio">
             <div class="poster-play icon">&#xe675;</div>
-            <img src="../../../static/imgs/poster/defalut.png" class="poster-img">
+            <img  :src="personalRadio.poster" class="poster-img">
+            <img v-if="personalRadio.poster==''" src="../../../static/imgs/poster/defalut.png" class="poster-img">
         </div>
         <div class="radio-text">
-            <div class="text-title">个性电台</div>
-            <div class="text-described">来听听专门为你定制的音乐吧</div>
+            <div class="text-title">{{personalRadio.title}}</div>
+            <div class="text-described">{{personalRadio.described}}</div>
         </div>
     </div>
 </template>
@@ -14,6 +15,12 @@
     import {mapActions,mapGetters} from 'vuex'
     export default{
         name:'personalRadio',
+        computed:mapGetters({
+            personalRadio:'personalRadio'
+        }),
+        mounted(){
+          this.$store.dispatch('initRadio',{callback:null});
+        },
         methods:{
             playPersonalRadio(){
                 let option={

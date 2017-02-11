@@ -14,6 +14,8 @@ class urlMapping {
             'GET_SEARCH_RESULT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
             /*个性电台*/
             'GET_PERSONAL_RADIO': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/personalRadio' + (this.isLocal ? '.json' : '.json'),
+            /*个性电台初始化*/
+            'GET_PERSONAL_RADIO_INIT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/radioInit' + (this.isLocal ? '.json' : '.json'),
         };
         return urls[url]
     }
