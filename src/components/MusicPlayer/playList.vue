@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <!--history-->
-                        <div class="play-list-box-body-box" id="historyList">
+                        <div class="play-list-box-body-box" id="historyList" v-if="PlayerComp.playList.historyList.list.length!=0">
                             <div class="play-list-box-body-box-head">
                                 <div class="play-list-head-btn">
                                     <span stop class="play-list-head-btn-icon-playType icon"> 上次试听列表({{PlayerComp.playList.historyList.count}}首):歌单·<i class="play-list-head-current-title">:{{PlayerComp.playList.historyList.title}}</i></span>
@@ -76,15 +76,13 @@
                         publicJs.initScroll('currentPlay-wrapper','currentPlay-scroller',{scrollX: false, scrollY: true})
                     });
                 }
-                if(markB){
-                    this.$nextTick(function () {
-                        publicJs.initScroll('historyList-wrapper','historyList-scroller',{scrollX: false, scrollY: true})
-                    });
-                }
                 /*---scroll end*/
                 this.$nextTick(function () {
                     if(markB){
                         document.getElementById('play-list-box-body-scroller').style.width=(750*2)/75+'rem';
+                        this.$nextTick(function () {
+                            publicJs.initScroll('historyList-wrapper','historyList-scroller',{scrollX: false, scrollY: true})
+                        });
                         publicJs.initScroll('play-list-box-body-wrapper','play-list-box-body-scroller',
                             {
                             scrollX: true,
