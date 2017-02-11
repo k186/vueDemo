@@ -67,7 +67,7 @@ const actions = {
             currentPlayListData=currentPlayList;
             let playList = {
                 currentPlayList: currentPlayListData ? currentPlayListData : {count: 0, sheetCode: '', list: [], title: ''},
-                historyList: null,
+                historyList: {count: 0, sheetCode: '', list: [], title: ''},/*radio must set like this other set null*/
                 initOrder: true
             };
             dispatch('updatePlaylist', {playList});

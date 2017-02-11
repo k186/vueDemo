@@ -11,13 +11,13 @@ const state = {
             vip: 3,
             SheetList: {
                 count: 32,
-                SheetLists: [
+                list: [
                     {
                         sheetCode: 1,
                         title: '222',
-                        count: 82,
-                        downloaded: 32,
-                        img: 'url',
+                        count: 4,
+                        downloaded: 2,
+                        poster: '',
                         tags: [],
                         summary: '这个是简介',
                         list: [
@@ -107,10 +107,10 @@ const state = {
                     },
                     {
                         sheetCode: 2,
-                        title: '222',
-                        count: 33,
-                        downloaded: 32,
-                        img: 'url',
+                        title: '欧美',
+                        count: 2,
+                        downloaded: 0,
+                        poster: '',
                         tags: [],
                         summary: '这个是简介',
                         list: [
@@ -156,46 +156,6 @@ const state = {
                                     "isInternet": true
                                 }
                             },
-                            {
-                                isLike: true,
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8545.mp3',
-                                    poster: '../../../static/imgs/poster/8545.jpg',
-                                    title: 'Try Everything (尝试一切)',
-                                    artist: 'Shakira',
-                                    album: 'Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)',
-                                    uid: 8545, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                            {
-                                isLike: true,
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8548.mp3',
-                                    poster: '../../../static/imgs/poster/8548.jpg',
-                                    title: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                                    artist: 'Alvaro Soler',
-                                    album: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                                    uid: 8548, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            }
                         ]
                     }
                 ]
@@ -304,7 +264,7 @@ const actions = {
         let currentPlayListData = null;
         function returnList() {
             let currentPlayList = null;
-            let dataObj = state.userData.basicInfo.SheetList.SheetLists;
+            let dataObj = state.userData.basicInfo.SheetList.list;
             for (let i = 0; i < dataObj.length; i++) {
                 if (dataObj[i].sheetCode == sheetCode) {
                     currentPlayList = {
