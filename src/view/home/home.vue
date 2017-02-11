@@ -94,7 +94,8 @@
                             }
                         ]
                     }
-                ]
+                ],
+                myScroll:null
             }
         },
         components: {
@@ -105,7 +106,13 @@
             MyFooter
         },
         mounted(){
-            publicJs.initScroll('home-wrapper','home-scroller');
+            let that=this;
+            publicJs.initScroll({wrapper:'home-wrapper',scroller:'home-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll
+            }});
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll)
         }
     }
 </script>

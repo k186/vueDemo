@@ -16,6 +16,17 @@ const state = {
                         sheetCode: 1,
                         title: '222',
                         count: 4,
+                        playHistory: 30,
+                        detail: {
+                            poster: 'url.jpg', /*背景图*/
+                            title: '搜藏222',
+                            mark: '', /*介绍*/
+                            tags: [1, 2, 3]/*数组映射*/
+                        },
+                        author: {
+                            name:'k186 Studio',
+                            head:''
+                        },
                         downloaded: 2,
                         poster: '',
                         tags: [],
@@ -71,6 +82,132 @@ const state = {
                                     artist: 'Gazebo',
                                     album: 'Portrait',
                                     uid: 8546, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
+                                    markTitle: {
+                                        quality: 1, /*0 normal 1 hq 2 sq */
+                                        exclusive: 1, /* 独家 0 1*/
+                                        mv: 1/*mv 0 1*/
+                                    }
+                                },
+                                mark: {
+                                    "isDownload": true,
+                                    "isInternet": true
+                                }
+                            },
+                            {
+                                isPlay: false,
+                                isLike: true,
+                                song: {
+                                    url: 'http://k186studio.com/static/music/8543.mp3',
+                                    poster: '../../../static/imgs/poster/8543.jpg',
+                                    title: 'Heroes',
+                                    artist: 'Alesso',
+                                    album: 'Heroes (we could be)',
+                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
                                     markTitle: {
                                         quality: 1, /*0 normal 1 hq 2 sq */
                                         exclusive: 1, /* 独家 0 1*/

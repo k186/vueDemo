@@ -2,7 +2,11 @@ import IScroll from 'iscroll'
 export default {
     name: 'InitScroll',
     myScroll: {},
-    initScroll: function (wrapper, scrooler, option) {
+    initScroll: function (initData) {
+        let wrapper=initData.wrapper;
+        let scroll=initData.scroller;
+        let option=initData.option;
+        let callback=initData.callbackFun;
         let that = this;
         let timer = window.setInterval(function () {
             if (option) {
@@ -11,7 +15,7 @@ export default {
             } else {
                 that.myScroll = new IScroll('#' + wrapper, {mouseWheel: false, click: that.isClick()});
             }
-            let scrollerHeight = window.document.getElementById(scrooler).clientHeight;
+            let scrollerHeight = window.document.getElementById(scroll).clientHeight;
             if (scrollerHeight) {
                 window.addEventListener('resize', function () {
                     let tid;
@@ -19,15 +23,16 @@ export default {
                     tid = setTimeout(function () {
                         that.refresh(that.myScroll)
                     }, 300);
-                    console.log('refreshScroll')
+                    console.log('resizeScroll')
                 }, false);
                 window.clearInterval(timer);
+               if(callback!=undefined){
+                   callback(that.myScroll)
+               }
             }
-            console.log('initScroll');
             that.refresh(that.myScroll);
         }, 50);
         //todo new feature  Chrome 51 Firefox 49
-
         function getBrowserInfo() {
             let agent = navigator.userAgent.toLowerCase();
 
@@ -60,13 +65,13 @@ export default {
         let browser = getBrowserInfo();
         let verinfo = (browser.browser + "").replace(/[^0-9.]/ig, "");
         if(browser.agent=="chrome"){
-            verinfo>=51?passiveEvt():defaultEvt();
+            verinfo.split('.')[0]>=51?passiveEvt():defaultEvt();
         }
         if(browser.agent=="firefox"){
-            verinfo>=49?passiveEvt():defaultEvt();
+            verinfo.split('.')[0]>=49?passiveEvt():defaultEvt();
         }
         if(browser.agent=="safari"){
-            verinfo>=10?passiveEvt():defaultEvt();
+            verinfo.split('.')[0]>=10?passiveEvt():defaultEvt();
         }
         function defaultEvt() {
             document.addEventListener('touchmove', function (e) {
@@ -78,10 +83,13 @@ export default {
                 e.preventDefault();
             }, {passive: false});
         }
-
     },
     refresh: function (myScroll) {
         myScroll.refresh();
+    },
+    destroy:function (myScroll) {
+        console.log('destroyScroll');
+        myScroll.destroy();
     },
     isClick: function () {
         if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return true;

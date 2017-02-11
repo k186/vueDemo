@@ -722,10 +722,25 @@ input:-ms-input-placeholder {
 .play-list-box-body-box{
   float: left;
 }
-.play-list-box-body-box-head{
+.play-list-box-body-box-head,.play-list-box-body-box-radio-head{
   height: px2rem(110);
   border-bottom: 1px solid $playListBtn;
   text-align: left;
+}
+.play-list-box-body-box-radio-head{
+  text-align: center;
+}
+.play-list-box-body-box-radio-head{
+  font-size: px2rem(32);
+  color: $mainTitle;
+  line-height: px2rem(110);
+}
+.play-list-head-btn-change-radio{
+  color: $playListBtn;
+  font-size: px2rem(30);
+  position: absolute;
+  top:0;
+  right: px2rem(32);
 }
 .play-list-box-body-box-head{
   display: flex;
@@ -739,7 +754,7 @@ input:-ms-input-placeholder {
     line-height: inherit;
   }
   .play-list-head-btn-icon,.play-list-head-btn-icon-playType{
-    color: $playListBtn;;
+    color: $playListBtn;
     line-height: inherit;
     vertical-align: middle;
     padding: 0 px2rem(20);
@@ -826,12 +841,19 @@ input:-ms-input-placeholder {
 .single-list-text.playing,.single-list-text.playing *{
   color: $mainGreen;
 }
-.single-list-control{
+.single-list-isPlay{
+  color: $mainGreen;
+}
+.single-list-control,.single-list-control-list{
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-end;
   font-size: px2rem(28);
+  width: px2rem(750-480);
   color: $playListBtn;
+}
+.single-list-control-list{
+  justify-content: flex-start;
 }
 .single-list-text-artist{
   color: $playListBtn;
@@ -847,3 +869,4 @@ input:-ms-input-placeholder {
 .single-list-isLike>.like{
   color: $like;
 }
+/*sheetsonglist ----------------------------------*/

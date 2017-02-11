@@ -20,6 +20,11 @@
     import {mapGetters} from 'vuex'
     export default{
         name:'songSheetList',
+        data(){
+          return{
+              myScroll:null
+          }
+        },
         computed:mapGetters({
             userData:"userData"
         }),
@@ -28,8 +33,14 @@
         },
         mounted(){
             if(this.userData.basicInfo.SheetList.list.length!=0){
-                publicJs.initScroll('song-SheetList-wrapper','song-SheetList-scroller');
+                let that=this;
+                publicJs.initScroll({wrapper:'song-SheetList-wrapper',scroller:'song-SheetList-scroller',callbackFun:function (scroll) {
+                    that.myScroll=scroll;
+                }});
             }
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll);
         }
     }
 </script>

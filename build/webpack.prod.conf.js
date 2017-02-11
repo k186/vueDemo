@@ -73,6 +73,14 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
+    }),
+    // remove console.log debugger
+    new webpack.optimize.UglifyJsPlugin({
+        compress:{
+            warnings: false,
+            drop_debugger: true,
+            drop_console: true
+        }
     })
   ]
 })

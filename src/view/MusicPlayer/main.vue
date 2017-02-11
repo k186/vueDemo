@@ -19,8 +19,19 @@
     import publicJs from '../../publicJs/publicJs'
     export default{
         name:'mainIndex',
+        data(){
+          return{
+              myScroll:null,
+          }
+        },
         mounted(){
-            publicJs.initScroll('main-wrapper','main-scroller');
+            let that=this;
+            publicJs.initScroll({wrapper:'main-wrapper',scroller:'main-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll;
+            }});
+        },
+        beforeDestroy(){
+          publicJs.destroy(this.myScroll)
         },
         components:{
             userNav,

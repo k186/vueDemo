@@ -28,12 +28,23 @@
     import {mapGetters, mapActions} from 'vuex'
     export default{
         name: 'searchHistory',
+        data(){
+          return{
+              myScroll:null
+          }
+        },
         computed: mapGetters({
             history: 'searchHistory'
         }),
         mounted(){
-            publicJs.initScroll('history-wrapper','history-scroller');
+            let that=this;
+            publicJs.initScroll({wrapper:'history-wrapper',scroller:'history-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll;
+            }});
             publicJs.setIndex('history-BG')
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll)
         },
         methods: {
             updateHistory(){
@@ -62,7 +73,10 @@
                         this.$store.dispatch('updateHistory', {searchHistory})
                     }
                 }
-                publicJs.initScroll('history-wrapper','history-scroller');
+                let that=this;
+                publicJs.initScroll({wrapper:'history-wrapper',scroller:'history-scroller',callbackFun:function (scroll) {
+                    that.myScroll=scroll;
+                }});
             }
         }
     }

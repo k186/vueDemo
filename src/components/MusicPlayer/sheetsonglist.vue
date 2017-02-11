@@ -1,13 +1,14 @@
 <template>
-    <div>32423432</div>
+    <div>
+
+    </div>
 </template>
 <script>
     export default{
         name:'sheetSongList',
         mounted(){
-            console.log(this.$route)
-            console.log(this.$router)
-
+            console.log(this.$route);
+            console.log(this.$router);
         }
     }
 </script>

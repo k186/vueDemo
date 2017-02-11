@@ -42,6 +42,11 @@
     import publicJs from '../../publicJs/publicJs'
     export default{
         name:'numberString',
+        data(){
+          return{
+              myScroll:null
+          }
+        },
         mounted(){
             let output1=document.getElementById('output1');
             let output2=document.getElementById('output2');
@@ -76,7 +81,13 @@
             Number2Wrods.config(option2).putStr(value,'output2');
             Number2Wrods.config(option3).putStr(value,'output3');
             output4.innerHTML= Number2Wrods.config(option4).putStr(value);
-            publicJs.initScroll('number-wrapper','number-scroller');
+            let that=this;
+            publicJs.initScroll({wrapper:'number-wrapper',scroller:'number-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll;
+            }});
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll);
         }
     }
 </script>
