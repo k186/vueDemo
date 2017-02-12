@@ -36,13 +36,7 @@ const state = {
                 title: '',
                 sheetCode: '',
                 list: []
-            },
-            /*radioList:{
-             count:0,
-             title:'',
-             sheetCode:'',
-             list:[]
-             },*/
+            }
         },
     }
 };
@@ -111,12 +105,17 @@ const mutations = {
         state.PlayerComp.currentPlay.currentTime = currentPlay.currentTime;
     },
     [TYPE.PLAYER_EVENT_UPDATE_PLAYLIST](state, {playList}){
+        debugger
         state.PlayerComp.playList.historyList = playList.historyList ? playList.historyList : state.PlayerComp.playList.currentPlayList;
         state.PlayerComp.playList.currentPlayList = playList.currentPlayList;
 
     },
     [TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX](state, {playIndex}){
         state.PlayerComp.currentPlay.playOrderIndex = playIndex.playOrderIndex;
+    },
+    [TYPE.PLAYER_EVENT_DELETE_SINGLE](state, {updateData}){
+        state.PlayerComp.playList.currentPlayList =updateData.currentPlayList;
+        state.PlayerComp.playOrder =updateData.playOrder;
     }
 };
 const actions = {
@@ -427,6 +426,43 @@ const actions = {
         console.log('index:'+playIndex.playOrderIndex);
         commit(TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX, {playIndex})
     },
+    deleteSingleInPlayList({commit,dispatch},{uid}){
+        let playOrder= state.PlayerComp.playOrder;
+        let $index= state.PlayerComp.playOrder.indexOf(uid);
+        playOrder.splice(state.PlayerComp.playOrder.indexOf(uid),1);
+        let currentPlayList=state.PlayerComp.playList.currentPlayList;
+        for(let i=0;i<currentPlayList.list.length;i++){
+            if(currentPlayList.list[i].song.uid==uid){
+                currentPlayList.list.splice(i,1);
+                currentPlayList.count-=1;
+                if(currentPlayList.count<0){
+                    currentPlayList.count=0
+                }
+                break;
+            }
+        }
+        let updateData={
+            currentPlayList:currentPlayList,
+            playOrder:playOrder
+        };
+        commit(TYPE.PLAYER_EVENT_DELETE_SINGLE,{updateData});
+        if(uid==state.PlayerComp.currentPlay.uid){
+            $index-=1;
+            if($index<0){
+                $index=0;
+            }
+            let playIndexObj = {
+                playOrderIndex: $index
+            };
+            dispatch('updatePlayOrderIndex', {playIndexObj});
+            dispatch('playerNext')
+        }else {
+            let playIndexObj = {
+                playOrderIndex: state.PlayerComp.playOrder.indexOf(state.PlayerComp.currentPlay.uid)
+            };
+            dispatch('updatePlayOrderIndex', {playIndexObj});
+        }
+    }
 };
 export default {
     state,

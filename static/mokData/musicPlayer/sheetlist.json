@@ -1,0 +1,99 @@
+{
+  "success": true,
+  "model": {
+    "count": 32,
+    "list": [
+      {
+        "sheetCode": 1,
+        "title": "3333",
+        "count":4,
+        "downloaded": 1,
+        "poster": "../../../static/imgs/poster/defalut.png",
+        "tags": [],
+        "summary": "这个是简介",
+        "list": [
+          {
+            "isLike": false,
+            "song": {
+              "url": "http://k186studio.com/static/music/8545.mp3",
+              "poster": "../../../static/imgs/poster/8545.jpg",
+              "title": "Try Everything (尝试一切)",
+              "artist": "Shakira",
+              "album": "Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)",
+              "uid": 8545,
+              "markTitle": {
+                "quality": 1,
+                "exclusive": 1,
+                "mv": 1
+              }
+            },
+            "mark": {
+              "isDownload": true,
+              "isInternet": true
+            }
+          },
+          {
+            "isLike": false,
+            "song": {
+              "url": "http://k186studio.com/static/music/8548.mp3",
+              "poster": "../../../static/imgs/poster/8548.jpg",
+              "title": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
+              "artist": "Alvaro Soler",
+              "album": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
+              "uid": 8548,
+              "markTitle": {
+                "quality": 1,
+                "exclusive": 1,
+                "mv": 1
+              }
+            },
+            "mark": {
+              "isDownload": true,
+              "isInternet": true
+            }
+          },
+          {
+            "isLike": true,
+            "song": {
+              "url": "http://k186studio.com/static/music/8546.mp3",
+              "poster": "../../../static/imgs/poster/8546.jpg",
+              "title": "I Like Chopin",
+              "artist": "Gazebo",
+              "album": "Portrait",
+              "uid": 8546,
+              "markTitle": {
+                "quality": 1,
+                "exclusive": 1,
+                "mv": 1
+              }
+            },
+            "mark": {
+              "isDownload": true,
+              "isInternet": true
+            }
+          },
+          {
+            "isLike": true,
+            "song": {
+              "url": "http://k186studio.com/static/music/8543.mp3",
+              "poster": "../../../static/imgs/poster/8543.jpg",
+              "title": "Heroes",
+              "artist": "Alesso",
+              "album": "Heroes (we could be)",
+              "uid": 8543,
+              "markTitle": {
+                "quality": 1,
+                "exclusive": 1,
+                "mv": 1
+              }
+            },
+            "mark": {
+              "isDownload": true,
+              "isInternet": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

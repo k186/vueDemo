@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "model": {
+    "count": 4,
+    "uidFilter":{
+      "8545":true,
+      "8548":false,
+      "8546":false
+    },
+    "list": [
+      {
+        "song": {
+          "url": "http://k186studio.com/static/music/8545.mp3",
+          "poster": "../../../static/imgs/poster/8545.jpg",
+          "title": "Try Everything (尝试一切)",
+          "artist": "Shakira",
+          "album": "Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)",
+          "uid": 8545,
+          "markTitle": {
+            "quality": 1,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": true
+        }
+      },
+      {
+        "song": {
+          "url": "http://k186studio.com/static/music/8548.mp3",
+          "poster": "../../../static/imgs/poster/8548.jpg",
+          "title": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
+          "artist": "Alvaro Soler",
+          "album": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
+          "uid": 8548,
+          "markTitle": {
+            "quality": 1,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": true
+        }
+      }
+    ]
+  }
+}
