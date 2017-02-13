@@ -28,7 +28,7 @@
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="currentPlay-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="currentPlay-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :Data="song" :from="PlayerComp.playList.currentPlayList.sheetCode=='radio'?'radio':'list'" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song" :from="PlayerComp.playList.currentPlayList.sheetCode=='radio'?'radio':'list'" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="historyList-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="historyList-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.historyList.list" :Data="song" from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.historyList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song" from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,8 @@
     export default{
         name: 'playList',
         computed: mapGetters({
-            PlayerComp: 'PlayerComp'
+            PlayerComp: 'PlayerComp',
+            userData:'userData'
         }),
         data(){
             return{

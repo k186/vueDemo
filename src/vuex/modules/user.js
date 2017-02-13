@@ -356,8 +356,8 @@ const mutations = {
     [TYPE.USER_EVENT_UPDATE_FAVOURITE](state,{favourite}){
         state.userData.basicInfo.favourite=favourite
     },
-    [TYPE.USER_EVENT_UPDATE_FAVOURITE_FILTER](state,{uidFilter}){
-        state.userData.basicInfo.favourite.uidFilter=uidFilter
+    [TYPE.USER_EVENT_UPDATE_FAVOURITE_FILTER](state,{uid}){
+        state.userData.basicInfo.favourite.uidFilter[uid]=!state.userData.basicInfo.favourite.uidFilter[uid]
     }
 };
 const actions = {
@@ -410,9 +410,12 @@ const actions = {
             }
         })
     },
-    updateFilter({commit,dispatch},{uidFilter}){
-        commit(TYPE.USER_EVENT_UPDATE_FAVOURITE_FILTER,{uidFilter});
+    updateFilter({commit,dispatch},{uid}){
+        commit(TYPE.USER_EVENT_UPDATE_FAVOURITE_FILTER,{uid});
         dispatch('updateFavourite')
+    },
+    isLikeFilter({commit,dispatch},{uid}){
+        return !!state.userData.basicInfo.favourite.uidFilter[uid];
     }
 };
 export default {

@@ -105,7 +105,6 @@ const mutations = {
         state.PlayerComp.currentPlay.currentTime = currentPlay.currentTime;
     },
     [TYPE.PLAYER_EVENT_UPDATE_PLAYLIST](state, {playList}){
-        debugger
         state.PlayerComp.playList.historyList = playList.historyList ? playList.historyList : state.PlayerComp.playList.currentPlayList;
         state.PlayerComp.playList.currentPlayList = playList.currentPlayList;
 
@@ -427,6 +426,7 @@ const actions = {
         commit(TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX, {playIndex})
     },
     deleteSingleInPlayList({commit,dispatch},{uid}){
+        debugger
         let playOrder= state.PlayerComp.playOrder;
         let $index= state.PlayerComp.playOrder.indexOf(uid);
         playOrder.splice(state.PlayerComp.playOrder.indexOf(uid),1);
@@ -445,7 +445,7 @@ const actions = {
             currentPlayList:currentPlayList,
             playOrder:playOrder
         };
-        commit(TYPE.PLAYER_EVENT_DELETE_SINGLE,{updateData});
+        commit(TYPE.PLAYER_EVENT_DELETE_SINGLE,{uid});
         if(uid==state.PlayerComp.currentPlay.uid){
             $index-=1;
             if($index<0){
