@@ -120,7 +120,7 @@ const state = {
                         sheetCode: 2,
                         title: '欧美',
                         count: 2,
-                        downloaded: 0,
+                        downloaded: 2,
                         poster: '',
                         tags: [],
                         summary: '这个是简介',
