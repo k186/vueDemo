@@ -19,7 +19,7 @@
                     <div class="player-box-btn">
                         <i v-if="PlayerComp.playStatus==0" class="player-box-btn-play icon" @click="play">&#xe675;</i>
                         <i v-if="PlayerComp.playStatus==1" class="player-box-btn-play icon" @click="pause">&#xe6ab;</i>
-                        <i class="player-box-btn-playList icon" @click="showPlayList">&#xe841;</i>
+                        <i class="player-box-btn-playList icon" @click="showPlayList({toggle:{PlayerVisible:false}})">&#xe841;</i>
                     </div>
                 </div>
             </div>
@@ -57,12 +57,11 @@
             this.$store.dispatch('playerInit');
         },
         methods: {
-            play(){
-                this.$store.dispatch('playerPlay');
-            },
-            pause(){
-                this.$store.dispatch('playerPause');
-            },
+            ...mapActions({
+                play:'playerPlay',
+                pause:'playerPause',
+                showPlayList:'playerToggle'
+            }),
             next(){
                 this.swipeChange='right2left';
                 this.$store.dispatch('playerNext');
@@ -121,12 +120,6 @@
                 El.removeEventListener('touchend',that.playerTouchEnd);
                 console.log('touchEnd')
             },
-            showPlayList(){
-                let toggle={
-                    PlayerVisible:false
-                };
-                this.$store.dispatch('playerToggle',{toggle})
-            }
         }
     }
 </script>

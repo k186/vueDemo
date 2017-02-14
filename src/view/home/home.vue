@@ -77,7 +77,7 @@
                             },
                             {
                                 name: 'MusicPlayer',
-                                router: '/Music',
+                                router: '/Music/k186',
                                 icon: '&#xe63f',
                                 color: 'loading'
                             },
@@ -110,6 +110,7 @@
             publicJs.initScroll({wrapper:'home-wrapper',scroller:'home-scroller',callbackFun:function (scroll) {
                 that.myScroll=scroll
             }});
+            console.log(this.$route)
         },
         beforeDestroy(){
             publicJs.destroy(this.myScroll)

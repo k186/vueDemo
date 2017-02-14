@@ -115,6 +115,14 @@ const mutations = {
     [TYPE.PLAYER_EVENT_DELETE_SINGLE](state, {updateData}){
         state.PlayerComp.playList.currentPlayList =updateData.currentPlayList;
         state.PlayerComp.playOrder =updateData.playOrder;
+    },
+    [TYPE.PLAYER_EVENT_CLEAR_PLAY_LIST](state){
+        state.PlayerComp.playList.currentPlayList={
+            count: 0,
+            sheetCode: '',
+            title: '',
+            list: []
+        }
     }
 };
 const actions = {
@@ -426,11 +434,10 @@ const actions = {
         commit(TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX, {playIndex})
     },
     deleteSingleInPlayList({commit,dispatch},{uid}){
-        debugger
-        let playOrder= state.PlayerComp.playOrder;
-        let $index= state.PlayerComp.playOrder.indexOf(uid);
-        playOrder.splice(state.PlayerComp.playOrder.indexOf(uid),1);
-        let currentPlayList=state.PlayerComp.playList.currentPlayList;
+        let playOrder=JSON.parse(JSON.stringify(state.PlayerComp.playOrder));
+        let $index= playOrder.indexOf(uid);
+        playOrder.splice(playOrder.indexOf(uid),1);
+        let currentPlayList=JSON.parse(JSON.stringify(state.PlayerComp.playList.currentPlayList));
         for(let i=0;i<currentPlayList.list.length;i++){
             if(currentPlayList.list[i].song.uid==uid){
                 currentPlayList.list.splice(i,1);
@@ -445,7 +452,8 @@ const actions = {
             currentPlayList:currentPlayList,
             playOrder:playOrder
         };
-        commit(TYPE.PLAYER_EVENT_DELETE_SINGLE,{uid});
+        /*first to update playlist and play order then update current play index and song*/
+        commit(TYPE.PLAYER_EVENT_DELETE_SINGLE,{updateData});
         if(uid==state.PlayerComp.currentPlay.uid){
             $index-=1;
             if($index<0){
@@ -462,6 +470,9 @@ const actions = {
             };
             dispatch('updatePlayOrderIndex', {playIndexObj});
         }
+    },
+    clearPlayList({commit}){
+        commit(TYPE.PLAYER_EVENT_CLEAR_PLAY_LIST)
     }
 };
 export default {

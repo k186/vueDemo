@@ -54,7 +54,7 @@ export default {
                 }
             },
             {
-                path: "/Music",
+                path: "/Music/:userToken",
                 component: MusicHome,
                 children:[
                     {

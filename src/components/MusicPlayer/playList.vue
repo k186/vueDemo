@@ -1,6 +1,6 @@
 <template>
     <transition name="playerToggle">
-    <div class="play-list-mask">
+        <div class="play-list-mask">
             <div class="play-list-box">
                 <!--scroll-->
                 <div class="play-list-box-body-wrapper" id="play-list-box-body-wrapper">
@@ -9,7 +9,8 @@
                         <div class="play-list-box-body-box" id="currentPlay">
                             <div class="play-list-box-body-box-head" v-if="PlayerComp.playList.currentPlayList.sheetCode!='radio'">
                                 <div class="play-list-head-btn" @click="toggleType">
-                                    <span stop class="play-list-head-btn-icon-playType icon" v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
+                                    <span stop class="play-list-head-btn-icon-playType icon"
+                                          v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
                                     <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==1">随机播放({{PlayerComp.playList.currentPlayList.count}}首)</span>
                                     <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==2">顺序播放({{PlayerComp.playList.currentPlayList.count}}首)</span>
                                     <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==3">单曲循环({{PlayerComp.playList.currentPlayList.count}}首)</span>
@@ -17,7 +18,7 @@
                                 <div class="play-list-head-btn">
                                     <span class="play-list-head-btn-icon icon">&#xe627;</span>
                                     <span class="play-list-head-btn-icon icon">&#xe60b;</span>
-                                    <span class="play-list-head-btn-icon icon">&#xe614;</span>
+                                    <span @click="clearPlayList" class="play-list-head-btn-icon icon">&#xe614;</span>
                                 </div>
                             </div>
                             <div class="play-list-box-body-box-radio-head" v-if="PlayerComp.playList.currentPlayList.sheetCode=='radio'">
@@ -28,7 +29,8 @@
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="currentPlay-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="currentPlay-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song" :from="PlayerComp.playList.currentPlayList.sheetCode=='radio'?'radio':'list'" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.currentPlayList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song"
+                                                 :from="PlayerComp.playList.currentPlayList.sheetCode=='radio'?'radio':'list'" :sheetCode="PlayerComp.playList.currentPlayList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +43,8 @@
                             </div>
                             <div class="play-list-box-body-box-wrapper" id="historyList-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="historyList-scroller">
-                                    <single-list v-for="song in PlayerComp.playList.historyList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song" from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode"></single-list>
+                                    <single-list v-for="song in PlayerComp.playList.historyList.list" :playStatus="PlayerComp.playStatus" :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song"
+                                                 from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode"></single-list>
                                 </div>
                             </div>
                         </div>
@@ -54,10 +57,10 @@
                             <li class="play-list-point-li" :class="currentPage==1?'active':''"></li>
                         </ul>
                     </div>
-                    <div class="play-list-box-btn" @click="hidePlayList">关闭</div>
+                    <div class="play-list-box-btn" @click="hidePlayList({toggle:{PlayerVisible:true}})">关闭</div>
                 </div>
             </div>
-    </div>
+        </div>
     </transition>
 </template>
 <script>
@@ -68,14 +71,14 @@
         name: 'playList',
         computed: mapGetters({
             PlayerComp: 'PlayerComp',
-            userData:'userData'
+            userData: 'userData'
         }),
         data(){
-            return{
-                currentPage:0,
-                myScrollA:null,
-                myScrollB:null,
-                myScrollC:null,
+            return {
+                currentPage: 0,
+                myScrollA: null,
+                myScrollB: null,
+                myScrollC: null,
             }
         },
         mounted(){
@@ -83,59 +86,59 @@
             this.initScroll();
         },
         methods: {
+            ...mapActions({
+                toggleType:'playerTogglePlayType',
+                hidePlayList:'playerToggle',
+                clearPlayList:'clearPlayList'
+            }),
             initScroll(){
-                let that=this;
-                let markB=this.PlayerComp.playList.historyList.list.length!=0;
+                let that = this;
+                let markB = this.PlayerComp.playList.historyList.list.length != 0;
                 /*init scroll*/
-                if(this.PlayerComp.playList.currentPlayList.list.length!=0){
+                if (this.PlayerComp.playList.currentPlayList.list.length != 0) {
                     this.$nextTick(function () {
-                      publicJs.initScroll({wrapper:'currentPlay-wrapper',scroller:'currentPlay-scroller',option:{scrollX: false, scrollY: true},callbackFun:function (scroll) {
-                          that.myScrollA=scroll
-                      }});
+                        publicJs.initScroll({
+                            wrapper: 'currentPlay-wrapper', scroller: 'currentPlay-scroller', option: {scrollX: false, scrollY: true}, callbackFun: function (scroll) {
+                                that.myScrollA = scroll
+                            }
+                        });
                     });
                 }
                 /*---scroll end*/
                 this.$nextTick(function () {
-                    if(markB){
-                        document.getElementById('play-list-box-body-scroller').style.width=(750*2)/75+'rem';
-                        this.$nextTick(function () {
-                            publicJs.initScroll({wrapper:'historyList-wrapper',scroller:'historyList-scroller',option:{scrollX: false, scrollY: true},callbackFun:function (scroll) {
-                                that.myScrollB=scroll;
-                            }});
+                    if (markB) {
+                        document.getElementById('play-list-box-body-scroller').style.width = (750 * 2) / 75 + 'rem';
+                        publicJs.initScroll({
+                            wrapper: 'historyList-wrapper', scroller: 'historyList-scroller', option: {scrollX: false, scrollY: true}, callbackFun: function (scroll) {
+                                that.myScrollB = scroll;
+                            }
                         });
                         publicJs.initScroll({
-                            wrapper:'play-list-box-body-wrapper',
-                            scroller:'play-list-box-body-scroller',
-                            option:{scrollX: true, scrollY: false,momentum: false, snap: true},
-                            callbackFun:function (scroll) {
+                            wrapper: 'play-list-box-body-wrapper',
+                            scroller: 'play-list-box-body-scroller',
+                            option: {scrollX: true, scrollY: false, momentum: false, snap: true},
+                            callbackFun: function (scroll) {
                                 that.myScrollC = scroll;
                                 that.myScrollC.on('scrollEnd', function () {
                                     that.currentPage = that.myScrollC.currentPage.pageX
                                 })
                             }
                         });
-                    }else if(!markB){
-                        document.getElementById('play-list-box-body-scroller').style.width=(750)/75+'rem';
+                    } else if (!markB) {
+                        document.getElementById('play-list-box-body-scroller').style.width = (750) / 75 + 'rem';
                     }
                 })
             },
-            hidePlayList(){
-                let toggle = {
-                    PlayerVisible: true
-                };
-                this.$store.dispatch('playerToggle', {toggle})
-            },
-            toggleType(){
-                this.$store.dispatch('playerTogglePlayType');
-            },
             initRadio(){
-                let that=this;
-                that.$store.dispatch('initRadio',{callback:function () {
-                    let option={
-                        from:'radio'
-                    };
-                    that.$store.dispatch('playerSet',{option});
-                }});
+                let that = this;
+                that.$store.dispatch('initRadio', {
+                    callback: function () {
+                        let option = {
+                            from: 'radio'
+                        };
+                        that.$store.dispatch('playerSet', {option});
+                    }
+                });
             },
             beforeDestroy(){
                 publicJs.destroy(this.myScrollA);
@@ -144,7 +147,7 @@
 
             }
         },
-        components:{
+        components: {
             singleList
         }
     }
