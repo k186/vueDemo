@@ -946,10 +946,10 @@ input:-ms-input-placeholder {
   animation-delay: -0.8s;
 }
 @keyframes playing {
-  0%, 40%,80%{
+  0%, 40%,100%{
     transform: scaleY(0.4);
   }
-  20%,60%,100% {
+  20%{
     transform: scaleY(1.0);
   }
 }
