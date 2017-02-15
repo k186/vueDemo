@@ -9,7 +9,7 @@
                         <div class="song-sheet-btns"><div class="icon song-sheet-list-head-btn-manage">&#xe601;</div><div>管理</div></div>
                     </div>
                 </div>
-                <single-sheet :route="'SheetSongList/'" :listData="userData.basicInfo.SheetList.list"></single-sheet>
+                <single-sheet  :listData="userData.basicInfo.SheetList.list"></single-sheet>
             </div>
         </div>
     </div>

@@ -122,6 +122,17 @@ const mutations = {
             sheetCode: '',
             title: '',
             list: []
+        };
+        state.PlayerComp.currentPlay={
+            currentTime: 0,
+            process: 0,
+            duration: 0,
+            url: '',
+            poster: '',
+            uid: '',
+            title: '',
+            artist: '',
+            album: '',
         }
     }
 };
@@ -134,10 +145,10 @@ const actions = {
         };
         commit(TYPE.PLAYER_EVENT_INIT, {setCurrentPlay});
         audio.addEventListener('timeupdate', function () {
-            dispatch('playerProcess');
+            //dispatch('playerProcess');
         });
         audio.addEventListener('progress', function () {
-            dispatch('playerBuffered');
+            //dispatch('playerBuffered');
         });
     },
     playerPlay({commit}){
@@ -471,8 +482,12 @@ const actions = {
             dispatch('updatePlayOrderIndex', {playIndexObj});
         }
     },
-    clearPlayList({commit}){
-        commit(TYPE.PLAYER_EVENT_CLEAR_PLAY_LIST)
+    clearPlayList({commit,dispatch}){
+        if(window.confirm('确定清空播放列表？')){
+            dispatch('playerPause');
+            commit(TYPE.PLAYER_EVENT_CLEAR_PLAY_LIST)
+        }
+
     }
 };
 export default {

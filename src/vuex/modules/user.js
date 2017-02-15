@@ -415,6 +415,7 @@ const actions = {
         dispatch('updateFavourite')
     },
     isLikeFilter({commit,dispatch},{uid}){
+        console.log(state.userData.basicInfo.favourite.uidFilter);
         return !!state.userData.basicInfo.favourite.uidFilter[uid];
     }
 };

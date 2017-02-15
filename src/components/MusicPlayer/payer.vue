@@ -38,10 +38,7 @@
         },
         data(){
             return {
-                playOrder: [],
-                currentIndex: 0,
                 swipeChange:'right2left',
-                bufferedPercent:0,
                 touchData:{
                     startTimeStamp:0,
                     startPointX:0,

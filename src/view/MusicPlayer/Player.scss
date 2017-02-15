@@ -866,14 +866,14 @@ input:-ms-input-placeholder {
   line-height: px2rem(91);
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: px2rem(32);
   color: $mainTitle;
 }
 
 .single-list-text {
   line-height: inherit;
-  width: px2rem(480);
+  max-width: px2rem(390);
   @include wordEllipsis();
 }
 
@@ -888,14 +888,13 @@ input:-ms-input-placeholder {
 .single-list-control, .single-list-control-list {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
   font-size: px2rem(28);
-  width: px2rem(750-480);
+  max-width: px2rem(750-570);
   color: $playListBtn;
 }
-
-.single-list-control-list {
-  justify-content: flex-start;
+.single-list-control{
+  position: absolute;
+  right: 0;
 }
 
 .single-list-text-artist {
@@ -906,6 +905,8 @@ input:-ms-input-placeholder {
 .single-list-isPlay, .single-list-isLike, .single-list-delete {
   line-height: inherit;
   padding: 0 px2rem(20);
+  min-width: px2rem(90);
+  text-align: center;
 }
 
 .single-list-delete {
@@ -920,36 +921,42 @@ input:-ms-input-placeholder {
 
 /*playingAnimation -----------------------------*/
 .wave-box {
-  height: px2rem(91);
+  height: px2rem(80);
   padding: px2rem(25) 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
   div {
-    display: inline-block;
-    width: px2rem(4);
+    width: px2rem(3);
     background: $mainGreen;
     height: 100%;
     line-height: px2rem(41);
     vertical-align: px2rem(25);
     transform-origin:0 bottom 0;
-    animation: playing 2s infinite ease-in-out;
   }
 }
 .wave-box > .wave1{
-  animation-delay: -1.1s;
+  height: 60%;
+  animation: playing 1s infinite ease-in-out;
 }
 .wave-box > .wave2{
-  animation-delay: -1s;
+  height: 99%;
+  animation: playing .75s infinite ease-in-out;
 }
 .wave-box > .wave3{
-  animation-delay: -0.9s;
+  height: 70%;
+  animation: playing 1s infinite ease-in-out;
 }
 .wave-box > .wave4{
-  animation-delay: -0.8s;
+  height: 80%;
+  animation: playing .75s infinite ease-in-out;
 }
 @keyframes playing {
-  0%, 40%,100%{
+  0%,100%{
     transform: scaleY(0.4);
   }
-  20%{
+  50%{
     transform: scaleY(1.0);
   }
 }

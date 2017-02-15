@@ -58,7 +58,7 @@ export default {
                 component: MusicHome,
                 children:[
                     {
-                        path: "",
+                        path: "main",
                         name:'Music',
                         component: MusicMain,
                         meta: {

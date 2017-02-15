@@ -77,7 +77,7 @@
                             },
                             {
                                 name: 'MusicPlayer',
-                                router: '/Music/k186',
+                                router: '/Music/k186/main',
                                 icon: '&#xe63f',
                                 color: 'loading'
                             },
