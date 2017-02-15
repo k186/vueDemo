@@ -26,16 +26,15 @@ export default {
                     console.log('resizeScroll')
                 }, false);
                 window.clearInterval(timer);
-               if(callback!=undefined){
-                   callback(that.myScroll)
-               }
+                if(callback!=undefined){
+                    callback(that.myScroll)
+                }
             }
             that.refresh(that.myScroll);
         }, 50);
-        //todo new feature  Chrome 51 Firefox 49
+        //todo new feature  Chrome 51 Firefox 49 this have bug in weiChat will set router failed
         function getBrowserInfo() {
             let agent = navigator.userAgent.toLowerCase();
-
             let regStr_ie = /msie [\d.]+;/gi;
             let regStr_ff = /firefox\/[\d.]+/gi
             let regStr_chrome = /chrome\/[\d.]+/gi;
@@ -43,46 +42,47 @@ export default {
             //IE
             if (agent.indexOf("msie") > 0) {
                 return {agent:"msie",browser:agent.match(regStr_ie)}
-            }
-
-            //firefox
-            if (agent.indexOf("firefox") > 0) {
+            }else if (agent.indexOf("firefox") > 0) {
+                //firefox
                 return {agent:"firefox",browser:agent.match(regStr_ff)}
-            }
-
-            //Chrome
-            if (agent.indexOf("chrome") > 0) {
+            }else if (agent.indexOf("chrome") > 0) {
+                //Chrome
                 return {agent:"chrome",browser:agent.match(regStr_chrome)}
-            }
-
-            //Safari
-            if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+            }else if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
+                //Safari
                 return {agent:"safari",browser:agent.match(regStr_saf)}
+            }else {
+                return null
             }
 
-        }
-
-        let browser = getBrowserInfo();
-        let verinfo = (browser.browser + "").replace(/[^0-9.]/ig, "");
-        if(browser.agent=="chrome"){
-            verinfo.split('.')[0]>=51?passiveEvt():defaultEvt();
-        }
-        if(browser.agent=="firefox"){
-            verinfo.split('.')[0]>=49?passiveEvt():defaultEvt();
-        }
-        if(browser.agent=="safari"){
-            verinfo.split('.')[0]>=10?passiveEvt():defaultEvt();
         }
         function defaultEvt() {
-            document.addEventListener('touchmove', function (e) {
+            window.document.addEventListener('touchmove', function (e) {
                 e.preventDefault();
             }, false);
         }
         function passiveEvt() {
-            document.addEventListener('touchmove', function (e) {
+            window.document.addEventListener('touchmove', function (e) {
                 e.preventDefault();
             }, {passive: false});
         }
+
+        let browser = getBrowserInfo();
+        if(!browser){
+            document.addEventListener('touchmove', function (e) {
+                e.preventDefault();
+            }, false);
+        }else {
+            let verinfo = (browser.browser + "").replace(/[^0-9.]/ig, "");
+            if(browser.agent=="chrome"){
+                verinfo.split('.')[0]>=51?passiveEvt():defaultEvt();
+            }else if(browser.agent=="firefox"){
+                verinfo.split('.')[0]>=49?passiveEvt():defaultEvt();
+            }else if(browser.agent=="safari"){
+                verinfo.split('.')[0]>=10?passiveEvt():defaultEvt();
+            }
+        }
+
     },
     refresh: function (myScroll) {
         myScroll.refresh();
