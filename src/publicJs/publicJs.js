@@ -69,9 +69,7 @@ export default {
 
         let browser = getBrowserInfo();
         if(!browser){
-            document.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, false);
+            defaultEvt()
         }else {
             let verinfo = (browser.browser + "").replace(/[^0-9.]/ig, "");
             if(browser.agent=="chrome"){
