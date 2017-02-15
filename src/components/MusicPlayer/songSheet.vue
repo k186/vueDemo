@@ -23,8 +23,8 @@
             //todo test
             inittest(){
                 let option={
-                    uid:8548,
-                    sheetCode:1,
+                    uid:8546,
+                    sheetCode:2,
                     from:'sheet'
                 };
                 this.$store.dispatch('playerSet',{option});

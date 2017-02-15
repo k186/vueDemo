@@ -1,7 +1,7 @@
 <template>
-    <!--<transition name="router-change">-->
+    <transition name="router-change">
         <router-view style="position: absolute;width: 100%;height: 100%"></router-view >
-   <!-- </transition>-->
+    </transition>
 </template>
 <style scoped>
     @import "../../static/style/coreCss/reset.scss";

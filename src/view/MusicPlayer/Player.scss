@@ -42,11 +42,11 @@ $listBackground: rgba(228, 228, 228, 0.98);
 
 @font-face {
   font-family: 'iconfont';  /* project id 226254 */
-  src: url('//at.alicdn.com/t/font_jbne4viu60w9udi.eot');
-  src: url('//at.alicdn.com/t/font_jbne4viu60w9udi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_jbne4viu60w9udi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_jbne4viu60w9udi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_jbne4viu60w9udi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1chrhkmc4alqsemi.eot');
+  src: url('//at.alicdn.com/t/font_1chrhkmc4alqsemi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1chrhkmc4alqsemi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1chrhkmc4alqsemi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1chrhkmc4alqsemi.svg#iconfont') format('svg');
 }
 
 .Player-BG {
@@ -917,8 +917,6 @@ input:-ms-input-placeholder {
   color: $like;
 }
 
-/*sheetsonglist ----------------------------------*/
-
 /*playingAnimation -----------------------------*/
 .wave-box {
   height: px2rem(80);
@@ -958,5 +956,124 @@ input:-ms-input-placeholder {
   }
   50%{
     transform: scaleY(1.0);
+  }
+}
+
+/*sheetDetailList ----------------------------------*/
+.detail-list-head{
+  width: 100%;
+  height: px2rem(90);
+  line-height: px2rem(90);
+  border-bottom: 1px solid $listBorder;
+  display: flex;
+  flex-wrap: nowrap;
+  background: $white;
+  position: absolute;
+}
+.detail-list-head-nav{
+  width: inherit;
+  text-align: center;
+  font-size: px2rem(34);
+  color: $secondTitle;
+}
+.detail-list-head-nav.active{
+  color: $mainGreen;
+}
+.detail-list-head-nav-bar{
+  position: absolute;
+  bottom: 0;
+  height:px2rem(7);
+  background: $mainGreen;
+  width: px2rem(100);
+  transition:all  .75s ease-in-out;
+  transform: translateX(px2rem(75));
+  //todo js to control width and transform
+}
+.detail-list-body-wrapper{
+  position: absolute;
+  top:px2rem(90);
+  bottom: 0;
+  width: 100%;
+}
+.detail-list-body-list-scroller{
+  background: $white;
+  width: px2rem(750*3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  text-size-adjust: none;
+}
+.detail-list-list-song,.detail-list-list-detail,.detail-list-list-lyric{
+  width: px2rem(750);
+}
+
+/*listSongSingle  -----------------------------------------------------------*/
+.list-song-single-box{
+  border-bottom:1px solid $listBorder;
+  height: px2rem(110);
+  margin-left:px2rem(30);
+  display: flex;
+  flex-wrap: nowrap;
+}
+.list-song-single-box-text{
+  width: px2rem(750-110-30);
+  margin: px2rem(15) 0;
+}
+.list-song-single-box-text-title{
+  width: inherit;
+  @include wordEllipsis();
+  font-size: px2rem(30);
+  color: $mainTitle;
+  display: flex;
+  .text{
+    line-height: px2rem(30);
+    vertical-align: middle;
+    margin-right: px2rem(2);
+  }
+  .sq{
+    color: $markTips;
+  }
+  .hq,.mv,.exclusive{
+    color: $mainGreen;
+  }
+  .sq,.hq,.mv,.exclusive{
+    font-size: px2rem(45);
+  }
+}
+.list-song-single-box-text-artist{
+  font-size: px2rem(28);
+  color: $secondTitle;
+  i{
+    font-size: px2rem(24);
+    text-align: center;
+    color: #cccccc;
+  }
+  i.active{
+    color: $mainGreen;
+  }
+}
+.list-song-single-box-btn{
+  width: px2rem(110);
+  line-height: px2rem(110);
+  text-align: center;
+  color: #b2b2b2;
+  i{
+    font-size: px2rem(28);
   }
 }

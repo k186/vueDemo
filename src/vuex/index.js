@@ -12,7 +12,7 @@ import radio from './modules/personalRadio'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
-    strict: true,
+    /*strict: true,*/
     actions,
     getters,
     modules:{
