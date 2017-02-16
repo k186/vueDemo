@@ -6,8 +6,10 @@
                     <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
                         <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
                             <div class="player-box-poster" >
-                                <img :class="PlayerComp.playStatus==1?'circleLoop':'circleLoopPause'" v-if="PlayerComp.currentPlay.poster" :src="PlayerComp.currentPlay.poster" alt="海报" class="player-box-poster-img">
-                                <img v-if="!PlayerComp.currentPlay.poster" src="../../../static/imgs/poster/defalut.png" alt="海报" class="player-box-poster-img">
+                                <img :class="PlayerComp.playStatus==1?'circleLoop':'circleLoopPause'"
+                                     :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/imgs/poster/default.jpg'"
+                                     alt="海报"
+                                     class="player-box-poster-img">
                             </div>
                             <div class="player-box-text">
                                 <div v-show="!PlayerComp.currentPlay.title" class="player-box-text-title">QQ音乐</div>

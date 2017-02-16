@@ -2,8 +2,7 @@
     <div class="personal-radio">
         <div class="radio-poster" @click="playPersonalRadio">
             <div class="poster-play icon">&#xe675;</div>
-            <img  :src="personalRadio.poster" class="poster-img">
-            <img v-if="personalRadio.poster==''" src="../../../static/imgs/poster/defalut.png" class="poster-img">
+            <img  :src="personalRadio.poster!=''?personalRadio.poster:'../../../static/imgs/poster/default.jpg'" class="poster-img">
         </div>
         <div class="radio-text">
             <div class="text-title">{{personalRadio.title}}</div>

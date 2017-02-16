@@ -18,6 +18,8 @@ class urlMapping {
             'GET_PERSONAL_RADIO_INIT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/radioInit' + (this.isLocal ? '.json' : '.json'),
             /*更新收藏列表*/
             'GET_UPDATE_FAVOURITE': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/updatefavourite' + (this.isLocal ? '.json' : '.json'),
+            /*初始化用户信息*/
+            'GET_INIT_USER_DATA': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/userdata' + (this.isLocal ? '.json' : '.json'),
         };
         return urls[url]
     }

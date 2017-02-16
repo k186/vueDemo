@@ -7,246 +7,21 @@ import urlMapping from '../../api/urlMapping'
 const state = {
     userData: {
         basicInfo: {
-            name: 'K186 Studio',
-            img: 'url',
-            vip: 3,
+            name: '',
+            img: '',
+            vip: 0,
             SheetList: {
-                count: 32,
-                list: [
-                    {
-                        sheetCode: 1,
-                        title: '的撒发',
-                        downloaded: 2,
-                        count: 4,
-                        playHistory: 30,
-                        poster: '../../../static/imgs/poster/8548.jpg',
-                        author: {
-                            name:'k186 Studio',
-                            head:''
-                        },
-                        mark: '', /*介绍*/
-                        tags: [1, 2, 3],/*数组映射*/
-                        list: [
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8546.mp3',
-                                    poster: '../../../static/imgs/poster/8546.jpg',
-                                    title: 'I Like Chopin',
-                                    artist: 'Gazebo',
-                                    album: 'Portrait',
-                                    uid: 8546, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8543.mp3',
-                                    poster: '../../../static/imgs/poster/8543.jpg',
-                                    title: 'Heroes',
-                                    artist: 'Alesso',
-                                    album: 'Heroes (we could be)',
-                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                        ]
-                    },
-                    {
-                        sheetCode: 2,
-                        title: '22223423432',
-                        downloaded: 2,
-                        count: 4,
-                        playHistory: 30,
-                        poster: '../../../static/imgs/poster/1232.jpg',
-                        author: {
-                            name:'k186 Studio',
-                            head:''
-                        },
-                        mark: '', /*介绍*/
-                        tags: [1, 2, 3],/*数组映射*/
-                        list: [
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8545.mp3',
-                                    poster: '../../../static/imgs/poster/8545.jpg',
-                                    title: 'Try Everything (尝试一切)',
-                                    artist: 'Shakira',
-                                    album: 'Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)',
-                                    uid: 8545, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8548.mp3',
-                                    poster: '../../../static/imgs/poster/8548.jpg',
-                                    title: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                                    artist: 'Alvaro Soler',
-                                    album: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                                    uid: 8548, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8546.mp3',
-                                    poster: '../../../static/imgs/poster/8546.jpg',
-                                    title: 'I Like Chopin',
-                                    artist: 'Gazebo',
-                                    album: 'Portrait',
-                                    uid: 8546, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            },
-                            {
-                                song: {
-                                    url: 'http://k186studio.com/static/music/8543.mp3',
-                                    poster: '../../../static/imgs/poster/8543.jpg',
-                                    title: 'Heroes',
-                                    artist: 'Alesso',
-                                    album: 'Heroes (we could be)',
-                                    uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                                    markTitle: {
-                                        quality: 1, /*0 normal 1 hq 2 sq */
-                                        exclusive: 1, /* 独家 0 1*/
-                                        mv: 1/*mv 0 1*/
-                                    }
-                                },
-                                mark: {
-                                    "isDownload": true,
-                                    "isInternet": true
-                                }
-                            }
-                        ]
-                    }
-                ]
+                count: 0,
+                list: []
             },
-            totalSong: [
-                {
-                    song: {
-                        url: 'http://k186studio.com/static/music/8545.mp3',
-                        poster: '../../../static/imgs/poster/8545.jpg',
-                        title: 'Try Everything (尝试一切)',
-                        artist: 'Shakira',
-                        album: 'Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)',
-                        uid: 8545, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                        markTitle: {
-                            quality: 1, /*0 normal 1 hq 2 sq */
-                            exclusive: 1, /* 独家 0 1*/
-                            mv: 1/*mv 0 1*/
-                        }
-                    },
-                    mark: {
-                        "isDownload": true,
-                        "isInternet": true
-                    }
-                },
-                {
-                    song: {
-                        url: 'http://k186studio.com/static/music/8548.mp3',
-                        poster: '../../../static/imgs/poster/8548.jpg',
-                        title: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                        artist: 'Alvaro Soler',
-                        album: 'El Mismo Sol (Under The Same Sun) (B-Case Remix)',
-                        uid: 8548, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                        markTitle: {
-                            quality: 1, /*0 normal 1 hq 2 sq */
-                            exclusive: 1, /* 独家 0 1*/
-                            mv: 1/*mv 0 1*/
-                        }
-                    },
-                    mark: {
-                        "isDownload": true,
-                        "isInternet": true
-                    }
-                },
-                {
-                    song: {
-                        url: 'http://k186studio.com/static/music/8546.mp3',
-                        poster: '../../../static/imgs/poster/8546.jpg',
-                        title: 'I Like Chopin',
-                        artist: 'Gazebo',
-                        album: 'Portrait',
-                        uid: 8546, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                        markTitle: {
-                            quality: 1, /*0 normal 1 hq 2 sq */
-                            exclusive: 1, /* 独家 0 1*/
-                            mv: 1/*mv 0 1*/
-                        }
-                    },
-                    mark: {
-                        "isDownload": true,
-                        "isInternet": true
-                    }
-                },
-                {
-                    song: {
-                        url: 'http://k186studio.com/static/music/8543.mp3',
-                        poster: '../../../static/imgs/poster/8543.jpg',
-                        title: 'Heroes',
-                        artist: 'Alesso',
-                        album: 'Heroes (we could be)',
-                        uid: 8543, /*用这个去匹配下载列表 HASH 来设置isDownload*/
-                        markTitle: {
-                            quality: 1, /*0 normal 1 hq 2 sq */
-                            exclusive: 1, /* 独家 0 1*/
-                            mv: 1/*mv 0 1*/
-                        }
-                    },
-                    mark: {
-                        "isDownload": true,
-                        "isInternet": true
-                    }
-                }
-            ],
+            totalSong: [],
             favourite: {
                 count: 0,
                 uidFilter:{},
                 list: []
             },
-            purchased: [],
-        },
-
+            purchased: []
+        }
     }
 };
 /*api getters can use all*/
@@ -265,6 +40,9 @@ const mutations = {
     },
     [TYPE.USER_EVENT_FIND_SHEET_WITH_CODE](state){
 
+    },
+    [TYPE.USER_EVENT_INIT](state,{userData}){
+        state.userData=userData
     }
 };
 const actions = {
@@ -338,13 +116,25 @@ const actions = {
             }
             return DetailF;
         }
-        if(state.userData.basicInfo.SheetList.list.length!=0){
-            Detail=findSheetDetail(sheetCode);
-            dispatch('sheetDetailInit',{Detail:Detail})
-        }else {
-            //todo ajax
-        }
+        Detail=findSheetDetail(sheetCode);
+        dispatch('sheetDetailInit',{Detail:Detail})
+    },
+    initUserData({commit},{token}){
+        let Map = new urlMapping();
+        Map.ajaxGetData({
+            url: 'GET_INIT_USER_DATA',
+            type: 'get',
+            data: {userToken:token},
+            callback: function (data) {
+                if (data.success) {
+                    if(data.model){
+                        commit(TYPE.USER_EVENT_INIT,{userData:data.model.userData})
+                    }
+                } else {
 
+                }
+            }
+        })
     }
 };
 export default {
