@@ -105,9 +105,12 @@ const mutations = {
         state.PlayerComp.currentPlay.currentTime = currentPlay.currentTime;
     },
     [TYPE.PLAYER_EVENT_UPDATE_PLAYLIST](state, {playList}){
-        state.PlayerComp.playList.historyList = playList.historyList ? playList.historyList : state.PlayerComp.playList.currentPlayList;
-        state.PlayerComp.playList.currentPlayList = playList.currentPlayList;
-
+        if(playList.currentPlayList.sheetCode==state.PlayerComp.playList.currentPlayList.sheetCode){
+            state.PlayerComp.playList.currentPlayList = playList.currentPlayList;
+        }else {
+            state.PlayerComp.playList.historyList = playList.historyList ? playList.historyList : state.PlayerComp.playList.currentPlayList;
+            state.PlayerComp.playList.currentPlayList = playList.currentPlayList;
+        }
     },
     [TYPE.PLAYER_EVENT_UPDATE_PLAY_ORDER_INDEX](state, {playIndex}){
         state.PlayerComp.currentPlay.playOrderIndex = playIndex.playOrderIndex;

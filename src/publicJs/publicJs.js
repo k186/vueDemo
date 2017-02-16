@@ -10,7 +10,9 @@ export default {
         let that = this;
         let timer = window.setInterval(function () {
             if (option) {
-                option.click = that.isClick();
+                if(option.click==undefined){
+                    option.click = that.isClick();
+                }
                 that.myScroll = new IScroll('#' + wrapper, option);
             } else {
                 that.myScroll = new IScroll('#' + wrapper, {mouseWheel: false, click: that.isClick()});

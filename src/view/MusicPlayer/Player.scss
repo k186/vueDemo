@@ -965,10 +965,14 @@ input:-ms-input-placeholder {
   height: px2rem(90);
   line-height: px2rem(90);
   border-bottom: 1px solid $listBorder;
+  position: fixed;
+  background: $white;
+}
+.detail-list-head-ul{
+  height: inherit;
+  width: inherit;
   display: flex;
   flex-wrap: nowrap;
-  background: $white;
-  position: absolute;
 }
 .detail-list-head-nav{
   width: inherit;
@@ -983,9 +987,9 @@ input:-ms-input-placeholder {
   position: absolute;
   bottom: 0;
   height:px2rem(7);
-  background: $mainGreen;
   width: px2rem(100);
-  transition:all  .75s ease-in-out;
+  background: $mainGreen;
+  transition:all  .45s ease-in-out;
   transform: translateX(px2rem(75));
   //todo js to control width and transform
 }
@@ -1019,21 +1023,38 @@ input:-ms-input-placeholder {
   -o-text-size-adjust: none;
   text-size-adjust: none;
 }
-.detail-list-list-song,.detail-list-list-detail,.detail-list-list-lyric{
+.detail-list-body-list-scroller{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.detail-list-list-song-wrapper,
+.detail-list-list-detail-wrapper,
+.detail-list-list-lyric-wrapper,
+.detail-list-list-song-scroller{
   width: px2rem(750);
+}
+.detail-list-list-song-wrapper,
+.detail-list-list-detail-wrapper,
+.detail-list-list-lyric-wrapper{
+  height: inherit;
 }
 
 /*listSongSingle  -----------------------------------------------------------*/
 .list-song-single-box{
   border-bottom:1px solid $listBorder;
   height: px2rem(110);
-  margin-left:px2rem(30);
   display: flex;
   flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.list-song-single-box-text.playing{
+  border-left:px2rem(10) solid $mainGreen;
+  padding-left: px2rem(20);
 }
 .list-song-single-box-text{
   width: px2rem(750-110-30);
   margin: px2rem(15) 0;
+  padding-left: px2rem(30);
 }
 .list-song-single-box-text-title{
   width: inherit;

@@ -126,7 +126,7 @@
                         publicJs.initScroll({
                             wrapper: 'play-list-box-body-wrapper',
                             scroller: 'play-list-box-body-scroller',
-                            option: {scrollX: true, scrollY: false, momentum: false, snap: true},
+                            option: {scrollX: true, scrollY: false, momentum: false, snap: true,click:false},
                             callbackFun: function (scroll) {
                                 that.myScrollC = scroll;
                                 that.myScrollC.on('scrollEnd', function () {

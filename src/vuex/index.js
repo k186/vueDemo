@@ -9,10 +9,11 @@ import searchBar from './modules/searchBar'
 import user from './modules/user'
 import player from './modules/player'
 import radio from './modules/personalRadio'
+import sheetDetail from './modules/sheetDetail'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
-    /*strict: true,*/
+    strict: true,
     actions,
     getters,
     modules:{
@@ -22,6 +23,7 @@ export default new Vuex.Store({
         searchBar,
         user,
         player,
-        radio
+        radio,
+        sheetDetail
     }
 })
