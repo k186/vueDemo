@@ -1,6 +1,6 @@
 <template>
     <div class="song-sheet-box-list">
-        <router-link :to="'/Music/'+$route.params.userToken+'/detailList/'+data.sheetCode" class="song-sheet-box-list-item" v-for="data in listData">
+        <router-link :to="'/Music/'+$route.params.userToken+'/detailList/'+data.sheetCode+'/'+from" class="song-sheet-box-list-item" v-for="data in listData">
             <img :src="data.poster!=''?data.poster:'../../../static/music/poster/default.jpg'" class="song-sheet-box-list-item-poster">
             <div class="song-sheet-box-list-item-text">
                 <div class="song-sheet-box-list-item-text-box">
@@ -26,6 +26,9 @@
         props:{
             listData:{
                 type:Array,
+                required:true
+            },
+            from:{
                 required:true
             }
         }

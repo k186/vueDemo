@@ -114,21 +114,21 @@ const actions = {
     isLikeFilter({},{uid}){
         return !!state.userData.basicInfo.favourite.uidFilter[uid];
     },
-    findSheetWithCode({commit,dispatch},{sheetCode}){
+    findSheetWithCode({commit,dispatch},{sheetCode,from}){
        commit(TYPE.USER_EVENT_FIND_SHEET_WITH_CODE);
         let DetailF={};
         let Detail=null;
         function findSheetDetail (sheetCode) {
-            if(sheetCode=='favourite'){
+            if(from=='favourite'){
                  DetailF={
                     "sheetCode": 'favourite',
                     "title": "我的喜爱",
                     "count": state.userData.basicInfo.favourite.count,
                     list:state.userData.basicInfo.favourite.list
                 };
-            }else if(sheetCode=='all'){
+            }else if(from=='all'){
                 //todo
-            }else {
+            }else if(from=="sheet") {
                 let Data=state.userData.basicInfo.SheetList.list;
                 for (let i = 0; i < Data.length; i++) {
                     if (Data[i].sheetCode == sheetCode) {

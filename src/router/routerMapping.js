@@ -74,7 +74,7 @@ export default {
                         }
                     },
                     {
-                        path: "detailList/:sheetCode",
+                        path: "detailList/:sheetCode/:from",
                         name:'detailList',
                         component: detailList,
                         meta: {

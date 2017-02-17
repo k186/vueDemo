@@ -13,8 +13,8 @@
                 <!--song-->
                 <div class="detail-list-list-song-wrapper wrapper" id="detail-list-list-song-wrapper">
                     <div class="detail-list-list-song-scroller scroller" id="detail-list-list-song-scroller">
-                        <quick-play :toggle="quickPlayToggle" :from="$route.params.sheetCode" :sheetCode="sheetDetailList.sheetCode">
-                            <single v-for="Data in sheetDetailList.list" :Data="Data" :from="$route.params.sheetCode" :sheetCode="sheetDetailList.sheetCode"></single>
+                        <quick-play :toggle="quickPlayToggle" :from="$route.params.from" :sheetCode="sheetDetailList.sheetCode">
+                            <single v-for="Data in sheetDetailList.list" :Data="Data" :from="$route.params.from" :sheetCode="sheetDetailList.sheetCode"></single>
                         </quick-play>
                         <div class="Scroll-Add-On"></div>
                     </div>
@@ -73,7 +73,7 @@
                     })
                 }
             });
-            this.findSheetWithCode({sheetCode:this.$route.params.sheetCode});
+            this.findSheetWithCode({sheetCode:this.$route.params.sheetCode,from:this.$route.params.from});
             if(this.sheetDetailList.list.length!=0){
                 this.$nextTick(function () {
                     publicJs.initScroll({

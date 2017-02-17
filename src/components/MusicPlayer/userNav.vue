@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="box-enter-row">
-                <router-link tag="div" :to="'/Music/'+$route.params.userToken+'/detailList/favourite/'" class="box-enter-nav">
+                <router-link tag="div" :to="'/Music/'+$route.params.userToken+'/detailList/favourite/favourite'" class="box-enter-nav">
                     <div class="enter-nav-icon  icon">&#xe613;</div>
                     <div class="enter-nav-name">我喜欢</div>
                     <div class="enter-nav-count">{{userData.basicInfo.favourite.count}}</div>
