@@ -3,16 +3,18 @@
   "model": {
     "sheetCode": "radio",
     "title": "个性电台",
-    "count": 3,
+    "described": "来听听和「Tik Tau」一样好听的歌曲吧",
+    "poster": "http://k186studio.com/static/music/poster/1D4ACE1915765694E91AD6F63E6B7EC4.jpg",
+    "count": 4,
     "list": [
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8545.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8545.jpg",
-          "title": "Try Everything (尝试一切)",
-          "artist": "Shakira",
-          "album": "Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)",
-          "uid": 8545,
+          "url": "http://k186studio.com/static/music/B2FCDACF43B056243DD27717998139C0.mp3",
+          "poster": "http://k186studio.com/static/music/poster/B2FCDACF43B056243DD27717998139C0.jpg",
+          "title": "MC History",
+          "artist": "MC 大队长",
+          "album": "暴走MC",
+          "uid": "B2FCDACF43B056243DD27717998139C0",
           "markTitle": {
             "quality": 2,
             "exclusive": 1,
@@ -21,64 +23,64 @@
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8548.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8548.jpg",
-          "title": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
-          "artist": "Alvaro Soler",
-          "album": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
-          "uid": 8548,
+          "url": "http://k186studio.com/static/music/C0B93124E4A4036B292A058D0B5B1B0B.mp3",
+          "poster": "http://k186studio.com/static/music/poster/C0B93124E4A4036B292A058D0B5B1B0B.jpg",
+          "title": "手紙 ~拝啓 十五の君へ~",
+          "artist": "May J. (メイ・ジェイ)",
+          "album": "Heartful Song Covers",
+          "uid": "C0B93124E4A4036B292A058D0B5B1B0B",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8546.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8546.jpg",
+          "url": "http://k186studio.com/static/music/ACBF9A231456559F134DEFACED8D1B7A.mp3",
+          "poster": "http://k186studio.com/static/music/poster/ACBF9A231456559F134DEFACED8D1B7A.jpg",
           "title": "I Like Chopin",
           "artist": "Gazebo",
           "album": "Portrait",
-          "uid": 8546,
+          "uid": "ACBF9A231456559F134DEFACED8D1B7A",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8543.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8543.jpg",
-          "title": "Heroes",
-          "artist": "Alesso",
-          "album": "Heroes (we could be)",
-          "uid": 8543,
+          "url": "http://k186studio.com/static/music/D4E72770A279BF500BEB319658B524D5.mp3",
+          "poster": "http://k186studio.com/static/music/poster/D4E72770A279BF500BEB319658B524D5.jpg",
+          "title": "No Woman No Cry",
+          "artist": "Boney M",
+          "album": "Take The Heat Off Me",
+          "uid": "D4E72770A279BF500BEB319658B524D5",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       }
     ]

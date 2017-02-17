@@ -9,12 +9,24 @@ const state = {
         basicInfo: {
             name: '',
             img: '',
-            vip: 0,
+            vip: {
+                vip:1,/*普通vip*/
+                nvip:1,/*普通年费vip*/
+                nsvip:1,/*年费超级vip*/
+                svip:1,/*超级vip*/
+                xvip:1,/*混合vip*/
+                nxvip:1,/*混合vip*/
+                nsui:1,/*年费音乐包*/
+                sui:1/*音乐包*/
+            },
             SheetList: {
                 count: 0,
                 list: []
             },
-            totalSong: [],
+            totalSong: {
+                count:0,
+                list:[]
+            },
             favourite: {
                 count: 0,
                 uidFilter:{},

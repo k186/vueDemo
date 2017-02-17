@@ -7,7 +7,7 @@
                         <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
                             <div class="player-box-poster" >
                                 <img :class="PlayerComp.playStatus==1?'circleLoop':'circleLoopPause'"
-                                     :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/imgs/poster/default.jpg'"
+                                     :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/music/poster/default.jpg'"
                                      alt="海报"
                                      class="player-box-poster-img">
                             </div>

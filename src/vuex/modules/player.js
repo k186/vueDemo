@@ -148,10 +148,10 @@ const actions = {
         };
         commit(TYPE.PLAYER_EVENT_INIT, {setCurrentPlay});
         audio.addEventListener('timeupdate', function () {
-            //dispatch('playerProcess');
+            dispatch('playerProcess');
         });
         audio.addEventListener('progress', function () {
-            //dispatch('playerBuffered');
+            dispatch('playerBuffered');
         });
     },
     playerPlay({commit}){
@@ -284,14 +284,21 @@ const actions = {
     playerToggle({commit}, {toggle}){
         commit(TYPE.PLAYER_EVENT_TOGGLE, {toggle})
     },
-    playerTogglePlayType({commit, dispatch}){
-        let currentPlayType = state.PlayerComp.playType;
-        currentPlayType += 1;
-        currentPlayType = currentPlayType > 3 ? 1 : currentPlayType;
-        let playType = {
-            playType: currentPlayType
-        };
-        commit(TYPE.PLAYER_EVENT_TOGGLE_PLAY_TYPE, {playType});
+    playerTogglePlayType({commit, dispatch},{setPlayType}){
+        if(!setPlayType){
+            let currentPlayType = state.PlayerComp.playType;
+            currentPlayType += 1;
+            currentPlayType = currentPlayType > 3 ? 1 : currentPlayType;
+            let playType = {
+                playType: currentPlayType
+            };
+            commit(TYPE.PLAYER_EVENT_TOGGLE_PLAY_TYPE, {playType});
+        }else {
+            let playType = {
+                playType: setPlayType
+            };
+            commit(TYPE.PLAYER_EVENT_TOGGLE_PLAY_TYPE, {playType});
+        }
         dispatch('initPlayOrder');
         dispatch('updatePlayOrderIndex',{});
     },
@@ -308,7 +315,7 @@ const actions = {
     },
     initPlayOrder({commit}){
         let playOrder = [];
-        console.log(state.PlayerComp.playOrder);
+        console.log('before:'+state.PlayerComp.playOrder);
         let DataArr = state.PlayerComp.playList.currentPlayList.list;
         for (let i = 0; i < DataArr.length; i++) {
             playOrder[i] = DataArr[i].song.uid;
@@ -323,15 +330,16 @@ const actions = {
             /*order*/
         }
         commit(TYPE.PLAYER_EVENT_PLAY_ORDER, {playOrder});
-        console.log(state.PlayerComp.playOrder)
+        console.log('after:'+state.PlayerComp.playOrder)
     },
     playerSet({commit, dispatch}, {option}){
         //只从自己的 playList.currentPlayList 取歌曲 todo 对应列表组件都要有一个方法来往currentPlayList 填充数据 根据不同的标识符 from 调用对应组件的方法 来自radio的不设置历史记录
-        //from sheet all search favorite  [list history radio] 判断从哪点的
+        //from sheet all search favorite  [list history radio]{playList} 判断从哪点的
         /*options
          * uid String 需要播放歌曲的uid
          * sheetCode String 列表编码
          * from String  sheet all search favorite  [list history radio] 来源
+         * playType 播放类型 1 random order singleLoop
          * */
         function isPlayCurrent(uid) {
             return state.PlayerComp.currentPlay.uid == uid
@@ -428,6 +436,9 @@ const actions = {
                 playPause();
                 setCurrent();
                 playPlay();
+            }
+            if(option.playType){
+                dispatch('playerTogglePlayType',{setPlayType:option.playType})
             }
         } else if (option.from == 'search') {
 

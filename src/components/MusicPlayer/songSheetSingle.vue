@@ -1,7 +1,7 @@
 <template>
     <div class="song-sheet-box-list">
         <router-link :to="'/Music/'+$route.params.userToken+'/sheetDetailList/'+data.sheetCode" class="song-sheet-box-list-item" v-for="data in listData">
-            <img :src="data.poster!=''?data.poster:'../../../static/imgs/poster/default.jpg'" class="song-sheet-box-list-item-poster">
+            <img :src="data.poster!=''?data.poster:'../../../static/music/poster/default.jpg'" class="song-sheet-box-list-item-poster">
             <div class="song-sheet-box-list-item-text">
                 <div class="song-sheet-box-list-item-text-box">
                     <div class="song-sheet-box-list-item-text-title">{{data.title}}</div>

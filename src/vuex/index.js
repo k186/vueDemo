@@ -10,6 +10,7 @@ import user from './modules/user'
 import player from './modules/player'
 import radio from './modules/personalRadio'
 import sheetDetail from './modules/sheetDetail'
+import MusicConfig from './modules/musicConfigule'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -24,6 +25,7 @@ export default new Vuex.Store({
         user,
         player,
         radio,
-        sheetDetail
+        sheetDetail,
+        MusicConfig
     }
 })

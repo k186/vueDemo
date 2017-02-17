@@ -13,14 +13,20 @@
                 <!--song-->
                 <div class="detail-list-list-song-wrapper wrapper" id="detail-list-list-song-wrapper">
                     <div class="detail-list-list-song-scroller scroller" id="detail-list-list-song-scroller">
-                        <single v-for="Data in sheetDetailList.list" :Data="Data" from="sheet" :sheetCode="sheetDetailList.sheetCode"></single>
+                        <quick-play :toggle="quickPlayToggle" from="sheet" :sheetCode="sheetDetailList.sheetCode">
+                            <single v-for="Data in sheetDetailList.list" :Data="Data" from="sheet" :sheetCode="sheetDetailList.sheetCode"></single>
+                        </quick-play>
                         <div class="Scroll-Add-On"></div>
                     </div>
                 </div>
                 <!--detail-->
-                <div class="detail-list-list-detail-wrapper wrapper"></div>
+                <div class="detail-list-list-detail-wrapper wrapper">
+                    详情开发中.....
+                </div>
                 <!--lyric-->
-                <div class="detail-list-list-lyric-wrapper wrapper"></div>
+                <div class="detail-list-list-lyric-wrapper wrapper">
+                    歌词本开发中......
+                </div>
             </div>
         </div>
     </div>
@@ -28,11 +34,13 @@
 <script>
     import publicJs from '../../publicJs/publicJs'
     import single from './listSongSingle'
+    import quickPlay from './quickPlay'
     import {mapGetters,mapActions} from  'vuex'
     export default{
         name:'sheetDetailList',
         components:{
-            single
+            single,
+            quickPlay
         },
         data(){
             return{

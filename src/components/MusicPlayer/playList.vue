@@ -8,7 +8,7 @@
                         <!--current-->
                         <div class="play-list-box-body-box" id="currentPlay">
                             <div class="play-list-box-body-box-head" v-if="PlayerComp.playList.currentPlayList.sheetCode!='radio'">
-                                <div class="play-list-head-btn" @click="toggleType">
+                                <div class="play-list-head-btn" @click="toggleType({})">
                                     <span stop class="play-list-head-btn-icon-playType icon"
                                           v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''"></span>
                                     <span stop class="play-list-head-btn-text" v-if="PlayerComp.playType==1">随机播放({{PlayerComp.playList.currentPlayList.count}}首)</span>

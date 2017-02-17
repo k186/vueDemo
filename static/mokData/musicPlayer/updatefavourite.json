@@ -3,20 +3,20 @@
   "model": {
     "count": 4,
     "uidFilter":{
-      "8545":true,
-      "8548":true,
-      "8546":true,
-      "1232":true
+      "94B34E8152D43232233891FA34529B38":true,
+      "9430BB2DF7604F9E3D227AB849137CFE":true,
+      "F22045983B504A26C0D9C2572966C591":true,
+      "6E6845904CC1FB99E4EAB82E5E813EB2":true
     },
     "list": [
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8545.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8545.jpg",
-          "title": "Try Everything (尝试一切)",
-          "artist": "Shakira",
-          "album": "Zootopia (Original Motion Picture Soundtrack) (疯狂动物城 电影原声带)",
-          "uid": 8545,
+          "url": "http://k186studio.com/static/music/94B34E8152D43232233891FA34529B38.mp3",
+          "poster": "http://k186studio.com/static/music/poster/94B34E8152D43232233891FA34529B38.jpg",
+          "title": "平凡之路 (《后会无期》电影主题曲)",
+          "artist": "朴树",
+          "album": "平凡之路",
+          "uid": "94B34E8152D43232233891FA34529B38",
           "markTitle": {
             "quality": 2,
             "exclusive": 1,
@@ -25,64 +25,64 @@
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8548.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8548.jpg",
-          "title": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
-          "artist": "Alvaro Soler",
-          "album": "El Mismo Sol (Under The Same Sun) (B-Case Remix)",
-          "uid": 8548,
+          "url": "http://k186studio.com/static/music/9430BB2DF7604F9E3D227AB849137CFE.mp3",
+          "poster": "http://k186studio.com/static/music/poster/9430BB2DF7604F9E3D227AB849137CFE.jpg",
+          "title": "恋曲1990 (《阿郎的故事》国语版电影主题曲_《阿郎恋曲》国语版)",
+          "artist": "罗大佑",
+          "album": "爱人同志（台湾版）",
+          "uid": "9430BB2DF7604F9E3D227AB849137CFE",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8546.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8546.jpg",
-          "title": "I Like Chopin",
-          "artist": "Gazebo",
-          "album": "Portrait",
-          "uid": 8546,
+          "url": "http://k186studio.com/static/music/F22045983B504A26C0D9C2572966C591.mp3",
+          "poster": "http://k186studio.com/static/music/poster/F22045983B504A26C0D9C2572966C591.jpg",
+          "title": "想神马有神马",
+          "artist": "李代沫",
+          "album": "想神马有神马",
+          "uid": "F22045983B504A26C0D9C2572966C591",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       },
       {
         "song": {
-          "url": "http://k186studio.com/static/music/8543.mp3",
-          "poster": "http://k186studio.com/static/imgs/poster/8543.jpg",
-          "title": "Heroes",
-          "artist": "Alesso",
-          "album": "Heroes (we could be)",
-          "uid": 8543,
+          "url": "http://k186studio.com/static/music/6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
+          "poster": "http://k186studio.com/static/music/poster/6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
+          "title": "美丽的神话 (《功夫瑜伽》电影主题曲)",
+          "artist": "成龙",
+          "album": "美丽的神话",
+          "uid": "6E6845904CC1FB99E4EAB82E5E813EB2",
           "markTitle": {
-            "quality": 1,
+            "quality": 2,
             "exclusive": 1,
             "mv": 1
           }
         },
         "mark": {
           "isDownload": true,
-          "isInternet": true
+          "isInternet": false
         }
       }
     ]
