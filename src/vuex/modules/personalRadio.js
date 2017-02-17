@@ -75,6 +75,7 @@ const actions = {
                 callback()
             }
         }
+        commit(TYPE.PERSONAL_RADIO_UPDATE_PLAY_LIST);
         if( state.personalRadio.list.length==0){
             dispatch('initRadio',{callback:function () {
                 updateToPlayList(callback);
@@ -82,7 +83,6 @@ const actions = {
         }else {
             updateToPlayList(callback);
         }
-       commit(TYPE.PERSONAL_RADIO_UPDATE_PLAY_LIST)
     }
 };
 export default {

@@ -5,7 +5,7 @@
         <div class="list-song-single-box-content">
             <div class="list-song-single-box-text">
                 <div class="list-song-single-box-text-title">
-                    <span class="text ">{{Data.song.title}}</span>
+                    <span class="text title">{{Data.song.title}}</span>
                     <span v-if="Data.song.markTitle.quality==2" class="text icon sq">&#xe8a9;</span>
                     <span v-if="Data.song.markTitle.quality==1" class="text icon hq">&#xe8ab;</span>
                     <span v-if="Data.song.markTitle.mv" class="text icon mv">&#xe6af;</span>

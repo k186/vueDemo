@@ -111,19 +111,30 @@ const actions = {
         commit(TYPE.USER_EVENT_UPDATE_FAVOURITE_FILTER,{uid});
         dispatch('updateFavourite')
     },
-    isLikeFilter({commit,dispatch},{uid}){
+    isLikeFilter({},{uid}){
         return !!state.userData.basicInfo.favourite.uidFilter[uid];
     },
     findSheetWithCode({commit,dispatch},{sheetCode}){
        commit(TYPE.USER_EVENT_FIND_SHEET_WITH_CODE);
+        let DetailF={};
         let Detail=null;
         function findSheetDetail (sheetCode) {
-            let Data=state.userData.basicInfo.SheetList.list;
-            let DetailF={};
-            for (let i = 0; i < Data.length; i++) {
-                if (Data[i].sheetCode == sheetCode) {
-                    DetailF=Data[i];
-                    break;
+            if(sheetCode=='favourite'){
+                 DetailF={
+                    "sheetCode": 'favourite',
+                    "title": "我的喜爱",
+                    "count": state.userData.basicInfo.favourite.count,
+                    list:state.userData.basicInfo.favourite.list
+                };
+            }else if(sheetCode=='all'){
+                //todo
+            }else {
+                let Data=state.userData.basicInfo.SheetList.list;
+                for (let i = 0; i < Data.length; i++) {
+                    if (Data[i].sheetCode == sheetCode) {
+                        DetailF=Data[i];
+                        break;
+                    }
                 }
             }
             return DetailF;
@@ -147,6 +158,27 @@ const actions = {
                 }
             }
         })
+    },
+    setFavouriteToPlayList({commit,dispatch},{callback}){
+        let currentPlayListData = null;
+        let dataObj = state.userData.basicInfo.favourite;
+        let currentPlayList = {
+            count: dataObj.count,
+            sheetCode: 'favourite',
+            list: dataObj.list,
+            title: '我的喜爱'
+        };
+        currentPlayListData = currentPlayList;
+        let playList = {
+            currentPlayList: currentPlayListData ? currentPlayListData : {count: 0, sheetCode: '', list: [], title: ''},
+            historyList: null,
+            initOrder: true
+        };
+        dispatch('updatePlaylist', {playList});
+        commit(TYPE.USER_EVENT_UPDATE_PLAY_LIST);
+        if (callback) {
+            callback()
+        }
     }
 };
 export default {

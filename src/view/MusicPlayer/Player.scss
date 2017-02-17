@@ -991,7 +991,6 @@ input:-ms-input-placeholder {
   background: $mainGreen;
   transition:all  .45s ease-in-out;
   transform: translateX(px2rem(75));
-  //todo js to control width and transform
 }
 .detail-list-body-wrapper{
   position: absolute;
@@ -1000,7 +999,6 @@ input:-ms-input-placeholder {
   width: 100%;
 }
 .detail-list-body-list-scroller{
-  background: $white;
   width: px2rem(750*3);
   position: absolute;
   top: 0;
@@ -1041,6 +1039,7 @@ input:-ms-input-placeholder {
 
 /*listSongSingle  -----------------------------------------------------------*/
 .list-song-single-box{
+  background: $white;
   height: px2rem(110);
 }
 .play-bar{
@@ -1064,10 +1063,13 @@ input:-ms-input-placeholder {
 }
 .list-song-single-box-text-title{
   width: inherit;
-  @include wordEllipsis();
   font-size: px2rem(30);
   color: $mainTitle;
   display: flex;
+  .title{
+    max-width: px2rem(750-110-60);
+    @include wordEllipsis();
+  }
   .text{
     line-height: px2rem(30);
     vertical-align: middle;

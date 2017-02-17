@@ -13,8 +13,8 @@
                 <!--song-->
                 <div class="detail-list-list-song-wrapper wrapper" id="detail-list-list-song-wrapper">
                     <div class="detail-list-list-song-scroller scroller" id="detail-list-list-song-scroller">
-                        <quick-play :toggle="quickPlayToggle" from="sheet" :sheetCode="sheetDetailList.sheetCode">
-                            <single v-for="Data in sheetDetailList.list" :Data="Data" from="sheet" :sheetCode="sheetDetailList.sheetCode"></single>
+                        <quick-play :toggle="quickPlayToggle" :from="$route.params.sheetCode" :sheetCode="sheetDetailList.sheetCode">
+                            <single v-for="Data in sheetDetailList.list" :Data="Data" :from="$route.params.sheetCode" :sheetCode="sheetDetailList.sheetCode"></single>
                         </quick-play>
                         <div class="Scroll-Add-On"></div>
                     </div>
@@ -22,6 +22,7 @@
                 <!--detail-->
                 <div class="detail-list-list-detail-wrapper wrapper">
                     详情开发中.....
+                    <!--todo 更具不同的sheetcode 显示不同的dom-->
                 </div>
                 <!--lyric-->
                 <div class="detail-list-list-lyric-wrapper wrapper">
@@ -47,6 +48,10 @@
                 myScroll:null,
                 myScrollB:null,
                 currentPage:0,
+                repeatData:{
+                    count: 0,
+                    list: []
+                }
             }
         },
         computed:{

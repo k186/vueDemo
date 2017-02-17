@@ -148,10 +148,10 @@ const actions = {
         };
         commit(TYPE.PLAYER_EVENT_INIT, {setCurrentPlay});
         audio.addEventListener('timeupdate', function () {
-            dispatch('playerProcess');
+            //dispatch('playerProcess');
         });
         audio.addEventListener('progress', function () {
-            dispatch('playerBuffered');
+            //dispatch('playerBuffered');
         });
     },
     playerPlay({commit}){
@@ -444,6 +444,14 @@ const actions = {
 
         } else if (option.from == 'all') {
 
+        } else if(option.from=='favourite'){
+            dispatch('setFavouriteToPlayList',{callback:function () {
+                if (!isPlayCurrent(option.uid)) {
+                    playPause();
+                    setCurrent();
+                    playPlay();
+                }
+            }})
         }
 
     },

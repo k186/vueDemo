@@ -6,7 +6,7 @@ const number2words = resolve => require(['../view/number2words/numberword'], res
 const MusicHome=resolve=>require(['../view/MusicPlayer/homeRouter'],resolve);
 const MusicMain=resolve=>require(['../view/MusicPlayer/main'],resolve);
 const songSheet=resolve=>require(['../view/MusicPlayer/songSheetList'],resolve);
-const sheetDetailList=resolve=>require(['../components/MusicPlayer/sheetDetailList'],resolve);
+const detailList=resolve=>require(['../view/MusicPlayer/detailList'],resolve);
 /*single all load*/
 /*import App from '../view/home/home';
 import ios from '../view/pickerMobile/mobilePickerDemo';
@@ -74,9 +74,9 @@ export default {
                         }
                     },
                     {
-                        path: "sheetDetailList/:sheetCode",
-                        name:'sheetDetailList',
-                        component: sheetDetailList,
+                        path: "detailList/:sheetCode",
+                        name:'detailList',
+                        component: detailList,
                         meta: {
                             title: '列表详情'
                         }
