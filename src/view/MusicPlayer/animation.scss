@@ -80,3 +80,91 @@
   -webkit-transform: translateY(-100%);
   transform: translateY(-100%);
 }
+.fullScreen-enter-active {
+
+}
+.fullScreen-leave-active{
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39) .75s;
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39) .75s
+}
+
+.fullScreen-enter {
+}
+
+.fullScreen-leave-active {
+  opacity:0;
+}
+.fullMask-enter-active,.fullMask-leave-active {
+  -webkit-transition: all .45s ease-in-out;
+  transition: all .45s ease-in-out;
+}
+
+.fullMask-enter {
+  opacity: 0;
+}
+
+.fullMask-leave-active {
+  opacity: 0;
+}
+.blurChange-enter-active,.blurChange-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+}
+
+.blurChange-enter {
+  opacity: 1;
+  transform:scale(1.1)
+}
+
+.blurChange-leave-active {
+  opacity: 0;
+  transform:scale(1.1)
+}
+.bounceTop-enter-active,.bounceTop-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39)
+}
+
+.bounceTop-enter {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.bounceTop-leave-active {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.bounceBottom-enter-active, .bounceBottom-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39)
+}
+
+.bounceBottom-enter {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.bounceBottom-leave-active {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.dish-leave-active {
+  -webkit-transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+  transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+}
+.dish-enter-active{
+  -webkit-transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+  transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+}
+
+.dish-enter{
+  opacity: 1;
+  border: none !important;
+  transform: translateY(.7rem) scale(.13);
+}
+.dish-leave-active {
+  opacity: 0;
+  border: none !important;
+  transform: translateY(.7rem) scale(.13);
+}

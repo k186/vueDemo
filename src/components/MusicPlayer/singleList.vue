@@ -10,7 +10,7 @@
         </div>
         <div class="single-list-control" v-if="from=='list'">
             <div class="single-list-isLike" @click.stop.prevent="isLike({uid:Data.song.uid})">
-                <span class="icon" :class="isLikeFilter({uid:Data.song.uid})?'like':''" v-html="isLikeFilter({uid:Data.song.uid})?'&#xe99f;':'&#xe613;'"></span>
+                <span class="icon" :class="isLikeFilter({uid:Data.song.uid})==true?'like':''" v-html="isLikeFilter({uid:Data.song.uid})==true?'&#xe99f;':'&#xe613;'"></span>
             </div>
             <div class="single-list-delete" @click.stop.prevent="deleteSingleInPlayList({uid:Data.song.uid})">
                 <span class="icon">&#xe6bf;</span>

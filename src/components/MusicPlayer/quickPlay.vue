@@ -2,7 +2,7 @@
     <div class="quick-play-box">
         <transition name="toggleTop">
             <div v-show="toggle" class="quick-play-head">
-                <div class="quick-play-btn left" @click.stop="playerSet({option:{sheetCode:sheetCode,from:from,playType:1}})">
+                <div class="quick-play-btn left" @click.stop="playerSet({option:{sheetCode:sheetCode,from:from,playType:3}})">
                     <span class="icon ">&#xe675;</span>
                     <span>随机播放全部</span>
                 </div>

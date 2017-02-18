@@ -4,14 +4,14 @@
             <div class="player-box" v-show="PlayerComp.visible">
                 <div class="player-box-bg">
                     <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
-                        <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster" @touchstart="playerTouch($event)" id="playerTouch">
-                            <div class="player-box-poster" >
-                                <img :class="PlayerComp.playStatus==1?'circleLoop':'circleLoopPause'"
+                        <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster">
+                            <div class="player-box-poster" @click.stop="toggleFullScreen">
+                                <img :class="PlayerComp.playStatus==1&&PlayerComp.fullScreen==false?'circleLoop':'circleLoopPause'"
                                      :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/music/poster/default.jpg'"
                                      alt="海报"
                                      class="player-box-poster-img">
                             </div>
-                            <div class="player-box-text">
+                            <div class="player-box-text" @touchstart.stop="playerTouch($event)" id="playerTouch">
                                 <div v-show="!PlayerComp.currentPlay.title" class="player-box-text-title">QQ音乐</div>
                                 <div v-show="PlayerComp.currentPlay.title" class="player-box-text-title">{{PlayerComp.currentPlay.title}}</div>
                                 <div class="player-box-text-lyric"></div>
@@ -27,16 +27,19 @@
             </div>
         </transition>
         <play-list v-if="PlayerComp.playList.visible"></play-list>
+        <full-screen></full-screen>
         <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
     </div>
 </template>
 <script>
     import playList from './playList'
+    import fullScreen from './fullScreen'
     import {mapActions, mapGetters} from 'vuex'
     export default{
         name: 'player',
         components:{
-            playList
+            playList,
+            fullScreen
         },
         data(){
             return {
@@ -59,11 +62,12 @@
             ...mapActions({
                 play:'playerPlay',
                 pause:'playerPause',
-                showPlayList:'playerToggle'
+                showPlayList:'playerToggle',
+                toggleFullScreen:'toggleFullScreen'
             }),
             next(){
                 this.swipeChange='right2left';
-                this.$store.dispatch('playerNext');
+                this.$store.dispatch('playerNext',{});
             },
             previous(){
                 this.swipeChange='left2right';

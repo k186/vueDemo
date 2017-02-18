@@ -142,7 +142,7 @@ const actions = {
         Detail=findSheetDetail(sheetCode);
         dispatch('sheetDetailInit',{Detail:Detail})
     },
-    initUserData({commit},{token}){
+    initUserData({commit},{token,callback}){
         let Map = new urlMapping();
         Map.ajaxGetData({
             url: 'GET_INIT_USER_DATA',
@@ -152,6 +152,9 @@ const actions = {
                 if (data.success) {
                     if(data.model){
                         commit(TYPE.USER_EVENT_INIT,{userData:data.model.userData})
+                        if(callback){
+                            callback()
+                        }
                     }
                 } else {
 

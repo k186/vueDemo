@@ -6,6 +6,7 @@ import urlMapping from '../../api/urlMapping'
 const state = {
     PlayerComp: {
         visible: true,
+        fullScreen:false,
         playType: 2, /*1 random order singleLoop*/
         playStatus: 0, /*0 pause 1 play*/
         playOrder: [],
@@ -137,6 +138,12 @@ const mutations = {
             artist: '',
             album: '',
         }
+    },
+    [TYPE.PLAYER_EVENT_SET_PLAY_PROCESS](state,{process}){
+        state.PlayerComp.currentPlay.currentTime=process*state.PlayerComp.currentPlay.duration;
+    },
+    [TYPE.PLAYER_EVENT_FULL_SCREEN](state,){
+        state.PlayerComp.fullScreen=!state.PlayerComp.fullScreen;
     }
 };
 const actions = {
@@ -148,10 +155,10 @@ const actions = {
         };
         commit(TYPE.PLAYER_EVENT_INIT, {setCurrentPlay});
         audio.addEventListener('timeupdate', function () {
-            //dispatch('playerProcess');
+            dispatch('playerProcess');
         });
         audio.addEventListener('progress', function () {
-            //dispatch('playerBuffered');
+            dispatch('playerBuffered');
         });
     },
     playerPlay({commit}){
@@ -197,11 +204,12 @@ const actions = {
             };
             commit(TYPE.PLAYER_EVENT_PROCESS, {setCurrentPlay});
             if(setCurrentPlay.process==1){
-                dispatch('playerNext')
+                dispatch('playerNext',{from:'auto'})
             }
         }
     },
-    playerNext({commit, dispatch}){
+    playerNext({commit, dispatch},{from}){
+        //todo loop
         dispatch('playerPause');
         let currentPlay = {
             currentTime: 0,
@@ -215,7 +223,11 @@ const actions = {
             album: '',
         };
         let $index = state.PlayerComp.currentPlay.playOrderIndex;
-        $index += 1;
+        if(from=='auto'&&state.PlayerComp.playType==3){
+
+        }else {
+            $index += 1;
+        }
         if ($index > state.PlayerComp.playOrder.length - 1) {
             $index = 0;
         }
@@ -496,7 +508,7 @@ const actions = {
                 playOrderIndex: $index
             };
             dispatch('updatePlayOrderIndex', {playIndexObj});
-            dispatch('playerNext')
+            dispatch('playerNext',{})
         }else {
             let playIndexObj = {
                 playOrderIndex: state.PlayerComp.playOrder.indexOf(state.PlayerComp.currentPlay.uid)
@@ -510,6 +522,17 @@ const actions = {
             commit(TYPE.PLAYER_EVENT_CLEAR_PLAY_LIST)
         }
 
+    },
+    setProcess({commit,dispatch},{process,callback}){
+       dispatch('playerPause');
+        commit(TYPE.PLAYER_EVENT_SET_PLAY_PROCESS,{process});
+        if(callback){
+            callback();
+        }
+        dispatch('playerPlay');
+    },
+    toggleFullScreen({commit}){
+        commit(TYPE.PLAYER_EVENT_FULL_SCREEN)
     }
 };
 export default {

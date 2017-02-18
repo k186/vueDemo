@@ -17,6 +17,7 @@
     import personalRadio from '../../components/MusicPlayer/pseronalRadio'
     import songSheet from '../../components/MusicPlayer/songSheet'
     import publicJs from '../../publicJs/publicJs'
+    import {mapActions} from 'vuex'
     export default{
         name:'mainIndex',
         data(){
@@ -26,9 +27,16 @@
         },
         mounted(){
             let that=this;
-            publicJs.initScroll({wrapper:'main-wrapper',scroller:'main-scroller',callbackFun:function (scroll) {
-                that.myScroll=scroll;
+            this.initUserData({token:this.$route.params.userToken,callback:function () {
+                publicJs.initScroll({wrapper:'main-wrapper',scroller:'main-scroller',callbackFun:function (scroll) {
+                    that.myScroll=scroll;
+                }});
             }});
+        },
+        methods:{
+            ...mapActions({
+                initUserData:'initUserData'
+            })
         },
         beforeDestroy(){
           publicJs.destroy(this.myScroll)

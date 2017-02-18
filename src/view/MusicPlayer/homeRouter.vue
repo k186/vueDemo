@@ -11,21 +11,12 @@
 
     import player from '../../components/MusicPlayer/payer'
     import loading from '../../components/loading/loading'
-    import {mapActions} from 'vuex'
     export default{
         name: 'musicHome',
         components: {
             loading,
             player
-        },
-        mounted(){
-            this.initUserData({token:this.$route.params.userToken})
-        },
-        methods:{
-            ...mapActions({
-                initUserData:'initUserData'
-            }),
-        },
+        }
     }
 </script>
 <style scoped>

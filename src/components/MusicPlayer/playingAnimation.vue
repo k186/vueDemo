@@ -1,5 +1,5 @@
 <template>
-    <div class="wave-box">
+    <div class="wave-box" :class="isPlay?'':'wave-pause'">
         <div class="wave1"></div>
         <div class="wave2"></div>
         <div class="wave3"></div>
