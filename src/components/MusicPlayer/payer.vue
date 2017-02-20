@@ -5,9 +5,14 @@
                 <div class="player-box-bg">
                     <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
                         <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster">
-                            <div class="player-box-poster" @click.stop="toggleFullScreen">
+                            <div v-if="PlayerComp.currentPlay.poster==''" class="player-box-poster">
+                                <img :src="'../../../static/music/poster/default.jpg'"
+                                     alt="海报"
+                                     class="player-box-poster-img">
+                            </div>
+                            <div v-if="PlayerComp.currentPlay.poster!=''" class="player-box-poster" @click.stop="toggleFullScreen">
                                 <img :class="PlayerComp.playStatus==1&&PlayerComp.fullScreen==false?'circleLoop':'circleLoopPause'"
-                                     :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/music/poster/default.jpg'"
+                                     :src="PlayerComp.currentPlay.poster"
                                      alt="海报"
                                      class="player-box-poster-img">
                             </div>

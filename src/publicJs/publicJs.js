@@ -59,14 +59,10 @@ export default {
 
         }
         function defaultEvt() {
-            window.document.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, false);
+            window.document.addEventListener('touchmove', that.defaultEvt, false);
         }
         function passiveEvt() {
-            window.document.addEventListener('touchmove', function (e) {
-                e.preventDefault();
-            }, {passive: false});
+            window.document.addEventListener('touchmove', that.defaultEvt, {passive: false});
         }
 
         let browser = getBrowserInfo();
@@ -82,14 +78,18 @@ export default {
                 verinfo.split('.')[0]>=10?passiveEvt():defaultEvt();
             }
         }
-
     },
     refresh: function (myScroll) {
         myScroll.refresh();
     },
     destroy:function (myScroll) {
+        let that=this;
         console.log('destroyScroll');
         myScroll.destroy();
+        window.removeEventListener('touchmove',that.defaultEvt , false);
+    },
+    defaultEvt:function (e) {
+        e.preventDefault();
     },
     isClick: function () {
         if (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent)) return true;

@@ -18,6 +18,9 @@
         }),
         components:{
             songSheetSingle
+        },
+        mounted(){
+
         }
     }
 </script>
