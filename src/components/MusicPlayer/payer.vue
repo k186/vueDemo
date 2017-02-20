@@ -63,7 +63,8 @@
                 play:'playerPlay',
                 pause:'playerPause',
                 showPlayList:'playerToggle',
-                toggleFullScreen:'toggleFullScreen'
+                toggleFullScreen:'toggleFullScreen',
+                playerDestroy:'playerDestroy'
             }),
             next(){
                 this.swipeChange='right2left';
@@ -123,6 +124,9 @@
                 El.removeEventListener('touchend',that.playerTouchEnd);
                 console.log('touchEnd')
             },
+        },
+        beforeDestroy(){
+            this.playerDestroy();
         }
     }
 </script>
