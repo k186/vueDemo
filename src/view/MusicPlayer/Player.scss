@@ -1086,6 +1086,7 @@ input:-ms-input-placeholder {
 /*listSongSingle  -----------------------------------------------------------*/
 .list-song-single-box {
   background: $white;
+  border-bottom: 1px solid $listBorder;
   height: px2rem(110);
 }
 
@@ -1099,7 +1100,6 @@ input:-ms-input-placeholder {
 .list-song-single-box-content {
   width: px2rem(750-30);
   margin-left: px2rem(30);
-  border-bottom: 1px solid $listBorder;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -1231,7 +1231,7 @@ input:-ms-input-placeholder {
     position: absolute;
     width: inherit;
     height: inherit;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .4);
   }
 }
 
@@ -1297,7 +1297,8 @@ input:-ms-input-placeholder {
   left: 0;
   right: 0;
   margin: px2rem(10) auto;
-  border: px2rem(20) solid rgba(0, 0, 0, .4);
+  border: px2rem(20) solid rgba(0, 0, 0, .3);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.49);
   height: px2rem(650);
   width: px2rem(650);
   border-radius: 100%;

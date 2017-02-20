@@ -6,13 +6,13 @@
                     <transition-group class="player-box-currentPlay" tag="div" :name="swipeChange">
                         <div class="player-box-currentPlay-box" :key="PlayerComp.currentPlay.poster">
                             <div v-if="PlayerComp.currentPlay.poster==''" class="player-box-poster">
-                                <img :src="'../../../static/music/poster/default.jpg'"
+                                <img :src="MusicConfig.poster+'default.jpg'"
                                      alt="海报"
                                      class="player-box-poster-img">
                             </div>
                             <div v-if="PlayerComp.currentPlay.poster!=''" class="player-box-poster" @click.stop="toggleFullScreen">
                                 <img :class="PlayerComp.playStatus==1&&PlayerComp.fullScreen==false?'circleLoop':'circleLoopPause'"
-                                     :src="PlayerComp.currentPlay.poster"
+                                     :src="MusicConfig.poster+PlayerComp.currentPlay.poster"
                                      alt="海报"
                                      class="player-box-poster-img">
                             </div>
@@ -33,7 +33,7 @@
         </transition>
         <play-list v-if="PlayerComp.playList.visible"></play-list>
         <full-screen></full-screen>
-        <audio id="audio" :src="PlayerComp.currentPlay.url"></audio>
+        <audio id="audio" :src="PlayerComp.currentPlay.url!=''?MusicConfig.music+PlayerComp.currentPlay.url:''"></audio>
     </div>
 </template>
 <script>
@@ -58,7 +58,8 @@
             }
         },
         computed: mapGetters({
-            PlayerComp: 'PlayerComp'
+            PlayerComp: 'PlayerComp',
+            MusicConfig:'MusicConfig'
         }),
         mounted(){
             this.$store.dispatch('playerInit');
@@ -69,7 +70,6 @@
                 pause:'playerPause',
                 showPlayList:'playerToggle',
                 toggleFullScreen:'toggleFullScreen',
-                playerDestroy:'playerDestroy'
             }),
             next(){
                 this.swipeChange='right2left';
@@ -129,9 +129,6 @@
                 El.removeEventListener('touchend',that.playerTouchEnd);
                 console.log('touchEnd')
             },
-        },
-        beforeDestroy(){
-            this.playerDestroy();
         }
     }
 </script>

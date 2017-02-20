@@ -13,7 +13,7 @@
                 </transition>
                 <div class="full-screen-dish-stage">
                     <transition name="bounceTop">
-                        <div  v-if="PlayerComp.fullScreen" class="dish-artist-stage">
+                        <div v-if="PlayerComp.fullScreen" class="dish-artist-stage">
                             <div class="dish-artist">&nbsp;&nbsp;{{PlayerComp.currentPlay.artist}}&nbsp;&nbsp;</div>
                             <div class="dish-quality">
                                 <div class="dish-quality-btn"><span class="btn-text">标准</span><i class="icon">&#xe9a0;</i></div>
@@ -23,12 +23,13 @@
                         </div>
                     </transition>
                     <transition name="dish">
-                        <div  v-if="PlayerComp.fullScreen" class="dish-body-stage"  @touchstart.stop="touchStarFun($event)" id="poster">
-                            <transition-group name="blurChange" class="dish-box" tag="div">
-                                <img :key="PlayerComp.currentPlay.uid"
-                                     :src="PlayerComp.currentPlay.poster!=''?PlayerComp.currentPlay.poster:'../../../static/music/poster/default.jpg'"
-                                     :class="PlayerComp.playStatus==1&&PlayerComp.fullScreen==true?'circleLoop':'circleLoopPause'"
-                                     class="dish-img">
+                        <div v-show="PlayerComp.fullScreen" class="dish-body-stage" @touchstart.stop="touchStarFun($event)" id="poster">
+                            <transition-group name="blurChange">
+                                <div class="dish-box":key="PlayerComp.currentPlay.uid">
+                                    <img :src="PlayerComp.currentPlay.poster!=''? MusicConfig.poster+PlayerComp.currentPlay.poster:MusicConfig.poster+'default.jpg'"
+                                         :class="PlayerComp.playStatus==1&&PlayerComp.fullScreen==true?'circleLoop':'circleLoopPause'"
+                                         class="dish-img">
+                                </div>
                             </transition-group>
                             <div v-if="PlayerComp.fullScreen" class="dish-stage-other">
                                 <div class="dish-lyric">歌词歌词歌词</div>
@@ -43,14 +44,13 @@
                         </div>
                     </transition>
                     <transition name="bounceBottom">
-                        <div  v-show="PlayerComp.fullScreen" class="dish-control">
+                        <div v-show="PlayerComp.fullScreen" class="dish-control">
                             <div class="dish-process-bar-box">
                                 <div class="process-time">{{playedTime}}</div>
                                 <div class="process-bar">
                                     <div class="process-bar-box"></div>
                                     <div class="process-bar-buffered"
                                          :style="bufferedProcess">
-
                                     </div>
                                     <div class="process-bar-played"
                                          :style="playedProcess">
@@ -59,18 +59,17 @@
                                     <div class="process-bar-current"
                                          :style="point"
                                          id="processBox"
-                                         @touchstart="processEvt($event)"
-                                    >
+                                         @touchstart="processEvt($event)">
                                     </div>
                                 </div>
                                 <div class="process-time">{{finalTime}}</div>
                             </div>
                             <div class="dish-control-box">
                                 <div class="dish-control-other">
-                        <span class="icon"
-                              @click.stop="toggleType({})"
-                              v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''">
-                        </span>
+                                    <span class="icon"
+                                          @click.stop="toggleType({})"
+                                          v-html="PlayerComp.playType==1?'&#xe60c;':''||PlayerComp.playType==2?'&#xe630;':''||PlayerComp.playType==3?'&#xe99e;':''">
+                                    </span>
                                 </div>
                                 <div class="dish-control-main">
                         <span @click.stop="playerPrevious"
@@ -120,10 +119,11 @@
         },
         computed: {
             ...mapGetters({
-                PlayerComp: 'PlayerComp'
+                PlayerComp: 'PlayerComp',
+                MusicConfig: 'MusicConfig'
             }),
             background(){
-                let url = this.PlayerComp.currentPlay.poster != '' ? this.PlayerComp.currentPlay.poster : '../../../static/music/poster/default.jpg';
+                let url = this.PlayerComp.currentPlay.poster != '' ? this.MusicConfig.poster + this.PlayerComp.currentPlay.poster : this.MusicConfig.poster + 'default.jpg';
                 return {backgroundImage: "url(" + url + ")"}
             },
             finalTime(){
@@ -215,7 +215,7 @@
                 El.addEventListener('touchend', that.posterEnd, false);
                 let finger = e.changedTouches[0];
                 that.finger.pageY = finger.pageY;
-                that.finger.posterTime=Date.now();
+                that.finger.posterTime = Date.now();
                 e.preventDefault();
             },
             posterMove(e){
@@ -229,8 +229,8 @@
                 let El = document.getElementById('poster');
                 El.removeEventListener('touchmove', that.posterMove, false);
                 El.removeEventListener('touchend', that.posterEnd, false);
-                let now=Date.now();
-                if( that.finger.LastpageY- that.finger.pageY>100&&now-that.finger.posterTime<300){
+                let now = Date.now();
+                if (that.finger.LastpageY - that.finger.pageY > 100 && now - that.finger.posterTime < 300) {
                     that.toggleFullScreen();
                 }
                 e.preventDefault();

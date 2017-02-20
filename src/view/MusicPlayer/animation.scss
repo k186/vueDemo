@@ -107,18 +107,16 @@
   opacity: 0;
 }
 .blurChange-enter-active,.blurChange-leave-active {
-  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
-  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  -webkit-transition: all .75s ease-in-out;
+  transition: all .75s ease-in-out
 }
 
 .blurChange-enter {
-  opacity: 1;
-  transform:scale(1.1)
+  opacity: .3;
 }
 
 .blurChange-leave-active {
-  opacity: 0;
-  transform:scale(1.1)
+  opacity: 1;
 }
 .bounceTop-enter-active,.bounceTop-leave-active {
   -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
@@ -159,12 +157,10 @@
 }
 
 .dish-enter{
-  opacity: 1;
-  border: none !important;
-  transform: translateY(.7rem) scale(.13);
+  opacity: 0;
+  transform: translate3d(0,.7rem,0) scale(1);
 }
 .dish-leave-active {
   opacity: 0;
-  border: none !important;
-  transform: translateY(.7rem) scale(.13);
+  transform: translate3d(0,.7rem,0) scale(.13);
 }

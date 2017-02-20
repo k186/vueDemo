@@ -1,7 +1,7 @@
 <template>
     <div class="song-sheet-box-list">
         <router-link :to="'/Music/'+$route.params.userToken+'/detailList/'+data.sheetCode+'/'+from" class="song-sheet-box-list-item" v-for="data in listData">
-            <img :src="data.poster!=''?data.poster:'../../../static/music/poster/default.jpg'" class="song-sheet-box-list-item-poster">
+            <img :src="data.poster!=''?MusicConfig.poster+data.poster:MusicConfig.poster+'default.jpg'" class="song-sheet-box-list-item-poster">
             <div class="song-sheet-box-list-item-text">
                 <div class="song-sheet-box-list-item-text-box">
                     <div class="song-sheet-box-list-item-text-title">{{data.title}}</div>
@@ -21,6 +21,7 @@
     </div>
 </template>
 <script>
+    import {mapGetters} from 'vuex'
     export default{
         name:'songSheetSingle',
         props:{
@@ -31,6 +32,11 @@
             from:{
                 required:true
             }
+        },
+        computed:{
+            ...mapGetters({
+                MusicConfig:'MusicConfig'
+            })
         }
     }
 </script>

@@ -161,11 +161,6 @@ const actions = {
             dispatch('playerBuffered');
         });
     },
-    playerDestroy(){
-        let audio = document.getElementById('audio');
-        audio.removeEventListener('timeupdate');
-        audio.removeEventListener('progress');
-    },
     playerPlay({commit}){
         /*get lat play currentTime*/
         state.PlayerComp.currentPlay.audio.currentTime = state.PlayerComp.currentPlay.currentTime;

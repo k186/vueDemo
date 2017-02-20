@@ -1,18 +1,41 @@
 {
   "success": true,
   "model": {
-    "count": 4,
+    "count": 10,
     "uidFilter":{
-      "94B34E8152D43232233891FA34529B38":true,
-      "9430BB2DF7604F9E3D227AB849137CFE":true,
-      "F22045983B504A26C0D9C2572966C591":true,
-      "6E6845904CC1FB99E4EAB82E5E813EB2":true
+      "607B239063821A41CD579C934B17ED9C": true,
+      "94B34E8152D43232233891FA34529B38": true,
+      "9430BB2DF7604F9E3D227AB849137CFE": true,
+      "F22045983B504A26C0D9C2572966C591": true,
+      "6E6845904CC1FB99E4EAB82E5E813EB2": true,
+      "D0E824775E89949B6F5CB1C3A3DF3DE2": true,
+      "2AFC3C20E6A57E62315A23491CF25AA1": true,
+      "C2B32285E08433453A1583B0FC50C097": true
     },
     "list": [
       {
         "song": {
-          "url": "http://okzvi7b4z.bkt.clouddn.com/music/94B34E8152D43232233891FA34529B38.mp3",
-          "poster": "http://k186studio.com/static/music/poster/94B34E8152D43232233891FA34529B38.jpg",
+          "url": "607B239063821A41CD579C934B17ED9C.mp3",
+          "poster": "607B239063821A41CD579C934B17ED9C.jpg",
+          "title": "风雨无阻",
+          "artist": "杨茵茵",
+          "album": "试音王9号",
+          "uid": "607B239063821A41CD579C934B17ED9C",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "94B34E8152D43232233891FA34529B38.mp3",
+          "poster": "94B34E8152D43232233891FA34529B38.jpg",
           "title": "平凡之路 (《后会无期》电影主题曲)",
           "artist": "朴树",
           "album": "平凡之路",
@@ -30,8 +53,8 @@
       },
       {
         "song": {
-          "url": "http://okzvi7b4z.bkt.clouddn.com/music/9430BB2DF7604F9E3D227AB849137CFE.mp3",
-          "poster": "http://k186studio.com/static/music/poster/9430BB2DF7604F9E3D227AB849137CFE.jpg",
+          "url": "9430BB2DF7604F9E3D227AB849137CFE.mp3",
+          "poster": "9430BB2DF7604F9E3D227AB849137CFE.jpg",
           "title": "恋曲1990 (《阿郎的故事》国语版电影主题曲_《阿郎恋曲》国语版)",
           "artist": "罗大佑",
           "album": "爱人同志（台湾版）",
@@ -49,8 +72,8 @@
       },
       {
         "song": {
-          "url": "http://okzvi7b4z.bkt.clouddn.com/music/F22045983B504A26C0D9C2572966C591.mp3",
-          "poster": "http://k186studio.com/static/music/poster/F22045983B504A26C0D9C2572966C591.jpg",
+          "url": "F22045983B504A26C0D9C2572966C591.mp3",
+          "poster": "F22045983B504A26C0D9C2572966C591.jpg",
           "title": "想神马有神马",
           "artist": "李代沫",
           "album": "想神马有神马",
@@ -68,8 +91,8 @@
       },
       {
         "song": {
-          "url": "http://okzvi7b4z.bkt.clouddn.com/music/6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
-          "poster": "http://k186studio.com/static/music/poster/6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
+          "url": "6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
+          "poster": "6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
           "title": "美丽的神话 (《功夫瑜伽》电影主题曲)",
           "artist": "成龙",
           "album": "美丽的神话",
@@ -82,6 +105,101 @@
         },
         "mark": {
           "isDownload": true,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "D5DB45333B889D19E1242A3F375EC83A.mp3",
+          "poster": "D5DB45333B889D19E1242A3F375EC83A.jpg",
+          "title": "Try Everything (《疯狂动物城》电影主题曲)",
+          "artist": "Shakira",
+          "album": "Zootopia (Original Motion Picture Soundtrack)",
+          "uid": "D5DB45333B889D19E1242A3F375EC83A",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 0,
+            "mv": 0
+          }
+        },
+        "mark": {
+          "isDownload": false,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "DD90A2F1D7B7968A4C4633BBD45384FD.mp3",
+          "poster": "DD90A2F1D7B7968A4C4633BBD45384FD.jpg",
+          "title": "J'entends Encore Les Mots",
+          "artist": "Shy'm",
+          "album": "Prendre L'air",
+          "uid": "DD90A2F1D7B7968A4C4633BBD45384FD",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 0,
+            "mv": 0
+          }
+        },
+        "mark": {
+          "isDownload": false,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "AAA252379844A41BDF2358E2553CB204.mp3",
+          "poster": "AAA252379844A41BDF2358E2553CB204.jpg",
+          "title": "渡口",
+          "artist": "蔡琴",
+          "album": "静听女人心",
+          "uid": "AAA252379844A41BDF2358E2553CB204",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 0,
+            "mv": 0
+          }
+        },
+        "mark": {
+          "isDownload": false,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "5049E0D8A1544EC9A7789C8037402A64.mp3",
+          "poster": "5049E0D8A1544EC9A7789C8037402A64.jpg",
+          "title": "变脸无喷火",
+          "artist": "川剧",
+          "album": "川剧",
+          "uid": "5049E0D8A1544EC9A7789C8037402A64",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 0,
+            "mv": 0
+          }
+        },
+        "mark": {
+          "isDownload": false,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "7D9ADED6E3BBDD26CB9A1663C7689E85.mp3",
+          "poster": "7D9ADED6E3BBDD26CB9A1663C7689E85.jpg",
+          "title": "我的好兄弟",
+          "artist": "高进",
+          "album": "拿得起放不下",
+          "uid": "7D9ADED6E3BBDD26CB9A1663C7689E85",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 0,
+            "mv": 0
+          }
+        },
+        "mark": {
+          "isDownload": false,
           "isInternet": false
         }
       }

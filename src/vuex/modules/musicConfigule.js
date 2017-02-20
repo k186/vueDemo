@@ -3,9 +3,9 @@
  */
 const state={
     MusicConfig:{
-        iconVip:"http://www.k186studio.com/static/music/icon/vip/",
-        poster:"",
-        music:"",
+        iconVip:"http://okzvi7b4z.bkt.clouddn.com/music/icon/vip/",
+        poster:"http://okzvi7b4z.bkt.clouddn.com/music/poster/",
+        music:"http://okzvi7b4z.bkt.clouddn.com/music/",
         userHead:"http://k186studio.com/static/music/img/",
         dpr:window.dpr
     }
