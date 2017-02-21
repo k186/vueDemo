@@ -9,17 +9,17 @@ class urlMapping {
     Mapping (url) {
         let urls = {
             /*获取搜索历史记录*/
-            'GET_SEARCH_HISTORY': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/history' + (this.isLocal ? '.json' : '.json'),
+            'GET_SEARCH_HISTORY': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/history' + (this.isLocal ? '.json' : '.json'),
             /*搜索结构*/
-            'GET_SEARCH_RESULT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
+            'GET_SEARCH_RESULT': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/searchResult' + (this.isLocal ? '.json' : '.json'),
             /*个性电台*/
-            'GET_PERSONAL_RADIO': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/personalRadio' + (this.isLocal ? '.json' : '.json'),
+            'GET_PERSONAL_RADIO': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/personalRadio' + (this.isLocal ? '.json' : '.json'),
             /*个性电台初始化*/
-            'GET_PERSONAL_RADIO_INIT': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/radioInit' + (this.isLocal ? '.json' : '.json'),
+            'GET_PERSONAL_RADIO_INIT': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/radioInit' + (this.isLocal ? '.json' : '.json'),
             /*更新收藏列表*/
-            'GET_UPDATE_FAVOURITE': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/updatefavourite' + (this.isLocal ? '.json' : '.json'),
+            'GET_UPDATE_FAVOURITE': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/updatefavourite' + (this.isLocal ? '.json' : '.json'),
             /*初始化用户信息*/
-            'GET_INIT_USER_DATA': (this.isLocal ? '' : this.hostname) + '../../static/mokData/musicPlayer/userdata' + (this.isLocal ? '.json' : '.json'),
+            'GET_INIT_USER_DATA': (this.isLocal ? '' : 'http://olpmg8rkp.bkt.clouddn.com') + '/static/mokData/musicPlayer/userdata' + (this.isLocal ? '.json' : '.json'),
         };
         return urls[url]
     }
