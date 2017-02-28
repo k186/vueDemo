@@ -2,7 +2,10 @@
     <div @click.stop.prevent="play({option:{uid:Data.song.uid,sheetCode:sheetCode,from:from}})" class="single-list-box">
         <div class="single-list-text" :class="Data.song.uid==currentPlayUid?'playing':''">
             <span class="single-list-text-title">{{Data.song.title}}</span>
-            <span class="single-list-text-quality">{{Data.song.markTitle.quality}}</span>
+            <span v-if="Data.song.markTitle.quality==2" class="single-list-text-quality icon sq">&#xe8a9;</span>
+            <span v-if="Data.song.markTitle.quality==1" class="single-list-text-quality icon hq">&#xe8ab;</span>
+            <span v-if="Data.song.markTitle.mv" class="single-list-text-quality icon mv">&#xe6af;</span>
+            <span v-if="Data.song.markTitle.exclusive" class="text icon exclusive">&#xe6b0;</span>
             <span class="single-list-text-artist">-&nbsp;{{Data.song.artist}}</span>
         </div>
         <div class="single-list-isPlay" v-if="Data.song.uid==currentPlayUid">

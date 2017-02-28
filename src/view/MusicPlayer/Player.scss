@@ -1124,17 +1124,16 @@ input:-ms-input-placeholder {
     vertical-align: middle;
     margin-right: px2rem(2);
   }
-  .sq {
-    color: $markTips;
-  }
-  .hq, .mv, .exclusive {
-    color: $mainGreen;
-  }
-  .sq, .hq, .mv, .exclusive {
-    font-size: px2rem(45);
-  }
 }
-
+.sq {
+  color: $markTips;
+}
+.hq, .mv, .exclusive {
+  color: $mainGreen;
+}
+.sq, .hq, .mv, .exclusive {
+  font-size: px2rem(45);
+}
 .list-song-single-box-text-artist {
   font-size: px2rem(28);
   color: $secondTitle;
