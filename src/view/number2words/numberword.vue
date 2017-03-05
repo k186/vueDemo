@@ -3,28 +3,29 @@
         <div class="nav">
             数字转中文（javascript）
         </div>
-        <div class="containeer">
-            <div class="cell">
-                <div class="cell-title">通配</div>
-                <div class="cell-output" id="output1"></div>
+        <div class="containeer wrapper" id="number-wrapper">
+            <div id="number-scroller" class="scroller">
+                <div class="cell">
+                    <div class="cell-title">通配</div>
+                    <div class="cell-output" id="output1"></div>
+                </div>
+                <div class="cell">
+                    <div class="cell-title">有数字标签(span)</div>
+                    <div class="cell-output" id="output2"></div>
+                </div>
+                <div class="cell">
+                    <div class="cell-title">有单位标签(div)</div>
+                    <div class="cell-output" id="output3"></div>
+                </div>
+                <div class="cell">
+                    <div class="cell-title">都有标签(span+div)</div>
+                    <div class="cell-output" id="output4"></div>
+                </div>
+                <div class="cell github">
+                    <a href="https://github.com/k186/number2words" target="_Blank" class="iconfont">&#xe600</a>
+                    k186
+                </div>
             </div>
-            <div class="cell">
-                <div class="cell-title">有数字标签(span)</div>
-                <div class="cell-output" id="output2"></div>
-            </div>
-            <div class="cell">
-                <div class="cell-title">有单位标签(div)</div>
-                <div class="cell-output" id="output3"></div>
-            </div>
-            <div class="cell">
-                <div class="cell-title">都有标签(span+div)</div>
-                <div class="cell-output" id="output4"></div>
-            </div>
-            <div class="cell github">
-                <a href="https://github.com/k186/number2words" target="_Blank" class="iconfont">&#xe600</a>
-                k186
-            </div>
-
         </div>
         <div class="foot">
             <div class="input-box off">
@@ -38,12 +39,13 @@
 </style>
 <script>
     import '../../../static/pugin/number2word/number2words.js'
+    import publicJs from '../../publicJs/publicJs'
     export default{
         name:'numberString',
-        data:function () {
-            return {
-
-            }
+        data(){
+          return{
+              myScroll:null
+          }
         },
         mounted(){
             let output1=document.getElementById('output1');
@@ -78,7 +80,14 @@
             Number2Wrods.config(option1).putStr(value,'output1');
             Number2Wrods.config(option2).putStr(value,'output2');
             Number2Wrods.config(option3).putStr(value,'output3');
-            output4.innerHTML= Number2Wrods.config(option4).putStr(value)
+            output4.innerHTML= Number2Wrods.config(option4).putStr(value);
+            let that=this;
+            publicJs.initScroll({wrapper:'number-wrapper',scroller:'number-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll;
+            }});
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll);
         }
     }
 </script>

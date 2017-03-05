@@ -2,7 +2,7 @@
 
 > A Vue.js project,only use vue.js,vuex,vue-router,original js
 
-###click here to see whole demo [k186](http://k186studio.com)
+###click here to see the demo [k186](http://k186studio.com)
 
 ##components
 >pc DatePicker

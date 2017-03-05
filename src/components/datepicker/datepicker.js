@@ -763,9 +763,9 @@ export default {
         },
         visible: function (val, oldVal) {
             if (val == true) {
-                setTimeout(() => document.addEventListener('click', this.hideDatePicker), 0);
+                setTimeout(() => document.addEventListener('click', this.hideDatePicker,false), 0);
             } else {
-                document.removeEventListener('click', this.hideDatePicker)
+                document.removeEventListener('click', this.hideDatePicker,false)
             }
         },
         options: function (val, oldVal) {

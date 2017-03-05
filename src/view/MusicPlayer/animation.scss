@@ -1,0 +1,166 @@
+.history-enter-active, .history-leave-active {
+  -webkit-transition: all .3s cubic-bezier(.26, .67, .75, .97);
+  transition: all .3s cubic-bezier(.26, .67, .75, .97)
+}
+
+.history-enter {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.history-leave-active {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.right2left-enter-active, .right2left-leave-active,.left2right-enter-active, .left2right-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.26, .67, .75, .97);
+  transition: all .45s cubic-bezier(.26, .67, .75, .97)
+}
+
+.right2left-enter,.left2right-leave-active {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+
+}
+
+.right2left-leave-active,.left2right-enter{
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+.circleLoop{
+  animation-name: roate;
+  animation-duration: 38s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+.circleLoopPause{
+  animation-name: roate;
+  animation-duration: 38s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state:paused;
+}
+@keyframes roate {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+.playerToggle-enter-active,.playerToggle-leave-active {
+  -webkit-transition: all .45s ease-in-out;
+  transition: all .45s ease-in-out;
+}
+.playerToggle-enter {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.playerToggle-leave-active {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.toggleTop-enter-active, .toggleTop-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.26, .67, .75, .97);
+  transition: all .45s cubic-bezier(.26, .67, .75, .97)
+}
+
+.toggleTop-enter {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.toggleTop-leave-active {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.fullScreen-enter-active {
+
+}
+.fullScreen-leave-active{
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39) .75s;
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39) .75s
+}
+
+.fullScreen-enter {
+}
+
+.fullScreen-leave-active {
+  opacity:0;
+}
+.fullMask-enter-active,.fullMask-leave-active {
+  -webkit-transition: all .45s ease-in-out;
+  transition: all .45s ease-in-out;
+}
+
+.fullMask-enter {
+  opacity: 0;
+}
+
+.fullMask-leave-active {
+  opacity: 0;
+}
+.blurChange-enter-active,.blurChange-leave-active {
+  -webkit-transition: all .75s ease-in-out;
+  transition: all .75s ease-in-out
+}
+
+.blurChange-enter {
+  opacity: .3;
+}
+
+.blurChange-leave-active {
+  opacity: 1;
+}
+.bounceTop-enter-active,.bounceTop-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39)
+}
+
+.bounceTop-enter {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.bounceTop-leave-active {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+.bounceBottom-enter-active, .bounceBottom-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.48,-0.01,.45,1.39);
+  transition: all .45s cubic-bezier(.48,-0.01,.45,1.39)
+}
+
+.bounceBottom-enter {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.bounceBottom-leave-active {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.dish-leave-active {
+  -webkit-transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+  transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+}
+.dish-enter-active{
+  -webkit-transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+  transition: all .75s cubic-bezier(0.07, 0.9, 0.22, 1.04);
+}
+
+.dish-enter{
+  opacity: 0;
+  transform: translate3d(0,.7rem,0) scale(1);
+}
+.dish-leave-active {
+  opacity: 0;
+  transform: translate3d(0,.7rem,0) scale(.13);
+}

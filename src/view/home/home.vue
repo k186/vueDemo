@@ -1,17 +1,21 @@
 <template>
-    <div>
-        <index-head></index-head>
-        <nav-list :Nav="Nav"></nav-list>
-        <loading></loading>
+    <div id="home-wrapper" class="wrapper"><!--this div will be replaced by router-view -->
+        <div id="home-scroller" class="scroller" style="background: #efeff4">
+            <index-head></index-head>
+            <nav-list :Nav="Nav"></nav-list>
+            <my-footer></my-footer>
+        </div>
         <alert></alert>
+        <loading></loading>
     </div>
 </template>
-
 <script>
     import indexHead from '../../components/indexHead/indexHead'
     import navList from '../../components/navList/nav'
     import loading from '../../components/loading/loading'
     import alert from '../../components/alert/alert'
+    import MyFooter from '../../components/footer/footer'
+    import publicJs from  '../../publicJs/publicJs'
     import {} from 'vuex'
     export default {
         name: 'home',
@@ -71,6 +75,12 @@
                                     },1500)
                                 }
                             },
+                            {
+                                name: 'MusicPlayer',
+                                router: '/Music/k186/main',
+                                icon: '&#xe63f',
+                                color: 'loading'
+                            },
                         ]
                     },
                     {
@@ -84,14 +94,26 @@
                             }
                         ]
                     }
-                ]
+                ],
+                myScroll:null
             }
         },
         components: {
             indexHead,
             navList,
             loading,
-            alert
+            alert,
+            MyFooter
+        },
+        mounted(){
+            let that=this;
+            publicJs.initScroll({wrapper:'home-wrapper',scroller:'home-scroller',callbackFun:function (scroll) {
+                that.myScroll=scroll
+            }});
+            console.log(this.$route)
+        },
+        beforeDestroy(){
+            publicJs.destroy(this.myScroll)
         }
     }
 </script>

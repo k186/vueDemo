@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Index from './router/routerindex'
 import Mapping from './router/routerMapping'
 import store from './vuex'
-import * as TYPE from './vuex/mutation-types'
 /*router*/
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -35,9 +34,6 @@ new Vue({
     store,
     render(tpl){
        return tpl(Index)
-    },
-    methods:{
-
     }
 }).$mount('#app');
 
