@@ -30,6 +30,7 @@
                             <div class="play-list-box-body-box-wrapper" id="currentPlay-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="currentPlay-scroller">
                                     <single-list v-for="song in PlayerComp.playList.currentPlayList.list"
+                                                 :key="song.uid"
                                                  :playStatus="PlayerComp.playStatus"
                                                  :currentPlayUid="PlayerComp.currentPlay.uid"
                                                  :Data="song"
@@ -50,6 +51,7 @@
                             <div class="play-list-box-body-box-wrapper" id="historyList-wrapper">
                                 <div class="play-list-box-body-box-scroller" id="historyList-scroller">
                                     <single-list v-for="song in PlayerComp.playList.historyList.list"
+                                                 :key="song.uid"
                                                  :playStatus="PlayerComp.playStatus"
                                                  :currentPlayUid="PlayerComp.currentPlay.uid" :Data="song"
                                                  from="history" :sheetCode="PlayerComp.playList.historyList.sheetCode">

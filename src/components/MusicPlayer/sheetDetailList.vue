@@ -14,7 +14,11 @@
                 <div class="detail-list-list-song-wrapper wrapper" id="detail-list-list-song-wrapper">
                     <div class="detail-list-list-song-scroller scroller" id="detail-list-list-song-scroller">
                         <quick-play :toggle="quickPlayToggle" :from="$route.params.from" :sheetCode="sheetDetailList.sheetCode">
-                            <single v-for="Data in sheetDetailList.list" :Data="Data" :from="$route.params.from" :sheetCode="sheetDetailList.sheetCode"></single>
+                            <single v-for="Data,index in sheetDetailList.list"
+                                    :key="index"
+                                    :Data="Data"
+                                    :from="$route.params.from"
+                                    :sheetCode="sheetDetailList.sheetCode"></single>
                         </quick-play>
                         <div class="Scroll-Add-On"></div>
                     </div>
@@ -51,7 +55,8 @@
                 repeatData:{
                     count: 0,
                     list: []
-                }
+                },
+              quickPlayToggle:true
             }
         },
         computed:{

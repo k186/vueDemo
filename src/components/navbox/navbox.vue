@@ -1,6 +1,6 @@
 <template>
     <div class="nav-box">
-        <router-link :to="nav.router" class="nav-btn" v-for="nav in data">
+        <router-link :to="nav.router" class="nav-btn" v-for="nav,index in data" :key="index">
             <em @click="tap(nav.callback?nav.callback:'')">
                 <i class="btn-icon" :class="nav.color" v-html="nav.icon"></i>
                 <span class="btn-word">{{nav.name}}</span>

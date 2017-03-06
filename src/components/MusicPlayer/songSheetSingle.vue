@@ -1,6 +1,6 @@
 <template>
     <div class="song-sheet-box-list">
-        <router-link :to="'/Music/'+$route.params.userToken+'/detailList/'+data.sheetCode+'/'+from" class="song-sheet-box-list-item" v-for="data in listData">
+        <router-link :to="'/Music/'+$route.params.userToken+'/detailList/'+data.sheetCode+'/'+from" class="song-sheet-box-list-item" v-for="data,index in listData" :key="index">
             <img :src="data.poster!=''?MusicConfig.poster+data.poster:MusicConfig.poster+'default.jpg'" class="song-sheet-box-list-item-poster">
             <div class="song-sheet-box-list-item-text">
                 <div class="song-sheet-box-list-item-text-box">
