@@ -80,6 +80,6 @@
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  @import "./static/datePickerPc.css";
+<style lang="scss" rel="stylesheet/scss">
+  @import "./static/datePickerPc.scss";
 </style>

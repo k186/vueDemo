@@ -117,7 +117,7 @@
         }
     }
 </script>
-<style scoped>
-    @import "home.css";
+<style lang="scss" rel="stylesheet/scss">
+    @import "home.scss";
 </style>
 

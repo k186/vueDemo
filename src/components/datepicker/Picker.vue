@@ -175,6 +175,5 @@
 
 <script src="./datepicker.js"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  @import "./css/datapicker.css";
+<style lang="scss" rel="stylesheet/scss" src="./css/datapicker.scss" scoped>
 </style>

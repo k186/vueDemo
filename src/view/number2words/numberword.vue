@@ -34,9 +34,7 @@
         </div>
     </section>
 </template>
-<style>
-    @import "./asset/main.css";
-</style>
+<style lang="scss" rel="stylesheet/scss" src="./asset/main.scss"></style>
 <script>
     import '../../../static/pugin/number2word/number2words.js'
     import publicJs from '../../publicJs/publicJs'

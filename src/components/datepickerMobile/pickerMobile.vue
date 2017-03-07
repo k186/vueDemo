@@ -914,6 +914,4 @@
     }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  @import "pickerMobile.css";
-</style>
+<style scoped lang="scss" rel="stylesheet/scss" src="./pickerMobile.scss"></style>

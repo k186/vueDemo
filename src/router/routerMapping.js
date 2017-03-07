@@ -16,11 +16,12 @@ export default {
     name: 'routerMapping',
     routes(){
         return [
-            {
+          //only use before v2.1.1
+           /* {
                 path: "/",
                 name:'aaa',
                 redirect: "/home"
-            },
+            },*/
             {
                 path: "/home",
                 name:'home',
@@ -91,5 +92,4 @@ export default {
         ]
     }
     /*config nav ../view/home/home.vue */
-
 }
