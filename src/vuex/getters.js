@@ -1,1 +1,1 @@
-/*global getters*/
+// global getters

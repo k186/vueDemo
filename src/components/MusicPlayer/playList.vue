@@ -86,17 +86,17 @@
       PlayerComp: 'PlayerComp',
       userData: 'userData'
     }),
-    data(){
+    data () {
       return {
         currentPage: 0,
         myScrollA: null,
         myScrollB: null,
-        myScrollC: null,
+        myScrollC: null
       }
     },
-    mounted(){
-      publicJs.setIndex('play-list-mask');
-      this.initScroll();
+    mounted () {
+      publicJs.setIndex('play-list-mask')
+      this.initScroll()
     },
     methods: {
       ...mapActions({
@@ -104,60 +104,65 @@
         hidePlayList: 'playerToggle',
         clearPlayList: 'clearPlayList'
       }),
-      initScroll(){
-        let that = this;
-        let markB = this.PlayerComp.playList.historyList.list.length != 0;
-        /*init scroll*/
-        if (this.PlayerComp.playList.currentPlayList.list.length != 0) {
+      initScroll () {
+        let that = this
+        let markB = this.PlayerComp.playList.historyList.list.length !== 0
+        /* init scroll */
+        if (this.PlayerComp.playList.currentPlayList.list.length !== 0) {
           this.$nextTick(function () {
             publicJs.initScroll({
-              wrapper: 'currentPlay-wrapper', scroller: 'currentPlay-scroller', option: {scrollX: false, scrollY: true}, callbackFun: function (scroll) {
+              wrapper: 'currentPlay-wrapper',
+              scroller: 'currentPlay-scroller',
+              option: {scrollX: false, scrollY: true},
+              callbackFun: function (scroll) {
                 that.myScrollA = scroll
               }
-            });
-          });
+            })
+          })
         }
-        /*---scroll end*/
+        /* scroll end */
         this.$nextTick(function () {
           if (markB) {
-            document.getElementById('play-list-box-body-scroller').style.width = (750 * 2) / 75 + 'rem';
+            document.getElementById('play-list-box-body-scroller').style.width = (750 * 2) / 75 + 'rem'
             publicJs.initScroll({
-              wrapper: 'historyList-wrapper', scroller: 'historyList-scroller', option: {scrollX: false, scrollY: true}, callbackFun: function (scroll) {
-                that.myScrollB = scroll;
+              wrapper: 'historyList-wrapper',
+              scroller: 'historyList-scroller',
+              option: {scrollX: false, scrollY: true},
+              callbackFun: function (scroll) {
+                that.myScrollB = scroll
               }
-            });
+            })
             publicJs.initScroll({
               wrapper: 'play-list-box-body-wrapper',
               scroller: 'play-list-box-body-scroller',
               option: {scrollX: true, scrollY: false, momentum: false, snap: true, click: false},
               callbackFun: function (scroll) {
-                that.myScrollC = scroll;
+                that.myScrollC = scroll
                 that.myScrollC.on('scrollEnd', function () {
                   that.currentPage = that.myScrollC.currentPage.pageX
                 })
               }
-            });
+            })
           } else if (!markB) {
-            document.getElementById('play-list-box-body-scroller').style.width = (750) / 75 + 'rem';
+            document.getElementById('play-list-box-body-scroller').style.width = (750) / 75 + 'rem'
           }
         })
       },
-      initRadio(){
-        let that = this;
+      initRadio () {
+        let that = this
         that.$store.dispatch('initRadio', {
           callback: function () {
             let option = {
               from: 'radio'
-            };
-            that.$store.dispatch('playerSet', {option});
+            }
+            that.$store.dispatch('playerSet', {option})
           }
-        });
+        })
       },
-      beforeDestroy(){
-        publicJs.destroy(this.myScrollA);
-        publicJs.destroy(this.myScrollB);
-        publicJs.destroy(this.myScrollC);
-
+      beforeDestroy () {
+        publicJs.destroy(this.myScrollA)
+        publicJs.destroy(this.myScrollB)
+        publicJs.destroy(this.myScrollC)
       }
     },
     components: {

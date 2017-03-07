@@ -66,7 +66,7 @@ app.listen(8080, function (err) {
     console.log(err);
     return
   }
-  /* if(config.dev.autoOpenBrowser){
+   if(config.dev.autoOpenBrowser){
    opn(url);
-   }*/
+   }
 });

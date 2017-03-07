@@ -27,7 +27,7 @@ const devConfig = merge(baseConfig, {
                 loader: "css-loader",
                 options: {
                   minimize: false,
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ],
@@ -37,13 +37,13 @@ const devConfig = merge(baseConfig, {
                 loader: "css-loader",
                 options: {
                   minimize: false,
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               {
                 loader: "sass-loader",
                 options: {
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ],
@@ -53,14 +53,14 @@ const devConfig = merge(baseConfig, {
                 loader: "css-loader",
                 options: {
                   minimize: false,
-                  sourceMap: false
+                  sourceMap: true
                 }
               },
               {
                 loader: "sass-loader",
                 options: {
                   indentedSyntax: true,
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ],
@@ -70,7 +70,7 @@ const devConfig = merge(baseConfig, {
                 loader: "css-loader",
                 options: {
                   minimize: false,
-                  sourceMap: false
+                  sourceMap: true
                 }
               }
             ]

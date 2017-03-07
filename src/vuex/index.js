@@ -12,20 +12,20 @@ import radio from './modules/personalRadio'
 import sheetDetail from './modules/sheetDetail'
 import MusicConfig from './modules/musicConfigule'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 export default new Vuex.Store({
-    strict: true,
-    actions,
-    getters,
-    modules:{
-        loading,
-        alert,
-        history,
-        searchBar,
-        user,
-        player,
-        radio,
-        sheetDetail,
-        MusicConfig
-    }
+  strict: true,
+  actions,
+  getters,
+  modules: {
+    loading,
+    alert,
+    history,
+    searchBar,
+    user,
+    player,
+    radio,
+    sheetDetail,
+    MusicConfig
+  }
 })

@@ -164,3 +164,19 @@
   opacity: 0;
   transform: translate3d(0,.7rem,0) scale(.13);
 }
+.router-change-enter-active, .router-change-leave-active {
+  -webkit-transition: all .45s cubic-bezier(.44, .01, .37, 1);
+  transition: all .45s cubic-bezier(.44, .01, .37, 1);
+  opacity: 1;
+}
+
+.router-change-enter {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.router-change-leave-active {
+  -webkit-transform: scale(.8);
+  transform: scale(.8);
+  opacity: 0;
+}
