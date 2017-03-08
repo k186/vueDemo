@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const config = require('../config');
+const tool =require('./tool');
 const baseConfig = require('./webpack.base.config');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,10 +13,9 @@ Object.keys(baseConfig.entry).forEach(function (name) {
 });
 
 const devConfig = merge(baseConfig, {
-  //more on https://webpack.js.org/configuration/devtool/
-  devtool: '#cheap-module-eval-source-map',
   module: {
-    rules: [
+    rules: tool.styleLoaders({sourceMap:config.dev.cssSourceMap})
+    /*[
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -77,8 +77,10 @@ const devConfig = merge(baseConfig, {
           }
         }
       }
-    ]
+    ]*/
   },
+  //more on https://webpack.js.org/configuration/devtool/
+  devtool: '#cheap-module-eval-source-map',
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({

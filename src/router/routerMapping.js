@@ -19,7 +19,7 @@ export default {
       // only use before v2.1.1
       {
         path: '/',
-        name: 'aaa',
+        name: 'rHome',
         redirect: '/home'
       },
       {

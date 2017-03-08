@@ -7,54 +7,33 @@ const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const env =config.build.env
 const ProdConfig = merge(baseConfig, {
-  devtool: '#source-map',
+  module: {
+    rules: tool.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true
+    })
+  },
+  devtool: config.build.productionSourceMap ? '#source-map' :false,
   output: {
     path: config.build.staticRoot,
     filename: tool.staticPath('js/[name].[chunkhash].js'),
     chunkFilename: tool.staticPath('js/[id].[chunkhash].js')
   },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          //https://github.com/ai/browserslist
-          postcss: require('autoprefixer'),
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    sourceMap: false,
-                    //doesn't work ?
-                  }
-                }
-              ],
-              fallback: 'vue-style-loader', // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-            })
-          }
-        }
-      }
-    ]
-  },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': config.build.env
+      'process.env': env
     }),
-    /*new webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
      compress: {
      warnings: false,
      drop_debugger: true,
      drop_console: true
      },
-     sourceMap: true
-     //sourceMap: config.build.productionSourceMap
-     }),*/
+      sourceMap: true
+     }),
     //extract css  into one files?
     new ExtractTextPlugin({
       filename: tool.staticPath('css/[name].[contenthash].css')
@@ -63,13 +42,18 @@ const ProdConfig = merge(baseConfig, {
     new OptimizeCSSPlugin(),
     //auto inject js css to index.html
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: config.build.indexHtml,
       template: 'index.html',
       inject: true,
       minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
-      }
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
     }),
     //https://webpack.js.org/plugins/commons-chunk-plugin/
     //Generate an extra chunk, which contains common modules shared between entry points.

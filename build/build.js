@@ -1,11 +1,12 @@
 require('shelljs/global');
+process.env.NODE_ENV='production'
 const path = require('path');
 const webpack = require('webpack');
 const ProdConfig = require('./webpack.prod.config');
 const chalk = require('chalk');
 const ora = require('ora');
 //clear dist
-rm('-rf', path.resolve(__dirname, 'static'));//force delete
+rm('-rf', './dist');//force delete
 mkdir('-p', './dist/static');//create dist/static
 cp('-R', 'static/*', './dist/static');//CP static file non-compressed
 

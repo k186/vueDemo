@@ -9,23 +9,13 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const url = 'http://localhost:' + config.dev.port;
 const app = express();
-const compiler = webpack(webpackConfig, function (err, stats) {
-  if (err)throw err;
-  process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModuleIds: false
-    }) + '\n\n');
-  console.log(">>Listening at " + url + '\n');
-  console.log(">>we are now at " + process.env.NODE_ENV + "mode")
-});
+
+const compiler = webpack(webpackConfig);
 
 //https://github.com/webpack/webpack-dev-middleware
-const DevMiddleware = webpackDevMiddleware(compiler, {
+const DevMiddleware =  webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  noInfo: false,
+  //noInfo: false,
   // display no info to console (only warnings and errors)
   quiet: true,
   // display nothing to the console
@@ -33,8 +23,7 @@ const DevMiddleware = webpackDevMiddleware(compiler, {
 // https://github.com/glenjamin/webpack-hot-middleware/blob/master/example/server.js
 const HotMiddleware = webpackHotMiddleware(compiler, {
   //log:console.log, clean the terminal
-  log: () => {
-  },
+  log: () => {},
   //path: '/__webpack_hmr',
   //heartbeat: 10 * 1000
 });
@@ -48,6 +37,10 @@ compiler.plugin('compilation', function (compilation) {
     callback();
   });
 });
+
+//https://segmentfault.com/a/1190000007890379
+// handle fallback for HTML5 history API
+app.use(require('connect-history-api-fallback')())
 
 app.use(DevMiddleware);
 app.use(HotMiddleware);
