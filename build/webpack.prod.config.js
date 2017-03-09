@@ -7,6 +7,7 @@ const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const env =config.build.env
 const ProdConfig = merge(baseConfig, {
   module: {
@@ -26,6 +27,7 @@ const ProdConfig = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new ProgressBarPlugin(),
     new webpack.optimize.UglifyJsPlugin({
      compress: {
      warnings: false,
