@@ -11,10 +11,6 @@
               <span>{{Format.month=='MM'&&(tmpMonth+1)<10?0:''}}{{tmpMonth+1}}</span>
               <span>-</span>
               <span>{{Format.day=='dd'&&tmpDay<10?0:''}}{{tmpDay}}</span>
-              <span>&nbsp;</span>
-              <span>{{tmpHour}}</span>
-              <span>:</span>
-              <span>{{tmpMinute}}</span>
             </div>
             <div class="control-ok" v-on:click="checked">{{'Confirm'|btnF(language)}}</div>
           </div>

@@ -7,9 +7,6 @@
       <div class="row">
         <div class="input" v-on:click="showDatePicker(2)">{{date2}}</div>
       </div>
-      <div class="row">
-        <input class="input" v-model="format" placeholder="时间格式 yyyy/MM/dd">
-      </div>
       <span>时间格式设置说明：
               <br>* d      without 0 &nbsp;&nbsp;&nbsp;  * yy     2016 16
               <br>* dd     with 01   &nbsp;&nbsp;&nbsp;  * yyyy   2016
@@ -32,7 +29,6 @@
       return {
         date: '2015-8-13',
         date2: '2016-10-11 20:15',
-        format: '',
         options2: {
           format: 'yyyy/M/dd HH:mm',
           startDate: '1992-01-01',
@@ -52,7 +48,7 @@
           visible: false,
           id: '',
           options: {
-            format: 'yyyy/MM/dd HH:mm',
+            format: 'yyyy/MM/dd',
             startDate: '1992-01-01',
             endDate: '2500-01-01',
             language: 'cn',
@@ -67,7 +63,6 @@
           this.picker.visible = true
           this.picker.value = this.date
           this.picker.options = this.options1
-          this.picker.options.format = this.fomart
           this.picker.id = type
         } else if (type === 2) {
           this.picker.visible = true
@@ -92,7 +87,7 @@
     }
   }
 </script>
-<style scoped>
+<style>
   .clearfloat:after {
     display: block;
     clear: both;
@@ -111,7 +106,8 @@
   }
 
   .input {
-    border: 1px solid #eeeeee;
+    border-bottom: 1px solid #b3b3b3;
+    background: white;
     height: inherit;
     line-height: inherit;
     font-size: .48rem;
