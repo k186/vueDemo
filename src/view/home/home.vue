@@ -74,6 +74,15 @@
                     that.$store.dispatch('loadingClose')
                   }, 1500)
                 }
+              },
+              {
+                name: 'UI框架(完善中)',
+                router: '',
+                icon: '&#xe609',
+                color: 'alert',
+                callback: function () {
+                  window.location = 'https://www.k186studio.com/pandaUiMobile/'
+                }
               }
             ]
           },
