@@ -74,12 +74,31 @@
                     that.$store.dispatch('loadingClose')
                   }, 1500)
                 }
-              },
+              }
+            ]
+          },
+          {
+            label: 'vue-family',
+            box: [
               {
                 name: 'MusicPlayer',
                 router: '/Music/k186/main',
-                icon: '&#xe63f',
-                color: 'loading'
+                icon: '&#xe641;',
+                color: 'music'
+              }
+            ]
+          },
+          {
+            label: 'vue-tools',
+            box: [
+              {
+                name: '晴天钟',
+                router: '',
+                icon: '&#xe887;',
+                color: 'pc',
+                callback: function () {
+                  window.location = 'https://www.k186studio.com/tools/7Timer'
+                }
               }
             ]
           },
