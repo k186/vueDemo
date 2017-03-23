@@ -1,1 +1,1 @@
-/*global actions*/
+// global actions

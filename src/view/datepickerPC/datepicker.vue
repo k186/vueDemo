@@ -13,73 +13,73 @@
 </template>
 
 <script>
-    import kPicker from '../../components/datepicker/Picker'
-    export default {
-        name: 'pickerView',
-        data: function () {
-            return {
-                date: '2016-11-1 15:18',
-                visible: false,
-                options: {
-                    format: 'yyyy/M/dd HH:mm',
-                    startDate: '2015-01-01',
-                    endDate: '2018-01-01',
-                    language: 'cn',
-                    timeRange: 2
-                },
-                date2: '',
-                options2: {
-                    format: 'yyyy-M-dd',
-                    startDate: '2016-01-01',
-                    endDate: '2020-12-01',
-                    language: 'en',
-                    timeRange: 20,
-                },
-                picker: {
-                    id: '',
-                    value: '',
-                    visible: false,
-                    options: {
-                        format: 'yyyy/M/dd HH:mm',
-                        startDate: '2015-01-01',
-                        endDate: '2018-01-01',
-                        language: 'cn',
-                        timeRange: 35
-                    }
-                }
-            }
+  import kPicker from '../../components/datepicker/Picker'
+  export default {
+    name: 'pickerView',
+    data: function () {
+      return {
+        date: '2016-11-1 15:18',
+        visible: false,
+        options: {
+          format: 'yyyy/M/dd HH:mm',
+          startDate: '2015-01-01',
+          endDate: '2018-01-01',
+          language: 'cn',
+          timeRange: 2
         },
-        methods: {
-            showDatePicker (type){
-                this.picker.visible = true;
-                if (type == 1) {
-                    this.picker.options = this.options2;
-                    this.picker.id = 'aaa';
-                    this.picker.value = this.date2;
-                } else {
-                    this.picker.options = this.options;
-                    this.picker.id = 'startDate';
-                    this.picker.value = this.date;
-                }
-            },
-            hideDatePicker(date){
-                if (typeof date == 'string') {
-                    if (this.picker.id == 'aaa') {
-                        this.date2 = date;
-                    } else {
-                        this.date = date;
-                    }
-                }
-                this.picker.visible = false;
-            }
+        date2: '',
+        options2: {
+          format: 'yyyy-M-dd',
+          startDate: '2016-01-01',
+          endDate: '2020-12-01',
+          language: 'en',
+          timeRange: 20
         },
-        watch: {},
-        //todo 封装接口 现在暴露接口太多
-        components: {kPicker}
-    }
+        picker: {
+          id: '',
+          value: '',
+          visible: false,
+          options: {
+            format: 'yyyy/M/dd HH:mm',
+            startDate: '2015-01-01',
+            endDate: '2018-01-01',
+            language: 'cn',
+            timeRange: 35
+          }
+        }
+      }
+    },
+    methods: {
+      showDatePicker (type) {
+        this.picker.visible = true
+        if (type === 1) {
+          this.picker.options = this.options2
+          this.picker.id = 'aaa'
+          this.picker.value = this.date2
+        } else {
+          this.picker.options = this.options
+          this.picker.id = 'startDate'
+          this.picker.value = this.date
+        }
+      },
+      hideDatePicker (date) {
+        if (typeof date === 'string') {
+          if (this.picker.id === 'aaa') {
+            this.date2 = date
+          } else {
+            this.date = date
+          }
+        }
+        this.picker.visible = false
+      }
+    },
+    watch: {},
+    // todo 封装接口 现在暴露接口太多
+    components: {kPicker}
+  }
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  @import "./static/datePickerPc.css";
+<style lang="scss" rel="stylesheet/scss">
+  @import "./static/datePickerPc.scss";
 </style>

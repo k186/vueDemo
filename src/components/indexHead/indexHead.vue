@@ -9,6 +9,6 @@
         </div>
     </div>
 </template>
-<style scoped>
-    @import "indexHead.css";
+<style scoped lang="scss" rel="stylesheet/scss">
+    @import "indexHead.scss";
 </style>
