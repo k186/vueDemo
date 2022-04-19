@@ -1,0 +1,1595 @@
+{
+  "success": true,
+  "model": {
+    "userData": {
+      "basicInfo": {
+        "name": "K186 Studio",
+        "img": "IMG_0393.09eda48.jpg",
+        "vip": {
+          "vip": false,
+          "nvip": false,
+          "nsvip": 7,
+          "svip": false,
+          "xvip": 7,
+          "nxvip": false,
+          "nsui": 2,
+          "sui": false
+        },
+        "SheetList": {
+          "count": 2,
+          "list": [
+            {
+              "sheetCode": "1",
+              "title": "欧美",
+              "count": 14,
+              "downloaded": 2,
+              "poster": "94B34E8152D43232233891FA34529B38.jpg",
+              "tags": [],
+              "summary": "欧美简介说明",
+              "list": [
+                {
+                  "song": {
+                    "url": "607B239063821A41CD579C934B17ED9C.mp3",
+                    "poster": "607B239063821A41CD579C934B17ED9C.jpg",
+                    "title": "风雨无阻",
+                    "artist": "杨茵茵",
+                    "album": "试音王9号",
+                    "uid": "607B239063821A41CD579C934B17ED9C",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "94B34E8152D43232233891FA34529B38.mp3",
+                    "poster": "94B34E8152D43232233891FA34529B38.jpg",
+                    "title": "平凡之路 (《后会无期》电影主题曲)",
+                    "artist": "朴树",
+                    "album": "平凡之路",
+                    "uid": "94B34E8152D43232233891FA34529B38",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "9430BB2DF7604F9E3D227AB849137CFE.mp3",
+                    "poster": "9430BB2DF7604F9E3D227AB849137CFE.jpg",
+                    "title": "恋曲1990 (《阿郎的故事》国语版电影主题曲_《阿郎恋曲》国语版)",
+                    "artist": "罗大佑",
+                    "album": "爱人同志（台湾版）",
+                    "uid": "9430BB2DF7604F9E3D227AB849137CFE",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "F22045983B504A26C0D9C2572966C591.mp3",
+                    "poster": "F22045983B504A26C0D9C2572966C591.jpg",
+                    "title": "想神马有神马",
+                    "artist": "李代沫",
+                    "album": "想神马有神马",
+                    "uid": "F22045983B504A26C0D9C2572966C591",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
+                    "poster": "6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
+                    "title": "美丽的神话 (《功夫瑜伽》电影主题曲)",
+                    "artist": "成龙",
+                    "album": "美丽的神话",
+                    "uid": "6E6845904CC1FB99E4EAB82E5E813EB2",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "6EADE89A824F9A41B8EB5F5299F52154.mp3",
+                    "poster": "6EADE89A824F9A41B8EB5F5299F52154.jpg",
+                    "title": "Free The Madness (Club Edition)",
+                    "artist": "Steve Aoki",
+                    "album": "Free the Madness",
+                    "uid": "6EADE89A824F9A41B8EB5F5299F52154",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "4469C3925AFBA66F6AED1A23572830EB.mp3",
+                    "poster": "4469C3925AFBA66F6AED1A23572830EB.jpg",
+                    "title": "How We Party",
+                    "artist": "R3hab",
+                    "album": "How We Party",
+                    "uid": "4469C3925AFBA66F6AED1A23572830EB",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "B2FCDACF43B056243DD27717998139C0.mp3",
+                    "poster": "B2FCDACF43B056243DD27717998139C0.jpg",
+                    "title": "MC History",
+                    "artist": "MC 大队长",
+                    "album": "暴走MC",
+                    "uid": "B2FCDACF43B056243DD27717998139C0",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "C0B93124E4A4036B292A058D0B5B1B0B.mp3",
+                    "poster": "C0B93124E4A4036B292A058D0B5B1B0B.jpg",
+                    "title": "手紙 ~拝啓 十五の君へ~",
+                    "artist": "May J. (メイ・ジェイ)",
+                    "album": "Heartful Song Covers",
+                    "uid": "C0B93124E4A4036B292A058D0B5B1B0B",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "ACBF9A231456559F134DEFACED8D1B7A.mp3",
+                    "poster": "ACBF9A231456559F134DEFACED8D1B7A.jpg",
+                    "title": "I Like Chopin",
+                    "artist": "Gazebo",
+                    "album": "Portrait",
+                    "uid": "ACBF9A231456559F134DEFACED8D1B7A",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "D4E72770A279BF500BEB319658B524D5.mp3",
+                    "poster": "D4E72770A279BF500BEB319658B524D5.jpg",
+                    "title": "No Woman No Cry",
+                    "artist": "Boney M",
+                    "album": "Take The Heat Off Me",
+                    "uid": "D4E72770A279BF500BEB319658B524D5",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "1D4ACE1915765694E91AD6F63E6B7EC4.mp3",
+                    "poster": "1D4ACE1915765694E91AD6F63E6B7EC4.jpg",
+                    "title": "Котик",
+                    "artist": "Alexander Rybak",
+                    "album": "Котик",
+                    "uid": "1D4ACE1915765694E91AD6F63E6B7EC4",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": true
+                  }
+                },
+                {
+                  "song": {
+                    "url": "965DD2531CA8917510C7D27F68BF3A60.mp3",
+                    "poster": "965DD2531CA8917510C7D27F68BF3A60.jpg",
+                    "title": "Routine",
+                    "artist": "Alan Walker",
+                    "album": "Routine",
+                    "uid": "965DD2531CA8917510C7D27F68BF3A60",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "3111A747B4A3CD09CEE6428B401A343D.mp3",
+                    "poster": "3111A747B4A3CD09CEE6428B401A343D.jpg",
+                    "title": "Ghost Town (Explicit)",
+                    "artist": "Adam Lambert",
+                    "album": "The Original High (Deluxe Version)",
+                    "uid": "3111A747B4A3CD09CEE6428B401A343D",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 1,
+                      "mv": 1
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": true
+                  }
+                }
+              ]
+            },
+            {
+              "sheetCode": "abacd",
+              "title": "随机搜藏",
+              "count": 19,
+              "downloaded": 4,
+              "poster": "D5DB45333B889D19E1242A3F375EC83A.jpg",
+              "tags": [],
+              "summary": "",
+              "list": [
+                {
+                  "song": {
+                    "url": "6B61EFEE20AF06B5601ADE029746145A.mp3",
+                    "poster": "6B61EFEE20AF06B5601ADE029746145A.jpg",
+                    "title": "Marry You",
+                    "artist": "Bruno Mars",
+                    "album": "Bravo Hits 76",
+                    "uid": "6B61EFEE20AF06B5601ADE029746145A",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "811E4BC632AE3E7D2CC6640A8A1CB558.mp3",
+                    "poster": "811E4BC632AE3E7D2CC6640A8A1CB558.jpg",
+                    "title": "We Came To Smash (《完美音调》电影插曲)",
+                    "artist": "Martin Solveig",
+                    "album": "More From Pitch Perfect (Original Motion Picture Soundtrack)",
+                    "uid": "811E4BC632AE3E7D2CC6640A8A1CB558",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "9915A62D8D5019398EAAE25A622ADCCD.mp3",
+                    "poster": "9915A62D8D5019398EAAE25A622ADCCD.jpg",
+                    "title": "All Good Things",
+                    "artist": "Nelly Furtado",
+                    "album": "KuschelRock 25",
+                    "uid": "9915A62D8D5019398EAAE25A622ADCCD",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "8B1A9953C4611296A827ABF8C47804D7.mp3",
+                    "poster": "8B1A9953C4611296A827ABF8C47804D7.jpg",
+                    "title": "All Good Things",
+                    "artist": "Nelly Furtado",
+                    "album": "KuschelRock 25",
+                    "uid": "8B1A9953C4611296A827ABF8C47804D7",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "42CC69C9D16FD3539F43680D9AE4C2B1.mp3",
+                    "poster": "42CC69C9D16FD3539F43680D9AE4C2B1.jpg",
+                    "title": "Pacific Rim (《环太平洋》电影主题曲)",
+                    "artist": "Ramin Djawadi",
+                    "album": "Pacific Rim Soundtrack from Warner Bros. Pictures and Legendary Pictures",
+                    "uid": "42CC69C9D16FD3539F43680D9AE4C2B1",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "D5DB45333B889D19E1242A3F375EC83A.mp3",
+                    "poster": "D5DB45333B889D19E1242A3F375EC83A.jpg",
+                    "title": "Try Everything (《疯狂动物城》电影主题曲)",
+                    "artist": "Shakira",
+                    "album": "Zootopia (Original Motion Picture Soundtrack)",
+                    "uid": "D5DB45333B889D19E1242A3F375EC83A",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "DD90A2F1D7B7968A4C4633BBD45384FD.mp3",
+                    "poster": "DD90A2F1D7B7968A4C4633BBD45384FD.jpg",
+                    "title": "J'entends Encore Les Mots",
+                    "artist": "Shy'm",
+                    "album": "Prendre L'air",
+                    "uid": "DD90A2F1D7B7968A4C4633BBD45384FD",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "AAA252379844A41BDF2358E2553CB204.mp3",
+                    "poster": "AAA252379844A41BDF2358E2553CB204.jpg",
+                    "title": "渡口",
+                    "artist": "蔡琴",
+                    "album": "静听女人心",
+                    "uid": "AAA252379844A41BDF2358E2553CB204",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "5049E0D8A1544EC9A7789C8037402A64.mp3",
+                    "poster": "5049E0D8A1544EC9A7789C8037402A64.jpg",
+                    "title": "变脸无喷火",
+                    "artist": "川剧",
+                    "album": "川剧",
+                    "uid": "5049E0D8A1544EC9A7789C8037402A64",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "7D9ADED6E3BBDD26CB9A1663C7689E85.mp3",
+                    "poster": "7D9ADED6E3BBDD26CB9A1663C7689E85.jpg",
+                    "title": "我的好兄弟",
+                    "artist": "高进",
+                    "album": "拿得起放不下",
+                    "uid": "7D9ADED6E3BBDD26CB9A1663C7689E85",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                    "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                    "title": "恼人的秋风",
+                    "artist": "高凌风",
+                    "album": "不一样",
+                    "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                    "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                    "title": "奔跑吧兄弟 (《奔跑吧兄弟》电影主题曲)",
+                    "artist": "筷子兄弟",
+                    "album": "奔跑吧兄弟",
+                    "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "D7FBD645753D55F4919707786012F68D.mp3",
+                    "poster": "D7FBD645753D55F4919707786012F68D.jpg",
+                    "title": "向快乐出发 (独唱版)",
+                    "artist": "林依轮",
+                    "album": "向快乐出发",
+                    "uid": "D7FBD645753D55F4919707786012F68D",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "C2B32285E08433453A1583B0FC50C097.mp3",
+                    "poster": "C2B32285E08433453A1583B0FC50C097.jpg",
+                    "title": "Jar Of Love",
+                    "artist": "曲婉婷",
+                    "album": "Everything In The World (白金庆功版)",
+                    "uid": "C2B32285E08433453A1583B0FC50C097",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "C2B32285E08433453A1583B0FC50C097.mp3",
+                    "poster": "C2B32285E08433453A1583B0FC50C097.jpg",
+                    "title": "Jar Of Love",
+                    "artist": "曲婉婷",
+                    "album": "Everything In The World (白金庆功版)",
+                    "uid": "C2B32285E08433453A1583B0FC50C097",
+                    "markTitle": {
+                      "quality": 2,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "2AFC3C20E6A57E62315A23491CF25AA1.mp3",
+                    "poster": "2AFC3C20E6A57E62315A23491CF25AA1.jpg",
+                    "title": "明天你是否依然爱我",
+                    "artist": "童安格",
+                    "album": "谢谢最深爱的你",
+                    "uid": "2AFC3C20E6A57E62315A23491CF25AA1",
+                    "markTitle": {
+                      "quality": 0,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "81B42D1CDCDD62EDD495A008780ABEDF.mp3",
+                    "poster": "81B42D1CDCDD62EDD495A008780ABEDF.jpg",
+                    "title": "海芋恋 (Live)",
+                    "artist": "萧敬腾",
+                    "album": "萧敬腾 First Live 影音限定版",
+                    "uid": "81B42D1CDCDD62EDD495A008780ABEDF",
+                    "markTitle": {
+                      "quality": 0,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "AAE14466F0125897AAFA595F096A30CE.mp3",
+                    "poster": "AAE14466F0125897AAFA595F096A30CE.jpg",
+                    "title": "带着梦想去旅行",
+                    "artist": "庄心妍",
+                    "album": "带着梦想去旅行",
+                    "uid": "AAE14466F0125897AAFA595F096A30CE",
+                    "markTitle": {
+                      "quality": 0,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": true,
+                    "isInternet": false
+                  }
+                },
+                {
+                  "song": {
+                    "url": "9842E655D044458572FE20EB618C1329.mp3",
+                    "poster": "9842E655D044458572FE20EB618C1329.jpg",
+                    "title": "庄心妍",
+                    "artist": "一万个舍不得",
+                    "album": "2013 LOVE.爱 情歌精选集",
+                    "uid": "9842E655D044458572FE20EB618C1329",
+                    "markTitle": {
+                      "quality": 0,
+                      "exclusive": 0,
+                      "mv": 0
+                    }
+                  },
+                  "mark": {
+                    "isDownload": false,
+                    "isInternet": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "totalSong": {
+          "count":32,
+          "list":[
+            {
+              "song": {
+                "url": "607B239063821A41CD579C934B17ED9C.mp3",
+                "poster": "607B239063821A41CD579C934B17ED9C.jpg",
+                "title": "风雨无阻",
+                "artist": "杨茵茵",
+                "album": "试音王9号",
+                "uid": "607B239063821A41CD579C934B17ED9C",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "94B34E8152D43232233891FA34529B38.mp3",
+                "poster": "94B34E8152D43232233891FA34529B38.jpg",
+                "title": "平凡之路 (《后会无期》电影主题曲)",
+                "artist": "朴树",
+                "album": "平凡之路",
+                "uid": "94B34E8152D43232233891FA34529B38",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "9430BB2DF7604F9E3D227AB849137CFE.mp3",
+                "poster": "9430BB2DF7604F9E3D227AB849137CFE.jpg",
+                "title": "恋曲1990 (《阿郎的故事》国语版电影主题曲_《阿郎恋曲》国语版)",
+                "artist": "罗大佑",
+                "album": "爱人同志（台湾版）",
+                "uid": "9430BB2DF7604F9E3D227AB849137CFE",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "F22045983B504A26C0D9C2572966C591.mp3",
+                "poster": "F22045983B504A26C0D9C2572966C591.jpg",
+                "title": "想神马有神马",
+                "artist": "李代沫",
+                "album": "想神马有神马",
+                "uid": "F22045983B504A26C0D9C2572966C591",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
+                "poster": "6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
+                "title": "美丽的神话 (《功夫瑜伽》电影主题曲)",
+                "artist": "成龙",
+                "album": "美丽的神话",
+                "uid": "6E6845904CC1FB99E4EAB82E5E813EB2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "6EADE89A824F9A41B8EB5F5299F52154.mp3",
+                "poster": "6EADE89A824F9A41B8EB5F5299F52154.jpg",
+                "title": "Free The Madness (Club Edition)",
+                "artist": "Steve Aoki",
+                "album": "Free the Madness",
+                "uid": "6EADE89A824F9A41B8EB5F5299F52154",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "4469C3925AFBA66F6AED1A23572830EB.mp3",
+                "poster": "4469C3925AFBA66F6AED1A23572830EB.jpg",
+                "title": "How We Party",
+                "artist": "R3hab",
+                "album": "How We Party",
+                "uid": "4469C3925AFBA66F6AED1A23572830EB",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "B2FCDACF43B056243DD27717998139C0.mp3",
+                "poster": "B2FCDACF43B056243DD27717998139C0.jpg",
+                "title": "MC History",
+                "artist": "MC 大队长",
+                "album": "暴走MC",
+                "uid": "B2FCDACF43B056243DD27717998139C0",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "C0B93124E4A4036B292A058D0B5B1B0B.mp3",
+                "poster": "C0B93124E4A4036B292A058D0B5B1B0B.jpg",
+                "title": "手紙 ~拝啓 十五の君へ~",
+                "artist": "May J. (メイ・ジェイ)",
+                "album": "Heartful Song Covers",
+                "uid": "C0B93124E4A4036B292A058D0B5B1B0B",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "ACBF9A231456559F134DEFACED8D1B7A.mp3",
+                "poster": "ACBF9A231456559F134DEFACED8D1B7A.jpg",
+                "title": "I Like Chopin",
+                "artist": "Gazebo",
+                "album": "Portrait",
+                "uid": "ACBF9A231456559F134DEFACED8D1B7A",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D4E72770A279BF500BEB319658B524D5.mp3",
+                "poster": "D4E72770A279BF500BEB319658B524D5.jpg",
+                "title": "No Woman No Cry",
+                "artist": "Boney M",
+                "album": "Take The Heat Off Me",
+                "uid": "D4E72770A279BF500BEB319658B524D5",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "1D4ACE1915765694E91AD6F63E6B7EC4.mp3",
+                "poster": "1D4ACE1915765694E91AD6F63E6B7EC4.jpg",
+                "title": "Котик",
+                "artist": "Alexander Rybak",
+                "album": "Котик",
+                "uid": "1D4ACE1915765694E91AD6F63E6B7EC4",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "965DD2531CA8917510C7D27F68BF3A60.mp3",
+                "poster": "965DD2531CA8917510C7D27F68BF3A60.jpg",
+                "title": "Routine",
+                "artist": "Alan Walker",
+                "album": "Routine",
+                "uid": "965DD2531CA8917510C7D27F68BF3A60",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "3111A747B4A3CD09CEE6428B401A343D.mp3",
+                "poster": "3111A747B4A3CD09CEE6428B401A343D.jpg",
+                "title": "Ghost Town (Explicit)",
+                "artist": "Adam Lambert",
+                "album": "The Original High (Deluxe Version)",
+                "uid": "3111A747B4A3CD09CEE6428B401A343D",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+
+            {
+              "song": {
+                "url": "6B61EFEE20AF06B5601ADE029746145A.mp3",
+                "poster": "6B61EFEE20AF06B5601ADE029746145A.jpg",
+                "title": "Marry You",
+                "artist": "Bruno Mars",
+                "album": "Bravo Hits 76",
+                "uid": "6B61EFEE20AF06B5601ADE029746145A",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "811E4BC632AE3E7D2CC6640A8A1CB558.mp3",
+                "poster": "811E4BC632AE3E7D2CC6640A8A1CB558.jpg",
+                "title": "We Came To Smash (《完美音调》电影插曲)",
+                "artist": "Martin Solveig",
+                "album": "More From Pitch Perfect (Original Motion Picture Soundtrack)",
+                "uid": "811E4BC632AE3E7D2CC6640A8A1CB558",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "9915A62D8D5019398EAAE25A622ADCCD.mp3",
+                "poster": "9915A62D8D5019398EAAE25A622ADCCD.jpg",
+                "title": "All Good Things",
+                "artist": "Nelly Furtado",
+                "album": "KuschelRock 25",
+                "uid": "9915A62D8D5019398EAAE25A622ADCCD",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "8B1A9953C4611296A827ABF8C47804D7.mp3",
+                "poster": "8B1A9953C4611296A827ABF8C47804D7.jpg",
+                "title": "All Good Things",
+                "artist": "Nelly Furtado",
+                "album": "KuschelRock 25",
+                "uid": "8B1A9953C4611296A827ABF8C47804D7",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "42CC69C9D16FD3539F43680D9AE4C2B1.mp3",
+                "poster": "42CC69C9D16FD3539F43680D9AE4C2B1.jpg",
+                "title": "Pacific Rim (《环太平洋》电影主题曲)",
+                "artist": "Ramin Djawadi",
+                "album": "Pacific Rim Soundtrack from Warner Bros. Pictures and Legendary Pictures",
+                "uid": "42CC69C9D16FD3539F43680D9AE4C2B1",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D5DB45333B889D19E1242A3F375EC83A.mp3",
+                "poster": "D5DB45333B889D19E1242A3F375EC83A.jpg",
+                "title": "Try Everything (《疯狂动物城》电影主题曲)",
+                "artist": "Shakira",
+                "album": "Zootopia (Original Motion Picture Soundtrack)",
+                "uid": "D5DB45333B889D19E1242A3F375EC83A",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "DD90A2F1D7B7968A4C4633BBD45384FD.mp3",
+                "poster": "DD90A2F1D7B7968A4C4633BBD45384FD.jpg",
+                "title": "J'entends Encore Les Mots",
+                "artist": "Shy'm",
+                "album": "Prendre L'air",
+                "uid": "DD90A2F1D7B7968A4C4633BBD45384FD",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "AAA252379844A41BDF2358E2553CB204.mp3",
+                "poster": "AAA252379844A41BDF2358E2553CB204.jpg",
+                "title": "渡口",
+                "artist": "蔡琴",
+                "album": "静听女人心",
+                "uid": "AAA252379844A41BDF2358E2553CB204",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "5049E0D8A1544EC9A7789C8037402A64.mp3",
+                "poster": "5049E0D8A1544EC9A7789C8037402A64.jpg",
+                "title": "变脸无喷火",
+                "artist": "川剧",
+                "album": "川剧",
+                "uid": "5049E0D8A1544EC9A7789C8037402A64",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "7D9ADED6E3BBDD26CB9A1663C7689E85.mp3",
+                "poster": "7D9ADED6E3BBDD26CB9A1663C7689E85.jpg",
+                "title": "我的好兄弟",
+                "artist": "高进",
+                "album": "拿得起放不下",
+                "uid": "7D9ADED6E3BBDD26CB9A1663C7689E85",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                "title": "恼人的秋风",
+                "artist": "高凌风",
+                "album": "不一样",
+                "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                "title": "奔跑吧兄弟 (《奔跑吧兄弟》电影主题曲)",
+                "artist": "筷子兄弟",
+                "album": "奔跑吧兄弟",
+                "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D7FBD645753D55F4919707786012F68D.mp3",
+                "poster": "D7FBD645753D55F4919707786012F68D.jpg",
+                "title": "向快乐出发 (独唱版)",
+                "artist": "林依轮",
+                "album": "向快乐出发",
+                "uid": "D7FBD645753D55F4919707786012F68D",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "C2B32285E08433453A1583B0FC50C097.mp3",
+                "poster": "C2B32285E08433453A1583B0FC50C097.jpg",
+                "title": "Jar Of Love",
+                "artist": "曲婉婷",
+                "album": "Everything In The World (白金庆功版)",
+                "uid": "C2B32285E08433453A1583B0FC50C097",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "2AFC3C20E6A57E62315A23491CF25AA1.mp3",
+                "poster": "2AFC3C20E6A57E62315A23491CF25AA1.jpg",
+                "title": "明天你是否依然爱我",
+                "artist": "童安格",
+                "album": "谢谢最深爱的你",
+                "uid": "2AFC3C20E6A57E62315A23491CF25AA1",
+                "markTitle": {
+                  "quality": 0,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "81B42D1CDCDD62EDD495A008780ABEDF.mp3",
+                "poster": "81B42D1CDCDD62EDD495A008780ABEDF.jpg",
+                "title": "海芋恋 (Live)",
+                "artist": "萧敬腾",
+                "album": "萧敬腾 First Live 影音限定版",
+                "uid": "81B42D1CDCDD62EDD495A008780ABEDF",
+                "markTitle": {
+                  "quality": 0,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "AAE14466F0125897AAFA595F096A30CE.mp3",
+                "poster": "AAE14466F0125897AAFA595F096A30CE.jpg",
+                "title": "带着梦想去旅行",
+                "artist": "庄心妍",
+                "album": "带着梦想去旅行",
+                "uid": "AAE14466F0125897AAFA595F096A30CE",
+                "markTitle": {
+                  "quality": 0,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "9842E655D044458572FE20EB618C1329.mp3",
+                "poster": "9842E655D044458572FE20EB618C1329.jpg",
+                "title": "庄心妍",
+                "artist": "一万个舍不得",
+                "album": "2013 LOVE.爱 情歌精选集",
+                "uid": "9842E655D044458572FE20EB618C1329",
+                "markTitle": {
+                  "quality": 0,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            }
+          ]
+        },
+        "favourite": {
+          "count": 15,
+          "uidFilter": {
+            "607B239063821A41CD579C934B17ED9C": true,
+            "94B34E8152D43232233891FA34529B38": true,
+            "9430BB2DF7604F9E3D227AB849137CFE": true,
+            "F22045983B504A26C0D9C2572966C591": true,
+            "6E6845904CC1FB99E4EAB82E5E813EB2": true,
+            "D5DB45333B889D19E1242A3F375EC83A": true,
+            "DD90A2F1D7B7968A4C4633BBD45384FD": true,
+            "AAA252379844A41BDF2358E2553CB204": true,
+            "5049E0D8A1544EC9A7789C8037402A64": true,
+            "7D9ADED6E3BBDD26CB9A1663C7689E85": true,
+            "D0E824775E89949B6F5CB1C3A3DF3DE2": true,
+            "2AFC3C20E6A57E62315A23491CF25AA1": true,
+            "C2B32285E08433453A1583B0FC50C097": true
+          },
+          "list": [
+            {
+              "song": {
+                "url": "607B239063821A41CD579C934B17ED9C.mp3",
+                "poster": "607B239063821A41CD579C934B17ED9C.jpg",
+                "title": "风雨无阻",
+                "artist": "杨茵茵",
+                "album": "试音王9号",
+                "uid": "607B239063821A41CD579C934B17ED9C",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "94B34E8152D43232233891FA34529B38.mp3",
+                "poster": "94B34E8152D43232233891FA34529B38.jpg",
+                "title": "平凡之路 (《后会无期》电影主题曲)",
+                "artist": "朴树",
+                "album": "平凡之路",
+                "uid": "94B34E8152D43232233891FA34529B38",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "9430BB2DF7604F9E3D227AB849137CFE.mp3",
+                "poster": "9430BB2DF7604F9E3D227AB849137CFE.jpg",
+                "title": "恋曲1990 (《阿郎的故事》国语版电影主题曲_《阿郎恋曲》国语版)",
+                "artist": "罗大佑",
+                "album": "爱人同志（台湾版）",
+                "uid": "9430BB2DF7604F9E3D227AB849137CFE",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "F22045983B504A26C0D9C2572966C591.mp3",
+                "poster": "F22045983B504A26C0D9C2572966C591.jpg",
+                "title": "想神马有神马",
+                "artist": "李代沫",
+                "album": "想神马有神马",
+                "uid": "F22045983B504A26C0D9C2572966C591",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "6E6845904CC1FB99E4EAB82E5E813EB2.mp3",
+                "poster": "6E6845904CC1FB99E4EAB82E5E813EB2.jpg",
+                "title": "美丽的神话 (《功夫瑜伽》电影主题曲)",
+                "artist": "成龙",
+                "album": "美丽的神话",
+                "uid": "6E6845904CC1FB99E4EAB82E5E813EB2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 1,
+                  "mv": 1
+                }
+              },
+              "mark": {
+                "isDownload": true,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D5DB45333B889D19E1242A3F375EC83A.mp3",
+                "poster": "D5DB45333B889D19E1242A3F375EC83A.jpg",
+                "title": "Try Everything (《疯狂动物城》电影主题曲)",
+                "artist": "Shakira",
+                "album": "Zootopia (Original Motion Picture Soundtrack)",
+                "uid": "D5DB45333B889D19E1242A3F375EC83A",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "DD90A2F1D7B7968A4C4633BBD45384FD.mp3",
+                "poster": "DD90A2F1D7B7968A4C4633BBD45384FD.jpg",
+                "title": "J'entends Encore Les Mots",
+                "artist": "Shy'm",
+                "album": "Prendre L'air",
+                "uid": "DD90A2F1D7B7968A4C4633BBD45384FD",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "AAA252379844A41BDF2358E2553CB204.mp3",
+                "poster": "AAA252379844A41BDF2358E2553CB204.jpg",
+                "title": "渡口",
+                "artist": "蔡琴",
+                "album": "静听女人心",
+                "uid": "AAA252379844A41BDF2358E2553CB204",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "5049E0D8A1544EC9A7789C8037402A64.mp3",
+                "poster": "5049E0D8A1544EC9A7789C8037402A64.jpg",
+                "title": "变脸无喷火",
+                "artist": "川剧",
+                "album": "川剧",
+                "uid": "5049E0D8A1544EC9A7789C8037402A64",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "7D9ADED6E3BBDD26CB9A1663C7689E85.mp3",
+                "poster": "7D9ADED6E3BBDD26CB9A1663C7689E85.jpg",
+                "title": "我的好兄弟",
+                "artist": "高进",
+                "album": "拿得起放不下",
+                "uid": "7D9ADED6E3BBDD26CB9A1663C7689E85",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                "title": "恼人的秋风",
+                "artist": "高凌风",
+                "album": "不一样",
+                "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D0E824775E89949B6F5CB1C3A3DF3DE2.mp3",
+                "poster": "D0E824775E89949B6F5CB1C3A3DF3DE2.jpg",
+                "title": "奔跑吧兄弟 (《奔跑吧兄弟》电影主题曲)",
+                "artist": "筷子兄弟",
+                "album": "奔跑吧兄弟",
+                "uid": "D0E824775E89949B6F5CB1C3A3DF3DE2",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "D7FBD645753D55F4919707786012F68D.mp3",
+                "poster": "D7FBD645753D55F4919707786012F68D.jpg",
+                "title": "向快乐出发 (独唱版)",
+                "artist": "林依轮",
+                "album": "向快乐出发",
+                "uid": "D7FBD645753D55F4919707786012F68D",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "C2B32285E08433453A1583B0FC50C097.mp3",
+                "poster": "C2B32285E08433453A1583B0FC50C097.jpg",
+                "title": "Jar Of Love",
+                "artist": "曲婉婷",
+                "album": "Everything In The World (白金庆功版)",
+                "uid": "C2B32285E08433453A1583B0FC50C097",
+                "markTitle": {
+                  "quality": 2,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            },
+            {
+              "song": {
+                "url": "2AFC3C20E6A57E62315A23491CF25AA1.mp3",
+                "poster": "2AFC3C20E6A57E62315A23491CF25AA1.jpg",
+                "title": "明天你是否依然爱我",
+                "artist": "童安格",
+                "album": "谢谢最深爱的你",
+                "uid": "2AFC3C20E6A57E62315A23491CF25AA1",
+                "markTitle": {
+                  "quality": 0,
+                  "exclusive": 0,
+                  "mv": 0
+                }
+              },
+              "mark": {
+                "isDownload": false,
+                "isInternet": false
+              }
+            }
+          ]
+        },
+        "purchased": []
+      }
+    }
+  }
+}

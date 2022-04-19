@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
-import * as getters from './getters'
 import loading from './modules/loading'
 import alert from './modules/alert'
 import history from './modules/searchHistory'
@@ -15,8 +13,6 @@ import MusicConfig from './modules/musicConfigule'
 Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
-  actions,
-  getters,
   modules: {
     loading,
     alert,

@@ -1,0 +1,88 @@
+{
+  "success": true,
+  "model": {
+    "sheetCode": "radio",
+    "title": "个性电台",
+    "described": "来听听和「Tik Tau」一样好听的歌曲吧",
+     "poster": "1D4ACE1915765694E91AD6F63E6B7EC4.jpg",
+    "count": 4,
+    "list": [
+      {
+        "song": {
+          "url": "B2FCDACF43B056243DD27717998139C0.mp3",
+           "poster": "B2FCDACF43B056243DD27717998139C0.jpg",
+          "title": "MC History",
+          "artist": "MC 大队长",
+          "album": "暴走MC",
+          "uid": "B2FCDACF43B056243DD27717998139C0",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "C0B93124E4A4036B292A058D0B5B1B0B.mp3",
+           "poster": "C0B93124E4A4036B292A058D0B5B1B0B.jpg",
+          "title": "手紙 ~拝啓 十五の君へ~",
+          "artist": "May J. (メイ・ジェイ)",
+          "album": "Heartful Song Covers",
+          "uid": "C0B93124E4A4036B292A058D0B5B1B0B",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "ACBF9A231456559F134DEFACED8D1B7A.mp3",
+           "poster": "ACBF9A231456559F134DEFACED8D1B7A.jpg",
+          "title": "I Like Chopin",
+          "artist": "Gazebo",
+          "album": "Portrait",
+          "uid": "ACBF9A231456559F134DEFACED8D1B7A",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": false
+        }
+      },
+      {
+        "song": {
+          "url": "D4E72770A279BF500BEB319658B524D5.mp3",
+           "poster": "D4E72770A279BF500BEB319658B524D5.jpg",
+          "title": "No Woman No Cry",
+          "artist": "Boney M",
+          "album": "Take The Heat Off Me",
+          "uid": "D4E72770A279BF500BEB319658B524D5",
+          "markTitle": {
+            "quality": 2,
+            "exclusive": 1,
+            "mv": 1
+          }
+        },
+        "mark": {
+          "isDownload": true,
+          "isInternet": false
+        }
+      }
+    ]
+  }
+}
